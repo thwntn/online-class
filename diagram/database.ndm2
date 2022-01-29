@@ -22,7 +22,7 @@
         "tables": [
           {
             "objectType": "Table_MYSQL",
-            "name": "CLASS",
+            "name": "DOCUMENT",
             "comment": "",
             "engine": "",
             "characterSet": "",
@@ -72,7 +72,7 @@
             "fields": [
               {
                 "objectType": "TableField_MYSQL",
-                "name": "class_id",
+                "name": "document_id",
                 "type": "int",
                 "length": -2147483648,
                 "decimals": -2147483648,
@@ -94,11 +94,11 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "class_id"
+                "oldName": "document_id"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "class_name",
+                "name": "doucument_directory",
                 "type": "varchar",
                 "length": 255,
                 "decimals": -2147483648,
@@ -108,7 +108,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -120,111 +120,13 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "class_name"
+                "oldName": "doucument_directory"
               },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "class_teacher",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "class_teacher"
-              }
-            ],
-            "indexes": [],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "class_id",
-                  "keyLength": 0,
-                  "order": "",
-                  "oldName": ""
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "",
-              "comment": ""
-            },
-            "foreignKeys": [],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
-            "name": "USER_SUBJECT",
-            "comment": "",
-            "engine": "",
-            "characterSet": "",
-            "collation": "",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 0,
-            "indexLength": 0,
-            "maxDataLength": 0,
-            "rows": 0,
-            "updateTime": "",
-            "DDL": "",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
               {
                 "objectType": "TableField_MYSQL",
                 "name": "user_name",
                 "type": "varchar",
-                "length": 255,
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -249,8 +151,8 @@
               {
                 "objectType": "TableField_MYSQL",
                 "name": "subject_id",
-                "type": "int",
-                "length": -2147483648,
+                "type": "varchar",
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -271,6 +173,32 @@
                 "virtualExpr": "",
                 "virtualType": "",
                 "oldName": "subject_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "homework_id",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "homework_id"
               }
             ],
             "indexes": [],
@@ -280,14 +208,7 @@
               "fields": [
                 {
                   "objectType": "IndexField_MYSQL",
-                  "name": "user_name",
-                  "keyLength": 0,
-                  "order": "",
-                  "oldName": ""
-                },
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "subject_id",
+                  "name": "document_id",
                   "keyLength": 0,
                   "order": "",
                   "oldName": ""
@@ -300,7 +221,7 @@
             "foreignKeys": [
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_USER_SUBJECT_USER_1",
+                "name": "fk_DOCUMENT_USER_1",
                 "fields": [
                   "user_name"
                 ],
@@ -317,7 +238,24 @@
               },
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_USER_SUBJECT_SUBJECT_1",
+                "name": "fk_DOCUMENT_HOMEWORK_1",
+                "fields": [
+                  "homework_id"
+                ],
+                "referenceSchema": "Default",
+                "referenceTable": "HOMEWORK",
+                "referenceFields": [
+                  "homework_id"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              },
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_DOCUMENT_SUBJECT_1",
                 "fields": [
                   "subject_id"
                 ],
@@ -338,7 +276,7 @@
           },
           {
             "objectType": "Table_MYSQL",
-            "name": "MESSAGE_CONTENT",
+            "name": "MESSAGE_GROUP",
             "comment": "",
             "engine": "",
             "characterSet": "",
@@ -388,7 +326,7 @@
             "fields": [
               {
                 "objectType": "TableField_MYSQL",
-                "name": "message_id",
+                "name": "messgroup_id",
                 "type": "int",
                 "length": -2147483648,
                 "decimals": -2147483648,
@@ -410,13 +348,13 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "message_id"
+                "oldName": "messgroup_id"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "msscnt_content",
-                "type": "varchar",
-                "length": 255,
+                "name": "messgroup_content",
+                "type": "text",
+                "length": -2147483648,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -424,7 +362,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -436,11 +374,11 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "msscnt_content"
+                "oldName": "messgroup_content"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "msscnt_time",
+                "name": "messgroup_time",
                 "type": "datetime",
                 "length": -2147483648,
                 "decimals": -2147483648,
@@ -450,7 +388,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -462,155 +400,13 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "msscnt_time"
+                "oldName": "messgroup_time"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "msscnt_type",
+                "name": "user_name",
                 "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "msscnt_type"
-              }
-            ],
-            "indexes": [],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "message_id",
-                  "keyLength": 0,
-                  "order": "",
-                  "oldName": ""
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "",
-              "comment": ""
-            },
-            "foreignKeys": [
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_MESSAGE_CONTENT_MESSAGE_1",
-                "fields": [
-                  "message_id"
-                ],
-                "referenceSchema": "Default",
-                "referenceTable": "MESSAGE",
-                "referenceFields": [
-                  "messgae_id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              }
-            ],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
-            "name": "USER",
-            "comment": "",
-            "engine": "",
-            "characterSet": "",
-            "collation": "",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 0,
-            "indexLength": 0,
-            "maxDataLength": 0,
-            "rows": 0,
-            "updateTime": "",
-            "DDL": "",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_password",
-                "type": "varchar",
-                "length": 255,
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -630,167 +426,11 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "user_password"
+                "oldName": "user_name"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "user_address",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_address"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_phone",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_phone"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_sex",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_sex"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_major",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_major"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_class",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_class"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_type",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_type"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "class_id",
+                "name": "chatgroup_id",
                 "type": "int",
                 "length": -2147483648,
                 "decimals": -2147483648,
@@ -800,7 +440,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -812,7 +452,7 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "class_id"
+                "oldName": "chatgroup_id"
               }
             ],
             "indexes": [],
@@ -822,7 +462,7 @@
               "fields": [
                 {
                   "objectType": "IndexField_MYSQL",
-                  "name": "user_password",
+                  "name": "messgroup_id",
                   "keyLength": 0,
                   "order": "",
                   "oldName": ""
@@ -835,169 +475,26 @@
             "foreignKeys": [
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_USER_CLASS_1",
+                "name": "fk_MESSAGE_GROUP_CHAT_GROUP_1",
                 "fields": [
-                  "class_id"
+                  "chatgroup_id"
                 ],
                 "referenceSchema": "Default",
-                "referenceTable": "CLASS",
+                "referenceTable": "CHAT_GROUP",
                 "referenceFields": [
-                  "class_id"
+                  "chatgroup_id"
                 ],
                 "onDelete": "",
                 "onUpdate": "",
                 "sourceCardinality": "NoneRelationship",
                 "targetCardinality": "NoneRelationship",
                 "oldName": ""
-              }
-            ],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
-            "name": "MESSAGE",
-            "comment": "",
-            "engine": "",
-            "characterSet": "",
-            "collation": "",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 0,
-            "indexLength": 0,
-            "maxDataLength": 0,
-            "rows": 0,
-            "updateTime": "",
-            "DDL": "",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "messgae_id",
-                "type": "int",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "messgae_id"
               },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_receive",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_receive"
-              }
-            ],
-            "indexes": [],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [],
-              "oldName": "",
-              "indexMethod": "",
-              "comment": ""
-            },
-            "foreignKeys": [
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_MESSAGE_USER_1",
+                "name": "fk_MESSAGE_GROUP_USER_1",
                 "fields": [
-                  "user_id"
+                  "user_name"
                 ],
                 "referenceSchema": "Default",
                 "referenceTable": "USER",
@@ -1016,7 +513,7 @@
           },
           {
             "objectType": "Table_MYSQL",
-            "name": "CHATGROUP",
+            "name": "COMMENT",
             "comment": "",
             "engine": "",
             "characterSet": "",
@@ -1066,7 +563,7 @@
             "fields": [
               {
                 "objectType": "TableField_MYSQL",
-                "name": "chgr_id",
+                "name": "comment_id",
                 "type": "int",
                 "length": -2147483648,
                 "decimals": -2147483648,
@@ -1088,11 +585,11 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "chgr_id"
+                "oldName": "comment_id"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "chgr_name",
+                "name": "comment_content",
                 "type": "varchar",
                 "length": 255,
                 "decimals": -2147483648,
@@ -1102,7 +599,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -1114,84 +611,12 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "chgr_name"
-              }
-            ],
-            "indexes": [],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "chgr_id",
-                  "keyLength": 0,
-                  "order": "",
-                  "oldName": ""
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "",
-              "comment": ""
-            },
-            "foreignKeys": [],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
-            "name": "MESSSAGE_GROUP",
-            "comment": "",
-            "engine": "",
-            "characterSet": "",
-            "collation": "",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 0,
-            "indexLength": 0,
-            "maxDataLength": 0,
-            "rows": 0,
-            "updateTime": "",
-            "DDL": "",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
+                "oldName": "comment_content"
+              },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "chgr_id",
-                "type": "int",
+                "name": "comment_time",
+                "type": "datetime",
                 "length": -2147483648,
                 "decimals": -2147483648,
                 "isUnsigned": false,
@@ -1212,39 +637,13 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "chgr_id"
+                "oldName": "comment_time"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "mssgr_id",
-                "type": "int",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "mssgr_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "mssgr_content",
+                "name": "user_name",
                 "type": "varchar",
-                "length": 255,
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -1252,7 +651,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -1264,13 +663,13 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "mssgr_content"
+                "oldName": "user_name"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "mssgr_time",
-                "type": "datetime",
-                "length": -2147483648,
+                "name": "homework_id",
+                "type": "varchar",
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -1278,7 +677,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -1290,33 +689,7 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "mssgr_time"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "datetime",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_id"
+                "oldName": "homework_id"
               }
             ],
             "indexes": [],
@@ -1326,7 +699,7 @@
               "fields": [
                 {
                   "objectType": "IndexField_MYSQL",
-                  "name": "chgr_id",
+                  "name": "comment_id",
                   "keyLength": 0,
                   "order": "",
                   "oldName": ""
@@ -1339,14 +712,14 @@
             "foreignKeys": [
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_MESSSAGE_GROUP_CHATGROUP_1",
+                "name": "fk_COMMENT_HOMEWORK_1",
                 "fields": [
-                  "chgr_id"
+                  "homework_id"
                 ],
                 "referenceSchema": "Default",
-                "referenceTable": "CHATGROUP",
+                "referenceTable": "HOMEWORK",
                 "referenceFields": [
-                  "chgr_id"
+                  "homework_id"
                 ],
                 "onDelete": "",
                 "onUpdate": "",
@@ -1356,156 +729,14 @@
               },
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_MESSSAGE_GROUP_USER_1",
+                "name": "fk_COMMENT_USER_1",
                 "fields": [
-                  "user_id"
+                  "user_name"
                 ],
                 "referenceSchema": "Default",
                 "referenceTable": "USER",
                 "referenceFields": [
-                  "user_id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              }
-            ],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
-            "name": "FRIEND",
-            "comment": "",
-            "engine": "",
-            "characterSet": "",
-            "collation": "",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 0,
-            "indexLength": 0,
-            "maxDataLength": 0,
-            "rows": 0,
-            "updateTime": "",
-            "DDL": "",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "int",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": false,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "friend_userid",
-                "type": "int",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "friend_userid"
-              }
-            ],
-            "indexes": [],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "user_id",
-                  "keyLength": 0,
-                  "order": "",
-                  "oldName": ""
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "",
-              "comment": ""
-            },
-            "foreignKeys": [
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_FRIEND_USER_1",
-                "fields": [
-                  "user_id"
-                ],
-                "referenceSchema": "Default",
-                "referenceTable": "USER",
-                "referenceFields": [
-                  "user_id"
+                  "user_name"
                 ],
                 "onDelete": "",
                 "onUpdate": "",
@@ -1622,8 +853,8 @@
               {
                 "objectType": "TableField_MYSQL",
                 "name": "noti_status",
-                "type": "varchar",
-                "length": 255,
+                "type": "bit",
+                "length": -2147483648,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -1673,9 +904,9 @@
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "int",
-                "length": -2147483648,
+                "name": "user_name",
+                "type": "varchar",
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -1695,7 +926,7 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "user_id"
+                "oldName": "user_name"
               }
             ],
             "indexes": [],
@@ -1720,12 +951,12 @@
                 "objectType": "ForeignKey_MYSQL",
                 "name": "fk_NOTIFICATION_USER_1",
                 "fields": [
-                  "user_id"
+                  "user_name"
                 ],
                 "referenceSchema": "Default",
                 "referenceTable": "USER",
                 "referenceFields": [
-                  "user_id"
+                  "user_name"
                 ],
                 "onDelete": "",
                 "onUpdate": "",
@@ -1739,7 +970,7 @@
           },
           {
             "objectType": "Table_MYSQL",
-            "name": "USER_HISTORY",
+            "name": "REGISTRY",
             "comment": "",
             "engine": "",
             "characterSet": "",
@@ -1789,9 +1020,9 @@
             "fields": [
               {
                 "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "int",
-                "length": -2147483648,
+                "name": "subject_id",
+                "type": "varchar",
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -1811,59 +1042,33 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "user_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "history_directory",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "history_directory"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "subject_id",
-                "type": "int",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
                 "oldName": "subject_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_name",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_name"
               }
             ],
             "indexes": [],
@@ -1873,7 +1078,14 @@
               "fields": [
                 {
                   "objectType": "IndexField_MYSQL",
-                  "name": "user_id",
+                  "name": "subject_id",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "user_name",
                   "keyLength": 0,
                   "order": "",
                   "oldName": ""
@@ -1886,7 +1098,24 @@
             "foreignKeys": [
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_USER_HISTORY_SUBJECT_1",
+                "name": "fk_USER_SUBJECT_USER_1",
+                "fields": [
+                  "user_name"
+                ],
+                "referenceSchema": "Default",
+                "referenceTable": "USER",
+                "referenceFields": [
+                  "user_name"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              },
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_USER_SUBJECT_SUBJECT_1",
                 "fields": [
                   "subject_id"
                 ],
@@ -1900,23 +1129,6 @@
                 "sourceCardinality": "NoneRelationship",
                 "targetCardinality": "NoneRelationship",
                 "oldName": ""
-              },
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_USER_HISTORY_USER_1",
-                "fields": [
-                  "user_id"
-                ],
-                "referenceSchema": "Default",
-                "referenceTable": "USER",
-                "referenceFields": [
-                  "user_id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
               }
             ],
             "triggers": [],
@@ -1924,7 +1136,7 @@
           },
           {
             "objectType": "Table_MYSQL",
-            "name": "DOCUMENT",
+            "name": "SCORE",
             "comment": "",
             "engine": "",
             "characterSet": "",
@@ -1974,7 +1186,59 @@
             "fields": [
               {
                 "objectType": "TableField_MYSQL",
-                "name": "document_id",
+                "name": "user_name",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_name"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "subject_id",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "subject_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "homework_id",
                 "type": "int",
                 "length": -2147483648,
                 "decimals": -2147483648,
@@ -1996,11 +1260,210 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "document_id"
+                "oldName": "homework_id"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "doucument_directory",
+                "name": "score_level",
+                "type": "varchar",
+                "length": 8,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "score_level"
+              }
+            ],
+            "indexes": [],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "user_name",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "homework_id",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "subject_id",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "",
+              "comment": ""
+            },
+            "foreignKeys": [
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_SCORE_REGISTRY_1",
+                "fields": [
+                  "subject_id"
+                ],
+                "referenceSchema": "Default",
+                "referenceTable": "REGISTRY",
+                "referenceFields": [
+                  "subject_id"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              },
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_SCORE_USER_1",
+                "fields": [
+                  "user_name"
+                ],
+                "referenceSchema": "Default",
+                "referenceTable": "USER",
+                "referenceFields": [
+                  "user_name"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              }
+            ],
+            "triggers": [],
+            "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "CLASS",
+            "comment": "",
+            "engine": "",
+            "characterSet": "",
+            "collation": "",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "",
+            "checkTime": "",
+            "dataFree": 0,
+            "dataLength": 0,
+            "indexLength": 0,
+            "maxDataLength": 0,
+            "rows": 0,
+            "updateTime": "",
+            "DDL": "",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "class_id",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "class_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_name",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_name"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "class_name",
                 "type": "varchar",
                 "length": 255,
                 "decimals": -2147483648,
@@ -2022,13 +1485,432 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "doucument_directory"
+                "oldName": "class_name"
+              }
+            ],
+            "indexes": [],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "class_id",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "user_name",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "",
+              "comment": ""
+            },
+            "foreignKeys": [
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_REGISTRY_USER_1",
+                "fields": [
+                  "user_name"
+                ],
+                "referenceSchema": "Default",
+                "referenceTable": "USER",
+                "referenceFields": [
+                  "user_name"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              }
+            ],
+            "triggers": [],
+            "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "FRIEND",
+            "comment": "",
+            "engine": "",
+            "characterSet": "",
+            "collation": "",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "",
+            "checkTime": "",
+            "dataFree": 0,
+            "dataLength": 0,
+            "indexLength": 0,
+            "maxDataLength": 0,
+            "rows": 0,
+            "updateTime": "",
+            "DDL": "",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "friend_user",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "friend_user"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "user_id",
+                "name": "user_name",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_name"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "friend_status",
                 "type": "int",
                 "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "friend_status"
+              }
+            ],
+            "indexes": [],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "friend_user",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "user_name",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "",
+              "comment": ""
+            },
+            "foreignKeys": [
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_FRIEND_USER_1",
+                "fields": [
+                  "user_name"
+                ],
+                "referenceSchema": "Default",
+                "referenceTable": "USER",
+                "referenceFields": [
+                  "user_name"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              },
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_FRIEND_USER_2",
+                "fields": [
+                  "friend_user"
+                ],
+                "referenceSchema": "Default",
+                "referenceTable": "USER",
+                "referenceFields": [
+                  "user_name"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              }
+            ],
+            "triggers": [],
+            "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "USER",
+            "comment": "",
+            "engine": "",
+            "characterSet": "",
+            "collation": "",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "",
+            "checkTime": "",
+            "dataFree": 0,
+            "dataLength": 0,
+            "indexLength": 0,
+            "maxDataLength": 0,
+            "rows": 0,
+            "updateTime": "",
+            "DDL": "",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_name",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_name"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_password",
+                "type": "varchar",
+                "length": 24,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_password"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_address",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_address"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_phone",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_phone"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_sex",
+                "type": "bit",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Empty",
+                "defaultValue": "Empty String",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_sex"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_major",
+                "type": "varchar",
+                "length": 80,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -2048,7 +1930,59 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "user_id"
+                "oldName": "user_major"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_type",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": true,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_type"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_image",
+                "type": "varchar",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_image"
               }
             ],
             "indexes": [],
@@ -2058,7 +1992,209 @@
               "fields": [
                 {
                   "objectType": "IndexField_MYSQL",
-                  "name": "document_id",
+                  "name": "user_name",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "",
+              "comment": ""
+            },
+            "foreignKeys": [],
+            "triggers": [],
+            "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "MESSAGE",
+            "comment": "",
+            "engine": "",
+            "characterSet": "",
+            "collation": "",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "",
+            "checkTime": "",
+            "dataFree": 0,
+            "dataLength": 0,
+            "indexLength": 0,
+            "maxDataLength": 0,
+            "rows": 0,
+            "updateTime": "",
+            "DDL": "",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "mess_id",
+                "type": "int",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "mess_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "mess_content",
+                "type": "text",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "mess_content"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "mess_time",
+                "type": "datetime",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "mess_time"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "mess_type",
+                "type": "int",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "mess_type"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "chat_id",
+                "type": "int",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "chat_id"
+              }
+            ],
+            "indexes": [],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "mess_id",
                   "keyLength": 0,
                   "order": "",
                   "oldName": ""
@@ -2071,14 +2207,14 @@
             "foreignKeys": [
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_DOCUMENT_USER_1",
+                "name": "fk_MESSAGE_CHAT_1",
                 "fields": [
-                  "user_id"
+                  "chat_id"
                 ],
                 "referenceSchema": "Default",
-                "referenceTable": "USER",
+                "referenceTable": "CHAT",
                 "referenceFields": [
-                  "user_id"
+                  "chat_id"
                 ],
                 "onDelete": "",
                 "onUpdate": "",
@@ -2143,8 +2279,8 @@
               {
                 "objectType": "TableField_MYSQL",
                 "name": "subject_id",
-                "type": "int",
-                "length": -2147483648,
+                "type": "varchar",
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -2178,7 +2314,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -2194,9 +2330,9 @@
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "subject_credits",
+                "name": "subject_image",
                 "type": "varchar",
-                "length": 255,
+                "length": 22,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -2204,7 +2340,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -2216,13 +2352,13 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "subject_credits"
+                "oldName": "subject_image"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "int",
-                "length": -2147483648,
+                "name": "user_name",
+                "type": "varchar",
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -2230,7 +2366,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -2242,7 +2378,7 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "user_id"
+                "oldName": "user_name"
               }
             ],
             "indexes": [],
@@ -2262,25 +2398,7 @@
               "indexMethod": "",
               "comment": ""
             },
-            "foreignKeys": [
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_SUBJECT_USER_1",
-                "fields": [
-                  "user_id"
-                ],
-                "referenceSchema": "Default",
-                "referenceTable": "USER",
-                "referenceFields": [
-                  "user_id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              }
-            ],
+            "foreignKeys": [],
             "triggers": [],
             "tablePartitions": []
           },
@@ -2336,9 +2454,9 @@
             "fields": [
               {
                 "objectType": "TableField_MYSQL",
-                "name": "hmw_id",
-                "type": "int",
-                "length": -2147483648,
+                "name": "homework_id",
+                "type": "varchar",
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -2358,39 +2476,13 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "hmw_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "hmw_content",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "hmw_content"
+                "oldName": "homework_id"
               },
               {
                 "objectType": "TableField_MYSQL",
                 "name": "subject_id",
-                "type": "int",
-                "length": -2147483648,
+                "type": "varchar",
+                "length": 16,
                 "decimals": -2147483648,
                 "isUnsigned": false,
                 "isZeroFill": false,
@@ -2398,7 +2490,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -2414,141 +2506,8 @@
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "int",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_id"
-              }
-            ],
-            "indexes": [],
-            "primaryKey": {
-              "objectType": "PrimaryKey_MYSQL",
-              "name": "",
-              "fields": [
-                {
-                  "objectType": "IndexField_MYSQL",
-                  "name": "hmw_id",
-                  "keyLength": 0,
-                  "order": "",
-                  "oldName": ""
-                }
-              ],
-              "oldName": "",
-              "indexMethod": "",
-              "comment": ""
-            },
-            "foreignKeys": [
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_HOMEWORK_USER_1",
-                "fields": [
-                  "user_id"
-                ],
-                "referenceSchema": "Default",
-                "referenceTable": "USER",
-                "referenceFields": [
-                  "user_id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              },
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_HOMEWORK_SUBJECT_1",
-                "fields": [
-                  "subject_id"
-                ],
-                "referenceSchema": "Default",
-                "referenceTable": "SUBJECT",
-                "referenceFields": [
-                  "subject_id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              }
-            ],
-            "triggers": [],
-            "tablePartitions": []
-          },
-          {
-            "objectType": "Table_MYSQL",
-            "name": "COMMENT",
-            "comment": "",
-            "engine": "",
-            "characterSet": "",
-            "collation": "",
-            "autoIncrement": 0,
-            "tablespace": "",
-            "storage": "",
-            "insertMethod": "",
-            "connection": "",
-            "checksum": false,
-            "rowFormat": "",
-            "avgRowLength": 0,
-            "maxRows": 0,
-            "minRows": 0,
-            "keyBlockSize": 0,
-            "packKeys": "",
-            "delayKeyWrite": false,
-            "dataDirectory": "",
-            "indexDirectory": "",
-            "statsAutoRecalc": "",
-            "statsPersistent": "",
-            "statsSamplePages": 0,
-            "union": "",
-            "pageCheckSum": false,
-            "transactional": false,
-            "compression": "",
-            "oldName": "",
-            "encryption": false,
-            "createOptions": "",
-            "createTime": "",
-            "checkTime": "",
-            "dataFree": 0,
-            "dataLength": 0,
-            "indexLength": 0,
-            "maxDataLength": 0,
-            "rows": 0,
-            "updateTime": "",
-            "DDL": "",
-            "partitionBy": "",
-            "partitionByExpr": "",
-            "partitions": 0,
-            "partitionKeyAlgorithm": "",
-            "subPartitionBy": "",
-            "subPartitionByExpr": "",
-            "subPartitions": 0,
-            "subPartitionKeyAlgorithm": "",
-            "fields": [
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "cmt_id",
-                "type": "int",
+                "name": "homework_content",
+                "type": "text",
                 "length": -2147483648,
                 "decimals": -2147483648,
                 "isUnsigned": false,
@@ -2569,37 +2528,11 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "cmt_id"
+                "oldName": "homework_content"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "cmt_content",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "cmt_content"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "cmt_time",
+                "name": "homework_time",
                 "type": "datetime",
                 "length": -2147483648,
                 "decimals": -2147483648,
@@ -2609,7 +2542,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -2621,12 +2554,12 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "cmt_time"
+                "oldName": "homework_time"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "int",
+                "name": "homework_finish",
+                "type": "datetime",
                 "length": -2147483648,
                 "decimals": -2147483648,
                 "isUnsigned": false,
@@ -2635,7 +2568,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -2647,33 +2580,7 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "user_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "hmw_id",
-                "type": "int",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "hmw_id"
+                "oldName": "homework_finish"
               }
             ],
             "indexes": [],
@@ -2683,8 +2590,15 @@
               "fields": [
                 {
                   "objectType": "IndexField_MYSQL",
-                  "name": "cmt_id",
+                  "name": "homework_id",
                   "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "subject_id",
+                  "keyLength": -2147483648,
                   "order": "",
                   "oldName": ""
                 }
@@ -2696,31 +2610,14 @@
             "foreignKeys": [
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_COMMENT_USER_1",
+                "name": "fk_HOMEWORK_SUBJECT_1",
                 "fields": [
-                  "user_id"
+                  "subject_id"
                 ],
                 "referenceSchema": "Default",
-                "referenceTable": "USER",
+                "referenceTable": "SUBJECT",
                 "referenceFields": [
-                  "user_id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
-              },
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_COMMENT_HOMEWORK_1",
-                "fields": [
-                  "hmw_id"
-                ],
-                "referenceSchema": "Default",
-                "referenceTable": "HOMEWORK",
-                "referenceFields": [
-                  "hmw_id"
+                  "subject_id"
                 ],
                 "onDelete": "",
                 "onUpdate": "",
@@ -2784,7 +2681,85 @@
             "fields": [
               {
                 "objectType": "TableField_MYSQL",
-                "name": "calendar_id",
+                "name": "subject_id",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "subject_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "calendar_time",
+                "type": "datetime",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "calendar_time"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "calendar_start",
+                "type": "datetime",
+                "length": 255,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "calendar_start"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "subject_weekstart",
                 "type": "int",
                 "length": -2147483648,
                 "decimals": -2147483648,
@@ -2806,63 +2781,11 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "calendar_id"
+                "oldName": "subject_weekstart"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "calendar_name",
-                "type": "varchar",
-                "length": 255,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "calendar_name"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "calendar_fulltime",
-                "type": "datetime",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "calendar_fulltime"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "subject_id",
+                "name": "subject_weekend",
                 "type": "int",
                 "length": -2147483648,
                 "decimals": -2147483648,
@@ -2872,7 +2795,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -2884,33 +2807,7 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "subject_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "int",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "user_id"
+                "oldName": "subject_weekend"
               }
             ],
             "indexes": [],
@@ -2920,7 +2817,21 @@
               "fields": [
                 {
                   "objectType": "IndexField_MYSQL",
-                  "name": "calendar_id",
+                  "name": "subject_id",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "calendar_time",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "calendar_start",
                   "keyLength": 0,
                   "order": "",
                   "oldName": ""
@@ -2947,23 +2858,6 @@
                 "sourceCardinality": "NoneRelationship",
                 "targetCardinality": "NoneRelationship",
                 "oldName": ""
-              },
-              {
-                "objectType": "ForeignKey_MYSQL",
-                "name": "fk_CALENDAR_SUBJECT_2",
-                "fields": [
-                  "user_id"
-                ],
-                "referenceSchema": "Default",
-                "referenceTable": "SUBJECT",
-                "referenceFields": [
-                  "user_id"
-                ],
-                "onDelete": "",
-                "onUpdate": "",
-                "sourceCardinality": "NoneRelationship",
-                "targetCardinality": "NoneRelationship",
-                "oldName": ""
               }
             ],
             "triggers": [],
@@ -2971,7 +2865,7 @@
           },
           {
             "objectType": "Table_MYSQL",
-            "name": "SCORE",
+            "name": "CHAT_GROUP",
             "comment": "",
             "engine": "",
             "characterSet": "",
@@ -3021,7 +2915,7 @@
             "fields": [
               {
                 "objectType": "TableField_MYSQL",
-                "name": "score_id",
+                "name": "chatgroup_id",
                 "type": "int",
                 "length": -2147483648,
                 "decimals": -2147483648,
@@ -3043,11 +2937,11 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "score_id"
+                "oldName": "chatgroup_id"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "score_level",
+                "name": "chatgroup_name",
                 "type": "varchar",
                 "length": 255,
                 "decimals": -2147483648,
@@ -3057,7 +2951,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -3069,12 +2963,38 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "score_level"
+                "oldName": "chatgroup_name"
               },
               {
                 "objectType": "TableField_MYSQL",
-                "name": "user_id",
-                "type": "int",
+                "name": "user_name",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_name"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "chatgroup_status",
+                "type": "bit",
                 "length": -2147483648,
                 "decimals": -2147483648,
                 "isUnsigned": false,
@@ -3083,7 +3003,7 @@
                 "isBinary": false,
                 "charset": "",
                 "collation": "",
-                "isNullable": true,
+                "isNullable": false,
                 "defaultType": "Others",
                 "defaultValue": "",
                 "isOnUpdateCurrentTimestamp": false,
@@ -3095,33 +3015,7 @@
                 "isGeneratedAlways": false,
                 "virtualExpr": "",
                 "virtualType": "",
-                "oldName": "user_id"
-              },
-              {
-                "objectType": "TableField_MYSQL",
-                "name": "hmw_id",
-                "type": "int",
-                "length": -2147483648,
-                "decimals": -2147483648,
-                "isUnsigned": false,
-                "isZeroFill": false,
-                "setEnumValues": "",
-                "isBinary": false,
-                "charset": "",
-                "collation": "",
-                "isNullable": true,
-                "defaultType": "Others",
-                "defaultValue": "",
-                "isOnUpdateCurrentTimestamp": false,
-                "isAutoInc": false,
-                "comment": "",
-                "columnFormat": "",
-                "storage": "",
-                "isVirtual": false,
-                "isGeneratedAlways": false,
-                "virtualExpr": "",
-                "virtualType": "",
-                "oldName": "hmw_id"
+                "oldName": "chatgroup_status"
               }
             ],
             "indexes": [],
@@ -3131,7 +3025,7 @@
               "fields": [
                 {
                   "objectType": "IndexField_MYSQL",
-                  "name": "score_id",
+                  "name": "chatgroup_id",
                   "keyLength": 0,
                   "order": "",
                   "oldName": ""
@@ -3144,14 +3038,222 @@
             "foreignKeys": [
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_SCORE_USER_1",
+                "name": "fk_CHAT_GROUP_USER_1",
                 "fields": [
-                  "user_id"
+                  "user_name"
                 ],
                 "referenceSchema": "Default",
                 "referenceTable": "USER",
                 "referenceFields": [
-                  "user_id"
+                  "user_name"
+                ],
+                "onDelete": "",
+                "onUpdate": "",
+                "sourceCardinality": "NoneRelationship",
+                "targetCardinality": "NoneRelationship",
+                "oldName": ""
+              }
+            ],
+            "triggers": [],
+            "tablePartitions": []
+          },
+          {
+            "objectType": "Table_MYSQL",
+            "name": "CHAT",
+            "comment": "",
+            "engine": "",
+            "characterSet": "",
+            "collation": "",
+            "autoIncrement": 0,
+            "tablespace": "",
+            "storage": "",
+            "insertMethod": "",
+            "connection": "",
+            "checksum": false,
+            "rowFormat": "",
+            "avgRowLength": 0,
+            "maxRows": 0,
+            "minRows": 0,
+            "keyBlockSize": 0,
+            "packKeys": "",
+            "delayKeyWrite": false,
+            "dataDirectory": "",
+            "indexDirectory": "",
+            "statsAutoRecalc": "",
+            "statsPersistent": "",
+            "statsSamplePages": 0,
+            "union": "",
+            "pageCheckSum": false,
+            "transactional": false,
+            "compression": "",
+            "oldName": "",
+            "encryption": false,
+            "createOptions": "",
+            "createTime": "",
+            "checkTime": "",
+            "dataFree": 0,
+            "dataLength": 0,
+            "indexLength": 0,
+            "maxDataLength": 0,
+            "rows": 0,
+            "updateTime": "",
+            "DDL": "",
+            "partitionBy": "",
+            "partitionByExpr": "",
+            "partitions": 0,
+            "partitionKeyAlgorithm": "",
+            "subPartitionBy": "",
+            "subPartitionByExpr": "",
+            "subPartitions": 0,
+            "subPartitionKeyAlgorithm": "",
+            "fields": [
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "chat_id",
+                "type": "int",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "chat_id"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "user_name",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "user_name"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "friend_user",
+                "type": "varchar",
+                "length": 16,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "friend_user"
+              },
+              {
+                "objectType": "TableField_MYSQL",
+                "name": "chat_status",
+                "type": "bit",
+                "length": -2147483648,
+                "decimals": -2147483648,
+                "isUnsigned": false,
+                "isZeroFill": false,
+                "setEnumValues": "",
+                "isBinary": false,
+                "charset": "",
+                "collation": "",
+                "isNullable": false,
+                "defaultType": "Others",
+                "defaultValue": "",
+                "isOnUpdateCurrentTimestamp": false,
+                "isAutoInc": false,
+                "comment": "",
+                "columnFormat": "",
+                "storage": "",
+                "isVirtual": false,
+                "isGeneratedAlways": false,
+                "virtualExpr": "",
+                "virtualType": "",
+                "oldName": "chat_status"
+              }
+            ],
+            "indexes": [],
+            "primaryKey": {
+              "objectType": "PrimaryKey_MYSQL",
+              "name": "",
+              "fields": [
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "chat_id",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "user_name",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                },
+                {
+                  "objectType": "IndexField_MYSQL",
+                  "name": "friend_user",
+                  "keyLength": 0,
+                  "order": "",
+                  "oldName": ""
+                }
+              ],
+              "oldName": "",
+              "indexMethod": "",
+              "comment": ""
+            },
+            "foreignKeys": [
+              {
+                "objectType": "ForeignKey_MYSQL",
+                "name": "fk_CHAT_USER_1",
+                "fields": [
+                  "user_name"
+                ],
+                "referenceSchema": "Default",
+                "referenceTable": "USER",
+                "referenceFields": [
+                  "user_name"
                 ],
                 "onDelete": "",
                 "onUpdate": "",
@@ -3161,14 +3263,14 @@
               },
               {
                 "objectType": "ForeignKey_MYSQL",
-                "name": "fk_SCORE_HOMEWORK_1",
+                "name": "fk_CHAT_USER_2",
                 "fields": [
-                  "hmw_id"
+                  "friend_user"
                 ],
                 "referenceSchema": "Default",
-                "referenceTable": "HOMEWORK",
+                "referenceTable": "USER",
                 "referenceFields": [
-                  "hmw_id"
+                  "user_name"
                 ],
                 "onDelete": "",
                 "onUpdate": "",
@@ -3189,7 +3291,7 @@
     {
       "name": "Diagram 1",
       "paperWidth": 2,
-      "paperHeight": 2,
+      "paperHeight": 1,
       "tableFont": "Arial Unicode MS",
       "tableFontSize": 14,
       "isBalckWhite": false,
@@ -3203,8 +3305,8 @@
           "type": "table",
           "schemaName": "Default",
           "tableName": "USER",
-          "x": 580,
-          "y": 1280,
+          "x": 1560,
+          "y": 620,
           "width": 200,
           "height": 240,
           "isBold": false,
@@ -3219,151 +3321,7 @@
           "type": "table",
           "schemaName": "Default",
           "tableName": "SUBJECT",
-          "x": 1670,
-          "y": 970,
-          "width": 200,
-          "height": 200,
-          "isBold": false,
-          "titleColor": {
-            "r": 55,
-            "g": 131,
-            "b": 192,
-            "a": 1
-          }
-        },
-        {
-          "type": "table",
-          "schemaName": "Default",
-          "tableName": "CLASS",
-          "x": 1980,
-          "y": 1210,
-          "width": 200,
-          "height": 200,
-          "isBold": false,
-          "titleColor": {
-            "r": 55,
-            "g": 131,
-            "b": 192,
-            "a": 1
-          }
-        },
-        {
-          "type": "table",
-          "schemaName": "Default",
-          "tableName": "USER_SUBJECT",
-          "x": 1370,
-          "y": 1170,
-          "width": 200,
-          "height": 200,
-          "isBold": false,
-          "titleColor": {
-            "r": 55,
-            "g": 131,
-            "b": 192,
-            "a": 1
-          }
-        },
-        {
-          "type": "table",
-          "schemaName": "Default",
-          "tableName": "MESSAGE",
-          "x": 520,
-          "y": 280,
-          "width": 200,
-          "height": 200,
-          "isBold": false,
-          "titleColor": {
-            "r": 55,
-            "g": 131,
-            "b": 192,
-            "a": 1
-          }
-        },
-        {
-          "type": "table",
-          "schemaName": "Default",
-          "tableName": "MESSAGE_CONTENT",
-          "x": 520,
-          "y": 30,
-          "width": 200,
-          "height": 200,
-          "isBold": false,
-          "titleColor": {
-            "r": 55,
-            "g": 131,
-            "b": 192,
-            "a": 1
-          }
-        },
-        {
-          "type": "table",
-          "schemaName": "Default",
-          "tableName": "CHATGROUP",
-          "x": 30,
-          "y": 1300,
-          "width": 200,
-          "height": 200,
-          "isBold": false,
-          "titleColor": {
-            "r": 55,
-            "g": 131,
-            "b": 192,
-            "a": 1
-          }
-        },
-        {
-          "type": "table",
-          "schemaName": "Default",
-          "tableName": "MESSSAGE_GROUP",
           "x": 280,
-          "y": 1300,
-          "width": 200,
-          "height": 200,
-          "isBold": false,
-          "titleColor": {
-            "r": 55,
-            "g": 131,
-            "b": 192,
-            "a": 1
-          }
-        },
-        {
-          "type": "table",
-          "schemaName": "Default",
-          "tableName": "FRIEND",
-          "x": 580,
-          "y": 1560,
-          "width": 200,
-          "height": 200,
-          "isBold": false,
-          "titleColor": {
-            "r": 55,
-            "g": 131,
-            "b": 192,
-            "a": 1
-          }
-        },
-        {
-          "type": "table",
-          "schemaName": "Default",
-          "tableName": "NOTIFICATION",
-          "x": 1980,
-          "y": 1460,
-          "width": 200,
-          "height": 200,
-          "isBold": false,
-          "titleColor": {
-            "r": 55,
-            "g": 131,
-            "b": 192,
-            "a": 1
-          }
-        },
-        {
-          "type": "table",
-          "schemaName": "Default",
-          "tableName": "DOCUMENT",
-          "x": 750,
           "y": 530,
           "width": 200,
           "height": 200,
@@ -3378,11 +3336,139 @@
         {
           "type": "table",
           "schemaName": "Default",
-          "tableName": "USER_HISTORY",
-          "x": 1670,
-          "y": 1220,
+          "tableName": "CLASS",
+          "x": 780,
+          "y": 800,
           "width": 200,
           "height": 200,
+          "isBold": false,
+          "titleColor": {
+            "r": 55,
+            "g": 131,
+            "b": 192,
+            "a": 1
+          }
+        },
+        {
+          "type": "table",
+          "schemaName": "Default",
+          "tableName": "REGISTRY",
+          "x": 280,
+          "y": 280,
+          "width": 200,
+          "height": 200,
+          "isBold": false,
+          "titleColor": {
+            "r": 55,
+            "g": 131,
+            "b": 192,
+            "a": 1
+          }
+        },
+        {
+          "type": "table",
+          "schemaName": "Default",
+          "tableName": "CHAT",
+          "x": 1560,
+          "y": 910,
+          "width": 200,
+          "height": 130,
+          "isBold": false,
+          "titleColor": {
+            "r": 55,
+            "g": 131,
+            "b": 192,
+            "a": 1
+          }
+        },
+        {
+          "type": "table",
+          "schemaName": "Default",
+          "tableName": "MESSAGE",
+          "x": 1560,
+          "y": 1090,
+          "width": 200,
+          "height": 200,
+          "isBold": false,
+          "titleColor": {
+            "r": 55,
+            "g": 131,
+            "b": 192,
+            "a": 1
+          }
+        },
+        {
+          "type": "table",
+          "schemaName": "Default",
+          "tableName": "CHAT_GROUP",
+          "x": 1560,
+          "y": 440,
+          "width": 200,
+          "height": 130,
+          "isBold": false,
+          "titleColor": {
+            "r": 55,
+            "g": 131,
+            "b": 192,
+            "a": 1
+          }
+        },
+        {
+          "type": "table",
+          "schemaName": "Default",
+          "tableName": "MESSAGE_GROUP",
+          "x": 1810,
+          "y": 440,
+          "width": 200,
+          "height": 140,
+          "isBold": false,
+          "titleColor": {
+            "r": 55,
+            "g": 131,
+            "b": 192,
+            "a": 1
+          }
+        },
+        {
+          "type": "table",
+          "schemaName": "Default",
+          "tableName": "FRIEND",
+          "x": 1970,
+          "y": 650,
+          "width": 200,
+          "height": 200,
+          "isBold": false,
+          "titleColor": {
+            "r": 55,
+            "g": 131,
+            "b": 192,
+            "a": 1
+          }
+        },
+        {
+          "type": "table",
+          "schemaName": "Default",
+          "tableName": "NOTIFICATION",
+          "x": 1260,
+          "y": 430,
+          "width": 200,
+          "height": 200,
+          "isBold": false,
+          "titleColor": {
+            "r": 55,
+            "g": 131,
+            "b": 192,
+            "a": 1
+          }
+        },
+        {
+          "type": "table",
+          "schemaName": "Default",
+          "tableName": "DOCUMENT",
+          "x": 530,
+          "y": 460,
+          "width": 200,
+          "height": 150,
           "isBold": false,
           "titleColor": {
             "r": 55,
@@ -3395,10 +3481,10 @@
           "type": "table",
           "schemaName": "Default",
           "tableName": "HOMEWORK",
-          "x": 1000,
-          "y": 870,
+          "x": 530,
+          "y": 660,
           "width": 200,
-          "height": 200,
+          "height": 150,
           "isBold": false,
           "titleColor": {
             "r": 55,
@@ -3411,10 +3497,10 @@
           "type": "table",
           "schemaName": "Default",
           "tableName": "COMMENT",
-          "x": 1000,
-          "y": 620,
+          "x": 780,
+          "y": 600,
           "width": 200,
-          "height": 200,
+          "height": 150,
           "isBold": false,
           "titleColor": {
             "r": 55,
@@ -3427,8 +3513,8 @@
           "type": "table",
           "schemaName": "Default",
           "tableName": "CALENDAR",
-          "x": 1920,
-          "y": 960,
+          "x": 30,
+          "y": 530,
           "width": 200,
           "height": 200,
           "isBold": false,
@@ -3443,8 +3529,8 @@
           "type": "table",
           "schemaName": "Default",
           "tableName": "SCORE",
-          "x": 1000,
-          "y": 1120,
+          "x": 280,
+          "y": 30,
           "width": 200,
           "height": 200,
           "isBold": false,
@@ -3460,31 +3546,31 @@
       "relations": [
         {
           "name": "fk_USER_SUBJECT_USER_1",
-          "sourceTableName": "USER_SUBJECT",
+          "sourceTableName": "REGISTRY",
           "sourceSchemaName": "Default",
           "lineWidth": 1,
           "visible": true,
           "vertices": [
             {
-              "x": 1355,
-              "y": 1330
+              "x": 495,
+              "y": 410
             },
             {
-              "x": 1310,
-              "y": 1330
+              "x": 1150,
+              "y": 410
             },
             {
-              "x": 1310,
-              "y": 1400
+              "x": 1150,
+              "y": 730
             },
             {
-              "x": 795,
-              "y": 1400
+              "x": 1545,
+              "y": 730
             }
           ],
           "label": {
-            "x": 1233,
-            "y": 1292,
+            "x": 183,
+            "y": 372,
             "width": 179,
             "height": 30,
             "fontName": "Arial Unicode MS",
@@ -3502,244 +3588,24 @@
         },
         {
           "name": "fk_USER_SUBJECT_SUBJECT_1",
-          "sourceTableName": "USER_SUBJECT",
+          "sourceTableName": "REGISTRY",
           "sourceSchemaName": "Default",
           "lineWidth": 1,
           "visible": true,
           "vertices": [
             {
-              "x": 1585,
-              "y": 1210
-            },
-            {
-              "x": 1620,
-              "y": 1210
-            },
-            {
-              "x": 1620,
-              "y": 1130
-            },
-            {
-              "x": 1655,
-              "y": 1130
-            }
-          ],
-          "label": {
-            "x": 1575,
-            "y": 1172,
-            "width": 201,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        },
-        {
-          "name": "fk_USER_CLASS_1",
-          "sourceTableName": "USER",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 795,
-              "y": 1470
-            },
-            {
-              "x": 1930,
-              "y": 1470
-            },
-            {
-              "x": 1930,
-              "y": 1370
-            },
-            {
-              "x": 1965,
-              "y": 1370
-            }
-          ],
-          "label": {
-            "x": 785,
-            "y": 1432,
-            "width": 123,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        },
-        {
-          "name": "fk_MESSAGE_CONTENT_MESSAGE_1",
-          "sourceTableName": "MESSAGE_CONTENT",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 620,
-              "y": 245
-            },
-            {
-              "x": 620,
-              "y": 265
-            }
-          ],
-          "label": {
-            "x": 490,
-            "y": 195,
-            "width": 250,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        },
-        {
-          "name": "fk_MESSAGE_USER_1",
-          "sourceTableName": "MESSAGE",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 620,
+              "x": 380,
               "y": 495
             },
             {
-              "x": 620,
-              "y": 1265
+              "x": 380,
+              "y": 515
             }
           ],
           "label": {
-            "x": 622,
+            "x": 140,
             "y": 445,
-            "width": 147,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        },
-        {
-          "name": "fk_MESSSAGE_GROUP_CHATGROUP_1",
-          "sourceTableName": "MESSSAGE_GROUP",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 265,
-              "y": 1400
-            },
-            {
-              "x": 245,
-              "y": 1400
-            }
-          ],
-          "label": {
-            "x": 275,
-            "y": 1362,
-            "width": 260,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        },
-        {
-          "name": "fk_MESSSAGE_GROUP_USER_1",
-          "sourceTableName": "MESSSAGE_GROUP",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 495,
-              "y": 1400
-            },
-            {
-              "x": 565,
-              "y": 1400
-            }
-          ],
-          "label": {
-            "x": 485,
-            "y": 1362,
-            "width": 209,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        },
-        {
-          "name": "fk_FRIEND_USER_1",
-          "sourceTableName": "FRIEND",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 690,
-              "y": 1545
-            },
-            {
-              "x": 690,
-              "y": 1535
-            }
-          ],
-          "label": {
-            "x": 561,
-            "y": 1515,
-            "width": 131,
+            "width": 201,
             "height": 30,
             "fontName": "Arial Unicode MS",
             "fontSize": 14,
@@ -3762,94 +3628,26 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1965,
-              "y": 1500
+              "x": 1475,
+              "y": 590
             },
             {
-              "x": 795,
-              "y": 1500
+              "x": 1510,
+              "y": 590
+            },
+            {
+              "x": 1510,
+              "y": 650
+            },
+            {
+              "x": 1545,
+              "y": 650
             }
           ],
           "label": {
-            "x": 1975,
-            "y": 1462,
+            "x": 1230,
+            "y": 552,
             "width": 179,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        },
-        {
-          "name": "fk_USER_HISTORY_SUBJECT_1",
-          "sourceTableName": "USER_HISTORY",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 1770,
-              "y": 1205
-            },
-            {
-              "x": 1770,
-              "y": 1185
-            }
-          ],
-          "label": {
-            "x": 1717,
-            "y": 1185,
-            "width": 203,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        },
-        {
-          "name": "fk_USER_HISTORY_USER_1",
-          "sourceTableName": "USER_HISTORY",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 1655,
-              "y": 1380
-            },
-            {
-              "x": 1620,
-              "y": 1380
-            },
-            {
-              "x": 1620,
-              "y": 1420
-            },
-            {
-              "x": 795,
-              "y": 1420
-            }
-          ],
-          "label": {
-            "x": 1484,
-            "y": 1342,
-            "width": 181,
             "height": 30,
             "fontName": "Arial Unicode MS",
             "fontSize": 14,
@@ -3872,106 +3670,26 @@
           "visible": true,
           "vertices": [
             {
-              "x": 735,
-              "y": 630
+              "x": 745,
+              "y": 540
             },
             {
-              "x": 690,
-              "y": 630
+              "x": 1090,
+              "y": 540
             },
             {
-              "x": 690,
-              "y": 1265
+              "x": 1090,
+              "y": 760
+            },
+            {
+              "x": 1545,
+              "y": 760
             }
           ],
           "label": {
-            "x": 582,
-            "y": 592,
+            "x": 572,
+            "y": 502,
             "width": 163,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        },
-        {
-          "name": "fk_SUBJECT_USER_1",
-          "sourceTableName": "SUBJECT",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 1655,
-              "y": 1060
-            },
-            {
-              "x": 1260,
-              "y": 1060
-            },
-            {
-              "x": 1260,
-              "y": 1370
-            },
-            {
-              "x": 795,
-              "y": 1370
-            }
-          ],
-          "label": {
-            "x": 1527,
-            "y": 1022,
-            "width": 138,
-            "height": 30,
-            "fontName": "Arial Unicode MS",
-            "fontSize": 14,
-            "fontColor": {
-              "r": 51,
-              "g": 51,
-              "b": 51,
-              "a": 1
-            },
-            "isFontBold": false,
-            "isFontItalic": false,
-            "isVisible": false
-          }
-        },
-        {
-          "name": "fk_HOMEWORK_USER_1",
-          "sourceTableName": "HOMEWORK",
-          "sourceSchemaName": "Default",
-          "lineWidth": 1,
-          "visible": true,
-          "vertices": [
-            {
-              "x": 985,
-              "y": 1030
-            },
-            {
-              "x": 890,
-              "y": 1030
-            },
-            {
-              "x": 890,
-              "y": 1320
-            },
-            {
-              "x": 795,
-              "y": 1320
-            }
-          ],
-          "label": {
-            "x": 827,
-            "y": 992,
-            "width": 168,
             "height": 30,
             "fontName": "Arial Unicode MS",
             "fontSize": 14,
@@ -3994,21 +3712,25 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1215,
-              "y": 920
+              "x": 570,
+              "y": 825
             },
             {
-              "x": 1770,
-              "y": 920
+              "x": 570,
+              "y": 870
             },
             {
-              "x": 1770,
-              "y": 955
+              "x": 380,
+              "y": 870
+            },
+            {
+              "x": 380,
+              "y": 745
             }
           ],
           "label": {
-            "x": 1015,
-            "y": 882,
+            "x": 357,
+            "y": 775,
             "width": 190,
             "height": 30,
             "fontName": "Arial Unicode MS",
@@ -4025,33 +3747,267 @@
           }
         },
         {
-          "name": "fk_COMMENT_USER_1",
-          "sourceTableName": "COMMENT",
+          "name": "fk_MESSAGE_CHAT_1",
+          "sourceTableName": "MESSAGE",
           "sourceSchemaName": "Default",
           "lineWidth": 1,
           "visible": true,
           "vertices": [
             {
-              "x": 985,
-              "y": 780
+              "x": 1660,
+              "y": 1075
             },
             {
-              "x": 830,
-              "y": 780
-            },
-            {
-              "x": 830,
-              "y": 1290
-            },
-            {
-              "x": 795,
-              "y": 1290
+              "x": 1660,
+              "y": 1055
             }
           ],
           "label": {
-            "x": 839,
-            "y": 742,
-            "width": 156,
+            "x": 1668,
+            "y": 1085,
+            "width": 150,
+            "height": 30,
+            "fontName": "Arial Unicode MS",
+            "fontSize": 14,
+            "fontColor": {
+              "r": 51,
+              "g": 51,
+              "b": 51,
+              "a": 1
+            },
+            "isFontBold": false,
+            "isFontItalic": false,
+            "isVisible": false
+          }
+        },
+        {
+          "name": "fk_DOCUMENT_HOMEWORK_1",
+          "sourceTableName": "DOCUMENT",
+          "sourceSchemaName": "Default",
+          "lineWidth": 1,
+          "visible": true,
+          "vertices": [
+            {
+              "x": 630,
+              "y": 625
+            },
+            {
+              "x": 630,
+              "y": 645
+            }
+          ],
+          "label": {
+            "x": 632,
+            "y": 575,
+            "width": 215,
+            "height": 30,
+            "fontName": "Arial Unicode MS",
+            "fontSize": 14,
+            "fontColor": {
+              "r": 51,
+              "g": 51,
+              "b": 51,
+              "a": 1
+            },
+            "isFontBold": false,
+            "isFontItalic": false,
+            "isVisible": false
+          }
+        },
+        {
+          "name": "fk_DOCUMENT_SUBJECT_1",
+          "sourceTableName": "DOCUMENT",
+          "sourceSchemaName": "Default",
+          "lineWidth": 1,
+          "visible": true,
+          "vertices": [
+            {
+              "x": 515,
+              "y": 570
+            },
+            {
+              "x": 495,
+              "y": 570
+            }
+          ],
+          "label": {
+            "x": 525,
+            "y": 532,
+            "width": 185,
+            "height": 30,
+            "fontName": "Arial Unicode MS",
+            "fontSize": 14,
+            "fontColor": {
+              "r": 51,
+              "g": 51,
+              "b": 51,
+              "a": 1
+            },
+            "isFontBold": false,
+            "isFontItalic": false,
+            "isVisible": false
+          }
+        },
+        {
+          "name": "fk_CHAT_USER_1",
+          "sourceTableName": "CHAT",
+          "sourceSchemaName": "Default",
+          "lineWidth": 1,
+          "visible": true,
+          "vertices": [
+            {
+              "x": 1675,
+              "y": 895
+            },
+            {
+              "x": 1675,
+              "y": 875
+            }
+          ],
+          "label": {
+            "x": 1677,
+            "y": 865,
+            "width": 119,
+            "height": 30,
+            "fontName": "Arial Unicode MS",
+            "fontSize": 14,
+            "fontColor": {
+              "r": 51,
+              "g": 51,
+              "b": 51,
+              "a": 1
+            },
+            "isFontBold": false,
+            "isFontItalic": false,
+            "isVisible": false
+          }
+        },
+        {
+          "name": "fk_FRIEND_USER_1",
+          "sourceTableName": "FRIEND",
+          "sourceSchemaName": "Default",
+          "lineWidth": 1,
+          "visible": true,
+          "vertices": [
+            {
+              "x": 1955,
+              "y": 765
+            },
+            {
+              "x": 1775,
+              "y": 765
+            }
+          ],
+          "label": {
+            "x": 1965,
+            "y": 727,
+            "width": 131,
+            "height": 30,
+            "fontName": "Arial Unicode MS",
+            "fontSize": 14,
+            "fontColor": {
+              "r": 51,
+              "g": 51,
+              "b": 51,
+              "a": 1
+            },
+            "isFontBold": false,
+            "isFontItalic": false,
+            "isVisible": false
+          }
+        },
+        {
+          "name": "fk_CHAT_GROUP_USER_1",
+          "sourceTableName": "CHAT_GROUP",
+          "sourceSchemaName": "Default",
+          "lineWidth": 1,
+          "visible": true,
+          "vertices": [
+            {
+              "x": 1660,
+              "y": 585
+            },
+            {
+              "x": 1660,
+              "y": 605
+            }
+          ],
+          "label": {
+            "x": 1662,
+            "y": 535,
+            "width": 173,
+            "height": 30,
+            "fontName": "Arial Unicode MS",
+            "fontSize": 14,
+            "fontColor": {
+              "r": 51,
+              "g": 51,
+              "b": 51,
+              "a": 1
+            },
+            "isFontBold": false,
+            "isFontItalic": false,
+            "isVisible": false
+          }
+        },
+        {
+          "name": "fk_MESSAGE_GROUP_CHAT_GROUP_1",
+          "sourceTableName": "MESSAGE_GROUP",
+          "sourceSchemaName": "Default",
+          "lineWidth": 1,
+          "visible": true,
+          "vertices": [
+            {
+              "x": 1795,
+              "y": 510
+            },
+            {
+              "x": 1775,
+              "y": 510
+            }
+          ],
+          "label": {
+            "x": 1740,
+            "y": 472,
+            "width": 258,
+            "height": 30,
+            "fontName": "Arial Unicode MS",
+            "fontSize": 14,
+            "fontColor": {
+              "r": 51,
+              "g": 51,
+              "b": 51,
+              "a": 1
+            },
+            "isFontBold": false,
+            "isFontItalic": false,
+            "isVisible": false
+          }
+        },
+        {
+          "name": "fk_MESSAGE_GROUP_USER_1",
+          "sourceTableName": "MESSAGE_GROUP",
+          "sourceSchemaName": "Default",
+          "lineWidth": 1,
+          "visible": true,
+          "vertices": [
+            {
+              "x": 1910,
+              "y": 595
+            },
+            {
+              "x": 1910,
+              "y": 670
+            },
+            {
+              "x": 1775,
+              "y": 670
+            }
+          ],
+          "label": {
+            "x": 1847,
+            "y": 545,
+            "width": 201,
             "height": 30,
             "fontName": "Arial Unicode MS",
             "fontSize": 14,
@@ -4074,18 +4030,94 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1100,
-              "y": 835
+              "x": 765,
+              "y": 710
             },
             {
-              "x": 1100,
-              "y": 855
+              "x": 745,
+              "y": 710
             }
           ],
           "label": {
-            "x": 894,
-            "y": 785,
+            "x": 775,
+            "y": 672,
             "width": 208,
+            "height": 30,
+            "fontName": "Arial Unicode MS",
+            "fontSize": 14,
+            "fontColor": {
+              "r": 51,
+              "g": 51,
+              "b": 51,
+              "a": 1
+            },
+            "isFontBold": false,
+            "isFontItalic": false,
+            "isVisible": false
+          }
+        },
+        {
+          "name": "fk_COMMENT_USER_1",
+          "sourceTableName": "COMMENT",
+          "sourceSchemaName": "Default",
+          "lineWidth": 1,
+          "visible": true,
+          "vertices": [
+            {
+              "x": 995,
+              "y": 710
+            },
+            {
+              "x": 1030,
+              "y": 710
+            },
+            {
+              "x": 1030,
+              "y": 800
+            },
+            {
+              "x": 1545,
+              "y": 800
+            }
+          ],
+          "label": {
+            "x": 829,
+            "y": 672,
+            "width": 156,
+            "height": 30,
+            "fontName": "Arial Unicode MS",
+            "fontSize": 14,
+            "fontColor": {
+              "r": 51,
+              "g": 51,
+              "b": 51,
+              "a": 1
+            },
+            "isFontBold": false,
+            "isFontItalic": false,
+            "isVisible": false
+          }
+        },
+        {
+          "name": "fk_REGISTRY_USER_1",
+          "sourceTableName": "CLASS",
+          "sourceSchemaName": "Default",
+          "lineWidth": 1,
+          "visible": true,
+          "vertices": [
+            {
+              "x": 995,
+              "y": 840
+            },
+            {
+              "x": 1545,
+              "y": 840
+            }
+          ],
+          "label": {
+            "x": 840,
+            "y": 802,
+            "width": 145,
             "height": 30,
             "fontName": "Arial Unicode MS",
             "fontSize": 14,
@@ -4108,17 +4140,17 @@
           "visible": true,
           "vertices": [
             {
-              "x": 1905,
-              "y": 1085
+              "x": 245,
+              "y": 630
             },
             {
-              "x": 1885,
-              "y": 1085
+              "x": 265,
+              "y": 630
             }
           ],
           "label": {
-            "x": 1737,
-            "y": 1047,
+            "x": 241,
+            "y": 602,
             "width": 178,
             "height": 30,
             "fontName": "Arial Unicode MS",
@@ -4135,25 +4167,25 @@
           }
         },
         {
-          "name": "fk_CALENDAR_SUBJECT_2",
-          "sourceTableName": "CALENDAR",
+          "name": "fk_SCORE_REGISTRY_1",
+          "sourceTableName": "SCORE",
           "sourceSchemaName": "Default",
           "lineWidth": 1,
           "visible": true,
           "vertices": [
             {
-              "x": 1905,
-              "y": 1055
+              "x": 380,
+              "y": 245
             },
             {
-              "x": 1885,
-              "y": 1055
+              "x": 380,
+              "y": 265
             }
           ],
           "label": {
-            "x": 1737,
-            "y": 1017,
-            "width": 178,
+            "x": 388,
+            "y": 235,
+            "width": 155,
             "height": 30,
             "fontName": "Arial Unicode MS",
             "fontSize": 14,
@@ -4176,25 +4208,25 @@
           "visible": true,
           "vertices": [
             {
-              "x": 985,
-              "y": 1280
+              "x": 495,
+              "y": 190
             },
             {
-              "x": 950,
-              "y": 1280
+              "x": 1200,
+              "y": 190
             },
             {
-              "x": 950,
-              "y": 1340
+              "x": 1200,
+              "y": 690
             },
             {
-              "x": 795,
-              "y": 1340
+              "x": 1545,
+              "y": 690
             }
           ],
           "label": {
-            "x": 995,
-            "y": 1242,
+            "x": 485,
+            "y": 152,
             "width": 126,
             "height": 30,
             "fontName": "Arial Unicode MS",
@@ -4211,25 +4243,59 @@
           }
         },
         {
-          "name": "fk_SCORE_HOMEWORK_1",
-          "sourceTableName": "SCORE",
+          "name": "fk_FRIEND_USER_2",
+          "sourceTableName": "FRIEND",
           "sourceSchemaName": "Default",
           "lineWidth": 1,
           "visible": true,
           "vertices": [
             {
-              "x": 1100,
-              "y": 1105
+              "x": 1955,
+              "y": 735
             },
             {
-              "x": 1100,
-              "y": 1085
+              "x": 1775,
+              "y": 735
             }
           ],
           "label": {
-            "x": 1102,
-            "y": 1075,
-            "width": 178,
+            "x": 1965,
+            "y": 697,
+            "width": 131,
+            "height": 30,
+            "fontName": "Arial Unicode MS",
+            "fontSize": 14,
+            "fontColor": {
+              "r": 51,
+              "g": 51,
+              "b": 51,
+              "a": 1
+            },
+            "isFontBold": false,
+            "isFontItalic": false,
+            "isVisible": false
+          }
+        },
+        {
+          "name": "fk_CHAT_USER_2",
+          "sourceTableName": "CHAT",
+          "sourceSchemaName": "Default",
+          "lineWidth": 1,
+          "visible": true,
+          "vertices": [
+            {
+              "x": 1645,
+              "y": 895
+            },
+            {
+              "x": 1645,
+              "y": 875
+            }
+          ],
+          "label": {
+            "x": 1528,
+            "y": 865,
+            "width": 119,
             "height": 30,
             "fontName": "Arial Unicode MS",
             "fontSize": 14,
