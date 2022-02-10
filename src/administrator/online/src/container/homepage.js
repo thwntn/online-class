@@ -1,7 +1,14 @@
+import style from './homepage.module.css'
+
 function HomePage () {
     const height = window.innerHeight
     return (
-        <div style = {{width: '100%', height:  height, backgroundImage: 'url(./image/homepage.jpg', backgroundSize: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center'}}>Home Page</div>
+        <div className = { style.background } style = {{ height: window.innerHeight }}>
+            <h1 className = {style.title}>Chào mừng bạn đến trang quản trị!</h1>
+            <p className = {style.description}>Nơi quản lí người dùng lớp học môn học, kiểm tra bảo mật, chỉnh sửa thống tin.</p>
+            <div className = { style.search }><input placeholder = 'Nhập tên công cụ'></input></div>
+            <button className = { style.searchSubmit }>Đi đến...</button>
+        </div>
     )
 }
 export default HomePage
