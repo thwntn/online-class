@@ -11,3 +11,21 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
 }
+.row {
+  margin: 0;
+}
+@font-face{
+  font-family: basic;
+  src: url(./font/Bandon.ttf);
+}
+*{
+  padding: 0;
+  margin: 0;
+  font-family: basic;
+}
+html{
+  box-sizing: border-box;
+}
+.pad {
+  padding: 56px;
+}

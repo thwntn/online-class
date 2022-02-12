@@ -1,0 +1,40 @@
+.background {
+    background-color: rgba(247, 247, 255);
+    justify-content: center;
+    display: flex;    
+    align-content: center;
+    flex-wrap: wrap;
+}
+.items {
+    display: flex;
+    flex-wrap: wrap;
+    width: 50%;
+    justify-content: center;
+    margin-top: 120px;
+}
+.title {
+    font-size: 2rem;
+    width: 100%;
+    padding: 32px 0px;
+}
+.itemsImage {
+    width: 256px;
+    height: 256px;
+    background-size: 100%;
+}
+.submit {
+    width: 256px;
+    height: 32px;
+    border-radius: 48px;
+    border: none;
+    color: white;
+    margin-top: 36px;
+}
+.boxItems {
+    width: 100%;
+    display: flex;
+}
+.space {
+    width: 100%;
+    height: 1px;
+}
