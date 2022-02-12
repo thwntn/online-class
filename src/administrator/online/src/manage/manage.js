@@ -15,7 +15,12 @@ const Manage = () => (
                 <h3 className = {style.keySubject}>Mã môn</h3>
                 <h5 className = {style.nameSuject}>Tên môn học</h5>
                 <div className = {style.navItem}>
-                    <button className = {style.submit}><i className="fa-solid fa-user"></i></button>
+                    <button className = {style.submit}><i class="fas fa-user"></i></button>
+                    <button className = {style.submit}><i class="fas fa-user-plus"></i></button>
+                    <button className = {style.submit}><i class="fas fa-file-alt"></i></button>
+                    <button className = {style.submit}><i class="fas fa-pen"></i></button>
+                    <button className = {style.submit}><i class="fas fa-stars"></i></button>
+
                 </div>
             </div>
         </div>
