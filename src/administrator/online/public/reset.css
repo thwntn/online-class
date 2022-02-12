@@ -1,0 +1,12 @@
+@font-face{
+    font-family: basic;
+    src: url(./font/Bandon.ttf);
+}
+*{
+    padding: 0;
+    margin: 0;
+    font-family: basic;
+}
+html{
+    box-sizing: border-box;
+}
