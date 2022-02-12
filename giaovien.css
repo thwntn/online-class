@@ -1,0 +1,138 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+/* header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+} */
+/* .wrapper{
+    width: 100%;
+    height: 100vh;
+    background-size: cover;
+    background-repeat: no-repeat;
+} */
+.menu{
+    margin: 0px auto;
+    max-width: 100%;
+}
+
+.navbar{
+    width: 85%;
+    margin: auto;
+    padding: 20px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.navbar ul li{
+    list-style: none;
+    display: inline-block;
+    margin: 0 25px;
+    font-weight: bold;
+}
+.navbar p{
+    font-size: 25px;
+    font-weight: bold;
+}
+.name-subject{
+    background: url(./image/img_learnlanguage.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 115px;
+    width: 83%;
+    height: 255px;
+    border-radius: 30px;
+}
+
+
+b{
+    font-size: 45px;
+    padding-right: 35px;
+}
+.name-subject p{
+    color: white;
+    padding: 180px 0 0 40px;
+}
+.link{
+    float: left;
+    width: 270px;
+    margin-top: 40px;
+    margin-left: 115px;
+}
+.link p{
+    line-height: 0.8;
+}
+img{
+    float: right;
+    width: 20px;
+}
+button{
+    width: 70px;
+    margin-left: 70px;
+    border-radius: 30px;
+    border: 1px white;
+    background-color: white;
+    box-shadow: 1px 1px 1px 1px #AAA;
+}
+.upload button{
+    float: right;
+    width: 160px;
+    height: 35px;
+    margin-top: 40px;
+    margin-right: 140px;
+}
+#content{
+    float: right;
+    width: 900px;
+    margin-top: 30px;
+    margin-right: 140px;
+}
+.media{
+    padding: 15px 15px 0 15px;
+}
+.media img{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+.media-body img{
+    float: right;
+    height: 40px;
+    width: 30px;
+}
+h6{
+    font-size: 14px;
+}
+.content-1{
+    background-color: #e8e8e8;
+    /* opacity: 0.2; */
+    border-radius:10px;
+}
+#baitap{
+    padding: 0 15px 10px 15px;
+}
+.content-1 p{
+    font-weight: bold;
+}
+#xemthem{
+    float: right;
+    margin-top: 20px;
+    margin-right: 34%;
+    margin-bottom: 10%;
+}
+#xemthem button{
+    width: 200px;
+    height: 35px;
+    background-color: white;
+    box-shadow: 1px 1px 1px 1px #AAA;
+}
+i{
+    width: 18px;
+    float: right;
+}
+a{
+    color: black;
+}
