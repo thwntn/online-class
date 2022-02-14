@@ -1,0 +1,28 @@
+.boxInfo {
+    width: 256px !important;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 12px;
+    border-radius: 12px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
+}
+.inputInfo {
+    margin: 12px 0px;
+    flex: 1;
+    border: none;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 48px;
+    padding: 4px 8px;
+}
+.imgUser {
+    width: 48px;
+    height: 48px;
+    background-color: #333;
+    border-radius: 48px;
+}
+.nameUser {
+    flex: 1;
+    line-height: 48px;
+    padding-left: 8px;
+}

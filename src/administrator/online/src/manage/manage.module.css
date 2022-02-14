@@ -1,0 +1,87 @@
+.listNav {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.035);
+    border-radius: 48px;
+    width: 516px;
+}
+.listNav li {
+    padding: 8px;
+}
+.navigation {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    height: 42px;
+}
+.title {
+    padding-bottom: 56px;
+}
+.submit {
+    background: none;
+    border: none;
+    padding: 0px 12px;
+}
+.titleItem {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    width: 100%;
+}
+.item {
+    padding: 0px 8px;
+    height: 156px;
+    border-radius: 18px;
+    background-size: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
+    margin-top: 56px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.items {
+    width: 100%;
+}
+.nameSuject {
+    margin-bottom: 0;
+    margin-top: 6px;
+    margin-left: 8px;
+}
+.keySubject {
+    margin-left: 8px;
+}
+.backgroundItem {
+    position: absolute;
+    top: 0;bottom: 0;left: 0;right: 0;
+    z-index: -1;
+    background-size: 150%;
+    opacity: 20%;
+}
+.navItem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.more {
+    width: 120px !important;
+    margin-top: 48px !important;
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.035);
+    background: none;
+    border-radius: 48px;
+    padding: 4px 8px;
+}
+.mainSession {
+    display: flex;
+    justify-content: center;
+}
+.itemBox {
+    padding: 0px 24px !important;
+}
