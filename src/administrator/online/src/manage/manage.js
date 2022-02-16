@@ -22,7 +22,7 @@ const data = [
         image: 'ctdl.jpg'
     },
     {
-        keySubject: 'CT321',
+        keySubject: 'CT311',
         nameSubject: 'Cấu trúc dữ liệu',
         image: 'ctdl.jpg'
     }
@@ -40,7 +40,7 @@ const Manage = () => (
         </div>
         <div className = {style.items + ' row'}>
             {data.map((item) => (
-                <div className = {style.itemBox + ' col-md-4'}>
+                <div key={item.keySubject} className = {style.itemBox + ' col-md-4'}>
                     <div className = {style.item}>
                         <div className = {style.backgroundItem} style = {{backgroundImage: `url(./image/${item.image})`}}></div>
                         <div className= {style.titleItem}>

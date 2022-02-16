@@ -1,11 +1,15 @@
 .boxInfo {
     width: 256px !important;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.95);
     display: flex;
     flex-wrap: wrap;
     padding: 12px;
     border-radius: 12px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
+    position: absolute;
+    z-index: 1;
+    top: -5%;
+    margin-left: -185px;
 }
 .inputInfo {
     margin: 12px 0px;

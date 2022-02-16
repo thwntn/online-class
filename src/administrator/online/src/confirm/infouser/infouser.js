@@ -1,5 +1,6 @@
 import style from './infouser.module.css'
 
+
 const InfoUser = () => (
     <div className = {style.boxInfo}>
         <div className = {style.imgUser}></div>
