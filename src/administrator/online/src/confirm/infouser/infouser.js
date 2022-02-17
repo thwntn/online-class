@@ -1,7 +1,9 @@
 import style from './infouser.module.css'
 
 
-const InfoUser = () => (
+const InfoUser = (property) => {
+    console.log(property);
+    return (
     <div className = {style.boxInfo}>
         <div className = {style.imgUser}></div>
         <div className = {style.nameUser}>Tên tài khoản</div>
@@ -11,7 +13,11 @@ const InfoUser = () => (
         <input className = {style.inputInfo} value = 'Nam'></input>
         <input className = {style.inputInfo} value = 'Mạng máy tính và truyền thông dữ liệu'></input>
         <input className = {style.inputInfo} value = 'Tài khoản sinh viên'></input>
+        <div className = {style.nav}>
+            <button className = {style.close} onClick = {property.func.close}>Đóng</button>
+            <button className = {style.finish} onClick = {property.func.close}>Cập nhật</button>
+        </div>
     </div>
-)
+)}
 
 export default InfoUser

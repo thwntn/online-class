@@ -2,6 +2,7 @@ import style from './accountactive.module.css'
 import InfoUser from './infouser.js'
 import {useEffect, useState} from 'react'
 import Confirm from '../confirm.js'
+import Convert from './convert.js'
 
 const data = [
     {
@@ -44,6 +45,22 @@ const AccountActive = (property) => {
     const [close, setClose] = useState(style.active)
     const [view, setView] = useState('none')
     const [active, setActive] = useState('')
+    const [convert, setConvert] = useState('none')
+
+    const closed = () => {
+        setTimeout(() => {
+            setView('none')
+        }, 200)
+    }
+    const closeConvert = () => {
+        setTimeout(() => {
+            console.log('ok');
+                setConvert('none')
+        }, 100)
+    }
+    const finish = () => {
+        console.log('fs')
+    }
     return (
         <div className = {style.frame + ' ' + (property.status && style.active)}>
             <div className = {style.accountBox}>
@@ -61,10 +78,20 @@ const AccountActive = (property) => {
                                 <div className = {style.nameUser}>{item.name}</div>
                                 <div className = {style.actionUser}>
                                     <button className = {style.gotoUser}><i className="fad fa-sign-in"></i></button>
-                                    <button className = {style.convertUser}><i className="fad fa-repeat-1"></i></button>
-                                    <button key = {item.key} onClick = {() => {setView(item.key)}} className = {style.viewUser}>
+                                    <button
+                                        className = {style.convertUser}
+                                        onClick = {() => setConvert(item.key)}
+                                    >
+                                        <i className="fad fa-repeat-1"></i>
+                                        {convert === item.key && <Convert closeConvert = {closeConvert}></Convert>}
+                                    </button>
+                                    <button
+                                        key = {item.key}
+                                        onClick = {() => {setView(item.key)}}
+                                        className = {style.viewUser}
+                                    >
                                         <i className="fad fa-eye"></i>
-                                        {view === item.key && <InfoUser></InfoUser>}
+                                        {view === item.key && <InfoUser func = {{close: closed,finish: finish}}></InfoUser>}
                                     </button>
                                 </div>
                             </div>

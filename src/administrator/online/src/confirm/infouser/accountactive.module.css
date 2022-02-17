@@ -23,14 +23,16 @@
 }
 .active {
     display: flex;
-    animation: show 0.05s linear forwards;
+    animation: show 0.1s ease forwards;
 }
 @keyframes show {
     from {
+        margin-top: 100px;
         transform: scale(90%);
         opacity: 0.1;
     }
     to {
+        margin-top: 0px;
         opacity: 1;
         transform: scale(100%);
     }
