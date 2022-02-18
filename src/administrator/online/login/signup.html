@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./assets/style/login.css">
+    <link rel="stylesheet" href="./assets/style/signup.css">
     <link rel="stylesheet" href="./assets/framework/css/bootstrap.css">
     <script src = './assets/framework/js/bootstrap.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -17,22 +18,30 @@
     <div id="root">
         <div class="container-fluid">
             <div class="frame row">
-                <div class="content col-md-4">
-                    <h2>Đăng nhập</h2>
+                <div class="content col-md-8">
+                    <h2>Đăng kí</h2>
                     <h5>Tên đăng nhập</h5>
                     <input type="text" placeholder="Tên tài khoản hoặc email">
                     <h5>Mật khẩu</h5>
                     <input type = 'pasword' placeholder="Nhập mật khẩu">
-                    <button>Gặp sự cố với mật khẩu ?</button>
-                    <button class="signin">Đăng nhập</button>
-                    <h5>Đăng nhập với</h5>
-                    <div class="sign-with">
-                        <button class="facebook"><i class="fa-brands fa-facebook-f"></i></button>
-                        <button class="google"><i class="fa-brands fa-google"></i></button>
+                    <h5>Địa chỉ</h5>
+                    <input type = 'pasword' placeholder="Nhập địa chỉ">
+                    <h5>Số điện thoại</h5>
+                    <input type = 'pasword' placeholder="Nhập số điện thoại">
+                    <h5>Giới tính</h5>
+                    <input class="sex" type="range" placeholder="Nhập ">
+                    <h5>Ngành học</h5>
+                    <input type = 'pasword' placeholder="Nhập ngành học">
+                    <h5>Loại tài khoản đăng kí</h5>
+                    <div class="type">
+                        <label for="student">Học sinh</label>
+                        <input type = 'radio' id="student" name="type" value = '1'>
+                        <label for="teacher">Giáo viên</label>
+                        <input type = 'radio' name="type" id="teacher">
                     </div>
-                    <div class="sign-up-button">
-                        <a>Đăng kí</a>
-                    </div>
+                    <h5>Ảnh đại diện</h5>
+                    <input class="upload" type = 'file' placeholder="Nhập mật khẩu">
+                    <button class="signin">Đăng kí</button>
                 </div>
             </div>
         </div>

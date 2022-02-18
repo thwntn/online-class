@@ -1,0 +1,133 @@
+@media (max-width: 880px) {
+    .frame{
+        background-size: 300% !important;
+    }
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    font-family: 'Varela Round', sans-serif;
+    font-weight: bold;
+}
+.content {
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    background-color: rgba(255, 255, 255, 1);
+    padding: 32px 24px !important;
+    justify-content: right;
+    display: flex;
+    flex-wrap: wrap;
+    border-radius: 12px;
+    max-width: 400px !important;
+    min-width: 400px;
+}
+.frame {
+    height: 100vh;
+    justify-content: center;
+    align-content: center;
+    background-image: url(../image/Login.png);
+    background-size: 130%;
+    background-position: center;
+}
+h2 {
+    text-align: center;
+    width: 100%;
+    font-weight: bolder !important;
+    margin-bottom: 48px !important;
+}
+h5 {
+    font-size: 14px !important;
+    width: 100%;
+    color: #888;
+    font-weight: bold !important;
+}
+input::placeholder {
+    font-size: 12px;
+    color: #ccc;
+}
+input {
+    width: 100%;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 32px !important;
+    padding: 4px;
+    color: #888;
+    background: none;
+}
+button {
+    background: none;
+    border: none;
+    font-size: 12px !important;
+}
+button:hover {
+    color: rgba(255, 100, 0, 0.9);
+}
+.signin {
+    width: 100%;
+    background-image: linear-gradient(90deg , rgba(42, 96, 250), rgba(232, 57, 246));
+    color: #fff;
+    margin: 24px 0px;
+    padding: 6px 0px;
+    border-radius: 48px;
+    transition: all 0.2s;
+    background-size: 150%;
+}
+.signin:hover {
+    animation: signin 0.2s ease forwards;
+    color: #fff;
+}
+@keyframes signin {
+    from {
+        background-position: 0px;
+    }
+    to {
+        background-position: -150px;
+    }
+}
+.sign-with {
+    width: 100%;
+    margin-top: 6px;
+}
+.sign-up {
+    background-color: rgba(0, 0, 0, 0.1);
+    padding: 4px 18px;
+    border-radius: 48px;
+}
+.google,
+.facebook {
+    color: #fff;
+    padding: 12px;
+    border-radius: 48px;
+    height: 48px;
+    width: 48px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+.google:hover,
+.facebook:hover {
+    color: white;
+}
+.google {
+    background-color: rgba(255, 0, 0, 0.5);
+}
+.facebook {
+    background-color: rgba(0, 0, 255, 0.5);
+}
+.sign-with button {
+    margin: 0px 8px;
+}
+.sign-up-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-top: 24px;
+    height: 16px;
+    align-items: center;
+}
+.sign-up-button a {
+    color: rgba(255, 100, 0, 0.9) !important;
+    margin-left: 10px;
+    text-decoration: underline !important;
+    font-size: 12px;
+    cursor: pointer;
+}
