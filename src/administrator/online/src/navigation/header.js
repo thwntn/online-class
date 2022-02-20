@@ -1,9 +1,14 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import style from './header.module.css'
+import Noti from './notification.js'
+import Message from './message.js'
 const items = ['Trang chủ', 'Tài khoản', 'Thông báo', 'Tin nhắn', 'Nhật kí']
 
 function Header () {
     const [scroll, setScroll] = useState(style.noActive)
+    const [activeNoti, setActiveNoti] = useState(false)
+    const [activeMessage, setActiveMess] = useState(false)
+
     useEffect(() => {
         document.addEventListener('scroll', () => {
             if(window.scrollY > 0) setScroll (style.active)
@@ -13,8 +18,19 @@ function Header () {
     return(
         <div className = {style.background + ` ${scroll}`}>
             <h2 className = {style.title}>Online Class</h2>
-            <ul style = {{display: 'flex', listStyle: 'none', margin: '0px'}}>
-                {items.map((items) => <li key = {items} className = {style.item}>{items}</li>)}
+            <ul className = {style.listItems} style = {{display: 'flex', listStyle: 'none', margin: '0px'}}>
+                <li className = {style.item}><a>Trang chủ</a></li>
+                <li className = {style.item}><a>Tài khoản</a></li>
+                <li onClick={() => setActiveNoti(!activeNoti)} className = {style.item}>
+                    Thông báo
+                    {activeNoti && <Noti></Noti>}
+                    </li>
+                <li onClick={() => setActiveMess(!activeMessage)} className = {style.item}>
+                    Tin nhắn
+                    {activeMessage && <Message></Message>}
+                </li>
+                <li className = {style.item}></li>
+
             </ul>
         </div>
     )

@@ -52,24 +52,16 @@ const AccountActive = (property) => {
             setView('none')
         }, 200)
     }
-    const closeConvert = () => {
-        setTimeout(() => {
-            console.log('ok');
-                setConvert('none')
-        }, 100)
-    }
     const finish = () => {
         console.log('fs')
     }
     return (
-        <div className = {style.frame + ' ' + (property.status && style.active)}>
+        <div className = {style.frame + ' ' + style.active}>
             <div className = {style.accountBox}>
                 <div className = {style.backgroundImage}></div>
                 <h3 className = {style.title}>Tài khoản hiện hành</h3>
                 <input className = {style.search} placeholder = 'Nhập tên cần tìm kiếm'></input>
-                <button onClick = {() => {
-                    document.querySelector(`.${style.frame}`).classList.remove(close)
-                }} className = {style.close}>Đóng</button>
+                <button onClick = {() => property.func()} className = {style.close}>Đóng</button>
                 <div className = {style.boxItems + ' row'}>
                     {data.map((item) => (
                         <div key = {item.key} className = {style.itemsElement + ' col-md-4'}>
@@ -80,10 +72,11 @@ const AccountActive = (property) => {
                                     <button className = {style.gotoUser}><i className="fad fa-sign-in"></i></button>
                                     <button
                                         className = {style.convertUser}
-                                        onClick = {() => setConvert(item.key)}
+                                        onMouseOver={() => setConvert(item.key)}
+                                        onMouseLeave={() => setConvert('')}
                                     >
                                         <i className="fad fa-repeat-1"></i>
-                                        {convert === item.key && <Convert closeConvert = {closeConvert}></Convert>}
+                                        {convert === item.key && <Convert></Convert>}
                                     </button>
                                     <button
                                         key = {item.key}

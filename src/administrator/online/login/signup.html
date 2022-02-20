@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,12 +9,13 @@
     <link rel="stylesheet" href="./assets/style/login.css">
     <link rel="stylesheet" href="./assets/style/signup.css">
     <link rel="stylesheet" href="./assets/framework/css/bootstrap.css">
-    <script src = './assets/framework/js/bootstrap.js'></script>
+    <script src='./assets/framework/js/bootstrap.js'></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
+
 <body>
     <div id="root">
         <div class="container-fluid">
@@ -23,28 +25,68 @@
                     <h5>Tên đăng nhập</h5>
                     <input type="text" placeholder="Tên tài khoản hoặc email">
                     <h5>Mật khẩu</h5>
-                    <input type = 'pasword' placeholder="Nhập mật khẩu">
+                    <input type='pasword' placeholder="Nhập mật khẩu">
                     <h5>Địa chỉ</h5>
-                    <input type = 'pasword' placeholder="Nhập địa chỉ">
+                    <input type='pasword' placeholder="Nhập địa chỉ">
                     <h5>Số điện thoại</h5>
-                    <input type = 'pasword' placeholder="Nhập số điện thoại">
+                    <input type='pasword' placeholder="Nhập số điện thoại">
+                    <h5>Email</h5>
+                    <input type='pasword' placeholder="Nhập email">
                     <h5>Giới tính</h5>
-                    <input class="sex" type="range" placeholder="Nhập ">
+                    <div class="sex">
+                        <button class="choose-sex">Nam</button>
+                        <button class="choose-sex">Nữ</button>
+                        <button class="choose-sex">Khác</button>
+                    </div>
                     <h5>Ngành học</h5>
-                    <input type = 'pasword' placeholder="Nhập ngành học">
+                    <input type='pasword' placeholder="Nhập ngành học">
                     <h5>Loại tài khoản đăng kí</h5>
                     <div class="type">
-                        <label for="student">Học sinh</label>
-                        <input type = 'radio' id="student" name="type" value = '1'>
-                        <label for="teacher">Giáo viên</label>
-                        <input type = 'radio' name="type" id="teacher">
+                        <button class="choose-type">Giáo viên</button>
+                        <button class="choose-type">Học sinh</button>
                     </div>
                     <h5>Ảnh đại diện</h5>
-                    <input class="upload" type = 'file' placeholder="Nhập mật khẩu">
+                    <input class="upload" type='file' placeholder="Nhập mật khẩu">
+                    <p class="choose-file">Chưa chọn file</p>
                     <button class="signin">Đăng kí</button>
                 </div>
             </div>
         </div>
     </div>
 </body>
+<script>
+    document.querySelector('.choose-file').addEventListener('click', function () {
+        document.querySelector('.upload').click()
+    })
+    document.querySelector('.upload').addEventListener('change', function () {
+        document.querySelector('.choose-file').innerHTML = document.querySelector('.upload').value
+    })
+
+    
+    const chooseSexs = document.querySelectorAll('.choose-sex')
+    for (item of chooseSexs) {
+        item.addEventListener('click', function () {
+            for (item of chooseSexs) {
+                item.style.background = 'none'
+                item.style.color = 'black'
+            }
+            this.style.backgroundImage = 'linear-gradient(90deg ,rgba(252, 107, 255), rgba(42, 96, 250))'
+            this.style.opacity = '60%'
+            this.style.color = 'white'
+        })
+    }
+    const chooseTypes = document.querySelectorAll('.choose-type')
+    for (item of chooseTypes) {
+        item.addEventListener('click', function () {
+            for (item of chooseTypes) {
+                item.style.background = 'none'
+                item.style.color = 'black'
+            }
+            this.style.backgroundImage = 'linear-gradient(90deg ,rgba(252, 107, 255), rgba(42, 96, 250))'
+            this.style.opacity = '60%'
+            this.style.color = 'white'
+        })
+    }
+</script>
+
 </html>

@@ -1,6 +1,6 @@
-@media (max-width: 880px) {
+@media (max-width: 1200px) {
     .frame{
-        background-size: 300% !important;
+        background-size: 320% !important;
     }
 }
 
@@ -22,7 +22,7 @@
     min-width: 400px;
 }
 .frame {
-    height: 100vh;
+    height: 110vh;
     justify-content: center;
     align-content: center;
     background-image: url(../image/Login.png);

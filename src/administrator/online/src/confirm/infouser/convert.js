@@ -1,6 +1,6 @@
 import style from './convert.module.css' 
 
-const Convert = (property) => {
+const Convert = () => {
     return (
         <div className = {style.boxConvert}>
             <ul className = {style.listConvert}>
@@ -9,12 +9,6 @@ const Convert = (property) => {
                 <li className = {style.items}>Chặn tải lên tài liệu</li>
                 <li className = {style.items}>Chặn nhắn tin</li>
             </ul>
-            <button
-                className = {style.close}
-                onClick = {property.closeConvert}
-            >
-                <i className="fas fa-times"></i>
-            </button>
         </div>
     )
 }

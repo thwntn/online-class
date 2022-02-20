@@ -7,9 +7,10 @@ import AccountActive from './infouser/accountactive'
 const Confirm = () => {
     const [view, setView] = useState(false)
     const mount = () => {
-        document.querySelector('.accountactive_frame__UQFsz').classList.add(`accountactive_active__8PM3W`)
-        setView(true)
-        console.log(view)
+        setTimeout(() => {
+            setView(!view)
+            console.log('ad')
+        }, 100);
     }
     return(
         <div className = {style.background + ' row pad'}>
@@ -18,7 +19,7 @@ const Confirm = () => {
                 <div className = {style.items + ' col-md-6'}>
                     <div className = {style.itemsImage} style = {{backgroundImage: 'url(./image/confirm.png'}}></div>
                     <div className = {style.space}></div>
-                    <button onClick = {mount} className = {style.submit} style = {{backgroundColor: 'rgb(255, 0, 0)'}}>Chờ xác nhận</button>
+                    <button onClick = {mount} className = {style.submit} style = {{backgroundColor: 'rgb(255, 0, 0)'}}>Tài khoản hiện hành</button>
                 </div>
                 <div className = {style.items + ' col-md-6'}>
                     <div className = {style.itemsImage} style = {{backgroundImage: 'url(./image/active.png'}}></div>
@@ -26,7 +27,7 @@ const Confirm = () => {
                     <button className = {style.submit} style = {{backgroundColor: 'rgb(0, 104, 55)'}}>Chờ xác nhận</button>
                 </div>
             </div>
-            <AccountActive status = {view}></AccountActive>
+            {view && <AccountActive func = {mount}></AccountActive>}
         </div>
     )
 }

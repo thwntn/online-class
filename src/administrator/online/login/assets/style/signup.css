@@ -13,14 +13,33 @@ h5 {
 .sex {
     padding: 4px 0px !important;
 }
+.choose-type,
+.choose-sex {
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 48px;
+    padding: 6px 24px;
+    margin: 0px 4px;
+}
+.choose-type {
+    margin: 24px 0px;
+}
 .type {
     width: 100%;
-    padding: 18px;
     display: flex;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: space-between;
 }
-.type input {
-    width: 20px;
-    margin: 0 !important;
+.type button {
+    width: 49%;
+}
+.upload {
+    display: none;
+}
+p {
+    width: 100%;
+    font-size: 12px !important;
+    color: #999;
+    margin: 18px 0px !important;
+}
+.signin {
+    padding: 8px 0px !important;
 }

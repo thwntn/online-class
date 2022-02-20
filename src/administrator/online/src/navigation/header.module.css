@@ -7,9 +7,9 @@
     display: flex;
     justify-content: space-between;
     color: white;
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.2);
     padding: 0px 8px;
     transition: top 0.2s, height 0.2s;
+    z-index: 5;
 }
 .title{
     display: flex;
@@ -19,14 +19,14 @@
 .item{
     padding: 0px 32px;
     display: flex;
-    align-items: center;
+    position: relative;
+    cursor: pointer;
 }
 .active {
     background-color: #fff;
     color: #333;
     height: 56px;
     top: 0;left: 0;right: 0;
-    
     animation: show 0.2s linear forwards;
     text-shadow: none;
     z-index: 5;
@@ -36,6 +36,10 @@
     background-color: none;
     height: 74px;
     animation: unshow 0.2s linear;
+}
+.listItems {
+    display: flex;
+    align-items: center;
 }
 @keyframes show {
     from {
