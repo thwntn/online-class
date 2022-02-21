@@ -1,45 +1,54 @@
-import { useEffect, useRef } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import style from './message.module.css'
+import ChatBox from './chatbox.js'
+
+const data = [
+    {
+        id: 1,
+        name: 'Nguyễn Trần Thiên Tân',
+        mess: 'Arron iu thwntn00'
+    },
+    {
+        id: 2,
+        name: 'Viết Tài',
+        mess: 'Arron iu thwntn00'
+    },
+    {
+        id: 3,
+        name: 'Nhật Minh',
+        mess: 'Arron iu thwntn00'
+    },
+    {
+        id: 4,
+        name: 'Tuấn Hưng',
+        mess: 'Arron iu thwntn00'
+    }
+]
 
 const Mess = () => {
     const itemMess = useRef()
-    useEffect(() => {
-        itemMess.current.addEventListener('click', function(event){
-            event.stopPropagation()
-        })
-    }, [])
+    const [gotoMess, setGoToMess] = useState(false)
    
     return (
-        <div ref = {itemMess} className = {style.frame}>
-            <h5>Tin nhắn</h5>
-            <div className = {style.item}>
-                <div className = {style.image}></div>
-                <div className = {style.content}>
-                    <h4>Nguyễn Trần Thiên Tân</h4>
-                    <p>Nội dung tin nhắn</p>
+        <div  ref = {itemMess} className = {style.frame}>
+            <h5 className = {style.title}>Tin nhắn</h5>
+            {data.map((item) => (
+                <div
+                    key = {style.id}
+                    className = {style.item}
+                    onClick = {(event) => {
+                        event.stopPropagation()
+                        setGoToMess(true)
+                    }}
+                >
+                    <div className = {style.image}></div>
+                    <div className = {style.content}>
+                        <h4>{item.name}</h4>
+                        <p>{item.mess}</p>
+                    </div>
                 </div>
-            </div>
-            <div className = {style.item}>
-                <div className = {style.image}></div>
-                <div className = {style.content}>
-                    <h4>Nguyễn Trần Thiên Tân</h4>
-                    <p>Nội dung tin nhắn</p>
-                </div>
-            </div>
-            <div className = {style.itemStatus}>
-                <div className = {style.image}></div>
-                <div className = {style.content}>
-                    <h4>Nguyễn Trần Thiên Tân</h4>
-                    <p>Nội dung tin nhắn</p>
-                </div>
-            </div>
-            <div className = {style.item}>
-                <div className = {style.image}></div>
-                <div className = {style.content}>
-                    <h4>Nguyễn Trần Thiên Tân</h4>
-                    <p>Nội dung tin nhắn</p>
-                </div>
-            </div>
+            ))}
+            {gotoMess && <ChatBox func = {setGoToMess}></ChatBox>}
         </div>
     )
 }
