@@ -7,8 +7,7 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
     border: 5px solid linear-gradient(to left, #743ad5, #d53a9d);
     border-radius: 12px;
-    height: 335px;
-    animation: accani 0.6s linear forwards;
+    animation: accani 0.3s ease;
     overflow: hidden;
 }
 .frame {
@@ -21,32 +20,16 @@
     bottom: 0;
     justify-content: center;
     align-items: center;
-    opacity: 0;
     z-index: 1;
 }
-
 @keyframes accani {
     from {
-        height: 0px;
+        transform: translateY(-20px);
+        opacity: 0;
     }
     to {
-        height: 335px;
-    }
-}
-.active {
-    display: flex;
-    animation: show 0.1s ease forwards;
-}
-@keyframes show {
-    from {
-        margin-top: 100px;
-        transform: scale(90%);
-        opacity: 0.1;
-    }
-    to {
-        margin-top: 0px;
+        transform: translateY(0px);
         opacity: 1;
-        transform: scale(100%);
     }
 }
 .title {

@@ -11,7 +11,7 @@ const Noti = () => {
    
     return (
         <div ref = {itemNoti} className = {style.frame}>
-            <h5>Thông báo</h5>
+            <h5><i class="fas fa-bell"></i>Thông báo</h5>
             <div className = {style.item}>
                 <div className = {style.image}></div>
                 <div className = {style.content}>

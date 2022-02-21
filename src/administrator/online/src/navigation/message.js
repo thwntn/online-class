@@ -31,7 +31,7 @@ const Mess = () => {
    
     return (
         <div  ref = {itemMess} className = {style.frame}>
-            <h5 className = {style.title}>Tin nhắn</h5>
+            <h5 className = {style.title}><i className="fab fa-facebook-messenger"></i> Tin nhắn</h5>
             {data.map((item) => (
                 <div
                     key = {style.id}
