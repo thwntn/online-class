@@ -1,0 +1,32 @@
+.frame {
+    background-color: rgba(247, 247, 255);
+}
+.boxLog {
+    background-color: rgba(255, 255, 255, 1);
+    border-radius: 12px;
+    padding: 8px 32px !important;
+}
+.content {
+    max-height: 448px;
+    overflow: auto;
+}
+.title {
+    padding-bottom: 56px;
+}
+.titleNav,
+.item {
+    width: 20%;
+    height: 24px;
+}
+.items,
+.labelNav {
+    display: flex;
+    height: 56px;
+    align-content: center;
+    align-items: center;
+    padding: 0;margin: 0;
+    list-style: none;
+}
+.items {
+    border-top: 1px solid rgba(0, 0, 0, 0.06);
+}

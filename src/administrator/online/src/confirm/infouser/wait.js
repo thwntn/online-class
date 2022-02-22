@@ -45,7 +45,6 @@ const Wait = (property) => {
     const [close, setClose] = useState(style.active)
     const [view, setView] = useState('none')
     const [active, setActive] = useState('')
-    const [convert, setConvert] = useState('none')
 
     const closed = () => {
         setTimeout(() => {
@@ -69,14 +68,9 @@ const Wait = (property) => {
                                 <div className = {style.imgUser} style = {{backgroundImage: './abc.jpg'}}></div>
                                 <div className = {style.nameUser}>{item.name}</div>
                                 <div className = {style.actionUser}>
-                                    <button className = {style.gotoUser}><i className="fad fa-sign-in"></i></button>
-                                    <button
-                                        className = {style.convertUser}
-                                        onMouseOver={() => setConvert(item.key)}
-                                        onMouseLeave={() => setConvert('')}
-                                    >
-                                        <i className="fad fa-repeat-1"></i>
-                                        {convert === item.key && <Convert></Convert>}
+                                    <button className = {style.gotoUser}><i className="fas fa-tilde"></i></button>
+                                    <button className = {style.convertUser}>
+                                        <i class="fas fa-times"></i>
                                     </button>
                                     <button
                                         key = {item.key}

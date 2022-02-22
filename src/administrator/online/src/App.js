@@ -3,6 +3,7 @@ import Header from './navigation/header.js'
 import HomePage from './homepage/homepage.js'
 import Confirm from './confirm/confirm.js';
 import Manage from './manage/manage';
+import Log from './log/log.js'
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <HomePage></HomePage>
         <Confirm></Confirm>
         <Manage></Manage>
+        <Log></Log>
       </div>
   )
 }

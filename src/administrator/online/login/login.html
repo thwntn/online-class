@@ -31,11 +31,21 @@
                         <button class="google"><i class="fa-brands fa-google"></i></button>
                     </div>
                     <div class="sign-up-button">
-                        <a>Đăng kí</a>
+                        <a href="./signup.html">Đăng kí</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <div class="errBox"></div>
+        
 </body>
+<script>
+    document.querySelector('.signin').addEventListener('click', function(){
+        document.querySelector('.errBox').classList.add('active')
+        setTimeout(function() {
+            document.querySelector('.errBox').classList.remove('active')
+        }, 2000)
+    })
+</script>
 </html>

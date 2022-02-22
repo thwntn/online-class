@@ -52,9 +52,16 @@
                 </div>
             </div>
         </div>
+        <div class="capcha">
+            <input type="text" placeholder="Vui lòng nhập mã xác thực được gửi đến mail của bạn!">
+        </div>
     </div>
 </body>
 <script>
+    document.querySelector('.signin').addEventListener('click', function(){
+        document.querySelector('.capcha').classList.add('active')
+    })
+
     document.querySelector('.choose-file').addEventListener('click', function () {
         document.querySelector('.upload').click()
     })

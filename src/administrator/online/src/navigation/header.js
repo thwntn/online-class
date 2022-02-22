@@ -21,7 +21,7 @@ function Header () {
             <ul className = {style.listItems} style = {{display: 'flex', listStyle: 'none', margin: '0px'}}>
                 <li className = {style.item}><a href = '#home'>Trang chủ</a></li>
                 <li className = {style.item}><a href = '#account'>Tài khoản</a></li>
-                <li className = {style.item}><a href = '#manage'>Quản lí môn học</a></li>
+                <li className = {style.item}><a href = '#manage'>Môn học</a></li>
                 <li className = {style.item}><a href = '#log'>Nhật kí</a></li>
                 <li onClick={() => setActiveNoti(!activeNoti)} className = {style.item}>
                     Thông báo
@@ -31,8 +31,6 @@ function Header () {
                     Tin nhắn
                     {activeMessage && <Message></Message>}
                 </li>
-                <li className = {style.item}></li>
-
             </ul>
         </div>
     )
