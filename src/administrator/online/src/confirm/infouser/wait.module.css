@@ -1,0 +1,93 @@
+.accountBox {
+    padding: 12px;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 1100px !important;
+    display: flex;
+    flex-wrap: wrap;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    border: 5px solid linear-gradient(to left, #743ad5, #d53a9d);
+    border-radius: 12px;
+    animation: accani 0.3s ease;
+    overflow: hidden;
+}
+.frame {
+    backdrop-filter: blur(10px);
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    z-index: 1;
+}
+@keyframes accani {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}
+.title {
+    flex: 1;
+}
+.boxItems {
+    width: 100%;
+}
+.close {
+    width: 86px;
+    height: 32px;
+    background-color: rgb(255, 0, 0);
+    color: #fff;
+    border-radius: 48px;
+    border: none;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+}
+.search {
+    height: 32px;
+    width: 256px;
+    border-radius: 48px;
+    border: 2px solid rgba(0, 0, 0, 0.05);
+    padding: 0px 12px;
+    outline: none;
+    margin-right: 12px;
+}
+.item {
+    display: flex;
+    align-items: center;
+    padding: 4px 4px;
+    border-radius: 48px;
+    margin: 18px 0px;
+    border: none;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+}
+.imgUser {
+    width: 42px;
+    height: 42px;
+    background-color: #333;
+    border-radius: 48px;
+}
+.nameUser {
+    padding: 0px 12px;
+    flex: 1;
+}
+.actionUser {
+    display: flex;
+}
+.gotoUser,
+.convertUser,
+.viewUser {
+    width: 32px;
+    height: 32px;
+    background-size: 100%;
+    border: none;
+    border-radius: 48px;
+    background: none;
+}
+.viewUser {
+    position: relative;
+}

@@ -16,11 +16,19 @@
     align-items: center;
     padding-left: 12px;
 }
-.item{
+.item {
     padding: 0px 32px;
     display: flex;
     position: relative;
     cursor: pointer;
+}
+.item a{
+    text-decoration: none;
+    display: block;
+    color: #fff;
+}
+.active a{
+    color: #333;
 }
 .active {
     background-color: #fff;

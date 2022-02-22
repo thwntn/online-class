@@ -29,7 +29,7 @@ const data = [
 ]
 
 const Manage = () => (
-    <div className = {style.mainSession + ' row pad'}>
+    <div id = 'manage' className = {style.mainSession + ' row pad'}>
         <h2 className = {style.title + ' row-md-10'}>Quản lí môn học</h2>
         <div className = {style.navigation + ' col-md-6'}>
             <ul className = {style.listNav}>

@@ -19,8 +19,10 @@ function Header () {
         <div className = {style.background + ` ${scroll}`}>
             <h2 className = {style.title}>Online Class</h2>
             <ul className = {style.listItems} style = {{display: 'flex', listStyle: 'none', margin: '0px'}}>
-                <li className = {style.item}><a>Trang chủ</a></li>
-                <li className = {style.item}><a>Tài khoản</a></li>
+                <li className = {style.item}><a href = '#home'>Trang chủ</a></li>
+                <li className = {style.item}><a href = '#account'>Tài khoản</a></li>
+                <li className = {style.item}><a href = '#manage'>Quản lí môn học</a></li>
+                <li className = {style.item}><a href = '#log'>Nhật kí</a></li>
                 <li onClick={() => setActiveNoti(!activeNoti)} className = {style.item}>
                     Thông báo
                     {activeNoti && <Noti></Noti>}
