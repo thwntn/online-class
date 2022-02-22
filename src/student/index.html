@@ -10,20 +10,168 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="./style.css" media="screen" />
 </head>
-<body>
+<body onload="show()">
     <div id="wrapper">
         <header>
             <div class="inner-header menu">
-                <a href="" id="logo">Online Class</a>
+                <a href="" id="logo" style="text-decoration: none">Online Class</a>
                 <nav>
                     <ul id="main-menu">
-                        <li><a href="">Trang chủ</a></li>
-                        <li><a href="">Môn học</a></li>
-                        <li><a href="">Bài tập được giao</a></li>
-                        <li><a href="">Lịch học</a></li>
-                        <li><a href="">Thông báo</a></li>
-                        <li><a href="">Tin nhắn</a></li>
-                        <li><i class="fa fa-search w3-xlarge"></i></li>
+                        <li><a href="#wrapper" style="text-decoration: none">Trang chủ</a></li>
+                        <li><a href="#monhoc" style="text-decoration: none">Môn học</a></li>
+                        <li>
+                            <p id="menuclick2">Bài tập được giao</p>
+                            <ul class="sub-menu" id="click2">
+                                <li class="tieude">Bài tập được giao</li>
+                                <li>
+                                    <table>
+                                        <tr>
+                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                            <td style="line-height: 0.5;" class="mt-1">
+                                                CT123 <br><h6>Nội dung....</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table>
+                                        <tr>
+                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                            <td style="line-height: 0.5;" class="mt-1">
+                                                CT123 <br><h6>Nội dung....</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table>
+                                        <tr>
+                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                            <td style="line-height: 0.5;" class="mt-1">
+                                                CT123 <br><h6>Nội dung....</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table>
+                                        <tr>
+                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                            <td style="line-height: 0.5;" class="mt-1">
+                                                CT123 <br><h6>Nội dung....</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                        <li><a href="#lich" style="text-decoration: none">Lịch học</a></li>
+                        <li>
+                            <p id="menuclick">Thông báo</p>
+                            <ul class="sub-menu" id="click">
+                                <li class="tieude">Thông báo</li>
+                                <li>
+                                    <table class="table1">
+                                        <tr>
+                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                            <td style="line-height: 0.5;" class="mt-1">
+                                                CT123 <br><h6>Nội dung....</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                            <td style="line-height: 0.5;">
+                                                CT123 <br><h6>Nội dung....</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li>
+                                    <li>
+                                        <table class="table1">
+                                            <tr>
+                                                <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                                <td style="line-height: 0.5;">
+                                                    CT123 <br><h6>Nội dung....</h6>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </li>
+                                </li>
+                                <li>
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                            <td style="line-height: 0.5;">
+                                                CT123 <br><h6>Nội dung....</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <p id="menuclick1">Tin nhắn</p>
+                            <ul class="sub-menu" id="click1">
+                                <li class="tieude">Tin nhắn</li>
+                                <li>
+                                    <table class="table1">
+                                        <tr>
+                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                            <td style="line-height: 0.5;" class="mt-1">
+                                                Thùy Liên <br><h6>Nội dung tin nhắn</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li>
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                            <td style="line-height: 0.5;">
+                                                Văn A <br><h6>Nội dung....</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                                <li>
+                                    <li>
+                                        <table class="table1">
+                                            <tr>
+                                                <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                                <td style="line-height: 0.5;">
+                                                    User A <br><h6>Nội dung....</h6>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </li>
+                                </li>
+                                <li>
+                                    <table>
+                                        <tr>
+                                            <td rowspan="2"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
+                                            <td style="line-height: 0.5;">
+                                                User B <br><h6>Nội dung....</h6>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            <form action="#" method="get">
+                                <div class="search-box">
+                                    <input type="text" name="timkiem" class="search-text" placeholder="Tìm kiếm">
+                                    <div id="button">
+                                        <i class="fa fa-search w3-xlarge"></i>
+                                    </div>
+                                </div>
+                            </form>
+                        </li>
                     </ul>
                 </nav>
             </div>
@@ -35,37 +183,52 @@
             <div>
                 <form action="#" method="get">
                     <input type="text" name="search" id="search" placeholder="Nhập mã môn học"><br>
-                    <button type="button">Search...</button>
+                    <button type="button" id="btt-search">Search...</button>
                 </form>
             </div>
         </div>
     </div>
     <br>
-    <div class="subject">
+    <div class="subject" id="monhoc">
         <h1>Results-Driven, Delightful Design & Marketing</h1>
         <p>Grow With Studio is a digital marketing agency that helps ecommerce businesses of every size see big results. <br>
             Our personalized, people-first strategies will put your</p>
-        <div class="container">
-            <div class="row">
-                <div class="col-md-3 mx-3">
-                    <img src="./image/stack-of-beautiful-books.png" class="card-img-top" alt="...">
-                    <h4 class="card-title">CT432</h4>
-                    <p class="card-text">Niên luận ngành Mạng.</p>
-                </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-3 mx-3">
-                    <img src="./image/subject-la-gi.jpg" class="card-img-top" alt="...">
-                    <h4 class="card-title">CT432</h4>
-                    <p class="card-text">Niên luận ngành Mạng.</p>
-                </div>
-                <div class="col-md-1"></div>
-                <div class="col-md-3 mx-3">
-                    <img src="./image/stack-of-beautiful-books.png" class="card-img-top" alt="...">
-                    <h4 class="card-title">CT432</h4>
-                    <p class="card-text">Niên luận ngành Mạng.</p>
-                </div>
-                <div class="col-md-1"></div>
-                
+        <div class="slide-anh">
+            <div id="btn-left" onclick="moveLeft()">
+                <button class="btn btn-outline-light"><img src="./image/btn-right.jpg" alt=""></button>
+            </div>
+            <div class="slide" id="a1">
+                <img src="./image/stack-of-beautiful-books.png" alt="...">
+                <h4>CT432</h4>
+                <p>Niên luận ngành Mạng.</p>
+            </div>
+            <div class="slide" id="a2">
+                <img src="./image/subject-la-gi.jpg" alt="...">
+                <h4>CT432</h4>
+                <p>Niên luận ngành Mạng.</p>
+            </div>
+            <div class="slide" id="a3">
+                <img src="./image/stack-of-beautiful-books.png" alt="...">
+                <h4>CT432</h4>
+                <p>Niên luận ngành Mạng.</p>
+            </div>
+            <div class="slide" id="a4">
+                <img src="./image/—Pngtree—email mail delivery computer illustration_6783868.png" alt="...">
+                <h4>CT432</h4>
+                <p>Niên luận ngành Mạng.</p>
+            </div>
+            <div class="slide" id="a5">
+                <img src="./image/price-of-the-internet-cover.png" alt="...">
+                <h4>CT432</h4>
+                <p>Niên luận ngành Mạng.</p>
+            </div>
+            <div class="slide" id="a6">
+                <img src="./image/—Pngtree—email mail delivery purple illustration_6783874.png" alt="...">
+                <h4>CT432</h4>
+                <p>Niên luận ngành Mạng.</p>
+            </div>
+            <div id="btn-right" onclick="moveRight()">
+                <button class="btn btn-outline-light"><img src="./image/btn-right.jpg" alt=""></button>
             </div>
         </div>
     </div>
@@ -138,7 +301,10 @@
             </div>
         </div>
         <br><br>
-    </div>
+    </div>      
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script>
         $(document).ready(function(){
@@ -150,9 +316,82 @@
                 }
             });
         });
+
+        var left=1;
+        var right=3;
+        function show(){
+            for(i=left; i<=right; i++){
+                document.getElementById("a"+i).style.display="inline-block";
+            }
+        }
+
+        function moveLeft(){
+            // if(left<=3 && right>=5){
+                document.getElementById("a"+left).style.display="none";
+                left+=1;
+                right+=1;
+                for(i=left; i<=right; i++){
+                    document.getElementById("a"+i).style.display="inline-block";
+                }
+            // } 
+            // else
+            //     return;
+        }
+
+        function moveRight(){
+            // if(left>=2 && right>=5){
+                document.getElementById("a"+right).style.display="none";
+                left-=1;
+                right-=1;
+                for(i=left; i<=right; i++){
+                    document.getElementById("a"+i).style.display="inline-block";
+                }
+            // } 
+            // else
+            //     return;
+        }
+
+        //Thông báo
+        var status=0;
+        document.getElementById("menuclick").onclick = function() {myFunction()};
+        function myFunction() {
+            if(status==0){
+                document.getElementById("click").style.display="inline-block";
+                status=1;
+            }
+            else{
+                status=0;
+                document.getElementById("click").style.display="none";
+            }
+        }
+
+        //Tin nhấn
+        var status1=0;
+        document.getElementById("menuclick1").onclick = function() {myFunction1()};
+        function myFunction1() {
+            if(status1==0){
+                document.getElementById("click1").style.display="inline-block";
+                status1=1;
+            }
+            else{
+                status1=0;
+                document.getElementById("click1").style.display="none";
+            }
+        }
+
+        //Bài tập
+        var status2=0;
+        document.getElementById("menuclick2").onclick = function() {myFunction2()};
+        function myFunction2() {
+            if(status2==0){
+                document.getElementById("click2").style.display="inline-block";
+                status2=1;
+            }
+            else{
+                status2=0;
+                document.getElementById("click2").style.display="none";
+            }
+        }
     </script>
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
 </body>
 </html>

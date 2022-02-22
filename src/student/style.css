@@ -1,32 +1,13 @@
+@font-face{font-family: abc;src:url(./font/Bandon.ttf)}
+
 *{
     margin: 0;
     padding: 0;
-}
-header{
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    transition: all 0.5s ease-in-out;
+    font-family: abc;
 }
 
-header.sticky{
-    background: #fff;
-    opacity: 1;
-    box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
-    /* padding: 15px 0px; */
-}
-
-header.sticky #main-menu a{
-    color: #000;
-}
-
-header.sticky #main-menu i{
-    color: #000;
-}
-
-header.sticky #logo{
-    color: #000;
+html {
+    scroll-behavior: smooth;
 }
 
 #wrapper{
@@ -34,7 +15,7 @@ header.sticky #logo{
     height: 100vh;
     background: url(./image/2581461.jpg);
     background-size: cover;
-    background-repeat: no-repeat;
+    /* background-repeat: no-repeat; */
 }
 
 ul{
@@ -46,8 +27,44 @@ a{
 }
 
 .menu{
+    font-weight: bold;
     margin: 0px auto;
-    max-width: 85%;
+    max-width: 90%;
+}
+
+header{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    font-size: 17px;
+    /* transition: all 0.5s ease-in-out; */
+    z-index: 5;
+
+}
+
+header.sticky{
+    background: #fff;
+    opacity: 2;
+    box-shadow: 0px 0px 12px rgb(0 0 0 / 8%);
+    /* box-shadow: 0px 0px 6px rgb(0,0,0,0.15); */
+    /* padding: 10px 0px; */
+}
+
+header.sticky #main-menu a{
+    color: #000;
+}
+
+header.sticky #main-menu p{
+    color: #000;
+}
+
+header.sticky #main-menu i{
+    color: #000;
+}
+
+header.sticky #logo{
+    color: #000;
 }
 
 .inner-header{
@@ -56,10 +73,52 @@ a{
     align-items: center;
 }
 
+.search-box{
+    position: relative;
+    /* height: 60px; */
+    padding: 14px 20px;
+    transition: 2s
+}
+
+.search-text{
+    width: 0px;
+    outline: none;
+    height: 30px;
+    background: rgb(128, 128, 128,0.5);
+    transition: 0.5s;
+    border-radius: 20px;
+    color: #fff;
+    border: none;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+
+.search-text::placeholder {
+    text-align: center;
+    color: rgba(247, 241, 241);
+    font-size: 14px;
+}
+
+.search-box #button{
+    display: flex;
+    float: right;
+    color: #fff;
+}
+
+.search-box #button i{
+    margin: 3px;
+}
+
+.search-box:hover .search-text{
+    width: 200px;
+    padding: 0px 15px;
+}
+
 #logo{
     color: #fff;
-    font-size: 25px;
+    font-size: 26px;
     font-weight: bold;
+    /* padding: 14px auto; */
+    display: block;
 }
 
 ul#main-menu{
@@ -67,17 +126,74 @@ ul#main-menu{
 }
 
 ul#main-menu a{
-    /* text-transform: uppercase; */
-    padding: 20px 20px;
+    padding: 15px 20px;
     color: #fff;
     font-weight: bold;
     display: block;
 }
 
-ul#main-menu i{
-    padding: 20px 20px;
+ul#main-menu p{
+    padding: 15px 20px;
+    color: #fff;
+    font-weight: bold;
+    display: block;
+}
+
+/* ul#main-menu i{
+    padding: 10px 20px;
     display: block;
     color: #fff;
+} */
+
+
+#main-menu ul{
+    position: absolute;
+    top: 100%;
+    background-color: rgb(255, 255, 255,0.5);
+    min-width: 230px;
+    line-height: 35px;
+    border-radius: 15px;
+    display: none;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.2);
+}
+
+#main-menu ul a{
+    color: #000;
+}
+
+
+/* #main-menu li:hover ul{
+    display: block;
+} */
+
+.sub-menu .tieude{
+    line-height: 40px;
+    padding-left:18px;
+    border-radius: 15px 15px 0px 0px;
+    border-bottom: 1px solid black;
+}
+
+.sub-menu .table1{
+    width: 230px;
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.table1 tr{
+    padding-left: 10px;
+}
+
+.sub-menu #hinh{
+    width: 50px;
+}
+
+.sub-menu img{
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
+}
+
+.sub-menu h6{
+    font-size: 13px;
 }
 
 .content{
@@ -87,6 +203,7 @@ ul#main-menu i{
     transform: translateY(-50%);
     text-align: center;
 }
+
 .content h1{
     font-size: 40px;
     font-weight: bold;
@@ -96,16 +213,21 @@ ul#main-menu i{
     font-size: 13px;
     font-weight: bold;
 }
-input{
+#search{
     width: 300px;
     padding: 10px;
-    border: 1px solid #1c1b1b;
-    background-color: #1c1b1b;
+    border: none;
+    background: rgb(128, 128, 128,0.5);
     text-align: center;
-    opacity: 0.4;
     border-radius: 30px;
+    outline: none;
 }
-button{
+
+#search::placeholder {
+    color: white;
+}
+
+#btt-search{
     width: 300px;
     padding: 10px;
     margin: 20px auto;
@@ -120,11 +242,6 @@ button{
     font-weight: bold;
     color: white;
 }
-::placeholder {
-    color: white;
-    opacity: 2;
-}
-
 
 .container img{
     height: 150px;
@@ -138,16 +255,70 @@ button{
 .subject{
     text-align: center;
 }
+
 .subject h1{
     margin-top: 200px;
     margin-bottom: 50px;
+    font-family: abc;
 }
+
+.subject h4{
+    font-family: abc;
+}
+
 .subject p{
-    margin-bottom: 140px;
+    margin-bottom: 150px;
 }
+
 .row{
     margin-bottom: 40px;
 }
+
+.slide-anh{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 400px;
+}
+
+.slide-anh #btn-left{
+    margin-left: 7%;
+    margin-bottom: 15%;
+    opacity: 0.3;
+    border: none;
+}
+
+.slide-anh #btn-right{
+    margin-right: 7%;
+    margin-bottom: 15%;
+    opacity: 0.3;
+    border: none;
+}
+
+.slide-anh #btn-left img{
+    width: 25px;
+    transform: rotate(180deg);
+}
+
+.slide-anh #btn-right img{
+    width: 25px;
+}
+
+.slide{
+    width: 23%;
+    margin-left: 50px;
+    margin-right:50px;
+    display: none;
+}
+
+.slide img{
+    height: 170px;
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
+
+}
+
 
 #ten-lich{
     padding-top: 100px;
