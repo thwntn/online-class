@@ -1,4 +1,6 @@
+@font-face{font-family: abc;src:url(./font/Bandon.ttf)}
 *{
+    font-family: abc;
     margin:0;
     padding:0;
 }
@@ -7,72 +9,60 @@
     height:100vh;
     background: url(img/background.jpg);
     background-size: cover;
-    color:white;
+    color:white; 
 }
 .main a{
     color:white;
 }
 header{
-    height:70px;
-    position: sticky;
+    padding:10px;
+    position: fixed;
     top:0;
     width:100%;
 }
 header.sticky{
     background-color: white;
-    opacity:0.9;
     color:black;
-    box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
+    box-shadow: 0px 0px 6px rgb(0,0,0,0.5);
 }
 header.sticky a{
     color:black;
 }
-.row{
-    z-index: 5;
-}
-.col-5{
-    font-size:30px ;
+.container-fluid .col-5{
+    font-size:30px;
     margin-left:20px;
+    margin-top:-10px;
 }
-.col-1 a{
+.comtainer-fluid .col-1{
+    display: block;
+}
+.container-fluid .col-1 a{
     text-decoration: none;
     font-size:20px;
 }
-.header-1 a{
-    color:black;
-}
-.header-1{
-    height:70px;
-    position: sticky;
-    top:0;
-    width:100%;
-}
-.text{
+
+.content{
+    height:100%;
     width:100%;
     text-align:center;
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: column;
-}
-.content{
-    width:100%;
-    text-align:center;
     color:black;
-    margin-top:150px;
-    margin-bottom:50px;
 }
+
 .content h1{
     font-size:50px;
 }
 .content p{
     font-size:30px;
-}
+} 
 .search{
     width:300px;
     height:40px;
     text-align:center;
-    border-radius: 20px 20px 20px 20px;
+    border-radius: 20px;
     border:none;
     background: rgb(128, 128, 128,0.5);
 }
@@ -83,8 +73,9 @@ header.sticky a{
     background-color: rgb(255, 94, 0);
     border:none;
     color:white;
+    margin-top:20px;
 }
-button:hover{
+.submit:hover{
     background-color:rgb(252, 180, 48);
 }
 .search::placeholder {
@@ -102,38 +93,6 @@ button:hover{
     float:left;
     margin:10px;
 }
-.add a{
-    text-decoration: none;
-    color:black;
-}
-.search-class{
-    border-radius: 20px 20px 20px 20px;
-    border:none;
-    text-align:center;
-}
-input {
-    background: none;
-    outline: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    width: 0px;
-    transition: 0.8s ease;
-    color: black;
-    font-size: 18px;
-    font-weight: 600;
-  }
-   
-  input::placeholder {
-    color: rgb(94, 94, 94);
-  }
-  .box:hover input {
-    width: 200px;
-    margin: 0 20px;
-    border: 2px solid white;
-    background-color: white;
-  }  
-
   .subject{
       width:30%;
       height:170px;
@@ -152,18 +111,156 @@ input {
     width:30px;
   }
   .addclass{
-    margin-left:100px;
-    margin-right:100px;
+    margin-left:150px;
+    margin-right:150px;
 }
-  .create{
+.addclass-1{
+    float:left;
+}
+.addclass-2{
+    float:right;
+    margin-top:50px;
+}
+  .addclass-1 .create-1{
     width:300px;
     height:40px;
-    background-color: rgb(218, 214, 214);
+    background-color: rgb(236, 235, 235);
     margin-bottom:30px;
-    border-radius: 10px 10px 10px 10px;
+    border-radius: 10px;
     border:none;
-    text-align:center;
   }
-  .create::placeholder {
+  .addclass-2 .create-1{
+    width:300px;
+    height:40px;
+    margin-bottom:40px;
+    border-radius: 10px;
+    background-color: rgb(236, 235, 235);
+    border:none;
+    margin-left:10px;
+  }
+  .addclass-2 h6{
+    background-color: rgb(236, 235, 235);
+    width:150px;
+    padding:10px;
+    border-radius: 10px;
+    margin-left:10px;
+    margin-right:20px;
+    float:left;
+  }
+  .addclass-2 .create-2{
+    width: 150px;
+    height:40px;
+    background-color: rgb(236, 235, 235);
+    border-radius: 10px;
+    border:none;
+    margin-left:10px;
+    margin-right:20px;
+    text-align:center;
+    float:left;     
+
+  }
+ 
+.create-1::placeholder {
     color:black;
+}
+.create-2::placeholder {
+    color:black;
+}
+.btn-group{
+    margin-left:-20px;
+    margin-top:-20px;
+}
+ .btn-group button{
+    margin:20px;
+    background-color: rgb(236, 235, 235);
+    border:none;
+    color:black;
+    font-weight: bold;
+    border-radius: 48px!important;
+} 
+#ten-lich{
+    padding-top: 100px;
+    margin-top: 100px;
+    font-size: 30px;
+    padding-bottom: 70px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.col-6{
+    box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
+    border-radius: 30px;
+    padding-bottom: 40px;
+}
+
+.col-6 table{
+    margin: 30px auto;
+    text-align: center;
+}
+
+.col-6 th{
+    width: 60px;
+    height: 40px;
+    border-bottom:1px solid ;
+}
+
+.col-6 td{
+    width: 60px;
+    height: 40px;
+}
+
+.container .col-5 table{
+    margin-top: 60px;
+}
+
+.container .col-5 th{
+    width: 140px;
+}
+.subject button{
+   border:none;
+}
+.modal-header{
+    float:right;
+}
+.addclass li{
+    list-style-type: none;
+}
+.sub-menu{
+    box-shadow: 0px 0px 6px rgb(0,0,0,0.15); 
+    width:262px;
+    margin-top:10px;
+    border-radius: 20px;
+    background-color: rgb(236, 234, 234,0.5);
+    display: block;
+}
+.sub-menu li{
+    list-style-type: none;
+}
+.sub-menu .tieude{
+    padding:10px;
+    font-size:20px;
+    color:black;
+    margin-left:-20px;
+}
+
+.sub-menu .table1{
+    width: 262px;
+    background-color: rgba(0, 0, 0, 0.1);
+    margin-left:-32px;
+}
+.sub-menu .table2{
+    margin-left:-32px;
+}
+.sub-menu #hinh{
+    width: 50px;
+}
+
+.sub-menu img{
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
+}
+
+.sub-menu h6{
+    font-size: 13px;
 }

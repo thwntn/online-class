@@ -1,0 +1,161 @@
+ .row {
+margin: 0;
+} 
+    @font-face{
+    font-family: basic;
+    src: url(./font/Bandon.ttf);
+}
+*{
+    padding: 0;
+    margin: 0;
+    font-family: basic;
+}
+html{
+    box-sizing: border-box;
+}
+.pad {
+    padding: 50px 32px;
+}
+.listNav {
+    display: flex;
+    flex-wrap: wrap;
+    list-style: none;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+    background-color: rgba(0, 0, 0, 0.035);
+    border-radius: 48px;
+    width: 600px;
+}
+.listNav a{
+    text-decoration: none;
+    color:black;
+}
+.listNav li {
+    padding: 8px;
+}
+.navigation {
+    width: 100% !important;
+    display: flex;
+    align-items: center;
+    height: 42px;
+}
+.title {
+    padding-bottom: 56px;
+}
+.submit {
+    background: none;
+    border: none;
+    padding: 0px 12px;
+}
+.titleItem {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    width: 100%;
+}
+.item {
+    padding: 0px 8px;
+    height: 156px;
+    border-radius: 18px;
+    background-size: 100%;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
+    margin-top: 56px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+.items {
+    width: 100%;
+}
+.nameSuject {
+    margin-bottom: 0;
+    margin-top: 6px;
+    margin-left: 8px;
+}
+.keySubject {
+    margin-left: 8px;
+}
+.backgroundItem {
+    position: absolute;
+    top: 0;bottom: 0;left: 0;right: 0;
+    z-index: -1;
+    background-size: 150%;
+    opacity: 20%;
+}
+.navItem {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+.more {
+    width: 120px !important;
+    margin-top: 48px !important;
+    border: none;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    background: none;
+    border-radius: 48px;
+    padding: 4px 8px;
+}
+.more:hover {
+    background-color: rgba(255, 100, 0, 0.8);
+    color: #fff;
+}
+.mainSession {
+    display: flex;
+    justify-content: center;
+}
+.itemBox {
+    padding: 0px 24px !important;
+}
+.search-class{
+    border-radius:20px;
+    border:none;
+    text-align:center;
+}
+
+.box input{
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 0px;
+    transition: 0.8s ease;
+    color: black;
+    font-size: 18px;
+    font-weight: 600;
+  }
+   
+  .box input::placeholder {
+    color: rgb(94, 94, 94);
+  }
+  .box:hover input {
+    width: 200px;
+    margin: 0 20px;
+    border: 2px solid white;
+    background-color: white;
+  }  
+  .modal-body textarea{
+    width:100%;;
+}
+.modal-body .upload{
+    display:none;
+}
+.create-1{
+    width:250px;
+    height:40px;
+    background-color: rgb(218, 214, 214);
+    border:none;
+    padding:5px;
+    margin:10px;
+    /* margin:10px; */
+    border-radius: 10px;
+
+}
+.create-1::placeholder {
+    color:black;
+}
