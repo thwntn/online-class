@@ -6,22 +6,22 @@ const data = [
     {
         id: 1,
         name: 'Nguyễn Trần Thiên Tân',
-        mess: 'Arron iu thwntn00'
+        mess: 'dfgsdfghdfg thwntn00'
     },
     {
         id: 2,
         name: 'Viết Tài',
-        mess: 'Arron iu thwntn00'
+        mess: 'dghjghjhjfgju thwntn00'
     },
     {
         id: 3,
         name: 'Nhật Minh',
-        mess: 'Arron iu thwntn00'
+        mess: 'Ahjkghjkghjk thwntn00'
     },
     {
         id: 4,
         name: 'Tuấn Hưng',
-        mess: 'Arron iu thwntn00'
+        mess: 'Arrhjkghjkg thwntn00'
     }
 ]
 
