@@ -32,7 +32,7 @@
 }
 .active {
     background-color: #fff;
-    color: #333;
+    color: #333 !important;
     height: 56px;
     top: 0;left: 0;right: 0;
     animation: show 0.2s linear forwards;
@@ -63,5 +63,47 @@
     }
     to {
         background-color: transparent;
+    }
+}
+
+.expandMenu {
+    display: none;
+}
+
+/* Reponsive */
+
+@media (max-width: 998px) {
+    .header {
+        flex-wrap: wrap;
+    }
+    .background {
+        overflow: hidden;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .listItems {
+        flex-wrap: wrap;
+        width: 100%;
+        padding: 0;
+        margin-top: 24px !important;
+    }
+    .item {
+        width: 100%;
+        height: 48px;
+    }
+    .header-background {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .title {
+        margin-top: 12px;
+    }
+    .expandMenu {
+        position: fixed;
+        top: 12px;
+        right: 24px;
+        background: none;
+        border: none;
+        display: block;
     }
 }

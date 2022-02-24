@@ -8,12 +8,31 @@ function Header () {
     const [scroll, setScroll] = useState(style.noActive)
     const [activeNoti, setActiveNoti] = useState(false)
     const [activeMessage, setActiveMess] = useState(false)
+
+    let expandMenu = '48px';
+    const setExpandMenu = () => {
+        if(expandMenu === '362px'){
+            expandMenu = '48px'
+            return '48px'
+        }
+        else {
+            expandMenu = '362px'
+            return '362px'
+        }
+    }
+
     useEffect(() => {
         document.addEventListener('scroll', () => {
             if(window.scrollY > 0) setScroll (style.active)
             else setScroll (style.noActive)
         })
     }, [])
+    useEffect(() => {
+        document.querySelector('.header_expandMenu__V7fSv').addEventListener('click', () => {
+            document.querySelector('.header_background__PngjP').style.height = setExpandMenu()
+        })
+    })
+
     return(
         <div className = {style.background + ` ${scroll}`}>
             <h2 className = {style.title}>Online Class</h2>
@@ -31,6 +50,7 @@ function Header () {
                     {activeMessage && <Message></Message>}
                 </li>
             </ul>
+            <button className = {style.expandMenu}><i className="fas fa-bars"></i></button>
         </div>
     )
 }
