@@ -8,9 +8,8 @@ function Header () {
     const [scroll, setScroll] = useState(style.noActive)
     const [activeNoti, setActiveNoti] = useState(false)
     const [activeMessage, setActiveMess] = useState(false)
-e
     useEffect(() => {
-        document.addEvenetListener('scroll', () => {
+        document.addEventListener('scroll', () => {
             if(window.scrollY > 0) setScroll (style.active)
             else setScroll (style.noActive)
         })
