@@ -6,18 +6,22 @@
 <link rel="stylesheet" type="text/css" href="./homework.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
     <div class="menu">
         <ul class="menu-1">
             <li><a href="index.php">&nbsp;<img src="img/Home-2-2-icon.png" style="width:20px">&nbsp;Trang chủ</a></li>
-            <li><a href=""><img src="img/calender.jpg" style="width:30px">Lịch</a></li> <hr>
+             <hr>
         </ul>
         <ul class="menu-2">
             <li>Lớp học</li>
-            <li><a href="">Kỹ thuật tấn công mạng</a></li>
-            <li><a href="">Mạng máy tính</a></li>
-            <li><a href="">Niên luận mạng máy tính</a></li>
+            <li><div class = "item" style="background-image: url(./img/internet.jpg)"></div>
+                <a href="">Mạng máy tính</a></li>
+            <li><div class = "item" style="background-image: url(./img/csdl.jpg)"></div>
+                <a href="">Cơ sở dữ liệu</a></li>
+            <li><div class = "item" style="background-image: url(./img/lt.jpg)"></div>
+                <a href="">Niên luận mạng máy tính</a></li>
         </ul>
     </div>
     <div class="main">
@@ -33,9 +37,9 @@
         </ul><hr>
         <div class="comment">
             <img src="img/user-profile-icon-free-vector.jpg">
-            <form action="" method="get">
-                <input class="comment-1" type="text" name="comment">
-                <button class="button" type="submit"><img src="img/send.png" ></button>
+            <form action="" method="get" class="comment-1">
+                <input class="comment-2" type="text" name="comment">
+                <button class="send" type="submit"><i class="fas fa-paper-plane"></i></button>
             </form>
         </div> <br> 
         <ul>
@@ -55,7 +59,7 @@
             <p><b>Danh sách sinh viên đã nộp bài
                 20/40</b></p>
             <ul>
-                <li><img src="img/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px"></li> 
+                <li><img src="img/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li> 
                 <li>Tên người dùng</li>
                 <li><a href=""><img src="img/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
                 <li><a href=""><img src="img/img_179653.png" style="width:10px"></a></li>
@@ -76,7 +80,7 @@
             </ul>
 
             <!-- Button trigger modal -->
-            <button type="button" class="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+            <button type="button" class="score" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Bảng điểm
             </button>
 

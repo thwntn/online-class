@@ -29,7 +29,7 @@
         <div class = "items row">
             <div class = "itemBox col-md-4">
                 <div class = "item">
-                    <div class = "backgroundItem" style="background-image: url(./img/internet.jpg)"></div>
+                <div class = "backgroundItem" style="background-image: url(./img/internet.jpg)"></div>
                     <div class= "titleItem">
                         <h3 class = "keySubject">CT222</h3>
                         <h5 class = "nameSuject">Mạng máy tính</h5>
@@ -52,7 +52,7 @@
                                             <table>
                                             <tr> 
                                                 <td><input class="create-1"  type="text" name="id" placeholder="Mã tài liệu" ></td>
-                                                <td><input class="create-1"   type="date" name="date-finish" placeholder="Thời hạn"></td>
+                                                <td><input class="create-1"   type="date" name="date-finish"></td>
                                             </tr>
                                             <tr>    
                                                 <td colspan="2"><textarea class="create-1" name="content"></textarea></td>
@@ -96,7 +96,7 @@
                     <div class = "backgroundItem" style="background-image: url(./img/lt.jpg)"></div>
                     <div class= "titleItem">
                         <h3 class = "keySubject">CT212</h3>
-                        <h5 class = "nameSuject">Lập trinh hướng đối tượng</h5>
+                        <h5 class = "nameSuject">Niên luận mạng máy tính</h5>
                     </div>
                     <div class = "navItem">
                         <button class = "submit"><i class="fas fa-user"></i></button>

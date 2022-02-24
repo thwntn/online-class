@@ -15,7 +15,9 @@ include "header.php";
                 <button type="button" class="btn btn-secondary">Học kỳ 3</button>
             </div>
         </li>
-        <li><input class="create-1" type="text" name="img" placeholder="Hình ảnh"></li>
+        <li><input class="upload-1" type="file" name="img">
+            <p class="create-3">Hình ảnh</p>
+        </li>
         <li><input class="create-1" type="text" name="year" placeholder="Nhập năm học"></li>
         <li><input class="create-1" type="text" name="credit" placeholder="Số tín chỉ"></li>
 
@@ -33,4 +35,13 @@ include "header.php";
 
     </ul>
 </form>
+<script>
+        document.querySelector('.create-3').addEventListener('click', function () {
+            console.log(123)
+        document.querySelector('.upload-1').click()
+    })
+    document.querySelector('.upload-1').addEventListener('change', function () {
+        document.querySelector('.create-3').innerHTML = document.querySelector('.upload-1').value
+    })
 
+    </script>

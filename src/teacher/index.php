@@ -25,8 +25,8 @@
                 <a href="#lich">Lịch dạy</a>
             </div>
             <div class="col-1" style="width:150px">
-            <a href="" >Thông báo</a>
-                <!-- <ul class="sub-menu">
+                <p id="menuclick">Thông báo</p>
+                 <ul class="sub-menu" id="click">
                                 <li class="tieude">Thông báo</li> 
                                 <li>
                                     <table class="table1">
@@ -70,7 +70,7 @@
                                         </tr>
                                     </table>
                                 </li>
-                            </ul> -->
+                            </ul> 
             </div>
 
             <div class="col-1" style="width:150px">
@@ -96,7 +96,9 @@
                 <div class="col-6">
                     <table>
                         <tr>
+                            <th><i class="fa-solid fa-angle-left"></i></th>
                             <th colspan="2">Tháng 1</th>
+                            <th><i class="fa-solid fa-angle-right"></i></th>
                             <th colspan="5"></th>
                             <th colspan="2">Năm:2022</th>
                         </tr>
@@ -171,10 +173,20 @@ $(document).ready(function(){
     });
 });
 
-document.getElementById("myBtn").onclick = function() {myFunction()};
-function myFunction() {
-  document.getElementById("myDropdown").classList.toggle("show");
-}
+//Thông báo
+var status=0;
+        document.getElementById("menuclick").onclick = function() {myFunction()};
+        function myFunction() {
+            if(status==0){
+                document.getElementById("click").style.display="inline-block";
+                status=1;
+            }
+            else{
+                status=0;
+                document.getElementById("click").style.display="none";
+            }
+        }
+
 </script>
 </body>
 </html>
