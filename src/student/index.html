@@ -196,7 +196,9 @@
             Our personalized, people-first strategies will put your</p>
         <div class="slide-anh">
             <div id="btn-left" onclick="moveLeft()">
-                <button class="btn btn-outline-light"><img src="./image/btn-right.jpg" alt=""></button>
+                <button class="btn btn-outline-light">
+                    <img src="./image/btn-right.jpg" alt="">
+                </button>
             </div>
             <div class="slide" id="a1">
                 <img src="./image/stack-of-beautiful-books.png" alt="...">
@@ -225,6 +227,11 @@
             </div>
             <div class="slide" id="a6">
                 <img src="./image/—Pngtree—email mail delivery purple illustration_6783874.png" alt="...">
+                <h4>CT432</h4>
+                <p>Niên luận ngành Mạng.</p>
+            </div>
+            <div class="slide" id="a7">
+                <img src="./image/price-of-the-internet-cover.png" alt="...">
                 <h4>CT432</h4>
                 <p>Niên luận ngành Mạng.</p>
             </div>
@@ -327,29 +334,29 @@
         }
 
         function moveLeft(){
-            // if(left<=3 && right>=5){
+            if(left<=3 && right<=6){
                 document.getElementById("a"+left).style.display="none";
                 left+=1;
                 right+=1;
                 for(i=left; i<=right; i++){
                     document.getElementById("a"+i).style.display="inline-block";
                 }
-            // } 
-            // else
-            //     return;
+            } 
+            else
+                return;
         }
 
         function moveRight(){
-            // if(left>=2 && right>=5){
+            if(left>=2 && right>=5){
                 document.getElementById("a"+right).style.display="none";
                 left-=1;
                 right-=1;
                 for(i=left; i<=right; i++){
                     document.getElementById("a"+i).style.display="inline-block";
                 }
-            // } 
-            // else
-            //     return;
+            } 
+            else
+                return;
         }
 
         //Thông báo

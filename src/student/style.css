@@ -208,8 +208,8 @@ ul#main-menu p{
     font-size: 13px;
 }
 
-.main-menu:hover li{
-    background-color: rgba(255, 255, 255, 0.1);
+.sub-menu li:hover{
+    background-color: rgba(255, 255, 255, 0.2);
 }
 
 .content{
@@ -283,11 +283,22 @@ ul#main-menu p{
 }
 
 .subject p{
-    margin-bottom: 150px;
+    margin-bottom: 100px;
 }
 
-.row{
+/* .row{
     margin-bottom: 40px;
+} */
+
+@keyframes wipeup {
+    form {
+        transform: translateX(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateX(0px);
+        opacity: 1;
+    }
 }
 
 .slide-anh{
@@ -299,14 +310,14 @@ ul#main-menu p{
 
 .slide-anh #btn-left{
     margin-left: 7%;
-    margin-bottom: 15%;
+    margin-bottom: 13%;
     opacity: 0.3;
     border: none;
 }
 
 .slide-anh #btn-right{
     margin-right: 7%;
-    margin-bottom: 15%;
+    margin-bottom: 13%;
     opacity: 0.3;
     border: none;
 }
@@ -332,9 +343,8 @@ ul#main-menu p{
     width: 100%;
     border-radius: 10px;
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
-
+    animation: wipeup 0.3s ease;
 }
-
 
 #ten-lich{
     padding-top: 100px;

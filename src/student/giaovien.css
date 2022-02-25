@@ -1,6 +1,10 @@
+@font-face{font-family: abc;src:url(./font/Bandon.ttf)}
+
+
 *{
     margin: 0;
     padding: 0;
+    font-family: abc;
 }
 /* header{
     position: fixed;
@@ -20,9 +24,9 @@
 }
 
 .navbar{
-    width: 85%;
+    box-shadow: 0px 0px 12px rgb(0 0 0 / 8%);
+    width: 100%;
     margin: auto;
-    padding: 20px 0;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -32,12 +36,15 @@
     display: inline-block;
     margin: 0 25px;
     font-weight: bold;
+    font-size: 17px;
 }
 .navbar p{
+    margin-left: 50px;
     font-size: 25px;
     font-weight: bold;
 }
 .name-subject{
+    margin-top: 20px;
     background: url(./image/img_learnlanguage.jpg);
     background-repeat: no-repeat;
     background-size: cover;
