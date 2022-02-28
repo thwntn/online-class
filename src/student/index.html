@@ -309,97 +309,11 @@
             </div>
         </div>
         <br><br>
-    </div>      
+    </div>         
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script>
-        $(document).ready(function(){
-            $(window).scroll(function(){
-                if($(this).scrollTop()){
-                    $('header').addClass('sticky');
-                }else{
-                    $('header').addClass('sticky');
-                }
-            });
-        });
-
-        var left=1;
-        var right=3;
-        function show(){
-            for(i=left; i<=right; i++){
-                document.getElementById("a"+i).style.display="inline-block";
-            }
-        }
-
-        function moveLeft(){
-            if(left<=3 && right<=6){
-                document.getElementById("a"+left).style.display="none";
-                left+=1;
-                right+=1;
-                for(i=left; i<=right; i++){
-                    document.getElementById("a"+i).style.display="inline-block";
-                }
-            } 
-            else
-                return;
-        }
-
-        function moveRight(){
-            if(left>=2 && right>=5){
-                document.getElementById("a"+right).style.display="none";
-                left-=1;
-                right-=1;
-                for(i=left; i<=right; i++){
-                    document.getElementById("a"+i).style.display="inline-block";
-                }
-            } 
-            else
-                return;
-        }
-
-        //Thông báo
-        var status=0;
-        document.getElementById("menuclick").onclick = function() {myFunction()};
-        function myFunction() {
-            if(status==0){
-                document.getElementById("click").style.display="inline-block";
-                status=1;
-            }
-            else{
-                status=0;
-                document.getElementById("click").style.display="none";
-            }
-        }
-
-        //Tin nhấn
-        var status1=0;
-        document.getElementById("menuclick1").onclick = function() {myFunction1()};
-        function myFunction1() {
-            if(status1==0){
-                document.getElementById("click1").style.display="inline-block";
-                status1=1;
-            }
-            else{
-                status1=0;
-                document.getElementById("click1").style.display="none";
-            }
-        }
-
-        //Bài tập
-        var status2=0;
-        document.getElementById("menuclick2").onclick = function() {myFunction2()};
-        function myFunction2() {
-            if(status2==0){
-                document.getElementById("click2").style.display="inline-block";
-                status2=1;
-            }
-            else{
-                status2=0;
-                document.getElementById("click2").style.display="none";
-            }
-        }
-    </script>
+    <script src="style.js"></script>
 </body>
 </html>
