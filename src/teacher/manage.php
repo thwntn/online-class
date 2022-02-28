@@ -36,6 +36,11 @@
                     </div>
                     <div class = "navItem">
                         <button class = "submit"><i class="fas fa-user"></i></button>
+                            
+
+                        <button class = "submit"><i class="fas fa-pen"></i></button>
+                        <button class = "submit"><i class="fas fa-star"></i></button>
+               
                         <button class = "submit"><i class="fas fa-user-plus"></i></button>
                         <button class="submit" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fas fa-file-alt"></i></i></button>
                                 <!-- Modal -->
@@ -128,7 +133,7 @@
                     <div class = "backgroundItem" style="background-image: url(./img/internet.jpg)"></div>
                     <div class= "titleItem">
                         <h3 class = "keySubject">CT311</h3>
-                        <h5 class = "nameSuject">Cấu trúc dữ liệu</h5>
+                        <h5 class = "nameSuject">Lập trình mạng</h5>
                     </div>
                     <div class = "navItem">
                         <button class = "submit"><i class="fas fa-user"></i></button>

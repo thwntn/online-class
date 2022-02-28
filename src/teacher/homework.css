@@ -163,6 +163,7 @@
     font-weight: bold;
     background-color: white;
     margin-top:10px;
+    text-align:center;
 }
 .popup {
     display: none;

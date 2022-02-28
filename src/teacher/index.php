@@ -137,8 +137,9 @@
                         </tr>
                         <tr>
                             <td>28</td>
-                            <td>29</td>
-                            <td>30</td>
+                            <td class="date-1">29</td>
+                            <td class="date-2">30</td>
+                            <td class="date-3">31</td>
                             <td colspan="7"></td>
                         </tr>
                     </table>

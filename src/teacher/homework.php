@@ -20,8 +20,10 @@
                 <a href="">Mạng máy tính</a></li>
             <li><div class = "item" style="background-image: url(./img/csdl.jpg)"></div>
                 <a href="">Cơ sở dữ liệu</a></li>
-            <li><div class = "item" style="background-image: url(./img/lt.jpg)"></div>
-                <a href="">Niên luận mạng máy tính</a></li>
+            <li><div class = "item" style="background-image: url(./img/ctdl.jpg)"></div>
+                <a href="">Cấu trúc dữ liệu</a></li>
+            <li><div class = "item" style="background-image: url(./img/internet.jpg)"></div>
+                <a href="">Lập trình mạng</a></li>
         </ul>
     </div>
     <div class="main">
