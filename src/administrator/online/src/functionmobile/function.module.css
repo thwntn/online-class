@@ -1,0 +1,64 @@
+.frame {
+    position: fixed;
+    display: flex;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(12px);
+    animation: show 0.3s ease;
+    z-index: 10;
+}
+.listFunc {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+.user {
+    width: 100px;
+    height: 100px;
+    background-size: 100%;
+    background-position: center;
+}
+.item {
+    width: 50%;
+}
+.item a{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    list-style: none;
+    margin: 24px 0px;
+    color: #000;
+    text-decoration: none;
+}
+.item h5 {
+    width: 100%;
+    text-align: center;
+}
+.close {
+    position: absolute;
+    bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 0, 0, 0.8);
+    padding: 12px 20px;
+    border-radius: 100%;
+    color: white;
+}
+@keyframes show {
+    from {
+        transform: translateY(-20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0px);
+        opacity: 1;
+    }
+}

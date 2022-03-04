@@ -29,3 +29,8 @@ html{
 .pad {
   padding: 132px 32px;
 }
+@media (max-width: 998px) {
+  .pad {
+    padding: 32px 0px;
+  }
+}

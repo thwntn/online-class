@@ -1,7 +1,7 @@
 .accountBox {
     padding: 12px;
     background-color: rgba(255, 255, 255, 0.8);
-    width: 1100px !important;
+    max-width: 1100px;
     display: flex;
     flex-wrap: wrap;
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
@@ -48,11 +48,10 @@
     box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 .search {
-    height: 32px;
+    padding: 4px 12px;
     width: 256px;
     border-radius: 48px;
     border: 2px solid rgba(0, 0, 0, 0.05);
-    padding: 0px 12px;
     outline: none;
     margin-right: 12px;
 }
@@ -90,4 +89,45 @@
 }
 .viewUser {
     position: relative;
+}
+@media (max-width: 998px) {
+    .search {
+        height: 48px;
+        width: 98%;
+        margin: 0;
+        background-color: rgba(0, 0, 0, 0.03);
+        border: none;
+        margin-bottom: 12px;
+    }
+    .title {
+        display: none;
+    }
+    .close {
+        display: none;
+    }
+    .accountBox {
+        position: fixed;
+        justify-content: center;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        align-content: flex-start;
+    }
+    .boxItems {
+        align-content: top;
+        overflow: auto;
+        height: 84vh;
+    }
+}
+.closemobile {
+    position: absolute;
+    bottom: 40px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: rgba(255, 0, 0, 0.8);
+    padding: 12px 20px;
+    border-radius: 100%;
+    color: white;
+    z-index: 1;
 }

@@ -13,6 +13,7 @@
     transform: scale(0);
     margin-left: -185px;
     animation: show 0.1s ease forwards;
+    z-index: 12;
 }
 .inputInfo {
     margin: 12px 0px;
@@ -64,5 +65,20 @@
     to {
         opacity: 1;
         transform: translateY(0px);
+    }
+}
+@media (max-width: 998px) {
+    .boxConvert {
+        position: fixed;
+        right: 28%;
+        bottom: 120px;
+        z-index: 1;
+    }
+    .boxInfo {
+        margin-left: auto;
+        margin-right: auto;
+        position: fixed;
+        top: 20px;
+        bottom: auto;
     }
 }

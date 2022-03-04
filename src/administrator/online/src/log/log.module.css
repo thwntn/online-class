@@ -8,7 +8,10 @@
 }
 .content {
     max-height: 448px;
-    overflow: auto;
+    overflow: scroll;
+}
+.content ul {
+    min-width: 900px;
 }
 .title {
     padding-bottom: 56px;

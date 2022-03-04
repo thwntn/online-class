@@ -32,3 +32,11 @@
 .items:hover {
     color: red;
 }
+@media (max-width: 998px) {
+    .boxConvert {
+        position: absolute;
+        right: 28%;
+        bottom: 120px;
+        z-index: 2;
+    }
+}

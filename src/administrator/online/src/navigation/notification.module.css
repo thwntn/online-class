@@ -83,3 +83,13 @@
 .frame i {
     padding-right: 6px;
 }
+@media (max-width: 998px) {
+    .frame {
+        margin: 0;
+        bottom: 96px;
+        right: 12px;
+    }
+    .frame::after {
+        display: none;
+    }
+}

@@ -10,7 +10,7 @@ const Log = () => {
                     <li className = {style.titleNav}>Nội dung</li>
                     <li className = {style.titleNav}>Thời gian</li>
                     <li className = {style.titleNav}>Tài khoản</li>
-                    <li className = {style.titleNav}>Loại tài khoản</li>
+                    <li className = {style.titleNav}>Loại</li>
                 </ul>
                 <div className = {style.content}>
                     <ul className = {style.items}>

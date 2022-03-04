@@ -38,6 +38,36 @@ const data = [
         key: 8,
         name: 'Nguyễn Nhật Minh'
 
+    },
+    {
+        key: 9,
+        name: 'Nguyễn Nhật Minh'
+
+    },
+    {
+        key: 18,
+        name: 'Nguyễn Nhật Minh'
+
+    },
+    {
+        key: 28,
+        name: 'Nguyễn Nhật Minh'
+
+    },
+    {
+        key: 38,
+        name: 'Nguyễn Nhật Minh'
+
+    },
+    {
+        key: 48,
+        name: 'Nguyễn Nhật Minh'
+
+    },
+    {
+        key: 58,
+        name: 'Nguyễn Nhật Minh'
+
     }
 ]
 
@@ -46,7 +76,9 @@ const AccountActive = (property) => {
     const [view, setView] = useState('none')
     const [active, setActive] = useState('')
     const [convert, setConvert] = useState('none')
-
+ 
+    console.log(property.data);
+     
     const closed = () => {
         setTimeout(() => {
             setView('none')
@@ -57,6 +89,10 @@ const AccountActive = (property) => {
     }
     return (
         <div className = {style.frame + ' ' + style.active}>
+            <div
+                className = {style.closemobile}
+              onClick = {() => property.data(false)}
+            ><i class="fas fa-times"></i></div>
             <div className = {style.accountBox}>
                 <div className = {style.backgroundImage}></div>
                 <h3 className = {style.title}>Tài khoản hiện hành</h3>
