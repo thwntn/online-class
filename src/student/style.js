@@ -42,44 +42,83 @@ function moveRight(){
         return;
 }
 
-//Thông báo
-var status=0;
-document.getElementById("menuclick").onclick = function() {myFunction()};
-function myFunction() {
-    if(status==0){
-        document.getElementById("click").style.display="inline-block";
-        status=1;
-    }
-    else{
-        status=0;
-        document.getElementById("click").style.display="none";
-    }
-}
+document.querySelector('.frameNoti').addEventListener('click', function(event){
+    event.stopPropagation()
+})
+document.querySelectorAll('.frameNoti')[1].addEventListener('click', function(event){
+    event.stopPropagation()
+})
 
-//Tin nhấn
-var status1=0;
-document.getElementById("menuclick1").onclick = function() {myFunction1()};
-function myFunction1() {
-    if(status1==0){
-        document.getElementById("click1").style.display="inline-block";
-        status1=1;
-    }
-    else{
-        status1=0;
-        document.getElementById("click1").style.display="none";
-    }
-}
 
-//Bài tập
-var status2=0;
-document.getElementById("menuclick2").onclick = function() {myFunction2()};
-function myFunction2() {
-    if(status2==0){
-        document.getElementById("click2").style.display="inline-block";
-        status2=1;
+//Background Header
+document.addEventListener('scroll', () => {
+    if(window.scrollY > 0) {
+        document.querySelector('.backgroundNav').classList.remove('noactiveNav')
+        document.querySelector('.backgroundNav').classList.add('activeNav')
     }
-    else{
-        status2=0;
-        document.getElementById("click2").style.display="none";
+    else {
+        document.querySelector('.backgroundNav').classList.add('noactiveNav')
+        document.querySelector('.backgroundNav').classList.remove('activeNav')
     }
+})
+
+
+//Content Mess
+var contentMess = false
+const itemNoti = document.querySelectorAll('.itemNoti')
+for (i of itemNoti){
+    i.addEventListener('click', function(){
+        if(!contentMess) {
+            document.querySelector('.frameMess').style.display = 'flex'
+            contentMess = true
+        }
+        else {
+            document.querySelector('.frameMess').style.display = 'none'
+            contentMess = false
+        }
+    })
 }
+document.querySelector('.backMess').addEventListener('click', () => {
+    document.querySelector('.frameMess').style.display = 'none'
+    contentMess = false
+})
+
+//Baitap
+var noti = false
+document.querySelector('.baitap').addEventListener('click', function() {
+    if(!noti) {
+        document.querySelector('.btap').style.display = 'flex'
+        noti = true
+    }
+    else {
+        document.querySelector('.btap').style.display = 'none'
+        noti = false
+    }
+})
+
+//Active Noti
+var noti = false
+document.querySelector('.actNoti').addEventListener('click', function() {
+    if(!noti) {
+        document.querySelector('.noti').style.display = 'flex'
+        noti = true
+    }
+    else {
+        document.querySelector('.noti').style.display = 'none'
+        noti = false
+    }
+})
+
+
+//Active Message
+var mess = false
+document.querySelector('.actMess').addEventListener('click', function() {
+    if(!mess) {
+        document.querySelector('.mess').style.display = 'flex'
+        mess = true
+    }
+    else {
+        document.querySelector('.mess').style.display = 'none'
+        mess = false
+    }
+})

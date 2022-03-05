@@ -10,171 +10,154 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="./style.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="./header.css" media="screen" />
 </head>
 <body onload="show()">
     <div id="wrapper">
         <header>
-            <div class="inner-header menu">
-                <a href="" id="logo" style="text-decoration: none">Online Class</a>
-                <nav>
-                    <ul id="main-menu">
-                        <li><a href="#wrapper" style="text-decoration: none">Trang chủ</a></li>
-                        <li><a href="#monhoc" style="text-decoration: none">Môn học</a></li>
-                        <li>
-                            <p id="menuclick2">Bài tập được giao</p>
-                            <ul class="sub-menu" id="click2">
-                                <li class="tieude"><i class="fas fa-book"></i>Bài tập được giao</li>
-                                <li>
-                                    <table>
-                                        <tr>
-                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                            <td style="line-height: 0.5;" class="mt-1">
-                                                CT123 <br><h6>Nội dung....</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                                <li>
-                                    <table>
-                                        <tr>
-                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                            <td style="line-height: 0.5;" class="mt-1">
-                                                CT123 <br><h6>Nội dung....</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                                <li>
-                                    <table>
-                                        <tr>
-                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                            <td style="line-height: 0.5;" class="mt-1">
-                                                CT123 <br><h6>Nội dung....</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                                <li>
-                                    <table>
-                                        <tr>
-                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                            <td style="line-height: 0.5;" class="mt-1">
-                                                CT123 <br><h6>Nội dung....</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                            </ul>
+            <div class = 'backgroundNav'>
+                <h2 class = 'titleNav'>Online Class</h2>
+                <ul class = 'listItemsNav'>
+                    <li class = 'itemNav'><a href = '#wrapper'>Trang chủ</a></li>
+                    <li class = 'itemNav'><a href = '#monhoc'>Môn học</a></li>
+                    <li class = 'itemNav baitap'>
+                        Bài tập được giao
+                        <div class = 'frameNoti btap'>
+                            <h5><i class="fas fa-book"></i>Bài tập được giao</h5>
+                            <div class = 'itemNoti'>
+                                <div class = 'imageNoti'></div>
+                                <div class = 'contentNoti'>
+                                    <h4>CT211</h4>
+                                    <p>Bài tập mới được giao</p>
+                                </div>
+                            </div>
+                            <div class = 'itemNoti'>
+                                <div class = 'imageNoti'></div>
+                                <div class = 'contentNoti'>
+                                    <h4>CT211</h4>
+                                    <p>Bài tập mới được giao</p>
+                                </div>
+                            </div>
+                            <div class = 'itemNotiStatus'>
+                                <div class = 'imageNoti'></div>
+                                <div class = 'contentNoti'>
+                                    <h4>CT211</h4>
+                                    <p>Bài tập mới được giao</p>
+                                </div>
+                            </div>
+                            <div class = 'itemNoti'>
+                                <div class = 'imageNoti'></div>
+                                <div class = 'contentNoti'>
+                                    <h4>CT211</h4>
+                                    <p>Bài tập mới được giao</p>
+                                </div>
+                            </div>
+                        </div>
                         </li>
-                        <li><a href="#lich" style="text-decoration: none">Lịch học</a></li>
-                        <li>
-                            <p id="menuclick">Thông báo</p>
-                            <ul class="sub-menu" id="click">
-                                <li class="tieude"><i class="fas fa-bell"></i>Thông báo</li>
-                                <li>
-                                    <table class="table1">
-                                        <tr>
-                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                            <td style="line-height: 0.5;" class="mt-1">
-                                                CT123 <br><h6>Nội dung....</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                                <li>
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                            <td style="line-height: 0.5;">
-                                                CT123 <br><h6>Nội dung....</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                                <li>
-                                    <li>
-                                        <table class="table1">
-                                            <tr>
-                                                <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                                <td style="line-height: 0.5;">
-                                                    CT123 <br><h6>Nội dung....</h6>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </li>
-                                </li>
-                                <li>
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                            <td style="line-height: 0.5;">
-                                                CT123 <br><h6>Nội dung....</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                            </ul>
+                    </li>
+                    <li class = 'itemNav'><a href = '#lich'>Lịch học</a></li>
+                    <li class = 'itemNav actNoti'>
+                        Thông báo
+                        <div class = 'frameNoti noti'>
+                            <h5><i class="fas fa-bell"></i>Thông báo</h5>
+                            <div class = 'itemNoti'>
+                                <div class = 'imageNoti'></div>
+                                <div class = 'contentNoti'>
+                                    <h4>CT211</h4>
+                                    <p>Bài tập mới được giao</p>
+                                </div>
+                            </div>
+                            <div class = 'itemNoti'>
+                                <div class = 'imageNoti'></div>
+                                <div class = 'contentNoti'>
+                                    <h4>CT211</h4>
+                                    <p>Bài tập mới được giao</p>
+                                </div>
+                            </div>
+                            <div class = 'itemNotiStatus'>
+                                <div class = 'imageNoti'></div>
+                                <div class = 'contentNoti'>
+                                    <h4>CT211</h4>
+                                    <p>Bài tập mới được giao</p>
+                                </div>
+                            </div>
+                            <div class = 'itemNoti'>
+                                <div class = 'imageNoti'></div>
+                                <div class = 'contentNoti'>
+                                    <h4>CT211</h4>
+                                    <p>Bài tập mới được giao</p>
+                                </div>
+                            </div>
+                        </div>
                         </li>
-                        <li>
-                            <p id="menuclick1">Tin nhắn</p>
-                            <ul class="sub-menu" id="click1">
-                                <li class="tieude"><i class="fab fa-facebook-messenger"></i>Tin nhắn</li>
-                                <li>
-                                    <table class="table1">
-                                        <tr>
-                                            <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                            <td style="line-height: 0.5;" class="mt-1">
-                                                Thùy Liên <br><h6>Nội dung tin nhắn</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                                <li>
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                            <td style="line-height: 0.5;">
-                                                Văn A <br><h6>Nội dung....</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                                <li>
-                                    <li>
-                                        <table class="table1">
-                                            <tr>
-                                                <td id="hinh"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                                <td style="line-height: 0.5;">
-                                                    User A <br><h6>Nội dung....</h6>
-                                                </td>
-                                            </tr>
-                                        </table>
-                                    </li>
-                                </li>
-                                <li>
-                                    <table>
-                                        <tr>
-                                            <td rowspan="2"><img src="./image/subject-la-gi.jpg" class="mx-3 my-3" alt="..."></td>
-                                            <td style="line-height: 0.5;">
-                                                User B <br><h6>Nội dung....</h6>
-                                            </td>
-                                        </tr>
-                                    </table>
-                                </li>
-                            </ul>
-                        </li>
-                        <li>
-                            <form action="#" method="get">
-                                <div class="search-box">
-                                    <input type="text" name="timkiem" class="search-text" placeholder="Tìm kiếm">
-                                    <div id="button">
-                                        <i class="fa fa-search w3-xlarge"></i>
+                    <li class="itemNav actMess">
+                        Tin nhắn
+                        <div class = 'frameNoti mess'>
+                            <h5 class = 'titleNoti'><i class="fab fa-facebook-messenger"></i> Tin nhắn</h5>
+                                <div class = 'itemNoti'>
+                                    <div class = 'imageNoti'></div>
+                                    <div class = 'contentNoti'>
+                                        <h4>Nguyen Van A</h4>
+                                        <p>Bài tập mới được giao</p>
                                     </div>
                                 </div>
-                            </form>
-                        </li>
-                    </ul>
-                </nav>
+                                <div class = 'itemNoti'>
+                                    <div class = 'imageNoti'></div>
+                                    <div class = 'contentNoti'>
+                                        <h4>Nguyen Van A</h4>
+                                        <p>Bài tập mới được giao</p>
+                                    </div>
+                                </div>
+                                <div class = 'itemNoti'>
+                                    <div class = 'imageNoti'></div>
+                                    <div class = 'contentNoti'>
+                                        <h4>Nguyen Van A</h4>
+                                        <p>Bài tập mới được giao</p>
+                                    </div>
+                                </div>
+                                <div class = 'itemNoti'>
+                                    <div class = 'imageNoti'></div>
+                                    <div class = 'contentNoti'>
+                                        <h4>Nguyen Van A</h4>
+                                        <p>Bài tập mới được giao</p>
+                                    </div>
+                                </div>
+                            <div class = 'frameMess'>
+                                <div class = 'navigationMess'>
+                                    <button
+                                        class = 'backMess'
+                                    >
+                                        <i class="fas fa-angle-left"></i>
+                                    </button>
+                                    <div class = 'imageMess'></div>
+                                    <h5 class = 'nameMess'>Nguyễn Trần Thiên Tân</h5>
+                                </div>
+                                <div class = 'contentMess'>
+                                    <div class = 'messMess'>
+                                        <p class = 'sendMess'>Làm người yêu mình nhé!</p>
+                                    </div>
+                                    <div class = 'messMess'>
+                                        <p class = 'receiveMess'>Tớ chỉ xem cậu là bạn thôi :)</p>
+                                    </div>
+                                </div>
+                                <div class = 'navigationMessSend'>
+                                    <input class = 'inputMessChat' placeholder = "Nhập tin nhắn"></input>
+                                    <button class = 'buttonMessSend'><i class ="fad fa-paper-plane"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <form action="#" method="get">
+                            <div class="search-box">
+                                <input type="text" name="timkiem" class="search-text" placeholder="Tìm kiếm">
+                                <div id="button">
+                                    <i class="fa fa-search w3-xlarge"></i>
+                                </div>
+                            </div>
+                        </form>
+                    </li>
+                </ul>
             </div>
         </header>
         <div class="content">
