@@ -94,55 +94,51 @@
         <div class="container">
             <div class="row">
                 <div class="col-6">
-                    <table>
-                        <tr>
-                            <th><i class="fa-solid fa-angle-left"></i></th>
-                            <th colspan="2">Tháng 1</th>
-                            <th><i class="fa-solid fa-angle-right"></i></th>
-                            <th colspan="5"></th>
-                            <th colspan="2">Năm:2022</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>11</td>
-                            <td>12</td>
-                            <td>13</td>
-                            <td>14</td>
-                            <td>15</td>
-                            <td>16</td>
-                            <td>17</td>
-                            <td>18</td>
-                        </tr>
-                        <tr>
-                            <td>19</td>
-                            <td>20</td>
-                            <td>21</td>
-                            <td>22</td>
-                            <td>23</td>
-                            <td>24</td>
-                            <td>25</td>
-                            <td>26</td>
-                            <td>27</td>
-                        </tr>
-                        <tr>
-                            <td>28</td>
-                            <td class="date-1">29</td>
-                            <td class="date-2">30</td>
-                            <td class="date-3">31</td>
-                            <td colspan="7"></td>
-                        </tr>
-                    </table>
+                    <?php
+                        $day = 10;
+                        $month = 10;
+                        $year = 2020;
+
+                        function isCommon ($year) {
+                            $isCommon;
+                            if(($year % 400 == 0 || $year % 4 == 0) && ($year % 100 != 0)) {
+                                $isCommon = true;
+                            } else {
+                                $isCommon = false;
+                            }
+                            return $isCommon;
+                        }
+
+                        function echoDate ($month, $year) {
+                            switch ($month) {
+                                case 2: {
+                                    $day;
+                                    if(isCommon($year)) {
+                                        $day = 29;
+                                    } else {
+                                        $day = 28;
+                                    }
+                                    for ($i=1; $i<$day; $i++) {
+                                        echo $i;
+                                    }
+                                    break;
+                                }
+                                case 1: case 3: case 5: case 7: case 8: case 10: case 12: {
+                                    for ($i=1; $i<=31; $i++) {
+                                        echo $i;
+                                    }
+                                    break;
+                                }
+                                case 4: case: 6 case 9: case 11: {
+                                    for ($i=1; $i<=30; $i++) {
+                                        echo $i;
+                                    }
+                                    break;
+                                }
+                            }
+                        }
+                        echoDate(3, 2020);
+                    ?>
                 </div>
                 <div class="col-1">
 
