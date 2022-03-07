@@ -20,6 +20,8 @@ header{
     top:0;
     width:100%;
     height:60px;
+    display: flex;
+
 }
 header.sticky{
     background-color: white;
@@ -34,14 +36,14 @@ header.sticky a{
     margin-left:20px;
     margin-top:-10px;
 }
-.comtainer-fluid .col-1{
+.comtainer-fluid .col1{
     display: block;
 }
-.container-fluid .col-1 a{
+.container-fluid .col1 a{
     text-decoration: none;
     font-size:20px;
 }
-.container-fluid .col-1 p{
+.container-fluid .col1 p{
     font-size:20px;
 }
 .content{
@@ -226,7 +228,12 @@ header.sticky a{
     color:black;
     margin-left:-20px;
 }
-
+.col1 {
+    padding: 0px 12px;
+}
+.col1 a {
+    display: block;
+}
 .sub-menu .table1{
     width: 262px;
     background-color: rgba(0, 0, 0, 0.1);
@@ -248,3 +255,74 @@ header.sticky a{
 .sub-menu h6{
     font-size: 13px;
 }
+.nav-list {
+    display: flex;
+}
+/* Css calendar */
+
+.calendar-frame {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+}
+.dayInCalendar {
+    width: 16.66666667%;
+    text-align: center;
+    margin: 26px 0px;
+}
+.nav-cal {
+    display: flex;
+    width: 100%;
+    padding: 8px;
+}
+.nav-cal_next,
+.nav-cal_prev {
+    border: none;
+    background: none;
+    margin: 0px 8px;
+}
+.calendar_header {
+    display: flex;
+    width: 100%;
+    padding: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+}
+.header_year {
+    padding: 8px;
+}
+.calendar-content {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+/*Navigation Mobile*/
+.nav-mobile {
+    position: fixed;
+    bottom: 10px;
+    display: flex;
+    left: 10px;
+    right: 10px;
+    backdrop-filter: blur(120px);
+    background-color: rgba(255, 255, 255, 1);
+    color: #333;
+    padding: 12px 24px;
+    border-radius: 48px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+.nav-mobile .nav-mobile_list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+ @media (max-width: 998px) {
+    .nav-bar {
+        display: none !important;
+    }
+ }
