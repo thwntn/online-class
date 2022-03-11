@@ -7,29 +7,87 @@
     padding: 8px 32px !important;
 }
 .content {
-    max-height: 448px;
-    overflow: scroll;
+    max-height: 70vh;
+    overflow: auto;
 }
-.content ul {
-    min-width: 900px;
+.boxLog ul {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.frameLog {
+    padding: 0;
+    border-radius: 48px 48px 0px 0px;
+    overflow: hidden;
 }
 .title {
     padding-bottom: 56px;
 }
 .titleNav,
 .item {
-    width: 20%;
+    width: 100%;
     height: 24px;
 }
 .items,
 .labelNav {
     display: flex;
+    flex-wrap: wrap;
     height: 56px;
     align-content: center;
     align-items: center;
     padding: 0;margin: 0;
     list-style: none;
 }
+.titleMobile {
+    display: none;
+}
+.boxLog h5 {
+    color: red;
+}
+.item {
+    width: 100%;
+}
+.frameClose {
+    display: none;
+}
 .items {
     border-top: 1px solid rgba(0, 0, 0, 0.06);
+}
+@media (max-width: 998px) {
+    .frame {
+        display: flex;
+        align-content: flex-start;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        right: 0;
+    }
+    .title {
+        display: none;
+    }
+    .titleMobile {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+    .titleMobile h5 {
+        padding: 8px 18px;
+        background-color: #fff;
+        border-radius: 48px;
+        margin-bottom: 32px;
+    }
+    .frameClose {
+        display: flex;
+        justify-content: center;
+        background-color: #fff;
+    }
+    .frameClose button {
+        width: 56px;
+        height: 8px;
+        border: none;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-radius: 48px;
+        margin: 12px 0px;
+    }
 }

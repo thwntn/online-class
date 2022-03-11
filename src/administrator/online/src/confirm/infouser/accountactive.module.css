@@ -1,6 +1,5 @@
 .accountBox {
-    padding: 12px;
-    background-color: rgba(255, 255, 255, 0.8);
+    background-color: rgba(245, 245, 255, 0.8);
     max-width: 1100px;
     display: flex;
     flex-wrap: wrap;
@@ -21,6 +20,26 @@
     justify-content: center;
     align-items: center;
     z-index: 1;
+}
+.titleMobile {
+    display: none;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    margin-top: 32px;
+    margin-bottom: 12px;
+}
+.frameMobile {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    background-color: #fff;
+    padding: 12px;
+}
+.titleMobile h5 {
+    background-color: #fff;
+    padding: 8px 18px;
+    border-radius: 48px;
 }
 @keyframes accani {
     from {
@@ -90,6 +109,14 @@
 .viewUser {
     position: relative;
 }
+.closemobile {
+    display: none;
+    background-color: rgba(0, 0, 0, 0.1);
+    width: 56px;
+    height: 8px;
+    margin: 4px 0px 24px 0px;
+    border-radius: 48px;
+}
 @media (max-width: 998px) {
     .search {
         height: 48px;
@@ -119,15 +146,13 @@
         overflow: auto;
         height: 84vh;
     }
-}
-.closemobile {
-    position: absolute;
-    bottom: 40px;
-    margin-left: auto;
-    margin-right: auto;
-    background-color: rgba(255, 0, 0, 0.8);
-    padding: 12px 20px;
-    border-radius: 100%;
-    color: white;
-    z-index: 1;
+    .closemobile {
+        display: block;
+    }
+    .titleMobile {
+        display: flex;
+    }
+    .frameMobile {
+        border-radius: 48px 48px 0px 0px;
+    }
 }

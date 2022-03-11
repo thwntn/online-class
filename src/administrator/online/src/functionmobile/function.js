@@ -1,10 +1,14 @@
 import { useState } from 'react'
 import AccountActive from '../confirm/infouser/accountactive'
+import Manage from '../manage/manage'
+import Log from '../log/log'
 import style from './function.module.css'
 
 
 const Function = (func) => {
     const [acc, setAcc] = useState(false)
+    const [manage, setManage] = useState(false)
+    const [log, setLog] = useState(false)
 
     return (
         <div className = {style.frame}>
@@ -25,16 +29,22 @@ const Function = (func) => {
                         <h5>Tài khoản</h5>
                     </a>
                 </li>
-                <li className = {style.item}>
-                    <a href = '#manage'>
-                        <div
-                            className = {style.user}
-                            style = {{backgroundImage: 'url(./image/subject.png)'}}
-                        ></div>
-                        <h5>Môn học</h5>
-                    </a>
+                <li
+                    className = {style.item}
+                    onClick = {() => setManage(!manage)}
+                    >
+                        <a href = '#manage'>
+                            <div
+                                className = {style.user}
+                                style = {{backgroundImage: 'url(./image/subject.png)'}}
+                            ></div>
+                            <h5>Môn học</h5>
+                        </a>
                 </li>
-                <li className = {style.item}>
+                <li
+                    className = {style.item}
+                    onClick = {() => setLog(!log)}
+                >
                     <a href = "#log">
                         <div
                             className = {style.user}
@@ -54,6 +64,8 @@ const Function = (func) => {
                 </li>
             </ul>
             {acc && <AccountActive data = {setAcc}></AccountActive>}
+            {manage && <Manage data = {setManage}></Manage>}
+            {log && <Log data = {setLog}></Log>}
         </div>
     )
 }

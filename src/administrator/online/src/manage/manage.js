@@ -28,37 +28,45 @@ const data = [
     }
 ]
 
-const Manage = () => (
-    <div id = 'manage' className = {style.mainSession + ' row pad'}>
-        <h2 className = {style.title + ' row-md-10'}>Quản lí môn học</h2>
-        <div className = {style.navigation + ' col-md-6'}>
-            <ul className = {style.listNav}>
-                <li>Thêm lớp học</li>
-                <li>Xem vi phạm</li>
-                <li>Tìm kiếm</li>
-            </ul>
-        </div>
-        <div className = {style.items + ' row'}>
-            {data.map((item) => (
-                <div key={item.keySubject} className = {style.itemBox + ' col-md-4'}>
-                    <div className = {style.item}>
-                        <div className = {style.backgroundItem} style = {{backgroundImage: `url(./image/${item.image})`}}></div>
-                        <div className= {style.titleItem}>
-                            <h3 className = {style.keySubject}>{item.keySubject}</h3>
-                            <h5 className = {style.nameSuject}>{item.nameSubject}</h5>
-                        </div>
-                        <div className = {style.navItem}>
-                            <button className = {style.submit}><i className="fas fa-user"></i></button>
-                            <button className = {style.submit}><i className="fas fa-user-plus"></i></button>
-                            <button className = {style.submit}><i className="fas fa-file-alt"></i></button>
-                            <button className = {style.submit}><i className="fas fa-pen"></i></button>
-                            <button className = {style.submit}><i className="fas fa-stars"></i></button>
-                        </div>
-                    </div>
+const Manage = (property) => {
+    return (
+        <div id = 'manage' className = {style.mainSession + ' row pad'}>
+            <h2 className = {style.title + ' row-md-10'}>Quản lí môn học</h2>
+            <div className = {style.titleMobile}><h5>Quản lí môn học</h5></div>
+            <div className = {style.frameMobile}>
+                <div
+                    className = {style.closeMobile}
+                    onTouchMove = {() => property.data(false)}
+                ></div>
+                <div className = {style.navigation + ' col-md-6'}>
+                    <ul className = {style.listNav}>
+                        <li>Thêm lớp học</li>
+                        <li>Xem vi phạm</li>
+                        <li>Tìm kiếm</li>
+                    </ul>
                 </div>
-            ))}
+                <div className = {style.items + ' row'}>
+                    {data.map((item) => (
+                        <div key={item.keySubject} className = {style.itemBox + ' col-md-4'}>
+                            <div className = {style.item}>
+                                <div className = {style.backgroundItem} style = {{backgroundImage: `url(./image/${item.image})`}}></div>
+                                <div className= {style.titleItem}>
+                                    <h3 className = {style.keySubject}>{item.keySubject}</h3>
+                                    <h5 className = {style.nameSuject}>{item.nameSubject}</h5>
+                                </div>
+                                <div className = {style.navItem}>
+                                    <button className = {style.submit}><i className="fas fa-user"></i></button>
+                                    <button className = {style.submit}><i className="fas fa-user-plus"></i></button>
+                                    <button className = {style.submit}><i className="fas fa-file-alt"></i></button>
+                                    <button className = {style.submit}><i className="fas fa-pen"></i></button>
+                                    <button className = {style.submit}><i className="fas fa-stars"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    ))}
+                </div>
+            </div>
         </div>
-        <button className = {style.more}>Xem thêm...</button>
-    </div>
-)
+    )
+}
 export default Manage

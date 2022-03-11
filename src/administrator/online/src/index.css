@@ -34,3 +34,25 @@ html{
     padding: 32px 0px;
   }
 }
+/* width */
+::-webkit-scrollbar {
+  width: 0px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+background: #f1f1f1;
+border-radius: 48px;
+
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+background: #ccc;
+border-radius: 48px;
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+background: #555;
+}
