@@ -16,8 +16,8 @@
             <li class="item-mobile"><a href="#home"><i class="fas fa-home"></i></a></li>
             <li class="item-mobile"><a href="./manage.php"><i class="fas fa-suitcase"></i></a></li>
             <li class="item-mobile"><a href="#ten-lich"><i class="fas fa-calendar"></i></a></li>
-            <li class="item-mobile"><a class ='noti-mobile' href="#"><i class="fas fa-bell"></i></a></li>
-            <li class="item-mobile"><a class ='mess-mobile' href="#"><i class="fas fa-comment"></i></a></li>
+            <li class="item-mobile"><a class ='noti-mobile'><i class="fas fa-bell"></i></a></li>
+            <li class="item-mobile"><a class ='mess-mobile'><i class="fas fa-comment"></i></a></li>
         </ul>
     </div>
     <div class = 'frameNoti noti'>

@@ -42,6 +42,8 @@ function moveRight(){
         return;
 }
 
+/*
+
 document.querySelector('.frameNoti').addEventListener('click', function(event){
     event.stopPropagation()
 })
@@ -84,7 +86,7 @@ document.querySelector('.backMess').addEventListener('click', () => {
 })
 
 //Baitap
-var noti = false
+/*var noti = false
 document.querySelector('.baitap').addEventListener('click', function() {
     if(!noti) {
         document.querySelector('.btap').style.display = 'flex'
@@ -95,6 +97,7 @@ document.querySelector('.baitap').addEventListener('click', function() {
         noti = false
     }
 })
+
 
 //Active Noti
 var noti = false
@@ -122,3 +125,5 @@ document.querySelector('.actMess').addEventListener('click', function() {
         mess = false
     }
 })
+
+*/

@@ -16,8 +16,8 @@
             <li class="item"><a href="#home"><i class="fas fa-home"></i></a></li>
             <li class="item"><a href="./manage.php"><i class="fas fa-suitcase"></i></a></li>
             <li class="item"><a href="#ten-lich"><i class="fas fa-calendar"></i></a></li>
-            <li class="item"><a class ='noti-mobile' href="#"><i class="fas fa-bell"></i></a></li>
-            <li class="item"><a class ='mess-mobile' href="#"><i class="fas fa-comment"></i></a></li>
+            <li class="item"><a class ='noti-mobile'><i class="fas fa-bell"></i></a></li>
+            <li class="item"><a class ='mess-mobile'><i class="fas fa-comment"></i></a></li>
         </ul>
     </div>
     <div class = 'frameNoti noti'>
@@ -171,7 +171,6 @@
                 </div>
             </div>
         </div>
-        <br><br>
     </div>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

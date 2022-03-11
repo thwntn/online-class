@@ -265,6 +265,8 @@ html{
     }
     .nav-mobile {
         display: flex !important;
+        z-index: 5;
+        background-color: #fff;
     }
 }
 

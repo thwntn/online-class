@@ -12,8 +12,102 @@
     <link rel="stylesheet" type="text/css" href="./style.css" media="screen" />
 </head>
 <body onload="show()">
+    <div class="nav-mobile">
+            <ul class="nav-mobile_list">
+            <li class="item"><a href="#home"><i class="fas fa-home"></i></a></li>
+            <li class="item"><a href="./manage.php"><i class="fas fa-suitcase"></i></a></li>
+            <li class="item"><a href="#ten-lich"><i class="fas fa-calendar"></i></a></li>
+            <li class="item"><a class ='noti-mobile'><i class="fas fa-bell"></i></a></li>
+            <li class="item"><a class ='mess-mobile'><i class="fas fa-comment"></i></a></li>
+        </ul>
+    </div>
+    <div class = 'frameNoti noti'>
+        <h5><i class="fas fa-bell"></i>Thông báo</h5>
+        <div class = 'itemNoti'>
+            <div class = 'imageNoti'></div>
+            <div class = 'contentNoti'>
+                <h4>CT211</h4>
+                <p>Bài tập mới được giao</p>
+            </div>
+        </div>
+        <div class = 'itemNoti'>
+            <div class = 'imageNoti'></div>
+            <div class = 'contentNoti'>
+                <h4>CT211</h4>
+                <p>Bài tập mới được giao</p>
+            </div>
+        </div>
+        <div class = 'itemNotiStatus'>
+            <div class = 'imageNoti'></div>
+            <div class = 'contentNoti'>
+                <h4>CT211</h4>
+                <p>Bài tập mới được giao</p>
+            </div>
+        </div>
+        <div class = 'itemNoti'>
+            <div class = 'imageNoti'></div>
+            <div class = 'contentNoti'>
+                <h4>CT211</h4>
+                <p>Bài tập mới được giao</p>
+            </div>
+        </div>
+    </div>
+    <div class = 'frameNoti mess'>
+        <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
+            <div class = 'itemNoti'>
+                <div class = 'imageNoti'></div>
+                <div class = 'contentNoti'>
+                    <h4>Nguyen Van A</h4>
+                    <p>Bài tập mới được giao</p>
+                </div>
+            </div>
+            <div class = 'itemNoti'>
+                <div class = 'imageNoti'></div>
+                <div class = 'contentNoti'>
+                    <h4>Nguyen Van A</h4>
+                    <p>Bài tập mới được giao</p>
+                </div>
+            </div>
+            <div class = 'itemNoti'>
+                <div class = 'imageNoti'></div>
+                <div class = 'contentNoti'>
+                    <h4>Nguyen Van A</h4>
+                    <p>Bài tập mới được giao</p>
+                </div>
+            </div>
+            <div class = 'itemNoti'>
+                <div class = 'imageNoti'></div>
+                <div class = 'contentNoti'>
+                    <h4>Nguyen Van A</h4>
+                    <p>Bài tập mới được giao</p>
+                </div>
+            </div>
+        <div class = 'frameMess'>
+            <div class = 'navigationMess'>
+                <button
+                    class = 'backMess'
+                >
+                    <i class="fas fa-angle-left"></i>
+                </button>
+                <div class = 'imageMess'></div>
+                <h5 class = 'nameMess'>Nguyễn Trần Thiên Tân</h5>
+            </div>
+            <div class = 'contentMess'>
+                <div class = 'messMess'>
+                    <p class = 'sendMess'>Làm người yêu mình nhé!</p>
+                </div>
+                <div class = 'messMess'>
+                    <p class = 'receiveMess'>Tớ chỉ xem cậu là bạn thôi :)</p>
+                </div>
+            </div>
+            <div class = 'navigationMessSend'>
+                <input class = 'inputMessChat' placeholder = "Nhập tin nhắn"></input>
+                <button class = 'buttonMessSend'><i class ="fad fa-paper-plane"></i></button>
+            </div>
+        </div>
+    </div>
     <div id="wrapper">
-        <header>
+        <header class = "header-main">
             <div class="inner-header menu">
                 <a href="" id="logo" style="text-decoration: none">Online Class</a>
                 <nav>
@@ -242,59 +336,29 @@
     </div>
     <br>
     <div id="lich">
-        <div id="ten-lich">Lịch học</div>
+        <div id="ten-lich">Lịch dạy</div>
         <div class="container">
             <div class="row">
-                <div class="col-6">
-                    <table>
-                        <tr>
-                            <th colspan="2">Tháng 1</th>
-                            <th colspan="5"></th>
-                            <th colspan="2">Năm:2022</th>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>8</td>
-                            <td>9</td>
-                        </tr>
-                        <tr>
-                            <td>10</td>
-                            <td>11</td>
-                            <td>12</td>
-                            <td>13</td>
-                            <td>14</td>
-                            <td>15</td>
-                            <td>16</td>
-                            <td>17</td>
-                            <td>18</td>
-                        </tr>
-                        <tr>
-                            <td>19</td>
-                            <td>20</td>
-                            <td>21</td>
-                            <td>22</td>
-                            <td>23</td>
-                            <td>24</td>
-                            <td>25</td>
-                            <td>26</td>
-                            <td>27</td>
-                        </tr>
-                        <tr>
-                            <td>28</td>
-                            <td>29</td>
-                            <td>30</td>
-                            <td colspan="7"></td>
-                        </tr>
-                    </table>
+                <div class="col-12 calendar-frame">
+                    <?php
+                        $day = date("d");
+                        $month = date("m");
+                        $year = date('Y');
+                        echo "
+                        <div class = 'calendar_header'>
+                            <div class = 'nav-cal'>
+                                <button class = 'nav-cal_prev'><i class='fas fa-angle-left'></i></button>
+                                <div>Tháng ".$month."</div>
+                                <button class = 'nav-cal_next'><i class='fas fa-angle-right'></i></button>
+                            </div>
+                            <div class = 'header_year'>2020</div>
+                        </div>
+                        <div class = 'calendar-content'>
+                        ";
+                        include('./control/calendar.php');
+                        echo "</div>";
+                    ?>
                 </div>
-                <div class="col-1">
-
                 </div>
                 <div class="col-5">
                     <table>
@@ -308,12 +372,70 @@
                 </div>
             </div>
         </div>
-        <br><br>
-    </div>         
+    </div>        
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
-    <script src="style.js"></script>
+    <script src= "./style.js"></script>
+    <script>
+        const load = () => {
+            setTimeout(() => {
+                //Content Mess
+                var contentMess = false
+                const itemNoti = document.querySelectorAll('.itemNoti')
+                for (i of itemNoti){
+                    i.addEventListener('click', function(){
+                        if(!contentMess) {
+                            document.querySelector('.frameMess').style.display = 'flex'
+                            contentMess = true
+                        }
+                        else {
+                            document.querySelector('.frameMess').style.display = 'none'
+                            contentMess = false
+                        }
+                    })
+                }
+                document.querySelector('.backMess').addEventListener('click', () => {
+                    document.querySelector('.frameMess').style.display = 'none'
+                    contentMess = false
+                })
+
+                //Mess Mobile
+                document.querySelector('.mess-mobile').addEventListener('click', function() {
+                    if(!mess) {
+                        document.querySelector('.mess').style.bottom = '100px'
+                        document.querySelector('.mess').style.display = 'flex'
+                        document.querySelector('.mess').style.right = '20px'
+                        mess = true
+                    }
+                    else {
+                        document.querySelector('.mess').style.display = 'none'
+                        mess = false
+                    }
+                })
+                document.querySelector('.frameMess').addEventListener('click', function(e) {
+                    e.stopPropagation();
+                })
+                var noti = false
+                var mess = false
+                //Active Notification Mobile
+                document.querySelector('.noti-mobile').addEventListener('click', function() {
+                    if(!noti) {
+                        document.querySelector('.noti').style.display = 'flex'
+                        document.querySelector('.noti').style.right = '20px'
+                        document.querySelector('.noti').style.bottom = '100px'
+                        noti = true
+                    }
+                    else {
+                        document.querySelector('.noti').style.display = 'none'
+                        noti = false
+                    }
+                })
+            }, 1000);
+        }
+        load()
+
+    </script>
 </body>
 </html>
