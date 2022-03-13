@@ -195,8 +195,9 @@
                                 <i class="fab fa-facebook-messenger"></i> Tin nhắn
                             </h5>
                             <?php
-                                $sql = "SELECT * FROM chat join user on chat.user_name = user.user_name";
+                                $sql = "SELECT * FROM chat join user on chat.user_name = user.user_name join chat_group on chat.user_name";
                                 $result = $conn->query($sql);
+                                
                                 while($row = $result->fetch_assoc()) {
                                     echo "
                                         <div class = itemNoti>
@@ -271,14 +272,14 @@
                 </button>
             </div>
             <?php
-                $sql = "SELECT * FROM subject";
+                $sql = "SELECT * FROM subject ";
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                     echo "
                         <div class='slide' id='a".$row['subject_code']."'>
                             <img src=".$row['subject_image'].">
-                            <h4>".$row["subject_id"]."</h4>
-                            <p>".$row["subject_name"]."</p>
+                            <h4><a href='./subject.php?code=".$row['subject_code']."'>".$row["subject_id"]."</a></h4>
+                            <p><a href='./subject.php?code=".$row['subject_code']."'>".$row["subject_name"]."</a></p>
                         </div>
                     ";
                 }

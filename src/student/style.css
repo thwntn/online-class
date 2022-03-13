@@ -22,10 +22,6 @@ ul{
     list-style: none;
 }
 
-a{
-    text-decoration: none;
-}
-
 .menu{
     font-weight: bold;
     margin: 0px auto;
@@ -110,14 +106,6 @@ header.sticky #logo{
     padding: 0px 15px;
 }
 
-/* #logo{
-    color: #fff;
-    font-size: 26px;
-    font-weight: bold;
-    padding-top: 10px;
-    display: block;
-} */
-
 ul#main-menu{
     display: flex;
 }
@@ -156,7 +144,6 @@ ul#main-menu p{
 #main-menu ul a{
     color: #000;
 }
-
 
 /* #main-menu li:hover ul{
     display: block;
@@ -275,7 +262,11 @@ ul#main-menu p{
 
 .subject p{
     margin-bottom: 120px;
-    font-size: 20px;
+    font-size: 18px;
+}
+
+.subject a{
+    font-size: 18px;
 }
 
 /*{
@@ -424,7 +415,7 @@ ul#main-menu p{
 /* Css calendar */
 
 .calendar-frame {
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
     padding: 0;
 }
@@ -488,13 +479,13 @@ ul#main-menu p{
     justify-content: space-between;
 }
 #lich .container {
-    display: flex;
+    /* display: flex; */
     flex-wrap: wrap;
     justify-content: center;
 }
-.col-5 {
+/* .col-5 {
     max-width: 426px;
-}
+} */
 
 .col-5 th {
     text-align: center;
