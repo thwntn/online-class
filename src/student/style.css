@@ -216,7 +216,7 @@ ul#main-menu p{
 }
 .content p{
     margin: 35px auto;
-    font-size: 13px;
+    font-size: 15px;
     font-weight: bold;
 }
 #search{
@@ -265,7 +265,7 @@ ul#main-menu p{
 
 .subject h1{
     /* margin-top: 200px; */
-    margin-bottom: 50px;
+    margin-bottom: 10px;
     font-family: abc;
 }
 
@@ -274,10 +274,11 @@ ul#main-menu p{
 }
 
 .subject p{
-    margin-bottom: 100px;
+    margin-bottom: 120px;
+    font-size: 20px;
 }
 
-/* .row{
+/*{
     margin-bottom: 40px;
 } */
 
@@ -325,6 +326,7 @@ ul#main-menu p{
 .slide{
     width: 23%;
     padding: 0px 50px;
+    margin: 0 20px;
     display: none;
     min-width: 270px;
 }
@@ -349,24 +351,24 @@ ul#main-menu p{
     text-align: center;
 }
 
-.col-12{
+.col-6{
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
     border-radius: 30px;
     padding-bottom: 40px;
 }
 
-.col-12 table{
+.col-6 table{
     margin: 30px auto;
     text-align: center;
 }
 
-.col-12 th{
+.col-6 th{
     width: 60px;
     height: 40px;
     border-bottom:1px solid ;
 }
 
-.col-12 td{
+.col-6 td{
     width: 60px;
     height: 40px;
 }
@@ -376,7 +378,16 @@ ul#main-menu p{
 }
 
 .col-5 th{
-    width: 140px;
+    width: 240px;
+    padding-bottom: 20px;
+    /* width: 140px; */
+}
+
+.col-5 td{
+    width: 60px;
+    height: 40px;
+    text-align: center;
+    font-weight: normal;
 }
 
 /* .ngayhoc{
@@ -484,6 +495,7 @@ ul#main-menu p{
 .col-5 {
     max-width: 426px;
 }
+
 .col-5 th {
     text-align: center;
 }
@@ -498,7 +510,7 @@ ul#main-menu p{
         display: flex;
     }
     .col-5,
-    .col-12 {
+    .col-6 {
         width: 100% !important;
     }
     #lich {
@@ -649,10 +661,19 @@ ul#main-menu p{
 .imageNoti {
     width: 60px;
     height: 60px;
-    background-color: white;
+    /* background-color: white; */
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
     border-radius: 48px;
 }
+
+.imageNoti img{
+    width: 60px;
+    height: 60px;
+    /* background-color: white; */
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 48px;
+}
+
 .contentNoti {
     flex: 1;
     margin-left: 16px;

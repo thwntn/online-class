@@ -42,7 +42,7 @@ function moveRight(){
         return;
 }
 
-/*
+
 
 document.querySelector('.frameNoti').addEventListener('click', function(event){
     event.stopPropagation()
@@ -86,28 +86,28 @@ document.querySelector('.backMess').addEventListener('click', () => {
 })
 
 //Baitap
-/*var noti = false
-document.querySelector('.baitap').addEventListener('click', function() {
+var noti = false
+document.querySelector('.baitap1').addEventListener('click', function() {
     if(!noti) {
-        document.querySelector('.btap').style.display = 'flex'
+        document.querySelector('.btap1').style.display = 'flex'
         noti = true
     }
     else {
-        document.querySelector('.btap').style.display = 'none'
+        document.querySelector('.btap1').style.display = 'none'
         noti = false
     }
 })
 
 
-//Active Noti
+// Active Noti
 var noti = false
-document.querySelector('.actNoti').addEventListener('click', function() {
+document.querySelector('.actNoti1').addEventListener('click', function() {
     if(!noti) {
-        document.querySelector('.noti').style.display = 'flex'
+        document.querySelector('.noti1').style.display = 'flex'
         noti = true
     }
     else {
-        document.querySelector('.noti').style.display = 'none'
+        document.querySelector('.noti1').style.display = 'none'
         noti = false
     }
 })
@@ -115,15 +115,14 @@ document.querySelector('.actNoti').addEventListener('click', function() {
 
 //Active Message
 var mess = false
-document.querySelector('.actMess').addEventListener('click', function() {
+document.querySelector('.actMess1').addEventListener('click', function() {
     if(!mess) {
-        document.querySelector('.mess').style.display = 'flex'
+        document.querySelector('.mess1').style.display = 'flex'
         mess = true
     }
     else {
-        document.querySelector('.mess').style.display = 'none'
+        document.querySelector('.mess1').style.display = 'none'
         mess = false
     }
 })
 
-*/
