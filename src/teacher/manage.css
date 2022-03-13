@@ -171,7 +171,7 @@ html{
 
 /*Header*/
 
-@font-face {
+ @font-face {
     font-family: basic;
     src: url(./Bandon.ttf);
 }
@@ -180,8 +180,8 @@ html{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    color: #000 !important;
     font-family: basic;
+    color: black !important;
 }
 
 .backgroundNav {
@@ -192,7 +192,6 @@ html{
     right: 0px;
     display: flex;
     justify-content: space-between;
-    color: white;
     padding: 0px 8px;
     transition: top 0.2s, height 0.2s;
     z-index: 5;
@@ -209,11 +208,11 @@ html{
     display: flex;
     position: relative;
     cursor: pointer;
+    font-size:20px;
 }
 .itemNav a{
     text-decoration: none;
     display: block;
-    color: #fff;
 }
 .activeNav a{
     color: #333;
@@ -259,7 +258,7 @@ html{
 
 /* Reponsive */
 
-@media (max-width: 998px) {
+ @media (max-width: 998px) {
     .background {
         display: none;
     }
@@ -472,27 +471,27 @@ html{
     top: 0;
     left: 10px;
     border-radius: 48px 48px 48px 0px;
-}
+} 
 /* width */
-::-webkit-scrollbar {
+ ::-webkit-scrollbar {
     width: 4px;
-}
+} 
 
 /* Track */
-::-webkit-scrollbar-track {
+ ::-webkit-scrollbar-track {
 background: #f1f1f1;
 border-radius: 48px;
 
-}
+} 
 
 /* Handle */
-::-webkit-scrollbar-thumb {
+ ::-webkit-scrollbar-thumb {
 background: #ccc;
 border-radius: 48px;
-}
+} 
 
 /* Handle on hover */
-::-webkit-scrollbar-thumb:hover {
+ ::-webkit-scrollbar-thumb:hover {
 background: #555;
 }
 
@@ -516,10 +515,10 @@ background: #555;
     .frame::after {
         display: none;
     }
-}
+} 
 /*Nav mobile*/
 
-.nav-mobile {
+ .nav-mobile {
     position: fixed;
     bottom: 10px;
     display: none;
@@ -542,4 +541,4 @@ background: #555;
     display: flex;
     width: 100%;
     justify-content: space-between;
-}
+}  
