@@ -13,23 +13,40 @@
 <div class="main">
     <div class="nav-mobile">
         <ul class="nav-mobile_list">
-            <li class="item"><a href="#home"><i class="fas fa-home"></i></a></li>
+            <li class="item"><a href="./index.php"><i class="fas fa-home"></i></a></li>
             <li class="item"><a href="./manage.php"><i class="fas fa-suitcase"></i></a></li>
-            <li class="item"><a href="#ten-lich"><i class="fas fa-calendar"></i></a></li>
+            <li class="item"><a href="#lich"><i class="fas fa-calendar"></i></a></li>
             <li class="item"><a class ='noti-mobile'><i class="fas fa-bell"></i></a></li>
             <li class="item"><a class ='mess-mobile'><i class="fas fa-comment"></i></a></li>
         </ul>
     </div>
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
-        <div class = 'itemNoti'>
-            <div class = 'imageNoti'></div>
-            <div class = 'contentNoti'>
-                <h4>CT211</h4>
-                <p>Bài tập mới được giao</p>
-            </div>
-        </div>
-        <div class = 'itemNoti'>
+        <!-- <div class = 'itemNoti'> 
+             <div class = 'imageNoti'></div>
+            <div class = 'contentNoti'> 
+                 <h4>CT211</h4>
+                <p>Bài tập mới được giao</p> -->
+                <?php 
+                    $con = mysqli_connect('localhost', 'root','', 'online-class');
+
+                    $sql="SELECT * FROM notification nt JOIN subject sj ON nt.user_name = sj.user_name  ";
+                    $kq=$con->query($sql);
+                    while($row=$kq->fetch_assoc()){
+                    echo "<div class = 'itemNoti'>";
+                    echo "<div class = 'imageNoti'>";
+                    echo "<img src=".$row['subject_image'].">";
+                    echo "</div>";
+                    echo  "<div class = 'contentNoti'>";
+                    echo "<h4>"; echo $row['subject_id']; echo "</h4>";
+                    echo $row['noti_content'];
+                    echo "</div>";
+                    echo "</div>";
+                    }
+                ?> 
+            
+        
+        <!-- <div class = 'itemNoti'>
             <div class = 'imageNoti'></div>
             <div class = 'contentNoti'>
                 <h4>CT211</h4>
@@ -49,11 +66,32 @@
                 <h4>CT211</h4>
                 <p>Bài tập mới được giao</p>
             </div>
-        </div>
+        </div> -->
     </div>
+
     <div class = 'frameNoti mess'>
         <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
-            <div class = 'itemNoti'>
+        <?php 
+            $con = mysqli_connect('localhost', 'root','', 'online-class');
+            $sql="SELECT * FROM chat c JOIN message ms ON c.chat_id = ms.chat_id JOIN user ON c.user_name=user.user_name  ";
+            $kq=$con->query($sql);
+            while($row=$kq->fetch_assoc()){
+                echo "
+                    <div class = 'itemNoti'>
+                    <div class = 'imageNoti'>
+                    <img src=".$row['user_image'].">
+                    </div>
+                    <div class = 'contentNoti'>
+                    <h4>  ".$row['friend_user']." </h4>
+                    <p>".$row['mess_content']."</p>
+                    </div>
+                    </div>
+                 ";
+                 
+            }
+
+        ?>
+            <!-- <div class = 'itemNoti'>
                 <div class = 'imageNoti'></div>
                 <div class = 'contentNoti'>
                     <h4>Nguyen Van A</h4>
@@ -80,7 +118,8 @@
                     <h4>Nguyen Van A</h4>
                     <p>Bài tập mới được giao</p>
                 </div>
-            </div>
+            </div> -->
+
         <div class = 'frameMess'>
             <div class = 'navigationMess'>
                 <button
@@ -108,10 +147,9 @@
     <div class = 'backgroundNav'>
         <h2 class = 'titleNav'>Online Class</h2>
         <ul class = 'listItemsNav'>
-            <li class = 'itemNav'><a href = '#home'>Trang chủ</a></li>
-            <li class = 'itemNav'><a href = './manage.php'>Mo</a></li>
-            <li class = 'itemNav'><a href = '#manage'>Môn học</a></li>
-            <li class = 'itemNav'><a href = '#log'>Nhật kí</a></li>
+            <li class = 'itemNav'><a href = './index.php'>Trang chủ</a></li>
+            <li class = 'itemNav'><a href = './manage.php'>Môn học</a></li>
+            <li class = 'itemNav'><a href = '#lich'>Lịch dạy</a></li>
             <li class = 'itemNav actNoti'>
                 Thông báo
                 
@@ -152,7 +190,7 @@
                         </div>
                         <div class = 'calendar-content'>
                         ";
-                        include('./control/calendar.php');
+                        include('./model/calendar.php');
                         echo "</div>";
                     ?>
                 </div>
@@ -160,14 +198,42 @@
 
                 </div>
                 <div class="col-5">
-                    <table>
-                        <tr>
+                     <table>
+                        <tr> 
                             <th>Buổi</th>
                             <th>Ngày</th>
                             <th>Mã môn</th>
-                            <th>Tên môn</th>
-                        </tr>
-                    </table>
+                            <th>Tên môn</th> 
+                            </tr>
+                            <?php 
+                            $con = mysqli_connect('localhost', 'root','', 'online-class');
+                        
+                            
+                            $sql=" SELECT * FROM calendar cd JOIN subject sj ON cd.subject_id=sj.subject_id ";
+                            $kq=$con->query($sql);
+                            
+                            while($row=$kq->fetch_assoc()){
+                            $calendar = $row['calendar_time'];
+                            $day1 = substr($calendar,-14,5);
+                            $time = substr($calendar,-9,6);
+                            echo "
+                            <tr>
+                            <td>".$time."</td>
+                            <td>".$day1."</td>
+                            <td>".$row['subject_id']."</td>
+                            <td>".$row['subject_name']."</td>
+                          
+                         
+                            
+                            
+                           </tr>
+                            ";
+                                
+                            }
+                        
+                            ?>
+                         
+                    </table> 
                 </div>
             </div>
         </div>

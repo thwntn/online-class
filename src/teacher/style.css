@@ -7,14 +7,14 @@
 .main{
     width:100%;
     height:100vh;
-    background: url(img/background.jpg);
+    background: url(image/background.jpg);
     background-size: cover;
     color:white; 
 }
 .main a{
     color:white;
 }
-header{
+/* header{
     padding:10px;
     position: fixed;
     top:0;
@@ -45,7 +45,7 @@ header.sticky a{
 }
 .container-fluid .col1 p{
     font-size:20px;
-}
+} */
 .content{
     height:100%;
     width:100%;
@@ -87,6 +87,7 @@ header.sticky a{
     color:white;
 }
 
+/* Tạo môn học */
   .addclass{
     margin-left:150px;
     margin-right:150px;
@@ -148,32 +149,37 @@ header.sticky a{
 }
 .create-1::placeholder {
     color:black;
+    font-size:15px;
 }
 .create-2::placeholder {
     color:black;
 }
-.btn-group{
-    margin-left:-20px;
-    margin-top:-20px;
+ .btn-group{
+  margin-left:-10px;
+  margin-top:-10px;
 }
  .btn-group button{
-    margin:20px;
+    margin:10px;
     background-color: rgb(236, 235, 235);
     border:none;
     color:black;
     font-weight: bold;
     border-radius: 48px!important;
-} 
+    padding:8px;
+    width:90px;
+}  
+
+/* Calender */
 #ten-lich{
     padding-top: 100px;
     margin-top: 100px;
     font-size: 30px;
     padding-bottom: 70px;
     font-weight: bold;
-    text-align: center;
+     text-align: center; 
 }
 
-.col-6{
+ .col-6{
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
     border-radius: 30px;
     padding-bottom: 40px;
@@ -181,7 +187,7 @@ header.sticky a{
 
 .col-6 table{
     margin: 30px auto;
-    text-align: center;
+    /* text-align: center; */
 }
 
 .col-6 th{
@@ -196,12 +202,15 @@ header.sticky a{
 }
 
 .container .col-5 table{
+    text-align:center;
     margin-top: 60px;
 }
 
 .container .col-5 th{
     width: 140px;
-}
+} 
+/* Thêm nội dung môn học*/
+
 .subject button{
    border:none;
 }
@@ -315,6 +324,7 @@ header.sticky a{
 }
 .nav-mobile .nav-mobile_list i{
     font-size: 20px;
+    color:#333;
 }
 .nav-mobile .nav-mobile_list {
     padding: 0;
@@ -353,7 +363,7 @@ header.sticky a{
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    color: #000 !important;
+     /* color: #000 !important;  */
     font-family: basic;
 }
 
@@ -381,11 +391,12 @@ header.sticky a{
     display: flex;
     position: relative;
     cursor: pointer;
+    font-size:20px;
 }
 .itemNav a{
     text-decoration: none;
     display: block;
-    color: #fff;
+     color: #fff; 
 }
 .activeNav a{
     color: #333;
@@ -480,13 +491,14 @@ header.sticky a{
     padding-bottom: 10px;
     border-bottom: 2px solid rgba(0, 0, 0, 0.04);
 }
-.imageNoti {
+.imageNoti img{
     width: 60px;
     height: 60px;
-    background-color: white;
+    /* background-color: white; */
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
     border-radius: 48px;
 }
+
 .contentNoti {
     flex: 1;
     margin-left: 16px;

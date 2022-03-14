@@ -6,48 +6,41 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./header.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <title>Document</title>
 </head>
 <body>
-<div class="nav-mobile">
+ <div class="nav-mobile">
         <ul class="nav-mobile_list">
-            <li class="item"><a href="#home"><i class="fas fa-home"></i></a></li>
-            <li class="item"><a href="./manage.php"><i class="fas fa-suitcase"></i></a></li>
-            <li class="item"><a href="#ten-lich"><i class="fas fa-calendar"></i></a></li>
-            <li class="item"><a class ='noti-mobile' href="#"><i class="fas fa-bell"></i></a></li>
-            <li class="item"><a class ='mess-mobile' href="#"><i class="fas fa-comment"></i></a></li>
+            <li class="item-mobile"><a href="./index.php"><i class="fas fa-home"></i></a></li>
+            <li class="item-mobile"><a href="./manage.php"><i class="fas fa-suitcase"></i></a></li>
+            <li class="item-mobile"><a href="#lich"><i class="fas fa-calendar"></i></a></li>
+            <li class="item-mobile"><a class ='noti-mobile'><i class="fas fa-bell"></i></a></li>
+            <li class="item-mobile"><a class ='mess-mobile'><i class="fas fa-comment"></i></a></li>
         </ul>
     </div>
+    
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
-        <div class = 'itemNoti'>
-            <div class = 'imageNoti'></div>
-            <div class = 'contentNoti'>
-                <h4>CT211</h4>
-                <p>Bài tập mới được giao</p>
-            </div>
-        </div>
-        <div class = 'itemNoti'>
-            <div class = 'imageNoti'></div>
-            <div class = 'contentNoti'>
-                <h4>CT211</h4>
-                <p>Bài tập mới được giao</p>
-            </div>
-        </div>
-        <div class = 'itemNotiStatus'>
-            <div class = 'imageNoti'></div>
-            <div class = 'contentNoti'>
-                <h4>CT211</h4>
-                <p>Bài tập mới được giao</p>
-            </div>
-        </div>
-        <div class = 'itemNoti'>
-            <div class = 'imageNoti'></div>
-            <div class = 'contentNoti'>
-                <h4>CT211</h4>
-                <p>Bài tập mới được giao</p>
-            </div>
-        </div>
+        <?php 
+                    $con = mysqli_connect('localhost', 'root','', 'online-class');
+
+                    $sql="SELECT * FROM notification nt JOIN subject sj ON nt.user_name = sj.user_name  ";
+                    $kq=$con->query($sql);
+                    while($row=$kq->fetch_assoc()){
+                    echo "<div class = 'itemNoti'>";
+                    echo "<div class = 'imageNoti'>";
+                    echo "<img src=".$row['subject_image'].">";
+                    echo "</div>";
+                    echo  "<div class = 'contentNoti'>";
+                    echo "<h4>"; echo $row['subject_id']; echo "</h4>";
+                    echo $row['noti_content'];
+                    echo "</div>";
+                    echo "</div>";
+                    }
+                ?> 
+            
     </div>
     <div class = 'frameNoti mess'>
         <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
@@ -102,108 +95,29 @@
                 <button class = 'buttonMessSend'><i class ="fad fa-paper-plane"></i></button>
             </div>
         </div>
+
+
     </div>
     <div class = 'backgroundNav'>
         <h2 class = 'titleNav'>Online Class</h2>
         <ul class = 'listItemsNav'>
-            <li class = 'itemNav'><a href = '#home'>Trang chủ</a></li>
-            <li class = 'itemNav'><a href = '#account'>Tài khoản</a></li>
-            <li class = 'itemNav'><a href = '#manage'>Môn học</a></li>
-            <li class = 'itemNav'><a href = '#log'>Nhật kí</a></li>
+            <li class = 'itemNav'><a href = './index.php'>Trang chủ</a></li>
+            <li class = 'itemNav'><a href = './manage.php'>Môn học</a></li>
+            <li class = 'itemNav'><a href = './index.php#lich'>Lịch dạy</a></li>
             <li class = 'itemNav actNoti'>
                 Thông báo
-                <div class = 'frameNoti noti'>
-                    <h5><i class="fas fa-bell"></i>Thông báo</h5>
-                    <div class = 'itemNoti'>
-                        <div class = 'imageNoti'></div>
-                        <div class = 'contentNoti'>
-                            <h4>CT211</h4>
-                            <p>Bài tập mới được giao</p>
-                        </div>
-                    </div>
-                    <div class = 'itemNoti'>
-                        <div class = 'imageNoti'></div>
-                        <div class = 'contentNoti'>
-                            <h4>CT211</h4>
-                            <p>Bài tập mới được giao</p>
-                        </div>
-                    </div>
-                    <div class = 'itemNotiStatus'>
-                        <div class = 'imageNoti'></div>
-                        <div class = 'contentNoti'>
-                            <h4>CT211</h4>
-                            <p>Bài tập mới được giao</p>
-                        </div>
-                    </div>
-                    <div class = 'itemNoti'>
-                        <div class = 'imageNoti'></div>
-                        <div class = 'contentNoti'>
-                            <h4>CT211</h4>
-                            <p>Bài tập mới được giao</p>
-                        </div>
-                    </div>
-                </div>
+                
                 </li>
             <li class="itemNav actMess">
                 Tin nhắn
-                <div class = 'frameNoti mess'>
-                    <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
-                        <div class = 'itemNoti'>
-                            <div class = 'imageNoti'></div>
-                            <div class = 'contentNoti'>
-                                <h4>Nguyen Van A</h4>
-                                <p>Bài tập mới được giao</p>
-                            </div>
-                        </div>
-                        <div class = 'itemNoti'>
-                            <div class = 'imageNoti'></div>
-                            <div class = 'contentNoti'>
-                                <h4>Nguyen Van A</h4>
-                                <p>Bài tập mới được giao</p>
-                            </div>
-                        </div>
-                        <div class = 'itemNoti'>
-                            <div class = 'imageNoti'></div>
-                            <div class = 'contentNoti'>
-                                <h4>Nguyen Van A</h4>
-                                <p>Bài tập mới được giao</p>
-                            </div>
-                        </div>
-                        <div class = 'itemNoti'>
-                            <div class = 'imageNoti'></div>
-                            <div class = 'contentNoti'>
-                                <h4>Nguyen Van A</h4>
-                                <p>Bài tập mới được giao</p>
-                            </div>
-                        </div>
-                    <div class = 'frameMess'>
-                        <div class = 'navigationMess'>
-                            <button
-                                class = 'backMess'
-                            >
-                                <i class="fas fa-angle-left"></i>
-                            </button>
-                            <div class = 'imageMess'></div>
-                            <h5 class = 'nameMess'>Nguyễn Trần Thiên Tân</h5>
-                        </div>
-                        <div class = 'contentMess'>
-                            <div class = 'messMess'>
-                                <p class = 'sendMess'>Làm người yêu mình nhé!</p>
-                            </div>
-                            <div class = 'messMess'>
-                                <p class = 'receiveMess'>Tớ chỉ xem cậu là bạn thôi :)</p>
-                            </div>
-                        </div>
-                        <div class = 'navigationMessSend'>
-                            <input class = 'inputMessChat' placeholder = "Nhập tin nhắn"></input>
-                            <button class = 'buttonMessSend'><i class ="fad fa-paper-plane"></i></button>
-                        </div>
-                    </div>
-                </div>
+                
             </li>
         </ul>
-    </div>
+    </div> 
+    
 </body>
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script>
     
     document.querySelector('.frameNoti').addEventListener('click', function(event){

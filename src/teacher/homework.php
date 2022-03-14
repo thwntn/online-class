@@ -11,26 +11,26 @@
 <body>
     <div class="menu">
         <ul class="menu-1">
-            <li><a href="index.php">&nbsp;<img src="img/Home-2-2-icon.png" style="width:20px">&nbsp;Trang chủ</a></li>
+            <li><a href="index.php">&nbsp;<img src="image/Home-2-2-icon.png" style="width:20px">&nbsp;Trang chủ</a></li>
              <hr>
         </ul>
         <ul class="menu-2">
             <li>Lớp học</li>
-            <li><div class = "item" style="background-image: url(./img/internet.jpg)"></div>
+            <li><div class = "item" style="background-image: url(./image/internet.jpg)"></div>
                 <a href="">Mạng máy tính</a></li>
-            <li><div class = "item" style="background-image: url(./img/csdl.jpg)"></div>
+            <li><div class = "item" style="background-image: url(./image/csdl.jpg)"></div>
                 <a href="">Cơ sở dữ liệu</a></li>
-            <li><div class = "item" style="background-image: url(./img/ctdl.jpg)"></div>
+            <li><div class = "item" style="background-image: url(./image/ctdl.jpg)"></div>
                 <a href="">Cấu trúc dữ liệu</a></li>
-            <li><div class = "item" style="background-image: url(./img/internet.jpg)"></div>
+            <li><div class = "item" style="background-image: url(./image/internet.jpg)"></div>
                 <a href="">Lập trình mạng</a></li>
         </ul>
     </div>
     <div class="main">
-        <p><a href=""><img src="img/format+list+icon.png">&nbsp;CT211-Niên luận mạng máy tính và truyền thông</a></p>
+        <p><a href=""><img src="image/format+list+icon.png">&nbsp;CT211-Niên luận mạng máy tính và truyền thông</a></p>
         <ul>
-            <a href=""><img src="img/Pencil-icon.png" class="img1"></a>
-            <img src="img/user-profile-icon-free-vector.jpg" class="img2">
+            <a href=""><img src="image/Pencil-icon.png" class="img1"></a>
+            <img src="image/user-profile-icon-free-vector.jpg" class="img2">
             <li><b>&nbsp;Trần Thị Tố Quyên đã đăng một bài tập mới: Báo cáo tuần 6 <br>
                 &nbsp;21/01/2022</b></li>
             <hr style="width:95%">
@@ -38,14 +38,14 @@
             <li>Sau thời gian tìm hiểu đề tài, các nhóm/sinh viên báo cáo tiến độ, kế hoạch thực hiện nghiên cứu, phân công thực hiện.</li>
         </ul><hr>
         <div class="comment">
-            <img src="img/user-profile-icon-free-vector.jpg">
+            <img src="image/user-profile-icon-free-vector.jpg">
             <form action="" method="get" class="comment-1">
                 <input class="comment-2" type="text" name="comment">
                 <button class="send" type="submit"><i class="fas fa-paper-plane"></i></button>
             </form>
         </div> <br> 
         <ul>
-            <img src="img/user-profile-icon-free-vector.jpg" class="img2">
+            <img src="image/user-profile-icon-free-vector.jpg" class="img2">
             <li><b>Trần Thị Tố Quyên</li>
             <li style="font-size:10px">21/01/2022</b></li>
             <li>Nội dung bình luận </li>
@@ -61,24 +61,24 @@
             <p><b>Danh sách sinh viên đã nộp bài
                 20/40</b></p>
             <ul>
-                <li><img src="img/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li> 
+                <li><img src="image/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li> 
                 <li>Tên người dùng</li>
-                <li><a href=""><img src="img/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
-                <li><a href=""><img src="img/img_179653.png" style="width:10px"></a></li>
+                <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
+                <li><a href=""><img src="image/img_179653.png" style="width:10px"></a></li>
             </ul>
 
             <ul>
-                <li><img src="img/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li>
+                <li><img src="image/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li>
                 <li>Tên người dùng</li>
-                <li><a href=""><img src="img/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
-                <li><a href=""><img src="img/img_179653.png" style="width:10px"></a></li>
+                <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
+                <li><a href=""><img src="image/img_179653.png" style="width:10px"></a></li>
             </ul>
 
             <ul>
-                <li><img src="img/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li>
+                <li><img src="image/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li>
                 <li>Tên người dùng</li>
-                <li><a href=""><img src="img/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
-                <li><a href=""><img src="img/img_179653.png" style="width:10px"></a></li>
+                <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
+                <li><a href=""><img src="image/img_179653.png" style="width:10px"></a></li>
             </ul>
 
             <!-- Button trigger modal -->
@@ -96,21 +96,21 @@
                     </div>
                     <div class="modal-body">
                     <ul>
-                            <li><img src="img/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li>
+                            <li><img src="image/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li>
                             <li>Tên người dùng</li>
-                            <li><a href=""><img src="img/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
+                            <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
                             <li style="color:red"><b>10</b></li>
                         </ul>
                         <ul>
-                            <li><img src="img/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li>
+                            <li><img src="image/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li>
                             <li>Tên người dùng</li>
-                            <li><a href=""><img src="img/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
+                            <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
                             <li style="color:red"><b>10</b></li>
                         </ul>
                         <ul>
-                            <li><img src="img/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li>
+                            <li><img src="image/user-profile-icon-free-vector.jpg" style="width:40px;border-radius:20px;"></li>
                             <li>Tên người dùng</li>
-                            <li><a href=""><img src="img/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
+                            <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
                             <li style="color:red"><b>10</b></li>
                         </ul>
                     </div>
