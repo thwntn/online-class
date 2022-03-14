@@ -67,6 +67,11 @@
 .main li{
     list-style-type: none;
 }
+
+.main i{
+    font-size: 13px;
+}
+
 .main .img2{
     border-radius: 20px;
     width:40px;

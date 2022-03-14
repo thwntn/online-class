@@ -191,7 +191,7 @@
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) {
             $k = $row['homework_time'];
-            $day = substr($k,-11,3);
+            $day = substr($k,-11,2);
             $month = substr($k,-14,2);
             $year = substr($k,-20,4);
             echo "

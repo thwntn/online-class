@@ -7,6 +7,7 @@
 <html>
 <head>
 <meta charset="UFT-8">
+<title>Document</title>
 <link rel="stylesheet" type="text/css" href="./homework.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
@@ -42,21 +43,33 @@
                                              where homework_id='.$_GET["id"].'';
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
+
+            $k = $result['homework_time'];
+            $day = substr($k,-11,2);
+            $month = substr($k,-14,2);
+            $year = substr($k,-20,4);
+            $user_img = $result['user_image'];
             echo"
             <p>
                 <a href=''>
                     <img src='image/format+list+icon.png'>&nbsp;".$result['subject_id']."  ".$result['subject_name']."
                 </a>
             </p>
+        
+        <ul>
+            <img src='$user_img' class='img2'>
+            <li><b>&nbsp;".$result['user_full_name']." <br>
+                &nbsp; 
+                <i>
+                    ".$day."/".$month."/".$year."
+                </i> </b>
+            </li>
+            <hr style='width:95%'>
+            <li style='color:red'>
+                ".$result['homework_content']."
+            </li>
             ";
         ?>
-        <ul>
-            <img src="image/user-profile-icon-free-vector.jpg" class="img2">
-            <li><b>&nbsp;Trần Thị Tố Quyên đã đăng một bài tập mới: Báo cáo tuần 6 <br>
-                &nbsp;21/01/2022</b></li>
-            <hr style="width:95%">
-            <li style="color:red">Bài tập 1.1:</li>
-            <li>Sau thời gian tìm hiểu đề tài, các nhóm/sinh viên báo cáo tiến độ, kế hoạch thực hiện nghiên cứu, phân công thực hiện.</li>
         </ul><hr>
         <div class="comment">
             <img src="image/user-profile-icon-free-vector.jpg">
