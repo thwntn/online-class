@@ -1,7 +1,6 @@
 import style from './log.module.css'
 
 const Log = (property) => {
-    console.log(property)
     return (
         <div id = 'log' className = {style.frame + ' row pad'}>
             <h2 className = {style.title + ' row-md-10'}>Nhật kí</h2>

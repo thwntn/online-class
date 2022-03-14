@@ -1,5 +1,16 @@
 .frame {
     background-color: rgba(247, 247, 255);
+    animation: show 0.3s ease;
+}
+@keyframes show {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
 .boxLog {
     background-color: rgba(255, 255, 255, 1);
@@ -16,7 +27,7 @@
     flex-wrap: wrap;
 }
 .frameLog {
-    padding: 0;
+    padding: 0 !important;
     border-radius: 48px 48px 0px 0px;
     overflow: hidden;
 }
@@ -89,5 +100,8 @@
         background-color: rgba(0, 0, 0, 0.2);
         border-radius: 48px;
         margin: 12px 0px;
+    }
+    .boxLog {
+        border-radius: 0px
     }
 }

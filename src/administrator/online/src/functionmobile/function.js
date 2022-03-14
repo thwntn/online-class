@@ -15,7 +15,7 @@ const Function = (func) => {
             <div
                 className = {style.close}
               onClick = {() => func.data.setFunc(!func.data.func)}
-            ><i class="fas fa-times"></i></div>
+            ><i className = "fas fa-times"></i></div>
             <ul className = {style.listFunc}>
                 <li
                     className = {style.item}

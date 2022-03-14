@@ -16,18 +16,18 @@ const NavMobile = () => {
                 <li
                     className = {style.item}
                     onClick = {() => setMess(!mess)}
-                ><i class="fas fa-comment"></i></li>
+                ><i className = "fas fa-comment"></i></li>
                 <li
                     className = {style.item}
                     onClick = {() => setFunc(!func)}
                 >
-                    <div className = {style.function}><i class="fas fa-plus"></i></div>
+                    <div className = {style.function}><i className = "fas fa-plus"></i></div>
                 </li>
                 <li
                     className = {style.item}
                     onClick = {() => setNoti(!noti)}
-                ><i class="fas fa-bell"></i></li>
-                <li className = {style.item}><i class="fas fa-clipboard"></i></li>
+                ><i className = "fas fa-bell"></i></li>
+                <li className = {style.item}><i className ="fas fa-clipboard"></i></li>
             </ul>
             {noti && <Noti></Noti>}
             {mess && <Mess></Mess>}

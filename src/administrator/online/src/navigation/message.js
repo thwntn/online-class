@@ -2,37 +2,21 @@ import { useEffect, useRef, useState } from 'react'
 import style from './message.module.css'
 import ChatBox from './chatbox.js'
 
-const data = [
-    {
-        id: 1,
-        name: 'Nguyễn Trần Thiên Tân',
-        mess: 'dfgsdfghdfg thwntn00'
-    },
-    {
-        id: 2,
-        name: 'Viết Tài',
-        mess: 'dghjghjhjfgju thwntn00'
-    },
-    {
-        id: 3,
-        name: 'Nhật Minh',
-        mess: 'Ahjkghjkghjk thwntn00'
-    },
-    {
-        id: 4,
-        name: 'Tuấn Hưng',
-        mess: 'Arrhjkghjkg thwntn00'
-    }
-]
+var chats = []
+
+fetch("http://localhost/online-class/src/administrator/api/chat.php")
+    .then(data => data.json())
+    .then(data => chats = data)
 
 const Mess = () => {
+    console.log(chats)
     const itemMess = useRef()
     const [gotoMess, setGoToMess] = useState(false)
    
     return (
         <div  ref = {itemMess} className = {style.frame}>
-            <h5 className = {style.title}><i className="fab fa-facebook-messenger"></i> Tin nhắn</h5>
-            {data.map((item) => (
+            <h5 className = {style.title}><i className="fab fa-facebook-messenger"></i>Tin nhắn</h5>
+            {chats.map((chat) => (
                 <div
                     key = {style.id}
                     className = {style.item}
@@ -43,8 +27,8 @@ const Mess = () => {
                 >
                     <div className = {style.image}></div>
                     <div className = {style.content}>
-                        <h4>{item.name}</h4>
-                        <p>{item.mess}</p>
+                        <h4>{chat.friend_user}</h4>
+                        <p>{chat.mess}</p>
                     </div>
                 </div>
             ))}

@@ -1,34 +1,16 @@
 import style from './manage.module.css'
-
-const data = [
-    {
-        keySubject: 'CT222',
-        nameSubject: 'Mạng máy tính',
-        image: 'internet.jpg'
-    },
-    {
-        keySubject: 'CT111',
-        nameSubject: 'Cơ sở dữ liệu',
-        image: 'csdl.jpg'
-    },
-    {
-        keySubject: 'CT212',
-        nameSubject: 'Lập trinh hướng đối tượng',
-        image: 'lt.jpg'
-    },
-    {
-        keySubject: 'CT321',
-        nameSubject: 'Cấu trúc dữ liệu',
-        image: 'ctdl.jpg'
-    },
-    {
-        keySubject: 'CT311',
-        nameSubject: 'Cấu trúc dữ liệu',
-        image: 'ctdl.jpg'
-    }
-]
+import { useEffect, useLayoutEffect, useState } from 'react'
 
 const Manage = (property) => {
+    const [subjects, setSubject] = useState([])
+    useEffect(() => {
+        async function fetchData () {
+            const response = await fetch("http://localhost/online-class/src/administrator/api/subject.php")
+            const responseJSON = await response.json()
+            setSubject(responseJSON)
+        }
+        fetchData()
+    }, [])
     return (
         <div id = 'manage' className = {style.mainSession + ' row pad'}>
             <h2 className = {style.title + ' row-md-10'}>Quản lí môn học</h2>
@@ -46,13 +28,13 @@ const Manage = (property) => {
                     </ul>
                 </div>
                 <div className = {style.items + ' row'}>
-                    {data.map((item) => (
-                        <div key={item.keySubject} className = {style.itemBox + ' col-md-4'}>
+                    {subjects.map((subject) => (
+                        <div key={subject.subject_id} className = {style.itemBox + ' col-md-4'}>
                             <div className = {style.item}>
-                                <div className = {style.backgroundItem} style = {{backgroundImage: `url(./image/${item.image})`}}></div>
+                                <div className = {style.backgroundItem} style = {{backgroundImage: `url(./image/${subject.subject_image})`}}></div>
                                 <div className= {style.titleItem}>
-                                    <h3 className = {style.keySubject}>{item.keySubject}</h3>
-                                    <h5 className = {style.nameSuject}>{item.nameSubject}</h5>
+                                    <h3 className = {style.keySubject}>{subject.subject_id}</h3>
+                                    <h5 className = {style.nameSuject}>{subject.subject_name}</h5>
                                 </div>
                                 <div className = {style.navItem}>
                                     <button className = {style.submit}><i className="fas fa-user"></i></button>
