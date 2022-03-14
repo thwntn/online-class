@@ -93,8 +93,8 @@
                             <img src=".$row['subject_image'].">
                             </div>
                             <div class= 'titleItem'>
-                                <h3 class = 'keySubject'>".$row['subject_id']."</h3>
-                                <h5 class = 'nameSuject'>".$row['subject_name']."</h5>
+                            <a href='./subject.php?code=".$row['subject_code']."''><h3 class = 'keySubject'>".$row['subject_id']."</h3>
+                                <h5 class = 'nameSuject'>".$row['subject_name']."</h5></a>
                             </div>
                             <div class = 'navItem'>
                                 <button class = 'submit'><i class='fas fa-user'></i></button>
