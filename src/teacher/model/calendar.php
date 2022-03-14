@@ -40,5 +40,5 @@
             }
         }
     }
-    echoDate($day, $year);
+    echoDate($month, $year);
 ?>

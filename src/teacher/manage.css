@@ -54,6 +54,12 @@ html{
     justify-content: left;
     width: 100%;
 }
+.titleItem img{
+    background-size: cover;
+}
+.titleItem a{
+    text-decoration: none;
+}
 .item {
     padding: 0px 8px;
     height: 156px;
