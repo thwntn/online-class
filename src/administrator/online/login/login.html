@@ -20,9 +20,9 @@
                 <div class="content col-md-4">
                     <h2>Đăng nhập</h2>
                     <h5>Tên đăng nhập</h5>
-                    <input type="text" placeholder="Tên tài khoản hoặc email">
+                    <input class = 'username' type="text" placeholder="Tên tài khoản hoặc email">
                     <h5>Mật khẩu</h5>
-                    <input type = 'pasword' placeholder="Nhập mật khẩu">
+                    <input class="password" type = 'pasword' placeholder="Nhập mật khẩu">
                     <button>Gặp sự cố với mật khẩu ?</button>
                     <button class="signin">Đăng nhập</button>
                     <h5>Đăng nhập với</h5>
@@ -37,11 +37,39 @@
             </div>
         </div>
     </div>
-    <div class="errBox"></div>
+    <div class="errBox">
+        <h5>Sai tên đăng nhập hoặc mật khẩu !</h5>
+    </div>
         
 </body>
 <script>
     document.querySelector('.signin').addEventListener('click', function(){
+        var username = document.querySelector('.username').value
+        var password = document.querySelector('.password').value
+        //fetch
+        async function login () {
+            const url = 'http://localhost/online-class/src/administrator/api/login.php'
+            const response = await fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(`[${username}, ${password}]`)
+            })
+            await response.json().then((responseJSON) => {
+                console.log(responseJSON == 100);
+                if (responseJSON == 100) {
+                    window.sessionStorage.setItem('userOL', username)
+                    window.location.href = "http://localhost/online-class/src/administrator/online/build/index.html"
+                }
+            })
+        }
+        login()
         document.querySelector('.errBox').classList.add('active')
         setTimeout(function() {
             document.querySelector('.errBox').classList.remove('active')

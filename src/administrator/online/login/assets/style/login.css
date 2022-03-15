@@ -36,7 +36,7 @@ h2 {
     font-weight: bolder !important;
     margin-bottom: 48px !important;
 }
-h5 {
+.content h5 {
     font-size: 14px !important;
     width: 100%;
     color: #888;
@@ -150,10 +150,17 @@ button:hover {
     background-image: url(../image/error.png);
     background-size: 20%;
     background-position: center;
-    border-radius: 12px;
     background-repeat: no-repeat;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
     backdrop-filter: blur(8px);
+    justify-content: center;
+}
+.errBox h5 {
+    position: absolute;
+    top: 10%;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
 }
 @keyframes show {
     from {
