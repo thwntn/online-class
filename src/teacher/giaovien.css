@@ -1,183 +1,140 @@
- .row {
-margin: 0;
-} 
-    @font-face{
+@font-face{
     font-family: basic;
     src: url(./font/Bandon.ttf);
 }
+
+
 *{
-    padding: 0;
     margin: 0;
-    font-family: basic;
-}
-html{
-    box-sizing: border-box;
-}
-.pad {
-    padding: 50px 32px;
-}
-.listNav {
-    display: flex;
-    flex-wrap: wrap;
-    list-style: none;
-    justify-content: space-around;
     padding: 0;
-    margin: 0;
-    background-color: rgba(0, 0, 0, 0.035);
-    border-radius: 48px;
-    width: 600px;
+    font-family: abc;
 }
-.listNav a{
-    text-decoration: none;
-    color:black;
+html {
+    scroll-behavior: smooth;
 }
-.listNav li {
-    padding: 8px;
+.main-subject{
+    padding-top: 90px;
 }
-.navigation {
-    width: 100% !important;
-    display: flex;
-    align-items: center;
-    height: 42px;
+
+.main-subject p{
+    font-size: 25px;
 }
-.title {
-    padding-bottom: 56px;
-}
-.submit {
-    background: none;
-    border: none;
-    padding: 0px 12px;
-}
-.titleItem {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: left;
-    width: 100%;
-}
-.titleItem img{
+
+.name-subject{
+    margin-top: 20px;
+    background-repeat: no-repeat;
     background-size: cover;
+    margin-left: 115px;
+    width: 83%;
+    height: 255px;
+    border-radius: 30px;
 }
-.titleItem a{
-    text-decoration: none;
-}
-.item {
-    padding: 0px 8px;
-    height: 156px;
-    border-radius: 18px;
-    background-size: 100%;
-    position: relative;
-    overflow: hidden;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.05);
-    margin-top: 56px !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-}
-.items {
+
+.name-subject img{
+    margin-top: 10px;
+    background-repeat: no-repeat;
+    background-size: cover;
+    margin-left: 115px;
     width: 100%;
+    height: 255px;
+    border-radius: 30px;
 }
-.nameSuject {
-    margin-bottom: 0;
-    margin-top: 6px;
-    margin-left: 8px;
+
+b{
+    font-size: 45px;
+    padding-right: 35px;
 }
-.keySubject {
-    margin-left: 8px;
+.name-subject p{
+    color: white;
+    padding: 180px 0 0 40px;
 }
-.backgroundItem {
-    position: absolute;
-    top: 0;bottom: 0;left: 0;right: 0;
-    z-index: -1;
-    background-size: 150%;
-    opacity: 20%;
-}
-.navItem {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-}
-.more {
-    width: 120px !important;
-    margin-top: 48px !important;
-    border: none;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
-    background: none;
-    border-radius: 48px;
-    padding: 4px 8px;
-}
-.more:hover {
-    background-color: rgba(255, 100, 0, 0.8);
-    color: #fff;
-}
-.mainSession {
-    display: flex;
-    justify-content: center;
-}
-.itemBox {
-    padding: 0px 24px !important;
-}
-.search-class{
-    border-radius:20px;
-    border:none;
+.link{
+    float: left;
+    width: 270px;
+    margin-top: 40px;
+    margin-left: 115px;
     text-align:center;
 }
-
-.box input{
-    background: none;
-    outline: none;
-    border: none;
-    padding: 0;
-    margin: 0;
-    width: 0px;
-    transition: 0.8s ease;
-    color: black;
-    font-size: 18px;
-    font-weight: 600;
-  }
-   
-  .box input::placeholder {
-    color: rgb(94, 94, 94);
-  }
-  .box:hover input {
-    width: 200px;
-    margin: 0 20px;
-    border: 2px solid white;
+.link p{
+    line-height: 0.8;
+}
+img{
+    float: right;
+    width: 20px;
+}
+button{
+    width: 70px;
+    margin-left: 70px;
+    border-radius: 30px;
+    border: 1px white;
     background-color: white;
-  }
-  .modal-body {
-      display: flex;
-  }
-  .modal-body textarea{
-    width:100%;
+    box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
 }
-.modal-body .upload{
-    display:none;
+.upload button{
+    float: right;
+    width: 160px;
+    height: 35px;
+    margin-top: 40px;
+    margin-right: 140px;
 }
-.create-1{
-    width:250px;
-    height:40px;
-    background-color: rgb(218, 214, 214);
-    border:none;
-    padding:5px;
-    margin:10px;
-    /* margin:10px; */
-    border-radius: 10px;
-
+#content{
+    float: right;
+    width: 800px;
+    margin-top: 30px;
+    margin-right: 140px;
 }
-.create-1::placeholder {
-    color:black;
+#content a{
+    text-decoration: none;
 }
-.create{
-    background-color: rgb(218, 214, 214);
-    padding:5px;
-    border-radius: 10px;
-    margin-left:10px;
+.media{
+    padding: 15px 15px 0 15px;
 }
-
+.media img{
+    width: 50px;
+    height: 50px;
+    border-radius: 30px;
+}
+.media-body img{
+    float: right;
+    height: 40px;
+    width: 30px;
+}
+h6{
+    font-size: 14px;
+}
+.content-1{
+    background-color: #e8e8e8;
+    /* opacity: 0.2; */
+    border-radius:10px;
+}
+#baitap{
+    padding: 0 15px 10px 15px;
+}
+.content-1 p{
+    font-weight: bold;
+}
+#xemthem{
+    float: right;
+    margin-top: 20px;
+    margin-right: 34%;
+    margin-bottom: 10%;
+}
+#xemthem button{
+    width: 200px;
+    height: 35px;
+    background-color: white;
+    box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
+}
+i{
+    width: 18px;
+    float: right;
+}
+a{
+    color: black;
+}
 /*Header*/
 
- @font-face {
+@font-face {
     font-family: basic;
     src: url(./Bandon.ttf);
 }

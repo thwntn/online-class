@@ -34,7 +34,7 @@
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
 }
-.menu-2 .item {
+.menu-2 .item{
     width:35px;
     height:35px;
     border-radius: 18px;
@@ -50,12 +50,12 @@
     margin-left:50px;
     float:left;
 }
-.menu-3 {
+.main p a{
     font-size:25px;
     color:black;
     text-decoration: none;
 }
-.menu-3 img{
+.main p img{
     width:30px;
 }
 .main ul{
@@ -67,14 +67,11 @@
 .main li{
     list-style-type: none;
 }
-.main img{
-    width:40px;
+
+.main i{
+    font-size: 13px;
 }
-.main a{
-    font-size:30px;
-    text-decoration: none;
-    color:black;
-}
+
 .main .img2{
     border-radius: 20px;
     width:40px;
@@ -136,10 +133,6 @@
     background-color: rgb(235, 235, 235);
     padding: 10px;
     border-radius: 20px;
-    width:100%;
-}
-.right-1 button{
-    border:none;
 }
  .right-1 a{
     text-decoration: none;

@@ -23,7 +23,7 @@
                 <h2 class = 'titleNav'>Online Class</h2>
                 <ul class = 'listItemsNav'>
                     <li class = 'itemNav'><a href = './index.php'>Trang chủ</a></li>
-                    <li class = 'itemNav'><a href = '#monhoc'>Môn học</a></li>
+                    <li class = 'itemNav'><a href = './index.php#monhoc'>Môn học</a></li>
                     <li class = 'itemNav baitap1'>
                         Bài tập được giao
                         <div class = 'frameNoti btap1'>
@@ -35,22 +35,25 @@
                                     $result = $conn->query($sql);
                                     while($row = $result->fetch_assoc()) {
                                         echo "
-                                        <div class = itemNoti>
-                                            <div class = 'imageNoti'>
-                                                <img src=".$row['subject_image'].">
+                                        <a href='./homework.php'>
+                                            <div class = itemNoti>
+                                                <div class = 'imageNoti'>
+                                                <a href='./homework.php'>
+                                                    <img src=".$row['subject_image'].">
+                                                </div>
+                                                <div class = 'contentNoti'>
+                                                    <h4>".$row['subject_id']."</h4>
+                                                    <p>".$row['homework_content']."</p>
+                                                </div>
                                             </div>
-                                            <div class = 'contentNoti'>
-                                                <h4>".$row['subject_id']."</h4>
-                                                <p>".$row['homework_content']."</p>
-                                            </div>
-                                        </div>
+                                        </a>
                                     ";
                                     }
                                 ?>
                         </div>
                         </li>
                     </li>
-                    <li class = 'itemNav'><a href = '#lich'>Lịch học</a></li>
+                    <li class = 'itemNav'><a href = './index.php#lich'>Lịch học</a></li>
                     <li class = 'itemNav actNoti1'>
                         Thông báo
                         <div class = 'frameNoti noti1'>
@@ -152,8 +155,9 @@
     </div>
     <div class="main-subject">
         <?php
-            $sql = 'SELECT * FROM subject join user on subject.user_name=user.user_name where subject_code='.$_GET["code"].'';
-
+            $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
+                                             join homework hw on sj.subject_id=hw.subject_id
+                                                        where subject_code='.$_GET["code"].'';
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
 
@@ -168,8 +172,6 @@
             ";
             
         ?>       
-            
-
     </div>
     <div class="link">
         <div class="shadow p-4 mb-5 bg-white rounded">
@@ -181,50 +183,39 @@
             <button>Empty</button>
         </div>
     </div> 
-    <!-- $k = $row['homework_time'];
-    $day = substr($k,-11,3);
-    $month = substr($k,-8,5);
-    $year = substr($k,-8,5); -->
     <?php
+        $name = $result['user_full_name'];
         $img_user = $result['user_image'];
-
-        echo "
-        <div id='content'>
-            <div class='content-1'>
-                <div class='media'>
-                    <img src='$img_user' class='mr-3' alt='...'>
-                    <div class='media-body'>
-                    <p class='mb-0'>".$result['user_full_name']."<a href='#'></a></p>
-                    <h6>10/2/2022</h6>
+        $sql = 'SELECT * FROM  subject sj join homework hw on hw.subject_id=sj.subject_id 
+            where subject_code='.$_GET["code"].' ';
+        $result = $conn->query($sql);
+        while($row = $result->fetch_assoc()) {
+            $k = $row['homework_time'];
+            $day = substr($k,-11,2);
+            $month = substr($k,-14,2);
+            $year = substr($k,-20,4);
+            echo "
+            <div id='content'>
+                <div class='content-1'>
+                    <div class='media'>
+                        <img src='$img_user' class='mr-3' alt='...'>
+                        <div class='media-body'>
+                        <p class='mb-0'>".$name."<a href='#'></a></p>
+                        <h6>".$day."/".$month."/".$year."</h6>
+                        </div>
+                    </div>
+                    <hr>
+                    <div id='baitap'>
+                        <a href='./homework.php?id=".$row['homework_id']."'>
+                            <p>".$row['homework_content']." :</p>
+                        </a>
+                        <h6></h6>
                     </div>
                 </div>
-                <hr>
-                <div id='baitap'>
-                    <p>Bài Tập 1.1:</p>
-                    <h6>The media object helps build complex and repetitive 
-                        components where some media is positioned alongside content that doesn’t wrap around said media.</h6>
-                </div>
             </div>
-        </div>
-        ";
+            ";
+        }
     ?>
-    <!-- <div id="content">
-        <div class="content-1">
-            <div class="media">
-                <img src="./image/stack-of-beautiful-books.png" class="mr-3" alt="...">
-                <div class="media-body">
-                  <p class="mb-0">Trần Thị Tố Quyên 01234 đã đăng một bài tập mới <a href="#"></a></p>
-                  <h6>22/01/2022</h6>
-                </div>
-            </div>
-            <hr>
-            <div id="baitap">
-                <p>Bài Tập 1.1:</p>
-                <h6>The media object helps build complex and repetitive 
-                    components where some media is positioned alongside content that doesn’t wrap around said media.</h6>
-            </div>
-        </div>
-    </div> -->
     <div id="xemthem">
         <button>Xem thêm...</button>
     </div>
