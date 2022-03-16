@@ -50,7 +50,7 @@
         data.push(document.querySelector('.password').value)
         //fetch
         async function login () {
-            const url = 'http://localhost/online-class/src/administrator/api/login.php'
+            const url = 'http://192.168.62.46/online-class/src/administrator/api/login.php'
             const response = await fetch(url, {
                 method: 'POST',
                 mode: 'cors',
