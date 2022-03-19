@@ -12,6 +12,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+    <!-- md5 -->
+    <script src="./assets/js/md5.js"></script>
+
+    <!-- scrypt -->
+    <script src="/online-class/src/administrator/online/node_modules/cryptr/index.js"></script>
 </head>
 <body>
     <div id="root">
@@ -40,17 +46,31 @@
     <div class="errBox">
         <h5>Sai tên đăng nhập hoặc mật khẩu !</h5>
     </div>
-        
 </body>
 <script>
+    //Create Form Login
+    const formLogin = (action, data) => {
+        const form = document.createElement('form')
+        form.setAttribute("action", action)
+        form.setAttribute("method", "post")
+
+        const input = document.createElement('input')
+        input.setAttribute('name', 'userOL')
+        input.setAttribute('value', data)
+        form.appendChild(input)
+
+        document.querySelector('body').appendChild(form)
+        document.querySelector('form').submit()
+    }
+
     document.querySelector('.signin').addEventListener('click', function(){
-        var data = []
-        console.log(document.querySelector('.username').value);
-        data.push(document.querySelector('.username').value)
+        let data = []
+        let username = document.querySelector('.username').value
+        data.push(username)
         data.push(document.querySelector('.password').value)
         //fetch
         async function login () {
-            const url = 'http://192.168.62.46/online-class/src/administrator/api/login.php'
+            const url = 'http://localhost/online-class/src/administrator/api/login.php'
             const response = await fetch(url, {
                 method: 'POST',
                 mode: 'cors',
@@ -64,9 +84,19 @@
                 body: JSON.stringify(data)
             })
             await response.json().then((responseJSON) => {
-                if (responseJSON == 100) {
-                    window.sessionStorage.setItem('userOL', document.querySelector('.username').value)
-                    window.location.href = "http://localhost/online-class/src/administrator/online/build/index.html"
+                switch(responseJSON) {
+                    case 100: {
+                        window.sessionStorage.setItem('userOL', document.querySelector('.username').value)
+                        window.location.href = "http://localhost/online-class/src/administrator/online/build/index.html"
+                        break
+                    }
+                    case 1: {
+                        formLogin("http://localhost/online-class/src/teacher/index.php", username)
+                        break;                      
+                    }
+                    case 2: {
+                        formLogin("http://localhost/online-class/src/student/index.php", username)
+                    }
                 }
             })
         }
@@ -76,5 +106,9 @@
             document.querySelector('.errBox').classList.remove('active')
         }, 2000)
     })
+    const sha = (password) => {
+        console.log(Crypt('12526'));
+    }
+    sha()
 </script>
 </html>

@@ -26,9 +26,7 @@
              <div class = 'imageNoti'></div>
             <div class = 'contentNoti'> 
                  <h4>CT211</h4>
-                <p>Bài tập mới được giao</p> -->
-                <?php 
-                    $con = mysqli_connect('localhost', 'root','', 'online-class');
+                <p>Bài tập mới được giao</p> -->    echo $_POST['userOL'];
 
                     $sql="SELECT * FROM notification nt JOIN subject sj ON nt.user_name = sj.user_name  ";
                     $kq=$con->query($sql);

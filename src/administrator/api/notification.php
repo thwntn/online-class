@@ -1,5 +1,5 @@
 <?php
-    $conn = new MySQLi('localhost', 'root', '', 'onlineclass');
+    $conn = new MySQLi('localhost', 'root', '', 'online-class');
 
     if($conn) {
         $querySelect = "SELECT * from notification";

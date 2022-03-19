@@ -1,5 +1,5 @@
 <?php
-    $conn = new MySQLi('localhost', 'root', '', 'onlineclass');
+    $conn = new MySQLi('localhost', 'root', '', 'online-class');
 
     $response = fopen("php://input", "r");
     while ($data = fread($response, 1024)) {

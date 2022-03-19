@@ -14,6 +14,13 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+    <!-- Font Awaresome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
 </head>
 
 <body>
@@ -23,48 +30,181 @@
                 <div class="content col-md-8">
                     <h2>Đăng kí</h2>
                     <h5>Tên đăng nhập</h5>
-                    <input type="text" placeholder="Tên tài khoản hoặc email">
+                    <label class="username_err"></label>
+                    <input class="username" type="text" placeholder="Tên tài khoản hoặc email">
                     <h5>Mật khẩu</h5>
-                    <input type='pasword' placeholder="Nhập mật khẩu">
+                    <label class="password_err"></label>
+                    <input class="password" type='password' placeholder="Nhập mật khẩu">
                     <h5>Địa chỉ</h5>
-                    <input type='pasword' placeholder="Nhập địa chỉ">
+                    <label class="address_err"></label>
+                    <input class="address" type='text' placeholder="Nhập địa chỉ">
                     <h5>Số điện thoại</h5>
-                    <input type='pasword' placeholder="Nhập số điện thoại">
+                    <label class="phone_err"></label>
+                    <input class="phone" type='text' placeholder="Nhập số điện thoại">
                     <h5>Email</h5>
-                    <input type='pasword' placeholder="Nhập email">
+                    <label class="email_err"></label>
+                    <input class="email" type='text' placeholder="Nhập email">
                     <h5>Giới tính</h5>
                     <div class="sex">
-                        <button class="choose-sex">Nam</button>
-                        <button class="choose-sex">Nữ</button>
-                        <button class="choose-sex">Khác</button>
+                        <button class="choose-sex" data = 1>Nam</button>
+                        <button class="choose-sex" data = 2>Nữ</button>
+                        <button class="choose-sex" data = 0>Khác</button>
                     </div>
                     <h5>Ngành học</h5>
-                    <input type='pasword' placeholder="Nhập ngành học">
+                    <label class="major_err"></label>
+                    <input class="major" type='pasword' placeholder="Nhập ngành học">
                     <h5>Loại tài khoản đăng kí</h5>
                     <div class="type">
-                        <button class="choose-type">Giáo viên</button>
-                        <button class="choose-type">Học sinh</button>
+                        <button class="choose-type" data = 2>Giáo viên</button>
+                        <button class="choose-type" data = 1>Học sinh</button>
                     </div>
                     <h5>Ảnh đại diện</h5>
-                    <input class="upload" type='file' placeholder="Nhập mật khẩu">
+                    <input class="upload" type='file'>
                     <p class="choose-file">Chưa chọn file</p>
-                    <button class="signin">Đăng kí</button>
+                    <button class="submit">Đăng kí</button>
                 </div>
             </div>
         </div>
         <div class="capcha">
             <input type="text" placeholder="Vui lòng nhập mã xác thực được gửi đến mail của bạn!">
         </div>
+        <div class="loading">
+            <i class="fas fa-spinner"></i>
+        </div>
     </div>
 </body>
 <script>
-    document.querySelector('.signin').addEventListener('click', function(){
+    const information = {
+        status: false,
+        data: {
+            username: null,
+            password: null,
+            address: null,
+            phone: null,
+            email: null,
+            major: null,
+            gendle: null,
+            type: null
+        },
+
+        isLetter: (string) => {
+            return string.toLowerCase() != string.toUpperCase()
+        },
+
+        check: function() {
+            console.log(this.isLeter);
+
+        },
+
+        checkString: function() {
+            for (char of this.data.username) {
+                if(!this.isLetter(char)) {
+                    return false
+                }
+            }
+            return true
+        },
+
+        setData: function(key, value) {
+            return this.data[`${key}`] = value
+        },
+        
+        handle: function () {
+            $('.submit').on('click', () => {
+                for (item in this.data) {
+                    if(this.data[`${item}`] == '' || this.data[`${item}`] == null) {
+                        console.log('err');
+                        break
+                    }
+                }
+            })
+
+            $('.choose-sex').on('click', () => {
+                this.setData('gendle', $('.choose-sex').attr('data'))
+            })
+
+            $('.choose-type').on('click', () => {
+                this.setData('type', $('.choose-type').attr('data'))
+            })
+
+            $('.content').on('change', () => {
+                //Username
+                let usrErr = $('.username_err')
+
+                const reSet = () => {
+                    this.setData('username', $('.username').val())
+                    this.setData('password', $('.password').val())
+                    this.setData('address', $('.address').val())
+                    this.setData('phone', $('.phone').val())
+                    this.setData('major', $('.major').val())
+                    this.setData('email', $('.email').val())
+                }
+
+                reSet()
+                //Username
+                if(this.checkString(this.data.username) && (this.data.username.length >= 4) && (this.data.username.length < 16)) {
+                    usrErr.html(null)
+                    this.status = true
+                }
+                else {
+                    usrErr.html('Tên tài khoản có độ dài 4 đến 16 và các kí tự 0 - 9, a - z!')
+                    this.status = false
+                }
+                //Password
+                let errPass = $('.password_err')
+                if(this.data.password.length < 8 || this.data.password.length > 16) {
+                    errPass.html('Mật khẩu phải có chiều dài từ 8 - 16 kí tự')
+                    this.status = false
+                }
+                else {
+                    errPass.html(null)
+                    this.status = true
+                }
+                //Phone
+                let errPhone = $('.phone_err')
+                if(this.data.phone.length > 13) {
+                    errPhone.html('Số điện thoại phải là số có chiều dài dưới 13 số')
+                    this.status = false                    
+                }
+                else if (this.data.phone / 1 != this.data.phone) {
+                        errPhone.html('Chỉ được chứa số')
+                        this.status = false
+                    }
+                    else {
+                        errPhone.html(null)
+                        this.status = true
+                    }
+                // Email
+                let errEmail = $('.email_err')
+                let email = this.data.email
+                if((email.slice(-10) == '@gmail.com') || (email.slice(-19) == '@student.ctu.edu.vn')){
+                    errEmail.html(null)
+                    this.status = true
+                }
+                else {
+                    errEmail.html('Email phải có dạng @gmail.com hoặc @student.ctu.edu.com')
+                    this.status = false
+                }
+                
+            })
+        },
+
+        enforcement: function() {
+            this.handle()   
+        }
+    }
+
+    information.enforcement()
+    
+    // Interface
+    document.querySelector('.submit').addEventListener('click', function(){
         document.querySelector('.capcha').classList.add('active')
     })
 
     document.querySelector('.choose-file').addEventListener('click', function () {
         document.querySelector('.upload').click()
     })
+
     document.querySelector('.upload').addEventListener('change', function () {
         document.querySelector('.choose-file').innerHTML = document.querySelector('.upload').value
     })
