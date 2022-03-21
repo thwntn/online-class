@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="main">
+        <input type="text" placeholder="Nhập mã xác thực được gửi đến mail của bạn">
+    </div>
+</body>
+<script>
+    const authen = {
+        data: {
+            username: localStorage.getItem('userOLAuthentication'),
+            code: null
+        },
+        send: function () {
+            url = 'http://localhost/online-class/src/administrator/api/authentication.php'
+            fetch(url, {
+                method: 'post',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(this.data)
+            })
+            .then(response => response.json())
+            .then(responseJson => console.log(responseJson))
+        },
+        handle: function () {
+            _this = this
+            document.querySelector('input').addEventListener('change', function () {
+                _this.send()
+                _this.data.code = document.querySelector('input').value
+            })
+        },
+        start: function() {
+            this.handle()
+        }
+    }
+    authen.start()
+</script>
+</html>

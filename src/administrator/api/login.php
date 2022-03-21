@@ -10,7 +10,6 @@
 
     function encrypt ($simple_string, $password) {
         $ciphering = "aes-256-cbc";
-        
         $iv_length = openssl_cipher_iv_length($ciphering);
         $options = 0;
         

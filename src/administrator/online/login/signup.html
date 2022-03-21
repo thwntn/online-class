@@ -60,8 +60,8 @@
                     <input class="major" type='pasword' placeholder="Nhập ngành học">
                     <h5>Loại tài khoản đăng kí</h5>
                     <div class="type">
-                        <button class="choose-type" data = 2>Giáo viên</button>
-                        <button class="choose-type" data = 1>Học sinh</button>
+                        <button class="choose-type" data = 9>Giáo viên</button>
+                        <button class="choose-type" data = 8>Học sinh</button>
                     </div>
                     <h5>Ảnh đại diện</h5>
                     <input class="upload" type='file'>
@@ -142,7 +142,35 @@
             })
             .then((response) => response.json())
             .then((responseJson) => {
-                console.log(responseJson);
+                if(responseJson == 1) {
+                    fetch('http://localhost/online-class/src/administrator/api/authen_start.php', {
+                        method: 'post',
+                        mode: 'cors',
+                        cache: 'no-cache',
+                        credentials: 'same-origin',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        redirect: 'follow',
+                        referrerPolicy: 'no-referrer',
+                        body: JSON.stringify(
+                            {
+                                username: this.data['username'],
+                                email: this.data['email']
+                            }
+                        )
+                    })
+                    .then(responseAu => responseAu.json())
+                    .then((responseJsonAu) => {
+                        if(responseJsonAu == 1) {
+                            localStorage.setItem('userOLAuthentication', this.data.username)
+                            location.href = 'http://localhost/online-class/src/administrator/online/login/authentication.html' 
+                        }
+                        else {
+                            console.log('err');
+                        }
+                    })
+                }
             })
         },
         
@@ -189,12 +217,33 @@
                     usrErr.html(null)
                 }
                 else {
-                    usrErr.html('Tên tài khoản có độ dài 4 đến 16 và các kí tự 0 - 9, a - z!')
+                    usrErr.html('Tên tài khoản có độ dài 4 đến 16, a - z!')
                 }
+                url = 'http://localhost/online-class/src/administrator/api/checkusername.php'
+                fetch(url, {
+                    method: 'post',
+                    mode: 'cors',
+                    cache: 'no-cache',
+                    credentials: 'same-origin',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    redirect: 'follow',
+                    referrerPolicy: 'no-referrer',
+                    body: JSON.stringify(this.data['username'])
+                })
+                .then(response => response.json())
+                .then(responseJson => {
+                    if(responseJson == 1) {
+                        usrErr.html('Tên đăng nhập đã tồn tại')
+                    }
+                })
                 //Password
                 let errPass = $('.password_err')
-                if(this.data.password.length < 8 || this.data.password.length > 16) {
+                let iPass = $('.password').val().length
+                if(iPass < 8 || iPass > 16) {
                     errPass.html('Mật khẩu phải có chiều dài từ 8 - 16 kí tự')
+                    console.log(iPass);
                 }
                 else {
                     errPass.html(null)
