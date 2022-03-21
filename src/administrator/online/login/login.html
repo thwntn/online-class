@@ -16,9 +16,7 @@
     <!-- md5 -->
     <script src="./assets/js/md5.js"></script>
 
-    <!-- scrypt -->
-    <script src="/online-class/src/administrator/online/node_modules/cryptr/index.js"></script>
-</head>
+   </head>
 <body>
     <div id="root">
         <div class="container-fluid">
@@ -28,7 +26,7 @@
                     <h5>Tên đăng nhập</h5>
                     <input class = 'username' type="text" placeholder="Tên tài khoản hoặc email">
                     <h5>Mật khẩu</h5>
-                    <input class="password" type = 'pasword' placeholder="Nhập mật khẩu">
+                    <input class="password" type = 'password' placeholder="Nhập mật khẩu">
                     <button>Gặp sự cố với mật khẩu ?</button>
                     <button class="signin">Đăng nhập</button>
                     <h5>Đăng nhập với</h5>
@@ -67,7 +65,7 @@
         let data = []
         let username = document.querySelector('.username').value
         data.push(username)
-        data.push(document.querySelector('.password').value)
+        data.push(md5(document.querySelector('.password').value))
         //fetch
         async function login () {
             const url = 'http://localhost/online-class/src/administrator/api/login.php'
@@ -77,13 +75,14 @@
                 cache: 'no-cache',
                 credentials: 'same-origin',
                 headers: {
-                'Content-Type': 'application/json'
+                    'Content-Type': 'application/json'
                 },
                 redirect: 'follow',
                 referrerPolicy: 'no-referrer',
                 body: JSON.stringify(data)
             })
             await response.json().then((responseJSON) => {
+                    console.log(responseJSON)
                 switch(responseJSON) {
                     case 100: {
                         window.sessionStorage.setItem('userOL', document.querySelector('.username').value)
@@ -106,9 +105,5 @@
             document.querySelector('.errBox').classList.remove('active')
         }, 2000)
     })
-    const sha = (password) => {
-        console.log(Crypt('12526'));
-    }
-    sha()
 </script>
 </html>

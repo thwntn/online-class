@@ -1,5 +1,5 @@
 <?php
-    $conn = new MySQLi('localhost', 'root', '', 'online-class');
+    include('./connect.php');
 
     if($conn) {
         $querySelect = "SELECT * from user";
