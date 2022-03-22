@@ -143,13 +143,13 @@
             .then((response) => response.json())
             .then((responseJson) => {
                 if(responseJson == 1) {
-                    fetch('http://localhost/online-class/src/administrator/api/authen_start.php', {
+                    fetch('http://192.168.62.29/online-class/src/administrator/api/authen_start.php', {
                         method: 'post',
                         mode: 'cors',
                         cache: 'no-cache',
                         credentials: 'same-origin',
                         headers: {
-                            'Content-Type': 'application/json'
+                            'Content-Type': 'text/html'
                         },
                         redirect: 'follow',
                         referrerPolicy: 'no-referrer',
