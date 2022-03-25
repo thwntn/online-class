@@ -31,14 +31,14 @@
                                 <i class="fas fa-book"></i>Bài tập được giao
                             </h5>
                                 <?php
-                                    $sql = "SELECT * FROM homework join subject on homework.subject_id = subject.subject_id";
+                                    $sql = "SELECT * FROM registry rg join homework hw on rg.subject_code=hw.subject_code
+                                    join subject sj on rg.subject_code=sj.subject_code where rg.user_name='thuylien' order by homework_time ASC";
                                     $result = $conn->query($sql);
                                     while($row = $result->fetch_assoc()) {
                                         echo "
-                                        <a href='./homework.php'>
+                                        <a href='./subject.php?code=".$row['subject_code']."'>
                                             <div class = itemNoti>
                                                 <div class = 'imageNoti'>
-                                                <a href='./homework.php'>
                                                     <img src=".$row['subject_image'].">
                                                 </div>
                                                 <div class = 'contentNoti'>
@@ -156,8 +156,8 @@
     <div class="main-subject">
         <?php
             $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                                             join homework hw on sj.subject_id=hw.subject_id
-                                                        where subject_code='.$_GET["code"].'';
+                                             join homework hw on sj.subject_code=hw.subject_code
+                                                        where sj.subject_code='.$_GET["code"].'';
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
 
@@ -186,8 +186,8 @@
     <?php
         $name = $result['user_full_name'];
         $img_user = $result['user_image'];
-        $sql = 'SELECT * FROM  subject sj join homework hw on hw.subject_id=sj.subject_id 
-            where subject_code='.$_GET["code"].' ';
+        $sql = 'SELECT * FROM  subject sj join homework hw on hw.subject_code=sj.subject_code
+            where sj.subject_code='.$_GET["code"].' ';
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) {
             $k = $row['homework_time'];

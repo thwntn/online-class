@@ -39,7 +39,7 @@
     <div class="main">
         <?php
             $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                                             join homework hw on sj.subject_id=hw.subject_id
+                                             join homework hw on sj.subject_code=hw.subject_code
                                              where homework_id='.$_GET["id"].'';
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
@@ -78,13 +78,22 @@
                 <button class="send" type="submit"><i class="fas fa-paper-plane"></i></button>
             </form>
         </div> <br> 
-        <ul>
-            <img src="image/user-profile-icon-free-vector.jpg" class="img2">
-            <li><b>Trần Thị Tố Quyên</li>
-            <li style="font-size:10px">21/01/2022</b></li>
-            <li>Nội dung bình luận </li>
-        </ul>
-
+        <?php 
+            $sql = 'SELECT * FROM comment cmt join homework hw on cmt.homework_id=hw.homework_id 
+                                              join user on cmt.user_name=user.user_name
+                                              where hw.homework_id= '.$_GET["id"].' ';
+            $kq = $conn->query($sql);
+            while($row = mysqli_fetch_array($kq)){
+                echo "
+                    <ul>
+                        <img src=".$row['user_image']." class='img2'>
+                        <li><b>".$row['user_full_name']."</li>
+                        <li style='font-size:10px'>21/01/2022</b></li>
+                        <li>".$row['comment_content']."</li>
+                    </ul>   
+                ";
+            }
+        ?>
     </div>
     <div class="right">
         <div class="right-1">

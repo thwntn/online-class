@@ -1,5 +1,7 @@
 <?php
     include './demo/connect.php';
+    $_POST['userOL'];
+    $user_name = $_POST['userOL'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -31,7 +33,8 @@
             <i class="fas fa-bell"></i>Thông báo
         </h5>
         <?php
-            $sql = "SELECT * FROM notification join subject on notification.user_name = subject.user_name";
+            $sql = "SELECT * FROM subject sj join registry rg on sj.subject_code=rg.subject_code  
+                join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
             $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                 if($row['noti_status'] == 1){
@@ -131,11 +134,12 @@
                                 <i class="fas fa-book"></i>Bài tập được giao
                             </h5>
                                 <?php
-                                    $sql = 'SELECT * FROM homework join subject on homework.subject_id = subject.subject_id ';
+                                    $sql = "SELECT * FROM registry rg join homework hw on rg.subject_code=hw.subject_code
+                                        join subject sj on rg.subject_code=sj.subject_code where rg.user_name='$user_name' order by homework_time ASC";
                                     $result = $conn->query($sql);
                                     while($row = $result->fetch_assoc()) {
                                         echo "
-                                        <a href='#'>
+                                        <a href='./subject.php?code=".$row['subject_code']."'>
                                             <div class = itemNoti>
                                                 <div class = 'imageNoti'>
                                                     <img src=".$row['subject_image'].">
@@ -158,7 +162,8 @@
                         <div class = 'frameNoti noti1'>
                             <h5><i class="fas fa-bell"></i>Thông báo</h5>
                             <?php
-                                $sql = "SELECT * FROM notification nt join subject sj on nt.user_name = sj.user_name";
+                                $sql = "SELECT * FROM subject sj join registry rg on sj.subject_code=rg.subject_code  
+                                    join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
                                 $result = $conn->query($sql);
                                 while($row = $result->fetch_assoc()) {
                                     if($row['noti_status'] == 1){
@@ -256,9 +261,9 @@
             <h1>Trang Sinh Viên</h1>
             <p>Chào mừng đến với trang sinh viên</p>
             <div>
-                <form action="#" method="get">
+                <form action="./demo/search.php" method="get">
                     <input type="text" name="search" id="search" placeholder="Nhập mã môn học"><br>
-                    <button type="button" id="btt-search">Search...</button>
+                    <button type="submit" name="search" id="btt-search" value="search">Search...</button>
                 </form>
             </div>
         </div>
@@ -274,7 +279,7 @@
                 </button>
             </div>
             <?php
-                $sql = "SELECT * FROM subject ";
+                $sql = "SELECT * FROM registry rg join subject sj on rg.subject_code=sj.subject_code where rg.user_name='$user_name'";
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                     echo "
@@ -293,7 +298,7 @@
     </div>
     <br>
     <div id="lich">
-        <div id="ten-lich">Lịch dạy</div>
+        <div id="ten-lich">Lịch học</div>
         <div class="container">
             <div class="row">
                 <div class="col-6 calendar-frame">
@@ -328,22 +333,22 @@
                             <th>Tên môn</th>
                         </tr>
                         <?php
-                            $sql = "SELECT * FROM calendar join subject on calendar.subject_id=subject.subject_id";
+                            $sql = "SELECT * FROM registry rg join calendar cl on rg.subject_code=cl.subject_code
+                            join subject sj on rg.subject_code=sj.subject_code where rg.user_name='$user_name' order by calendar_time ASC";
                             $result = $conn->query($sql);
                             while($row = $result->fetch_assoc()) {
-                            $k = $row['calendar_time'];
-                            $day1 = substr($k,-11,3);
-                            $month1 = substr($k,-14,2);
-                            $hour = substr($k,-8,5);
-
-                            echo"
-                                <tr>
-                                    <td>".$hour."</td>
-                                    <td>".$day1."/".$month1."</td>
-                                    <td>".$row['subject_id']."</td>
-                                    <td>".$row['subject_name']."</td>
-                                </tr>
-                            ";
+                                $k = $row['calendar_time'];
+                                $day1 = substr($k,-11,3);
+                                $month1 = substr($k,-14,2);
+                                $hour = substr($k,-8,5);
+                                echo"
+                                    <tr>
+                                        <td>".$hour."</td>
+                                        <td>".$day1."/".$month1."</td>
+                                        <td>".$row['subject_id']."</td>
+                                        <td>".$row['subject_name']."</td>
+                                    </tr>
+                                ";
                             }
                         ?> 
                     </table>
