@@ -11,9 +11,21 @@
     $code = rand(100000,999999);
     $time = date("Y-m-d h:i:s");
 
-    shell_exec("echo 'Mã xác thực tài khoản của bạn tại website OnlineClass là : ".$code."' | mail -s 'Mã xác thực từ Mail Server OnlineClass' ".$email);
-
-    $query = "INSERT INTO authentication VALUE ('$username', '$code', '$time')";
-    echo $conn -> query($query);
-
+    $subject = "Mã xác nhận từ OnlineClass";
+    
+    $message = "Mã xác nhận của bạn tại Online Class là: ". $code;
+    
+    $header = "From:abc@somedomain.com \r\n";
+    $header .= "Cc:afgh@somedomain.com \r\n";
+    $header .= "MIME-Version: 1.0\r\n";
+    $header .= "Content-type: text/html\r\n";
+    
+    $retval = mail ($email,$subject,$message,$header);
+    
+    if( $retval == true ) {
+        $query = "INSERT INTO authentication VALUE ('$username', '$code', '$time')";
+        echo $conn -> query($query);
+    }else {
+        echo -1;
+    }
 ?>
