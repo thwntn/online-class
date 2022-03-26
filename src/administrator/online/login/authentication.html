@@ -32,13 +32,17 @@
                 body: JSON.stringify(this.data)
             })
             .then(response => response.json())
-            .then(responseJson => console.log(responseJson))
+            .then(responseJson => {
+                if(responseJson == 1) {
+                    location.href = 'http://localhost/online-class/src/administrator/online/login/login.html';
+                }
+            })
         },
         handle: function () {
             _this = this
             document.querySelector('input').addEventListener('change', function () {
-                _this.send()
                 _this.data.code = document.querySelector('input').value
+                _this.send()
             })
         },
         start: function() {
