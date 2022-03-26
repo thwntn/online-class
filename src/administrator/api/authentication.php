@@ -6,11 +6,37 @@
         $response = json_decode($read, true);
     }
 
-    $username = $response['username'];
+    $userName = $response['username'];
     $code = $response['code'];
 
-    $time = date("Y-m-d h:i:s");
+    $query = "SELECT username FROM authentication WHERE code = '$code'";
+    $result = $conn -> query($query);
 
-    $query = "INSERT INTO authentication VALUE ('$username', '$code', '$time')";
-    echo $query;
+    $data = $result -> fetch_assoc();
+
+    if(($data != null) && ($data['username'] == $userName)) {
+        $queryType = "SELECT user_type FROM user WHERE `user_name` = '$userName'";
+        $resultType = $conn -> query($queryType);
+
+        $dataType = $resultType -> fetch_assoc();
+
+        if($dataType != null) {
+            $userType = $dataType['user_type'];
+
+            switch($userType) {
+                case 8: {
+                    $userType = 2;
+                    break;
+                }
+                case 9: {
+                    $userType = 1;
+                    break;
+                }
+            }
+
+            $queryUpdate = "UPDATE user SET user_type = '$userType'";
+            echo $final = $conn -> query($queryUpdate);
+        }
+    }
+    else echo -1;
 ?>
