@@ -19,7 +19,8 @@ const AccountActive = (property) => {
     const [view, setView] = useState('none')
     const [active, setActive] = useState('')
     const [convert, setConvert] = useState('none')
- 
+    
+    console.log(users);
      
     const closed = () => {
         setTimeout(() => {

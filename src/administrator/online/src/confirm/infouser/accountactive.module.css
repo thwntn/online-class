@@ -7,7 +7,7 @@
     border: 5px solid linear-gradient(to left, #743ad5, #d53a9d);
     border-radius: 12px;
     animation: show 0.3s ease;
-    overflow: hidden;
+    overflow: auto;
 }
 @keyframes show {
     from {
@@ -67,6 +67,8 @@
 .boxItems {
     width: 100%;
     align-content: flex-start;
+    height: 346px;
+    overflow: auto;
 }
 .close {
     width: 86px;
