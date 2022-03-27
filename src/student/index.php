@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="./style.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="./header.css" media="screen" />
-
 </head>
 <body onload="show()">
     <div class="nav-mobile">
@@ -263,7 +262,7 @@
             <div>
                 <form action="./demo/search.php" method="get">
                     <input type="text" name="search" id="search" placeholder="Nhập mã môn học"><br>
-                    <button type="submit" name="search" id="btt-search" value="search">Search...</button>
+                    <button type="submit" name="btnsearch" id="btt-search" value="search">Search...</button>
                 </form>
             </div>
         </div>
@@ -334,7 +333,7 @@
                         </tr>
                         <?php
                             $sql = "SELECT * FROM registry rg join calendar cl on rg.subject_code=cl.subject_code
-                            join subject sj on rg.subject_code=sj.subject_code where rg.user_name='$user_name' order by calendar_time ASC";
+                                join subject sj on rg.subject_code=sj.subject_code where rg.user_name='$user_name' order by calendar_time ASC";
                             $result = $conn->query($sql);
                             while($row = $result->fetch_assoc()) {
                                 $k = $row['calendar_time'];

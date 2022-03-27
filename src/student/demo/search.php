@@ -1,20 +1,22 @@
-<?php 
+<?php
 include 'connect.php';
-if (isset($_REQUEST['search'])){
-    $search=addslashes($_GET['search']);
-    $sql="SELECT * FROM subject where subject_id like '%$search%'";
-    $kq=$conn->query($sql);
-    $num_rows = mysqli_num_rows($kq);
-    if (empty($search)) {
-        echo "Dữ liệu không được để trống!";
-    } else {
-        if ($num_rows > 0 && $search != "") {
+    if (isset( $_GET['btnsearch'])) {
+        $search = $_GET['search'];
+        $sql = "SELECT * FROM subject WHERE (subject_id like '%$search%') ";
+     
+        $kq=$conn->query($sql);
+        $num = mysqli_num_rows($kq);
+        if ($num > 0 && $search != "") {
+            echo '<table>';
             while($row=$kq->fetch_assoc()){
-                echo $row['subject_name'];
+                echo '<tr>';
+                    echo "<td>{$row['subject_name']}</td>";
+                echo '</tr>';
             }
-        } else {
-            echo "Không tìm thấy kết quả!";
+            echo '</table>';
+        } 
+        else {
+            echo "Khong tim thay ket qua!";
         }
-    } 
-}
+    }
 ?>

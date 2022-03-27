@@ -73,10 +73,28 @@
         </ul><hr>
         <div class="comment">
             <img src="image/user-profile-icon-free-vector.jpg">
-            <form action="" method="get" class="comment-1">
+            <form action="" method="post" class="comment-1">
                 <input class="comment-2" type="text" name="comment">
-                <button class="send" type="submit"><i class="fas fa-paper-plane"></i></button>
+                <button class="send" type="submit" name="upload"><i class="fas fa-paper-plane"></i></button>
             </form>
+            <?php
+                // if(isset($_SESSION['username'])){
+                //     $homework_id=$_GET['id'];
+                //     $user=$_SESSION['username'];
+                //     $sql="SELECT * FROM users where username='$user'";
+                //     $kq=$con->query($sql);
+                //     while($row1=$kq->fetch_assoc()){
+                //         $idu= $row1['iduser'];
+                //     }
+                    if(isset($_POST['comment'])){
+                        $homework_id=$_GET['id'];
+                        $content=$_POST["comment"];
+                        $sql1 = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
+                            VALUES ('$content', now(),'thuylien','$homework_id')";
+                        $kq1=$conn->query($sql1);
+                    }
+                // }
+            ?>
         </div> <br> 
         <?php 
             $sql = 'SELECT * FROM comment cmt join homework hw on cmt.homework_id=hw.homework_id 
