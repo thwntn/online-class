@@ -4,24 +4,46 @@ input {
 h2 {
     margin-bottom: 20px !important;
 }
+#root {
+    margin-top: 176px;
+}
 .signin {
     margin: 0;
+}
+.img_desk {
+    display: flex;
+    justify-content: left;
+    align-content: center;
+    flex-wrap: wrap;
+    background-position: top 60% right 30%;
+    margin-top: -448px !important;
+}
+h1 {
+    margin-top: -180px!important;
 }
 h5 {
     margin-bottom: 0 !important;
 }
+input {
+    margin-top: 24px !important;
+}
+.sex button {
+    width: 30%;
+}
 .sex {
+    margin-top: 12px;
+    width: 100%;
     padding: 4px 0px !important;
 }
 .choose-type,
 .choose-sex {
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.05);
-    border-radius: 48px;
-    padding: 6px 24px;
+    border-radius: 12px;
+    padding: 12px 24px;
     margin: 0px 4px;
 }
 .choose-type {
-    margin: 24px 0px;
+    margin: 12px 0px;
 }
 .type {
     width: 100%;
@@ -29,7 +51,18 @@ h5 {
     justify-content: space-between;
 }
 .type button {
-    width: 49%;
+    width: 48%;
+}
+.choose-file {
+    width: 100%;
+    border: none;
+    outline: none;
+    padding: 12px;
+    margin-top: 16px;
+    margin-bottom: 12px;
+    color: #333;
+    background-color: rgba(245, 245, 255);
+    border-radius: 12px;
 }
 .upload {
     display: none;
@@ -38,10 +71,18 @@ p {
     width: 100%;
     font-size: 12px !important;
     color: #999;
-    margin: 18px 0px !important;
+    margin-top: -100px !important;
 }
-.signin {
-    padding: 8px 0px !important;
+.submit {
+    width: 100%;
+    background-color: rgba(0, 0, 255, 0.65);
+    color: #fff;
+    margin: 24px 0px;
+    padding: 18px 0px !important;
+    border-radius: 12px;
+    transition: all 0.2s;
+    background-size: 150%;
+    box-shadow: 0px 0px 16px rgba(159, 159, 255, 0.8);
 }
 .capcha {
     position: fixed;

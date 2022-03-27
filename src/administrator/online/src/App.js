@@ -1,12 +1,12 @@
 import './App.css';
 import Header from './navigation/header.js'
 import HomePage from './homepage/homepage.js'
-import Confirm from './confirm/confirm.js';
-import Manage from './manage/manage';
-import Log from './log/log.js'
 import NavMobile from './navigation/navmobile.js';
+import { useState } from 'react';
 
 function App() {
+  console.log(sessionStorage.getItem('userOL') == undefined);
+  const [main, setMain] = useState(<HomePage></HomePage>)
   if (window.innerWidth < 998) {
     return (
       <div className='container-fluid' style = {{ padding: '0px', margin: '0px'}}>
@@ -17,12 +17,8 @@ function App() {
   }
   else return (
       <div className='container-fluid' style = {{ padding: '0px', margin: '0px'}}>
-        <Header></Header>
-        <HomePage></HomePage>
-        <Confirm></Confirm>
-        <Manage></Manage>
-        <Log></Log> 
-        <NavMobile></NavMobile>
+        <Header setMain = {setMain}></Header>
+        {main}
       </div>
   )
 }

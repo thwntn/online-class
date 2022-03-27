@@ -1,13 +1,14 @@
 .accountBox {
     background-color: rgba(245, 245, 255, 0.8);
-    max-width: 1100px;
+    max-width: 1400px;
     display: flex;
     flex-wrap: wrap;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.05);
     border: 5px solid linear-gradient(to left, #743ad5, #d53a9d);
     border-radius: 12px;
     animation: show 0.3s ease;
     overflow: auto;
+    min-width: 1400px;
 }
 @keyframes show {
     from {
@@ -29,7 +30,8 @@
     bottom: 0;
     justify-content: center;
     align-items: center;
-    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.02);
+    z-index: 10;
 }
 .titleMobile {
     display: none;
@@ -40,10 +42,11 @@
     margin-bottom: 12px;
 }
 .frameMobile {
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    background-color: #fff;
+    background-color: rgba(250, 250, 255, 1);
     padding: 12px;
 }
 .titleMobile h5 {
@@ -67,7 +70,7 @@
 .boxItems {
     width: 100%;
     align-content: flex-start;
-    height: 346px;
+    height: 68vh;
     overflow: auto;
 }
 .close {
@@ -88,26 +91,99 @@
     margin-right: 12px;
 }
 .item {
+    position: relative;
     display: flex;
-    align-items: center;
+    flex-wrap: wrap;
+    align-content: space-between;
     padding: 4px 4px;
-    border-radius: 48px;
+    border-radius: 6px;
+    height: 256px;
     margin: 18px 0px;
     border: none;
-    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.08);
+    padding: 12px 12px;
+    background-color: #fff;
 }
 .imgUser {
-    width: 42px;
-    height: 42px;
-    background-color: #333;
-    border-radius: 48px;
+    width: 82px;
+    height: 82px;
+    border: 2px solid rgba(0, 0, 0, 0.08);
+    border-radius: 100%;
+    margin-bottom: 12px;
 }
 .nameUser {
-    padding: 0px 12px;
-    flex: 1;
+    padding: 0px;
+    width: 100%;
+    font-size: 20px;
+    color: #666;
+}
+.item p {
+    padding:  0px;
+    font-size: 14px;
+    margin-top: 12px;
+}
+.lock,
+.teacher,
+.student {
+    width: 100%;
 }
 .actionUser {
     display: flex;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.lock button,
+.teacher button,
+.student button {
+    width: 85px;
+    height: 32px;
+    border: none;
+    border-radius: 0px 48px 48px 48px;
+}
+.student button h5 {
+    font-size: 12.5px;
+    margin: 0 !important;
+    margin-left: 8px;
+    color: #009;
+}
+.teacher button h5 {
+    font-size: 12.5px;
+    margin: 0 !important;
+    margin-left: 8px;
+    color: rgb(0, 153, 71);
+}
+.lock button h5 {
+    font-size: 12.5px;
+    margin: 0 !important;
+    margin-left: 8px;
+    color: #900;
+}
+.lock button {
+    background-color: rgba(255, 0, 0, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.student button {
+    background-color: rgba(0, 140, 255, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.teacher button {
+    background-color: rgba(0, 255, 55, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.iconType {
+    background-image: url(./image/student.png);
+    width: 24px;
+    height: 24px;
+    background-size: 100%;
 }
 .gotoUser,
 .convertUser,

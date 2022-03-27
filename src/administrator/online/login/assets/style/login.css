@@ -3,17 +3,20 @@
         background-size: 320% !important;
     }
 }
-
+html {
+    font-size: 62.5%;
+}
+#root {
+    font-size: 1.6rem;
+    background-color: #fff;
+}
 * {
     padding: 0;
     margin: 0;
     font-family: 'Varela Round', sans-serif;
     font-weight: bold;
-    font-size: 1rem;
 }
 .content {
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
-    background-color: rgba(255, 255, 255, 1);
     padding: 32px 24px !important;
     justify-content: right;
     display: flex;
@@ -26,7 +29,6 @@
     height: 110vh;
     justify-content: center;
     align-content: center;
-    background-image: url(../image/Login.png);
     background-size: 130%;
     background-position: center;
 }
@@ -43,18 +45,18 @@ h2 {
     font-weight: bold !important;
 }
 input::placeholder {
-    font-size: 12px;
+    font-size: 14px;
     color: #ccc;
 }
 input {
     width: 100%;
     border: none;
     outline: none;
-    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
-    margin-bottom: 32px !important;
-    padding: 4px;
-    color: #888;
-    background: none;
+    margin-bottom: 56px !important;
+    padding: 12px;
+    color: #333;
+    background-color: rgba(245, 245, 255);
+    border-radius: 12px;
 }
 button {
     background: none;
@@ -62,17 +64,83 @@ button {
     font-size: 12px !important;
 }
 button:hover {
-    color: rgba(255, 100, 0, 0.9);
+    color: rgba(0, 0, 255, 1);
 }
 .signin {
     width: 100%;
-    background-image: linear-gradient(90deg , rgba(42, 96, 250), rgba(232, 57, 246));
+    background-color: rgba(0, 0, 255, 0.65);
     color: #fff;
     margin: 24px 0px;
-    padding: 6px 0px;
-    border-radius: 48px;
+    padding: 12px 0px;
+    border-radius: 12px;
     transition: all 0.2s;
     background-size: 150%;
+    box-shadow: 0px 0px 16px rgba(159, 159, 255, 0.8);
+}
+.header {
+    font-size: 1.4rem;
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 136px;
+    justify-content: space-around;
+    align-items: center;
+    background-color: #fff;
+    z-index: 10;
+}
+.header ul {
+    display: flex;
+    list-style: none;
+    align-items: center;
+}
+.header li {
+    padding: 12px 48px;
+}
+.header .registry{
+    box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.08);
+    border-radius: 100px;
+    padding: 0px 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 32px;
+    margin-left: 24px;
+}
+.img_desk {
+    position: relative;
+    background-size: 50%;
+    background-repeat: no-repeat;
+    background-position: bottom right 30%;
+}
+.img_desk h1 {
+    font-size: 4rem;
+    font-weight: bolder;
+    line-height: 64px;
+}
+.img_desk p {
+    line-height: 32px;
+    font-size: 1.3rem;
+    margin-top: 24px;
+}
+.header .registry:hover {
+    background-color: rgba(0, 0, 255, 0.5);
+    color: #fff;
+    cursor: pointer;
+}
+.header .active {
+    color: rgba(0, 0, 255, 0.5);
+    position: relative;
+}
+.header .active::after {
+    content: '';
+    border-left: 12px solid rgba(0, 0, 255, 0.5);
+    border-right: 12px solid rgba(0, 0, 255, 0.5);
+    border-top: 4px solid rgba(0, 0, 255, 0.5);
+    position: absolute;
+    bottom: -5px;
+    right: 41%;
 }
 .signin:hover {
     animation: signin 0.2s ease forwards;

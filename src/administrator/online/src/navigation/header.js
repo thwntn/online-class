@@ -1,10 +1,14 @@
 import { useState, useEffect, useRef } from 'react'
 import style from './header.module.css'
 import Noti from './notification.js'
+import HomePage from '../homepage/homepage'
+import Log from '../log/log'
+import Confirm from '../confirm/confirm'
 import Message from './message.js'
+import AccountActive from '../confirm/infouser/accountactive'
 const items = ['Trang chủ', 'Tài khoản', 'Thông báo', 'Tin nhắn', 'Nhật kí']
 
-function Header () {
+function Header ({setMain}) {
     const [scroll, setScroll] = useState(style.noActive)
     const [activeNoti, setActiveNoti] = useState(false)
     const [activeMessage, setActiveMess] = useState(false)
@@ -37,9 +41,15 @@ function Header () {
         <div className = {style.background + ` ${scroll}`}>
             <h2 className = {style.title}>Online Class</h2>
             <ul className = {style.listItems} style = {{display: 'flex', listStyle: 'none', margin: '0px'}}>
-                <li className = {style.item}><a href = '#home'>Trang chủ</a></li>
-                <li className = {style.item}><a href = '#account'>Tài khoản</a></li>
-                <li className = {style.item}><a href = '#manage'>Môn học</a></li>
+                <li
+                    className = {style.item}
+                    onClick = {() => setMain(<HomePage></HomePage>)}
+                    ><a href = '#home'>Trang chủ</a></li>
+                <li
+                    className = {style.item}
+                    onClick = {() => setMain(<Confirm></Confirm>)}
+                ><a href = '#account'>Tài khoản</a></li>
+                <li className = {style.item}><a href = '#manage'>Thống kê</a></li>
                 <li className = {style.item}><a href = '#log'>Nhật kí</a></li>
                 <li onClick={() => setActiveNoti(!activeNoti)} className = {style.item}>
                     Thông báo

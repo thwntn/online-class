@@ -15,7 +15,7 @@ const InfoUser = (property) => {
         <input className = {style.inputInfo} value = 'Tài khoản sinh viên'></input>
         <div className = {style.nav}>
             <button className = {style.close} onClick = {property.func.close}>Đóng</button>
-            <button className = {style.finish} onClick = {property.func.close}>Cập nhật</button>
+            <button className = {style.finish} onClick = {property.func.finish}>Cập nhật</button>
         </div>
     </div>
 )}

@@ -2,37 +2,39 @@ import { useEffect, useRef, useState } from 'react'
 import style from './message.module.css'
 import ChatBox from './chatbox.js'
 
-var chats = []
-
-fetch("http://localhost/online-class/src/administrator/api/chat.php")
-    .then(data => data.json())
-    .then(data => chats = data)
-
 const Mess = () => {
-    console.log(chats)
     const itemMess = useRef()
+    const [messages, setMessages] = useState([])
     const [gotoMess, setGoToMess] = useState(false)
-   
+    const [friend, setFriend] = useState({})
+    
+    useEffect(() => {
+        fetch("http://localhost/online-class/src/administrator/api/chat.php")
+        .then(response => response.json())
+        .then(responseJson => setMessages(responseJson))
+    }, [])
     return (
         <div  ref = {itemMess} className = {style.frame}>
             <h5 className = {style.title}><i className="fab fa-facebook-messenger"></i>Tin nhắn</h5>
-            {chats.map((chat) => (
+            {messages.map((message) => (
                 <div
-                    key = {style.id}
+                    key = {message.chat_id}
                     className = {style.item}
                     onClick = {(event) => {
                         event.stopPropagation()
                         setGoToMess(true)
+                        setFriend(message)
+                        console.log(friend);
                     }}
                 >
                     <div className = {style.image}></div>
                     <div className = {style.content}>
-                        <h4>{chat.friend_user}</h4>
-                        <p>{chat.mess}</p>
+                        <h4>{message.friend_user}</h4>
+                        <p>{message.mess}</p>
                     </div>
                 </div>
             ))}
-            {gotoMess && <ChatBox func = {setGoToMess}></ChatBox>}
+            {gotoMess && <ChatBox data = {{setGoToMess, friend}}></ChatBox>}
         </div>
     )
 }

@@ -1,13 +1,15 @@
 .background {
     width: 100%;
-    background-image: url(./homepage.jpg);
+    background-image: url(./homepage.png);
     background-size: 100%;
+    height: 100vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-content: center;
     background-position: center;
     filter: brightness(90%);
+    color: #fff;
 }
 .title {
     width: 100%;
