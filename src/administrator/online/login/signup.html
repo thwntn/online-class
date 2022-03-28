@@ -103,7 +103,7 @@
         },
 
         isLetter: (string) => {
-            return string.toLowerCase() != string.toUpperCase()
+            return string.toLowerCase() !== string.toUpperCase()
         },
 
         check: function() {
@@ -116,13 +116,6 @@
                 if(!this.isLetter(char)) {
                     return false
                 }
-            }
-            return true
-        },
-
-        finalCheck: function() {
-            for (const [key, value] of Object.entries(this.data)) {
-                if(value == null || value == '') return false
             }
             return true
         },
@@ -168,8 +161,7 @@
                     .then(responseAu => responseAu.json())
                     .then((responseJsonAu) => {
                         if(responseJsonAu == 1) {
-                            localStorage.setItem('userOLAuthentication', this.data.username)
-                       //     location.href = 'http://localhost/online-class/src/administrator/online/login/authentication.html' 
+                            location.href = 'http://localhost/online-class/src/administrator/online/login/authentication.html'
                         }
                         else {
                             console.log('err');
@@ -178,10 +170,78 @@
                 }
             })
         },
+
+        checkData: function () {
+            let usrErr = $('.username_err')
+
+            if(!this.checkString(this.data.username) || (this.data.username.length < 4) || (this.data.username.length > 16)) {
+                usrErr.html('Tên tài khoản có độ dài 4 đến 16, a - z!')
+                return false
+            } else {
+                usrErr.html(null)
+            }
+
+            url = 'http://localhost/online-class/src/administrator/api/checkusername.php'
+            fetch(url, {
+                method: 'post',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(this.data['username'])
+            })
+            .then(response => response.json())
+            .then(responseJson => {
+                if(responseJson == 1) {
+                    usrErr.html('Tên đăng nhập đã tồn tại')
+                } else {
+                usrErr.html(null)
+                }
+            })
+            let errPass = $('.password_err')
+            let iPass = $('.password').val().length
+            if(iPass < 8 || iPass > 16) {
+                errPass.html('Mật khẩu phải có chiều dài từ 8 - 16 kí tự')
+                return false
+            } else {
+                errPass.html(null)
+            }
+
+            //Phone
+            let errPhone = $('.phone_err')
+            if(this.data.phone.length > 13) {
+                errPhone.html('Số điện thoại phải là số có chiều dài dưới 13 số')
+                return false
+            }
+            else if (this.data.phone / 1 != this.data.phone) {
+                errPhone.html('Chỉ được chứa số')
+                return false
+            } else {
+                errPhone.html(null)
+            }
+
+            let errEmail = $('.email_err')
+            let email = $('.email')
+            if((email.slice(-10) == '@gmail.com') && (email.slice(-19) == '@student.ctu.edu.vn')){
+                errEmail.html('Email phải có dạng @gmail.com hoặc @student.ctu.edu.vn')
+                console.log(1);
+                return false
+            } else {
+                errEmail.html(null)
+            }
+
+            usrErr.html(null)
+            return true
+        },
+
         
         handle: function () {
             $('.submit').on('click', () => {
-                this.status = this.finalCheck()
+                this.status = this.checkData()
                 if(this.status) {
                     this.signUp()
                 }
@@ -203,9 +263,6 @@
             })
 
             $('.content').on('change', () => {
-                //Username
-                let usrErr = $('.username_err')
-
                 const reSet = () => {
                     this.setData('username', $('.username').val())
                     this.setData('password', md5($('.password').val()))
@@ -216,64 +273,7 @@
                     this.setData('fullname', $('.fullname').val())
                 }
 
-                reSet()
-                //Username
-                if(this.checkString(this.data.username) && (this.data.username.length >= 4) && (this.data.username.length < 16)) {
-                    usrErr.html(null)
-                }
-                else {
-                    usrErr.html('Tên tài khoản có độ dài 4 đến 16, a - z!')
-                }
-                url = 'http://localhost/online-class/src/administrator/api/checkusername.php'
-                fetch(url, {
-                    method: 'post',
-                    mode: 'cors',
-                    cache: 'no-cache',
-                    credentials: 'same-origin',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    redirect: 'follow',
-                    referrerPolicy: 'no-referrer',
-                    body: JSON.stringify(this.data['username'])
-                })
-                .then(response => response.json())
-                .then(responseJson => {
-                    if(responseJson == 1) {
-                        usrErr.html('Tên đăng nhập đã tồn tại')
-                    }
-                })
-                //Password
-                let errPass = $('.password_err')
-                let iPass = $('.password').val().length
-                if(iPass < 8 || iPass > 16) {
-                    errPass.html('Mật khẩu phải có chiều dài từ 8 - 16 kí tự')
-                    console.log(iPass);
-                }
-                else {
-                    errPass.html(null)
-                }
-                //Phone
-                let errPhone = $('.phone_err')
-                if(this.data.phone.length > 13) {
-                    errPhone.html('Số điện thoại phải là số có chiều dài dưới 13 số')
-                }
-                else if (this.data.phone / 1 != this.data.phone) {
-                        errPhone.html('Chỉ được chứa số')
-                    }
-                    else {
-                        errPhone.html(null)
-                    }
-                // Email
-                let errEmail = $('.email_err')
-                let email = this.data.email
-                if((email.slice(-10) == '@gmail.com') || (email.slice(-19) == '@student.ctu.edu.vn')){
-                    errEmail.html(null)
-                }
-                else {
-                    errEmail.html('Email phải có dạng @gmail.com hoặc @student.ctu.edu.com')
-                }
-                
+                reSet()          
             })
 
             document.querySelector('.registry').addEventListener('click', () => {
@@ -287,11 +287,6 @@
     }
 
     information.enforcement()
-    
-    // Interface
-    // document.querySelector('.submit').addEventListener('click', function(){
-    //     document.querySelector('.capcha').classList.add('active')
-    // })
 
     document.querySelector('.choose-file').addEventListener('click', function () {
         document.querySelector('.upload').click()

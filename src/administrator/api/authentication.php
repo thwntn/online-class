@@ -6,37 +6,18 @@
         $response = json_decode($read, true);
     }
 
-    $userName = $response['username'];
-    $code = $response['code'];
+    $code = $response;
 
-    $query = "SELECT username FROM authentication WHERE code = '$code'";
+    $query = "SELECT user_name FROM authentication WHERE code = '$code'";
     $result = $conn -> query($query);
 
     $data = $result -> fetch_assoc();
 
-    if(($data != null) && ($data['username'] == $userName)) {
-        $queryType = "SELECT user_type FROM user WHERE `user_name` = '$userName'";
-        $resultType = $conn -> query($queryType);
+    $userName = $data['user_name'];
 
-        $dataType = $resultType -> fetch_assoc();
-
-        if($dataType != null) {
-            $userType = $dataType['user_type'];
-
-            switch($userType) {
-                case 8: {
-                    $userType = 2;
-                    break;
-                }
-                case 9: {
-                    $userType = 1;
-                    break;
-                }
-            }
-
-            $queryUpdate = "UPDATE user SET user_type = '$userType'";
-            echo $final = $conn -> query($queryUpdate);
-        }
+    if(($data != null)) {
+        $queryUpdate = "UPDATE user SET user_type = 1 WHERE `user_name` = '$userName' && user_type = 9 ; UPDATE user SET user_type = 2 WHERE `user_name` = '$userName' && user_type = 8";
+        echo $final =  $conn -> multi_query($queryUpdate);
     }
     else echo -1;
 ?>

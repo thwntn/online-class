@@ -13,12 +13,10 @@
 </body>
 <script>
     const authen = {
-        data: {
-            username: localStorage.getItem('userOLAuthentication'),
-            code: null
-        },
+        code: null,
         send: function () {
             url = 'http://localhost/online-class/src/administrator/api/authentication.php'
+            console.log(this.data);
             fetch(url, {
                 method: 'post',
                 mode: 'cors',
@@ -29,7 +27,7 @@
                 },
                 redirect: 'follow',
                 referrerPolicy: 'no-referrer',
-                body: JSON.stringify(this.data)
+                body: JSON.stringify(this.code)
             })
             .then(response => response.json())
             .then(responseJson => {
@@ -41,7 +39,7 @@
         handle: function () {
             _this = this
             document.querySelector('input').addEventListener('change', function () {
-                _this.data.code = document.querySelector('input').value
+                _this.code = document.querySelector('input').value
                 _this.send()
             })
         },

@@ -6,7 +6,7 @@
         $response = json_decode($read, true);
     }
 
-    $username = $response['username'];
+    $userName = $response['username'];
     $email = $response['email'];
     $code = rand(100000,999999);
     $time = date("Y-m-d h:i:s");
@@ -23,7 +23,7 @@
     $retval = mail ($email,$subject,$message,$header);
     
     if( $retval == true ) {
-        $query = "INSERT INTO authentication VALUE ('$username', '$code', '$time')";
+        $query = "INSERT INTO authentication VALUE ('$userName', '$code', '$time')";
         echo $conn -> query($query);
     }else {
         echo -1;
