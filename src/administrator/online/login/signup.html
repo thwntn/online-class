@@ -169,7 +169,7 @@
                     .then((responseJsonAu) => {
                         if(responseJsonAu == 1) {
                             localStorage.setItem('userOLAuthentication', this.data.username)
-                            location.href = 'http://localhost/online-class/src/administrator/online/login/authentication.html' 
+                       //     location.href = 'http://localhost/online-class/src/administrator/online/login/authentication.html' 
                         }
                         else {
                             console.log('err');
@@ -277,7 +277,7 @@
             })
 
             document.querySelector('.registry').addEventListener('click', () => {
-                location.href = 'http://localhost:5500/online-class/src/administrator/online/login/login.html'
+                location.href = 'http://localhost/online-class/src/administrator/online/login/login.html'
             })
         },
 
