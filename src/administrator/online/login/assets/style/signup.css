@@ -69,8 +69,7 @@ input {
 }
 p {
     width: 100%;
-    font-size: 12px !important;
-    color: #999;
+    font-size: 14px !important;
     margin-top: -100px !important;
 }
 .submit {
