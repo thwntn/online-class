@@ -1,16 +1,14 @@
 @font-face{
     font-family: basic;
-    src: url(./font/Bandon.ttf);
-}
-
-
+    src: url(./font/Bandon.ttf); }
 *{
     margin: 0;
     padding: 0;
-    font-family: abc;
+
 }
 html {
     scroll-behavior: smooth;
+    font-family: basic;
 }
 .main-subject{
     padding-top: 90px;
@@ -62,13 +60,22 @@ img{
     float: right;
     width: 20px;
 }
+.add-dl{
+    margin-left:730px;
+    width:100px;
+    padding:5px;
+    border-radius: 30px;
+}
+.button{
+    border-radius: 30px;
+}
 button{
     width: 70px;
     margin-left: 70px;
-    border-radius: 30px;
     border: 1px white;
     background-color: white;
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
+   
 }
 .upload button{
     float: right;
@@ -132,18 +139,59 @@ i{
 a{
     color: black;
 }
+.repair{
+    float:right;
+    padding:10px;
+    background: none;
+    border: none;
+}
+
+.create-1::placeholder {
+    color:black;
+    font-size:15px;
+}
+.modal-body {
+    display: flex;
+}
+.modal-body textarea{
+  width:100%;
+}
+/* .modal-body .upload{
+   display:none; 
+} */
+.create-1{
+  width:250px;
+  height:40px;
+  background-color: rgb(218, 214, 214);
+  border:none;
+  padding:5px;
+  margin:10px;
+  /* margin:10px; */
+  border-radius: 10px;
+
+}
+.create-1::placeholder {
+  color:black;
+}
+.create{
+  background-color: rgb(218, 214, 214);
+  padding:5px;
+  border-radius: 10px;
+  margin-left:10px;
+}
+.delete{
+   background: none;
+   border: none;
+}
+
 /*Header*/
 
-@font-face {
-    font-family: basic;
-    src: url(./Bandon.ttf);
-}
 
 * {
     box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: basic;
+    /* font-family: basic; */
     color: black !important;
 }
 

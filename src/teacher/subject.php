@@ -12,181 +12,136 @@
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-    
-    <!-- <link rel="stylesheet" type="text/css" href="./style.css" media="screen" /> -->
     <link rel="stylesheet" type="text/css" href="./giaovien.css" media="screen" />
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Baloo+2:wght@600&family=Barlow:wght@300&display=swap" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
   
     <?php include 'header.php'; ?>
     <div class="main-subject">
         <?php
-            $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                                             join homework hw on sj.subject_id=hw.subject_id
-                                                        where subject_code='.$_GET["code"].'';
-            $result = $con->query($sql);
-            $result = mysqli_fetch_array($result);
+        
+        
+            $sql = ' SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
+                                             join homework hw on sj.subject_code=hw.subject_code
+                                             where sj.subject_code='.$_GET["code"].' ';
+            $kq = $con->query($sql);
+            $row=$kq->fetch_assoc();
 
-            $anh = $result['subject_image'];
+            $anh = $row['subject_image'];
             echo "
                 <div class='name-subject' style='background:url($anh)'>
+                <a href='' class='repair'><i class='fa-solid fa-pencil'></i></a>
                     <p>
-                        <b>".$result['subject_id']."</b>
-                        ".$result['subject_name']."
+                        <b>".$row['subject_id']."</b>
+                        ".$row['subject_name']."
                     </p>
                 </div>
             ";
             
         ?>       
-    </div>
+    </div> <br>
+    
+    
+    <form action="add_document.php" method = "GET"  >   
+        <button class='add-dl'>Thêm tài liệu</button>
+        <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >  
+    </form>    
+                                
+
     <div class="link">
+    <a href="" class='repair'><i class='fa-solid fa-pencil'></i></a>
+
+
         <div class="shadow p-4 mb-5 bg-white rounded">
-            <p>Đường dẫn cuộc họp <a href=""></a></p>
+            <p>Đường dẫn cuộc họp</p>
             <a href="https://meet.google.com/hfz-duwk-hzq">https://meet.google.com/hfz-duwk-hzq</a>
         </div>
         <div class="shadow p-4 mb-5 bg-white rounded">
             <p>Bài tập sắp đến hạn</p>
-            <button>Empty</button>
+            <button class='button'>Empty</button>
         </div>
     </div> 
     <?php
-        $name = $result['user_full_name'];
-        $img_user = $result['user_image'];
-        $sql = 'SELECT * FROM  subject sj join homework hw on hw.subject_id=sj.subject_id 
-            where subject_code='.$_GET["code"].' ';
-        $result = $con->query($sql);
-        while($row = $result->fetch_assoc()) {
-            $k = $row['homework_time'];
-            $day = substr($k,-11,2);
-            $month = substr($k,-14,2);
-            $year = substr($k,-20,4);
-            echo "
-            <div id='content'>
-                <div class='content-1'>
-                    <div class='media'>
-                        <img src='$img_user' class='mr-3' alt='...'>
-                        <div class='media-body'>
-                        <p class='mb-0'>".$name."<a href='#'></a></p>
-                        <h6>".$day."/".$month."/".$year."</h6>
-                        </div>
+        $name = $row['user_full_name'];
+        $img_user = $row['user_image'];
+        $sql = ' SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
+                                            join homework hw on sj.subject_code=hw.subject_code
+                                            where sj.subject_code='.$_GET["code"].' ';
+        $kq = $con->query($sql);
+        while($row=$kq->fetch_assoc()){
+ 
+           
+             $k = $row['homework_time'];
+             $day = substr($k,-11,2);
+             $month = substr($k,-14,2);
+             $year = substr($k,-20,4);
+             ?>
+             <div id='content'>
+                 <div class='content-1'>
+                 <button class='repair' data-bs-toggle='collapse' data-bs-target='#collapseWidthExample' aria-expanded='false' aria-controls='collapseWidthExample'><i class='fa-solid fa-pencil'></i></button>
+                 <div class='collapse collapse-horizontal' id='collapseWidthExample'>  
+                         <form action = "./delete_homework.php" method = "GET"  class = "formXoa" >
+                            <button type="submit" class = "delete"><i class='fa-solid fa-xmark'></i></button>
+                            <input type="hidden" name="id" value = "<?php echo $row['homework_id'] ?>" >
+                        </form>  
+                </div> 
+                     <div class='media'>
+                        
+                         <img src="<?php echo $img_user; ?>" class='mr-3' alt='...'>
+                       
+                         <div class='media-body'>
+                         <p class='mb-0'><?php echo $name ?><a href='#'></a></p>
+                         <h6><?php echo $day; echo "/"; echo $month;echo "/"; echo $year;?></h6>
+                         </div>
+                     </div>
+                     <hr>
+                     <div id='baitap'>
+                         <a href='./homework.php?id="<?php echo $row['homework_id'];?>"'>
+                             <p><?php echo $row['homework_content']?> </p>
+                         </a>
+                         <h6></h6>
                     </div>
-                    <hr>
-                    <div id='baitap'>
-                        <a href='./homework.php?id=".$row['homework_id']."'>
-                            <p>".$row['homework_content']." :</p>
-                        </a>
-                        <h6></h6>
-                    </div>
-                </div>
-            </div>
-            ";
+                 </div>
+             </div>
+             <?php
         }
     ?>
+                    
     <div id="xemthem">
-        <button>Xem thêm...</button>
+        <button class='button'>Xem thêm...</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
     <script>
     
-    document.querySelector('.frameNoti').addEventListener('click', function(event){
-        event.stopPropagation()
-    })
-    document.querySelectorAll('.frameNoti')[1].addEventListener('click', function(event){
-        event.stopPropagation()
-    })
-
-
-    //Background Header
-    document.addEventListener('scroll', () => {
-        if(window.scrollY > 0) {
-            document.querySelector('.backgroundNav').classList.remove('noactiveNav')
-            document.querySelector('.backgroundNav').classList.add('activeNav')
-        }
-        else {
-            document.querySelector('.backgroundNav').classList.add('noactiveNav')
-            document.querySelector('.backgroundNav').classList.remove('activeNav')
-        }
-    })
+    
    
-    
-    //Content Mess
-    var contentMess = false
-    const itemNoti = document.querySelectorAll('.itemNoti')
-    for (i of itemNoti){
-        i.addEventListener('click', function(){
-            if(!contentMess) {
-                document.querySelector('.frameMess').style.display = 'flex'
-                contentMess = true
-            }
-            else {
-                document.querySelector('.frameMess').style.display = 'none'
-                contentMess = false
-            }
-        })
-    }
-    document.querySelector('.backMess').addEventListener('click', () => {
-        document.querySelector('.frameMess').style.display = 'none'
-        contentMess = false
-    })
-    
-    //Active Noti
-    var noti = false
-    document.querySelector('.actNoti').addEventListener('click', function() {
-        if(!noti) {
-            document.querySelector('.noti').style.display = 'flex'
-            noti = true
-        }
-        else {
-            document.querySelector('.noti').style.display = 'none'
-            noti = false
-        }
-    })
-    
-    //Mess Mobile
-    document.querySelector('.mess-mobile').addEventListener('click', function() {
-        if(!mess) {
-            document.querySelector('.mess').style.bottom = '100px'
-            document.querySelector('.mess').style.display = 'flex'
-            document.querySelector('.mess').style.right = '20px'
-            mess = true
-        }
-        else {
-            document.querySelector('.mess').style.display = 'none'
-            mess = false
-        }
-    })
-    document.querySelector('.frameMess').addEventListener('click', function(e) {
-        e.stopPropagation();
-    })
 
-    //Active Notification Mobile
-    document.querySelector('.noti-mobile').addEventListener('click', function() {
-        if(!noti) {
-            document.querySelector('.noti').style.display = 'flex'
-            document.querySelector('.noti').style.right = '20px'
-            document.querySelector('.noti').style.bottom = '100px'
-            noti = true
-        }
-        else {
-            document.querySelector('.noti').style.display = 'none'
-            noti = false
-        }
-    })
-
-    //Active Message
-    var mess = false
-    document.querySelector('.actMess').addEventListener('click', function() {
-        if(!mess) {
-            document.querySelector('.mess').style.display = 'flex'
-            mess = true
-        }
-        else {
-            document.querySelector('.mess').style.display = 'none'
-            mess = false
-        }
-    })
+    //Xoa bai tap
+    document.addEventListener('DOMContentLoaded', function() {
+        var el = document.getElementsByClassName("formXoa"); 
+        for(var i=0;i < el.length;i++) {
+        el[i].addEventListener("submit", function(e) { 
+                e.preventDefault();
+                Swal.fire({ 
+                    title: 'Bạn chắc chắn muốn xóa?',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Delete'
+                }).then((result) => {
+                    if (result.isConfirmed) {            
+                    e.target.submit();
+                    }
+                })
+        });
+    }  
+        }, false);
 </script>
 </body>
 </html>

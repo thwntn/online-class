@@ -1,3 +1,8 @@
+<?php
+//  echo $_POST['userOL'];
+//  $user=$_POST['userOL'];
+include 'connect.php' ; 
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <html>
@@ -7,7 +12,6 @@
 <link rel="stylesheet" type="text/css" href="./style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 </head>
 <body>
 <div class="main">
@@ -22,12 +26,9 @@
     </div>
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
-        <!-- <div class = 'itemNoti'> 
-             <div class = 'imageNoti'></div>
-            <div class = 'contentNoti'> 
-                 <h4>CT211</h4>
-                <p>Bài tập mới được giao</p> -->    echo $_POST['userOL'];
-
+        
+                    <?php
+                    
                     $sql="SELECT * FROM notification nt JOIN subject sj ON nt.user_name = sj.user_name  ";
                     $kq=$con->query($sql);
                     while($row=$kq->fetch_assoc()){
@@ -44,33 +45,12 @@
                 ?> 
             
         
-        <!-- <div class = 'itemNoti'>
-            <div class = 'imageNoti'></div>
-            <div class = 'contentNoti'>
-                <h4>CT211</h4>
-                <p>Bài tập mới được giao</p>
-            </div>
-        </div>
-        <div class = 'itemNotiStatus'>
-            <div class = 'imageNoti'></div>
-            <div class = 'contentNoti'>
-                <h4>CT211</h4>
-                <p>Bài tập mới được giao</p>
-            </div>
-        </div>
-        <div class = 'itemNoti'>
-            <div class = 'imageNoti'></div>
-            <div class = 'contentNoti'>
-                <h4>CT211</h4>
-                <p>Bài tập mới được giao</p>
-            </div>
-        </div> -->
+       
     </div>
 
     <div class = 'frameNoti mess'>
         <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
         <?php 
-            $con = mysqli_connect('localhost', 'root','', 'online-class');
             $sql="SELECT * FROM chat c JOIN message ms ON c.chat_id = ms.chat_id JOIN user ON c.user_name=user.user_name  ";
             $kq=$con->query($sql);
             while($row=$kq->fetch_assoc()){
@@ -161,9 +141,10 @@
     <div id = 'home' class="content">
         <h1><b>Trang giảng viên</h1>
         <p>Chào mừng đến trang giảng viên</b></p>
-        <form action="" method="get" class="text">
+        <form action="search.php" method="GET" class="text">
             <input class="search" type="text" name="search" placeholder="Nhập nội dung"> <br>
-            <button type="button" class="submit">Search...</button>
+
+            <button type="submit" class="submit">Search...</button>
         </form>
     </div>
    
@@ -204,20 +185,19 @@
                             <th>Tên môn</th> 
                             </tr>
                             <?php 
-                            $con = mysqli_connect('localhost', 'root','', 'online-class');
+                            
                         
                             
-                            $sql=" SELECT * FROM calendar cd JOIN subject sj ON cd.subject_id=sj.subject_id ";
+                            $sql=" SELECT * FROM calendar cd JOIN subject sj ON cd.subject_id=sj.subject_id where user_name='$user' ";
                             $kq=$con->query($sql);
                             
                             while($row=$kq->fetch_assoc()){
                             $calendar = $row['calendar_time'];
-                            $day1 = substr($calendar,-14,5);
                             $time = substr($calendar,-9,6);
                             echo "
                             <tr>
                             <td>".$time."</td>
-                            <td>".$day1."</td>
+                            <td>".$row['calendar_start']."</td>
                             <td>".$row['subject_id']."</td>
                             <td>".$row['subject_name']."</td>
                           
@@ -236,8 +216,10 @@
             </div>
         </div>
     </div>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
 //navigation
     document.querySelector('.frameNoti').addEventListener('click', function(event){

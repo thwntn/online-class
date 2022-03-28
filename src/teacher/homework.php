@@ -14,6 +14,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
+    <br>
     <div class="menu">
         <ul class="menu-1">
             <li><a href="index.php">&nbsp;<img src="image/Home-2-2-icon.png" style="width:20px">&nbsp;Trang chủ</a></li>
@@ -23,8 +24,8 @@
             <li>Lớp học</li>
             <?php
                 $sql = "SELECT * FROM subject";
-                $result = $con->query($sql);
-                while($row = $result->fetch_assoc()) {
+                $kq = $con->query($sql);
+                while($row = $kq->fetch_assoc()) {
                     $img = $row['subject_image'];
                     echo"
                     <li>
@@ -39,27 +40,28 @@
     <div class="main">
         <?php
             $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                                             join homework hw on sj.subject_id=hw.subject_id
-                                             where homework_id='.$_GET["id"].'';
-            $result = $con->query($sql);
-            $result = mysqli_fetch_array($result);
+                                             join homework hw on sj.subject_code=hw.subject_code
+                                             where homework_id='.$_GET["id"].' ';
+            $kq = $con->query($sql);
+            $row = mysqli_fetch_array($kq);
 
-            $k = $result['homework_time'];
+            $k = $row['homework_time'];
             $day = substr($k,-11,2);
             $month = substr($k,-14,2);
             $year = substr($k,-20,4);
-            $user_img = $result['user_image'];
+            $user_img = $row['user_image'];
             echo"
             <p>
+            <img src='image/format+list+icon.png' class='listmenu'>
                 <a href=''>
-                    <img src='image/format+list+icon.png'>&nbsp;".$result['subject_id']."  ".$result['subject_name']."
+                    &nbsp;".$row['subject_id']."  ".$row['subject_name']."
                 </a>
             </p>
             
         <ul>
         <a href=''><img src='image/Pencil-icon.png' class='img1'></a>
             <img src='$user_img' class='img2'>
-            <li><b>&nbsp;".$result['user_full_name']." <br>
+            <li><b>&nbsp;".$row['user_full_name']." <br>
                 &nbsp; 
                 <i>
                     ".$day."/".$month."/".$year."
@@ -67,56 +69,56 @@
             </li>
             <hr style='width:95%'>
             <li style='color:red'>
-                ".$result['homework_content']."
+                ".$row['homework_content']."
             </li>
             ";
         ?>
-        </ul><hr>
+        </ul> <br> <hr> <br>
         <div class="comment">
-            <img src="image/user.png">
+             <img src="image/user.png">
             <form action="" method="get" class="comment-1">
                 <input class="comment-2" type="text" name="comment">
                 <button class="send" type="submit"><i class="fas fa-paper-plane"></i></button>
             </form>
-        </div> <br> 
-        <ul>
-            <img src="image/user.png" class="img2">
-            <li><b>Trần Thị Tố Quyên</li>
-            <li style="font-size:10px">21/01/2022</b></li>
-            <li>Nội dung bình luận </li>
-        </ul>
-
+        </div> 
+                <?php 
+                $sql = 'SELECT * FROM comment cmt join homework hw on cmt.homework_id=hw.homework_id 
+                                                  join user on cmt.user_name=user.user_name
+                                                  where hw.homework_id= '.$_GET["id"].' ';
+                $kq = $con->query($sql);
+                while($row = mysqli_fetch_array($kq)){
+                    echo "
+                    <ul>
+                    <img src=".$row['user_image']." class='img2'>
+                    <li><b>".$row['user_full_name']."</li>
+                    <li style='font-size:10px'>21/01/2022</b></li>
+                    <li>".$row['comment_content']."</li>
+                    ";
+                }
+                ?>
     </div>
     <div class="right">
-        <div class="right-1">
-            <p><b>Bài tập của bạn</p> 
-            <p class="link"><a href="">Thêm bài tập</a></b></p>
-        </div>
+        
         <div class="right-2">
             <p><b>Danh sách sinh viên đã nộp bài
                 20/40</b></p>
-            <ul>
-                <li><img src="image/user1.jpg" style="width:40px;border-radius:20px;"></li> 
-                <li>Tên người dùng</li>
-                <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
-                <li><a href=""><img src="image/img_179653.png" style="width:10px"></a></li>
-            </ul>
 
-            <ul>
-                <li><img src="image/user1.jpg" style="width:40px;border-radius:20px;"></li>
-                <li>Tên người dùng</li>
-                <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
-                <li><a href=""><img src="image/img_179653.png" style="width:10px"></a></li>
-            </ul>
-
-            <ul>
-                <li><img src="image/user1.jpg" style="width:40px;border-radius:20px;"></li>
-                <li>Tên người dùng</li>
-                <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
-                <li><a href=""><img src="image/img_179653.png" style="width:10px"></a></li>
-            </ul>
-
-            <!-- Button trigger modal -->
+            <?php 
+            $sql='SELECT * FROM homework hw join score on hw.homework_id=score.homework_id
+                                            join user on score.user_name=user.user_name
+                                            where hw.homework_id= '.$_GET["id"].' ';
+             $kq = $con->query($sql);
+             while($row = mysqli_fetch_array($kq)){
+                 echo "
+                    <ul>
+                    <li><img src=".$row['user_image']." style='width:40px;border-radius:20px;''></li> 
+                    <li style='font-size:15px'>".$row['user_full_name']."</li> 
+                    <li><a href=''><img src='image/free-file-icon-1453-thumb.png' style='width:15px'></a></li>
+                    <li><a href=''><img src='image/img_179653.png' style='width:10px'></i></a></li>
+                    </ul>
+                 ";
+             }
+            ?>
             <button type="button" class="score" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
                 Bảng điểm
             </button>
@@ -130,24 +132,23 @@
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                    <ul>
-                            <li><img src="image/user1.jpg" style="width:40px;border-radius:20px;"></li>
-                            <li>Tên người dùng</li>
-                            <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
-                            <li style="color:red"><b>C</b></li>
+            
+                    <?php
+                        $sql='SELECT * FROM homework hw join score on hw.homework_id=score.homework_id
+                                                        join user on score.user_name=user.user_name
+                                                        where hw.homework_id= '.$_GET["id"].' ';
+                        $kq = $con->query($sql);
+                        while($row = mysqli_fetch_array($kq)){
+                            echo "
+                            <ul>
+                            <li><img src=".$row['user_image']." style='width:40px;border-radius:20px;'></li>
+                            <li>".$row['user_full_name']."</li>
+                            <li><a href=''><img src='image/free-file-icon-1453-thumb.png' style='width:15px'></a></li>
+                            <li style='color:red'><b>".$row['score_level']."</b></li>
                         </ul>
-                        <ul>
-                            <li><img src="image/user1.jpg" style="width:40px;border-radius:20px;"></li>
-                            <li>Tên người dùng</li>
-                            <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
-                            <li style="color:red"><b>B</b></li>
-                        </ul>
-                        <ul>
-                            <li><img src="image/user1.jpg" style="width:40px;border-radius:20px;"></li>
-                            <li>Tên người dùng</li>
-                            <li><a href=""><img src="image/free-file-icon-1453-thumb.png" style="width:15px"></a></li>
-                            <li style="color:red"><b>A</b></li>
-                        </ul>
+                            ";
+                        }
+                ?>
                     </div>
                     
                     </div>
@@ -158,6 +159,16 @@
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+<script> 
+    const menu = document.querySelector('.menu');
+    const listmenu = document.querySelector('.listmenu');
+    const main = document.querySelector('.main');
 
+    listmenu.onclick = function() {
+        main.classList.toggle('expand');
+        menu.classList.toggle('hide');
+        
+    }
+</script>
 </body>
 </html>

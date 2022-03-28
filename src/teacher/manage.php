@@ -1,3 +1,6 @@
+<?php
+    include './connect.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,11 +11,14 @@
     <link rel="stylesheet" href="./manage.css">
     <link rel="stylesheet" href="modulemanage/framework/css/bootstrap.css">
     <script src="modulemanage/framework/js/bootstrap.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Baloo+2:wght@600&family=Barlow:wght@300&display=swap" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <br> <br>
-  <?php include "header.php"; ?>
+  <?php include 'header.php'; ?>
     <div class = "mainSession row pad">
         <h2 class = "title row-md-10">Quản lí môn học</h2>
         <div class = "navigation col-md-6">
@@ -20,7 +26,7 @@
                 <li><a href="./addclass.php">Thêm lớp học</a></li>
                 <li><a href="">Xem vi phạm</a></li>
                 <li>
-                <form action="" method="get" class="box">
+                <form action="search.php" method="GET" class="box">
                 <b>Tìm kiếm</b>
                 <input class="search-class" type="text" name="search" placeholder="Nhập nội dung"> 
                 </form>
@@ -28,79 +34,66 @@
             </ul>
         </div>
         <div class = "items row">
-       
-
             <?php 
-                $con = mysqli_connect('localhost', 'root','', 'online-class');
-                $sql="select * FROM subject  ";
+                
+                $sql="SELECT * FROM subject ";
                 $kq=$con->query($sql);
                 while($row=$kq->fetch_assoc()){
-                    echo "
+                    ?>
                     <div class = 'itemBox col-md-4'>
+                        <!--Xóa môn học -->
+                        <div class="collapse collapse-horizontal" id="collapseWidthExample">  
+                                <form action = "./deletesubject.php" method = "GET"  class = "formDelete" >
+                                    <button type="submit" class = "delete"><i class="fa-solid fa-xmark"></i></button>
+                                    <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >
+                                </form>  
+                        </div> 
                         <div class = 'item'>
-                            <div class = 'backgroundItem'>
-                            <img src=".$row['subject_image'].">
+                            <div class = 'backgroundItem' style="background:url( <?php echo $row['subject_image'];?> ); background-size: cover">                           
                             </div>
                             <div class= 'titleItem'>
-                            <a href='./subject.php?code=".$row['subject_code']."''><h3 class = 'keySubject'>".$row['subject_id']."</h3>
-                                <h5 class = 'nameSuject'>".$row['subject_name']."</h5></a>
+                                <a href="./subject.php?code=<?php echo $row['subject_code']; ?>"><h3 class = 'keySubject'><?php echo $row['subject_id']; ?></h3>
+                                <h5 class = 'nameSuject'><?php echo $row['subject_name']; ?></h5></a>
+                                <!-- Sua mon hoc -->
+                                <div class="collapse collapse-horizontal" id="collapseWidthExample">                                                            
+                                     <form action = "./suasubject.php" method = "GET"  >
+                                        <button type="submit" class = "repair"><i class="fa-solid fa-pencil"></i></button>
+                                        <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >
+                                    </form>                               
+                                </div> 
                             </div>
+                            
                             <div class = 'navItem'>
                                 <button class = 'submit'><i class='fas fa-user'></i></button>
                                 <button class = 'submit'><i class='fas fa-user-plus'></i></button>
-                                <button class = 'submit' data-bs-toggle='modal' data-bs-target='#exampleModal'><i class='fas fa-file-alt'></i></button>
-                                <div class='modal fade' id='exampleModal' tabindex='-1' aria-labelledby='exampleModalLabel' aria-hidden='true'>
-                                <div class='modal-dialog modal-lg'>
-                                <div class='modal-content'>
-                                <div class='modal-header'>
-                                    <h1 class='modal-title' id='exampleModalLabel'>Thêm nội dung</h1>
-                                    <button  class='btn btn-secondary' data-bs-dismiss='modal' style='margin-right: -320px;'>Hủy</button>
-                                    <button  class='btn btn-primary submit'>Hoàn tất</button>
-                                </div>
-                                <div class='modal-body'>
-                                        <form action='' method='post' >           
-                                            <table>
-                                            <tr> 
-                                                <td><input class='create-1'  type='text' name='id' placeholder='Mã tài liệu' ></td>
-                                                <td><input class='create-1'   type='date' name='date-finish'></td>
-                                            </tr>
-                                            <tr>    
-                                                <td colspan='2'><textarea class='create-1' name='content'></textarea></td>
-                                            </tr>
-                                            <tr>    
-                                                <td>
-                                                <input class='upload' type='file'>
-                                                <p class='create'>Chưa chọn file</p></td>
-                                            </tr>
-                                        </table>
-                                    </form>  
-                                    
-                                </div>
-                                </div>
-                            </div>
-                            </div>  
-                                <button class = 'submit'><i class='fas fa-pen'></i></button>
+                                
+                                <!--Them mon hoc -->
+                                <form action="add_homework.php" method = "GET"  >   
+                                <button class = 'submit'><i class='fas fa-file-alt'></i></button>
+                                <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >  
+                                </form>                                                              
+                                                        
+                                <button class = 'submit' data-bs-toggle='collapse' data-bs-target='#collapseWidthExample' aria-expanded='false' aria-controls='collapseWidthExample'><i class='fas fa-pen'></i></button>
                                 <button class = 'submit'><i class='fas fa-star'></i></button>
                             </div>
                         </div>
                     </div>
 
-                    ";
-                }
-
-            ?>
-
+                    <?php
+                        }
+                    ?>                  
         </div> 
         <button class = "more">Xem thêm...</button>
     </div>
+
     <script>
-        document.querySelector('.create').addEventListener('click', function () {
-            console.log(123)
-        document.querySelector('.upload').click()
-    })
-    document.querySelector('.upload').addEventListener('change', function () {
-        document.querySelector('.create').innerHTML = document.querySelector('.upload').value
-    })
+    //upload file
+    //     document.querySelector('.create').addEventListener('click', function () {
+    //     document.querySelector('.upload').click()
+    // })
+    // document.querySelector('.upload').addEventListener('change', function () {
+    //     document.querySelector('.create').innerHTML = document.querySelector('.upload').value
+    // })
     //navigation
     document.querySelector('.frameNoti').addEventListener('click', function(event){
         event.stopPropagation()
@@ -125,8 +118,8 @@
 
     //Content Mess
     var contentMess = false
-    const itemNoti = document.querySelectorAll('.itemNoti')
-    for (i of itemNoti){
+    const itemNotis = document.querySelectorAll('.itemNoti')
+    for (i of itemNotis){
         i.addEventListener('click', function(){
             if(!contentMess) {
                 document.querySelector('.frameMess').style.display = 'flex'
@@ -205,6 +198,31 @@
     document.querySelector('.frameMess').addEventListener('click', function(e) {
         e.stopPropagation();
     })
-    </script>
+   
+    //Xóa môn học
+    document.addEventListener('DOMContentLoaded', function() {
+    var el = document.getElementsByClassName("formDelete"); 
+    for(var i=0;i < el.length;i++) {
+    el[i].addEventListener("submit", function(e) { 
+            e.preventDefault();
+            Swal.fire({ 
+                title: 'Bạn có chắc chắn muốn xóa không?',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Delete'
+            }).then((result) => {
+                if (result.isConfirmed) {            
+                e.target.submit();
+                }
+            })
+    });
+}  
+}, false);
+
+
+        //Sua mon hoc
+       
+</script>
 </body>
 </html>
