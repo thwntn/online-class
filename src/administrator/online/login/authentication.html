@@ -5,10 +5,32 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+
+    <link rel="stylesheet" href="./assets/style/authen.css">
+
+    <!-- awaresome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+    <!-- font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
 </head>
 <body>
     <div id="main">
-        <input type="text" placeholder="Nhập mã xác thực được gửi đến mail của bạn">
+        <div class="frame_authen flex">
+            <div class="box_authen flex">
+                <div class="logo flex">
+                    <i class="fas fa-fingerprint"></i>
+                </div>
+                <h1>Xác thực</h1>
+                <p>Nhận mã xác thực tại gmail của bạn và điền vào ô bên dưới</p>
+                <div class="in_data flex">
+                    <input type="text" maxlength = 6>
+                </div>
+                <button>Tự động xác thực...</button>
+            </div>
+        </div>
     </div>
 </body>
 <script>

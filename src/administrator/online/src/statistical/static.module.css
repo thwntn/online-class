@@ -1,0 +1,132 @@
+.frame {
+    background-color: rgba(0, 0, 0, 0.025);
+    padding: 24px;
+    border-radius: 16px;
+}
+.title {
+    padding: 0px 0px 32px 0px;
+}
+.graphInteractive,
+.graphSignUp,
+.graphLogin {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.05);
+}
+.graphLogin {
+    padding: 12px 28px;
+}
+.graphInteractive {
+    margin-top: 24px !important;
+    margin-left: 16px!important;
+}
+.graphSignUp {
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
+    padding: 12px;
+    margin-left: 16px!important;
+}
+.graphLogin h5 {
+    margin-top: 24px !important;
+}
+.graphSignUp h5 {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    display: flex;
+    margin-top: 24px;
+}
+.graphInteractive {
+    margin-left: 16px;
+    display: flex;
+    padding: 12px;
+    justify-content: center;
+}
+.graphInteractive h5 {
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+.countSignUp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.framePerson {
+    padding: 0 !important;
+}
+.countInteractive {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.graph {
+    display: flex;
+}
+.mainSession {
+    background-color: #fff;
+    box-shadow: 0px 0px 16px rgba(0, 0, 0, 0.05);
+    margin-top: 24px !important;
+    padding: 24px;
+    border-radius: 12px;
+}
+.status {
+    background-color:rgba(0, 179, 45, 0.151);
+    padding: 4px 12px;
+    border-radius: 48px;
+}
+.status div {
+    width: 8px;
+    height: 8px;
+    border-radius: 8px;
+    margin-right: 8px;
+    background-color: rgb(0, 255, 64);
+}
+.img {
+    display: flex;
+    justify-content: center;
+}
+.itemDocument div,
+.itemSignUp div,
+.itemLogin div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.itemDocument .img div,
+.itemSignUp .img div,
+.itemLogin .img div {
+    height: 64px;
+    width: 64px;
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.itemDocument div p,
+.itemSignUp div p,
+.itemLogin div p {
+    padding: 0;
+    margin: 0;
+    display: flex;
+}
+.itemDocument,
+.itemSignUp,
+.itemLogin {
+    background-color: rgba(0, 0, 0, 0.025);
+    padding: 12px;
+    border-radius: 4px;
+    margin-bottom: 16px !important;
+}
+.itemDocument .img div {
+    background-image: url(./img/document.png);
+    background-size: 110%;
+}
+.itemLogin .img div {
+    background-image: url(./img/login.png);
+    background-size: 100%;
+}
+.itemSignUp .img div {
+    background-image: url(./img/signup.png);
+    background-size: 100%;
+}

@@ -1,0 +1,7 @@
+.frame {
+    padding: 24px 0px;
+    padding-top: 74px;
+    height: 100vh;
+    display: flex;
+    flex-wrap: wrap;
+}

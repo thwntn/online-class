@@ -6,6 +6,8 @@ import Log from '../log/log'
 import Confirm from '../confirm/confirm'
 import Message from './message.js'
 import AccountActive from '../confirm/infouser/accountactive'
+import Statistical from '../statistical/statistical'
+
 const items = ['Trang chủ', 'Tài khoản', 'Thông báo', 'Tin nhắn', 'Nhật kí']
 
 function Header ({setMain}) {
@@ -49,7 +51,10 @@ function Header ({setMain}) {
                     className = {style.item}
                     onClick = {() => setMain(<Confirm></Confirm>)}
                 ><a href = '#account'>Tài khoản</a></li>
-                <li className = {style.item}><a href = '#manage'>Thống kê</a></li>
+                <li
+                    className = {style.item}
+                    onClick = {() => setMain(<Statistical></Statistical>)}
+                ><a href = '#manage'>Thống kê</a></li>
                 <li className = {style.item}><a href = '#log'>Nhật kí</a></li>
                 <li onClick={() => setActiveNoti(!activeNoti)} className = {style.item}>
                     Thông báo

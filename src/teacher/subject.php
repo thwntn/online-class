@@ -20,14 +20,13 @@
 </head>
 <body>
   
-    <?php include 'header.php'; ?>
+    <?php // include 'header.php'; ?>
     <div class="main-subject">
         <?php
         
         
-            $sql = ' SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                                             join homework hw on sj.subject_code=hw.subject_code
-                                             where sj.subject_code='.$_GET["code"].' ';
+            $sql = ' SELECT * FROM subject sj join user u on sj.user_name=u.user_name join homework hw on sj.subject_code=hw.subject_code where sj.subject_code='.$_GET["code"].' ';
+            echo $sql;
             $kq = $con->query($sql);
             $row=$kq->fetch_assoc();
 

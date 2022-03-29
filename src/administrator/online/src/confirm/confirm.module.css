@@ -4,6 +4,7 @@
     display: flex;    
     align-content: center;
     flex-wrap: wrap;
+    height: 100vh;
 }
 .items {
     display: flex;
