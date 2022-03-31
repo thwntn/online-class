@@ -12,6 +12,10 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Barlow:wght@300&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@4.5.10-0/dist/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Baloo+2:wght@600&family=Barlow:wght@300&display=swap" rel="stylesheet">
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
     <br>
@@ -30,7 +34,7 @@
                     echo"
                     <li>
                         <div class = 'item' style='background-image: url($img)'></div>
-                        <a href='./subject.php?code=".$row['subject_code']."'>".$row['subject_name']."</a>
+                        <a href='./subject.php?id=".$row['subject_id']."'>".$row['subject_name']."</a>
                     </li>
                     ";
                 }
@@ -40,7 +44,7 @@
     <div class="main">
         <?php
             $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                                             join homework hw on sj.subject_code=hw.subject_code
+                                             join homework hw on sj.subject_id=hw.subject_id
                                              where homework_id='.$_GET["id"].' ';
             $kq = $con->query($sql);
             $row = mysqli_fetch_array($kq);
@@ -50,37 +54,66 @@
             $month = substr($k,-14,2);
             $year = substr($k,-20,4);
             $user_img = $row['user_image'];
-            echo"
+            ?>
             <p>
             <img src='image/format+list+icon.png' class='listmenu'>
                 <a href=''>
-                    &nbsp;".$row['subject_id']."  ".$row['subject_name']."
+                    &nbsp;<?php echo $row['subject_code']; 
+                                echo $row['subject_name']; ?>
                 </a>
             </p>
-            
         <ul>
-        <a href=''><img src='image/Pencil-icon.png' class='img1'></a>
-            <img src='$user_img' class='img2'>
-            <li><b>&nbsp;".$row['user_full_name']." <br>
+        
+        <button class='img1' data-bs-toggle='collapse' data-bs-target='#collapseWidthExample' aria-expanded='false' aria-controls='collapseWidthExample'><i class='fa-solid fa-pencil'></i></button>
+        <div class='collapse collapse-horizontal' id='collapseWidthExample'>  
+                         <form action = "./delete_homework.php" method = "GET"  class = "formXoa" >
+                            <button type="submit" class = "delete"><i class='fa-solid fa-xmark'></i></button>
+                            <input type="hidden" name="id" value = "<?php echo $row['homework_id'] ?>" >
+                        </form>  
+        </div> 
+        <img src="<?php echo $user_img; ?>" class='img2'>
+            <li><b>&nbsp;<?php echo $row['user_fullname']; ?> <br>
                 &nbsp; 
                 <i>
-                    ".$day."/".$month."/".$year."
+                <?php echo $day; echo "/"; echo $month;echo "/"; echo $year;?>
                 </i> </b>
+            
             </li>
             <hr style='width:95%'>
+              <div class='collapse collapse-horizontal' id='collapseWidthExample'>  
+                    <form action = "./suahomework.php" method = "GET" >
+                            <button type="submit" class = "delete"><i class='fa-solid fa-pencil'></i></button>
+                            <input type="hidden" name="id" value = "<?php echo $row['homework_id'] ?>" >
+                        </form> 
+                        &nbsp;
+            </div> 
+            
             <li style='color:red'>
-                ".$row['homework_content']."
+                <?php echo $row['homework_content']; ?>
             </li>
-            ";
-        ?>
+            
+        
         </ul> <br> <hr> <br>
         <div class="comment">
+    
+    
+            
+
              <img src="image/user.png">
-            <form action="" method="get" class="comment-1">
+             <form action="" method="post" class="comment-1">
                 <input class="comment-2" type="text" name="comment">
-                <button class="send" type="submit"><i class="fas fa-paper-plane"></i></button>
+                <button class="send" type="submit" name="upload"><i class="fas fa-paper-plane"></i></button>
             </form>
-        </div> 
+            <?php
+            if(isset($_POST['comment'])){
+                $homework_id=$_GET['id'];
+                $content=$_POST["comment"];
+                $sql1 = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
+                    VALUES ('$content', now(),'ngocdiem','$homework_id')";
+                $kq1=$con->query($sql1);
+            }
+    ?>
+         </div>  
                 <?php 
                 $sql = 'SELECT * FROM comment cmt join homework hw on cmt.homework_id=hw.homework_id 
                                                   join user on cmt.user_name=user.user_name
@@ -90,12 +123,14 @@
                     echo "
                     <ul>
                     <img src=".$row['user_image']." class='img2'>
-                    <li><b>".$row['user_full_name']."</li>
-                    <li style='font-size:10px'>21/01/2022</b></li>
+                    <li><b>".$row['user_fullname']."</li>
+                    <li style='font-size:10px'>".$row['comment_time']."</b></li>
                     <li>".$row['comment_content']."</li>
+                    </ul>
                     ";
                 }
                 ?>
+
     </div>
     <div class="right">
         
@@ -108,11 +143,11 @@
                                             join user on score.user_name=user.user_name
                                             where hw.homework_id= '.$_GET["id"].' ';
              $kq = $con->query($sql);
-             while($row = mysqli_fetch_array($kq)){
+             while($row = mysqli_fetch_assoc($kq)){
                  echo "
                     <ul>
                     <li><img src=".$row['user_image']." style='width:40px;border-radius:20px;''></li> 
-                    <li style='font-size:15px'>".$row['user_full_name']."</li> 
+                    <li style='font-size:15px'>".$row['user_fullname']."</li> 
                     <li><a href=''><img src='image/free-file-icon-1453-thumb.png' style='width:15px'></a></li>
                     <li><a href=''><img src='image/img_179653.png' style='width:10px'></i></a></li>
                     </ul>
@@ -138,11 +173,11 @@
                                                         join user on score.user_name=user.user_name
                                                         where hw.homework_id= '.$_GET["id"].' ';
                         $kq = $con->query($sql);
-                        while($row = mysqli_fetch_array($kq)){
+                        while($row = mysqli_fetch_assoc($kq)){
                             echo "
                             <ul>
                             <li><img src=".$row['user_image']." style='width:40px;border-radius:20px;'></li>
-                            <li>".$row['user_full_name']."</li>
+                            <li>".$row['user_fullname']."</li>
                             <li><a href=''><img src='image/free-file-icon-1453-thumb.png' style='width:15px'></a></li>
                             <li style='color:red'><b>".$row['score_level']."</b></li>
                         </ul>
@@ -169,6 +204,26 @@
         menu.classList.toggle('hide');
         
     }
+    //Xoa bai tap
+    document.addEventListener('DOMContentLoaded', function() {
+        var el = document.getElementsByClassName("formXoa"); 
+        for(var i=0;i < el.length;i++) {
+        el[i].addEventListener("submit", function(e) { 
+                e.preventDefault();
+                Swal.fire({ 
+                    title: 'Bạn chắc chắn muốn xóa?',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#3085d6',
+                    confirmButtonText: 'Delete'
+                }).then((result) => {
+                    if (result.isConfirmed) {            
+                    e.target.submit();
+                    }
+                })
+        });
+    }  
+        }, false);
 </script>
 </body>
 </html>

@@ -3,11 +3,11 @@
 <link rel="stylesheet" href="modulemanage/framework/css/bootstrap.css">
     <script src="modulemanage/framework/js/bootstrap.js"></script>
  <?php  
-include 'connect.php';
-include 'header.php';
+include './connect.php';
+include './header.php';
  if (isset($_GET['search'])){
     $search=$_GET['search'];
-     $sql="SELECT * FROM subject where subject_id like '%$search%'";
+     $sql="SELECT * FROM subject where subject_code like '%$search%'";
      $kq=$con->query($sql);
      $num = mysqli_num_rows($kq);
      
@@ -40,20 +40,20 @@ include 'header.php';
                         <div class="collapse collapse-horizontal" id="collapseWidthExample">  
                                 <form action = "./deletesubject.php" method = "GET"  class = "formDelete" >
                                     <button type="submit" class = "delete"><i class="fa-solid fa-xmark"></i></button>
-                                    <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >
+                                    <input type="hidden" name="id" value = " <?php echo $row['subject_id']; ?>" >
                                 </form>  
                         </div> 
                         <div class = 'item'>
                             <div class = 'backgroundItem' style="background:url( <?php echo $row['subject_image'];?> ); background-size: cover">                           
                             </div>
                             <div class= 'titleItem'>
-                                <a href="./subject.php?code=<?php echo $row['subject_code']; ?>"><h3 class = 'keySubject'><?php echo $row['subject_id']; ?></h3>
+                                <a href="./subject.php?id=<?php echo $row['subject_id']; ?>"><h3 class = 'keySubject'><?php echo $row['subject_code']; ?></h3>
                                 <h5 class = 'nameSuject'><?php echo $row['subject_name']; ?></h5></a>
                                 <!-- Sua mon hoc -->
                                 <div class="collapse collapse-horizontal" id="collapseWidthExample">                                                            
                                      <form action = "./suasubject.php" method = "GET"  >
                                         <button type="submit" class = "repair"><i class="fa-solid fa-pencil"></i></button>
-                                        <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >
+                                        <input type="hidden" name="id" value = " <?php echo $row['subject_id']; ?>" >
                                     </form>                               
                                 </div> 
                             </div>
@@ -65,7 +65,7 @@ include 'header.php';
                                 <!--Them mon hoc -->
                                 <form action="add_homework.php" method = "GET"  >   
                                 <button class = 'submit'><i class='fas fa-file-alt'></i></button>
-                                <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >  
+                                <input type="hidden" name="id" value = " <?php echo $row['subject_id']; ?>" >  
                                 </form>                                                              
                                                         
                                 <button class = 'submit' data-bs-toggle='collapse' data-bs-target='#collapseWidthExample' aria-expanded='false' aria-controls='collapseWidthExample'><i class='fas fa-pen'></i></button>

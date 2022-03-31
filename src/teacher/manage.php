@@ -26,7 +26,7 @@
                 <li><a href="./addclass.php">Thêm lớp học</a></li>
                 <li><a href="">Xem vi phạm</a></li>
                 <li>
-                <form action="search.php" method="GET" class="box">
+                <form action="./search.php" method="GET" class="box">
                 <b>Tìm kiếm</b>
                 <input class="search-class" type="text" name="search" placeholder="Nhập nội dung"> 
                 </form>
@@ -36,7 +36,7 @@
         <div class = "items row">
             <?php 
                 
-                $sql="SELECT * FROM subject ";
+                $sql="SELECT * FROM subject where user_name='ngocdiem'";
                 $kq=$con->query($sql);
                 while($row=$kq->fetch_assoc()){
                     ?>
@@ -45,20 +45,20 @@
                         <div class="collapse collapse-horizontal" id="collapseWidthExample">  
                                 <form action = "./deletesubject.php" method = "GET"  class = "formDelete" >
                                     <button type="submit" class = "delete"><i class="fa-solid fa-xmark"></i></button>
-                                    <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >
+                                    <input type="hidden" name="id" value = " <?php echo $row['subject_id']; ?>" >
                                 </form>  
                         </div> 
                         <div class = 'item'>
                             <div class = 'backgroundItem' style="background:url( <?php echo $row['subject_image'];?> ); background-size: cover">                           
                             </div>
                             <div class= 'titleItem'>
-                                <a href="./subject.php?code=<?php echo $row['subject_code']; ?>"><h3 class = 'keySubject'><?php echo $row['subject_id']; ?></h3>
+                                <a href="subject.php?id=<?php echo $row['subject_id']; ?>"><h3 class = 'keySubject'><?php echo $row['subject_code']; ?></h3>
                                 <h5 class = 'nameSuject'><?php echo $row['subject_name']; ?></h5></a>
                                 <!-- Sua mon hoc -->
                                 <div class="collapse collapse-horizontal" id="collapseWidthExample">                                                            
                                      <form action = "./suasubject.php" method = "GET"  >
                                         <button type="submit" class = "repair"><i class="fa-solid fa-pencil"></i></button>
-                                        <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >
+                                        <input type="hidden" name="id" value = " <?php echo $row['subject_id']; ?>" >
                                     </form>                               
                                 </div> 
                             </div>
@@ -68,9 +68,9 @@
                                 <button class = 'submit'><i class='fas fa-user-plus'></i></button>
                                 
                                 <!--Them mon hoc -->
-                                <form action="add_homework.php" method = "GET"  >   
+                                <form action="./add_homework.php" method = "GET"  >   
                                 <button class = 'submit'><i class='fas fa-file-alt'></i></button>
-                                <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >  
+                                <input type="hidden" name="id" value = " <?php echo $row['subject_id']; ?>" >  
                                 </form>                                                              
                                                         
                                 <button class = 'submit' data-bs-toggle='collapse' data-bs-target='#collapseWidthExample' aria-expanded='false' aria-controls='collapseWidthExample'><i class='fas fa-pen'></i></button>
@@ -95,109 +95,7 @@
     //     document.querySelector('.create').innerHTML = document.querySelector('.upload').value
     // })
     //navigation
-    document.querySelector('.frameNoti').addEventListener('click', function(event){
-        event.stopPropagation()
-    })
-    document.querySelectorAll('.frameNoti')[1].addEventListener('click', function(event){
-        event.stopPropagation()
-    })
-
-
-    //Background Header
-    document.addEventListener('scroll', () => {
-        if(window.scrollY > 0) {
-            document.querySelector('.backgroundNav').classList.remove('noactiveNav')
-            document.querySelector('.backgroundNav').classList.add('activeNav')
-        }
-        else {
-            document.querySelector('.backgroundNav').classList.add('noactiveNav')
-            document.querySelector('.backgroundNav').classList.remove('activeNav')
-        }
-    })
-
-
-    //Content Mess
-    var contentMess = false
-    const itemNotis = document.querySelectorAll('.itemNoti')
-    for (i of itemNotis){
-        i.addEventListener('click', function(){
-            if(!contentMess) {
-                document.querySelector('.frameMess').style.display = 'flex'
-                contentMess = true
-            }
-            else {
-                document.querySelector('.frameMess').style.display = 'none'
-                contentMess = false
-            }
-        })
-    }
-    document.querySelector('.backMess').addEventListener('click', () => {
-        document.querySelector('.frameMess').style.display = 'none'
-        contentMess = false
-    })
-
-    //Mess Mobile
-    document.querySelector('.mess-mobile').addEventListener('click', function() {
-        if(!mess) {
-            document.querySelector('.mess').style.bottom = '100px'
-            document.querySelector('.mess').style.display = 'flex'
-            document.querySelector('.mess').style.right = '20px'
-            mess = true
-        }
-        else {
-            document.querySelector('.mess').style.display = 'none'
-            mess = false
-        }
-    })
-    document.querySelector('.frameMess').addEventListener('click', function(e) {
-        e.stopPropagation();
-    })
-
-    //Active Notification Mobile
-    document.querySelector('.noti-mobile').addEventListener('click', function() {
-        if(!noti) {
-            document.querySelector('.noti').style.display = 'flex'
-            document.querySelector('.noti').style.right = '20px'
-            document.querySelector('.noti').style.bottom = '100px'
-            noti = true
-        }
-        else {
-            document.querySelector('.noti').style.display = 'none'
-            noti = false
-        }
-    })
-
-    //Active Noti
-    var noti = false
-    document.querySelector('.actNoti').addEventListener('click', function() {
-        if(!noti) {
-            document.querySelector('.noti').style.right = '100px'
-            document.querySelector('.noti').style.display = 'flex'
-            noti = true
-        }
-        else {
-            document.querySelector('.noti').style.display = 'none'
-            noti = false
-        }
-    })
-
-
-    //Active Message
-    var mess = false
-    document.querySelector('.actMess').addEventListener('click', function() {
-        if(!mess) {
-            document.querySelector('.mess').style.right = '100px'
-            document.querySelector('.mess').style.display = 'flex'
-            mess = true
-        }
-        else {
-            document.querySelector('.mess').style.display = 'none'
-            mess = false
-        }
-    })
-    document.querySelector('.frameMess').addEventListener('click', function(e) {
-        e.stopPropagation();
-    })
+   
    
     //Xóa môn học
     document.addEventListener('DOMContentLoaded', function() {

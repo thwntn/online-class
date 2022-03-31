@@ -34,7 +34,7 @@
                     echo "<img src=".$row['subject_image'].">";
                     echo "</div>";
                     echo  "<div class = 'contentNoti'>";
-                    echo "<h4>"; echo $row['subject_id']; echo "</h4>";
+                    echo "<h4>"; echo $row['subject_code']; echo "</h4>";
                     echo $row['noti_content'];
                     echo "</div>";
                     echo "</div>";

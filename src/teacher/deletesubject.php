@@ -1,6 +1,6 @@
 <?php 
 include 'connect.php';
-$sql='DELETE FROM subject where subject_code='.$_GET["code"].'';
+$sql='DELETE FROM subject where subject_id='.$_GET["id"].'';
 $kq=$con->query($sql);
 
     header('Location:manage.php');

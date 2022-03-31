@@ -61,22 +61,25 @@ img{
     width: 20px;
 }
 .add-dl{
-    margin-left:730px;
+    margin-right:150px; 
+    float:right;
     width:100px;
     padding:5px;
     border-radius: 30px;
-}
-.button{
-    border-radius: 30px;
-}
-button{
-    width: 70px;
-    margin-left: 70px;
     border: 1px white;
     background-color: white;
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
    
 }
+.button{
+    border-radius: 30px;
+    width: 70px;
+    
+    border: 1px white;
+    background-color: white;
+    box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
+}
+
 .upload button{
     float: right;
     width: 160px;
@@ -115,7 +118,9 @@ h6{
     border-radius:10px;
 }
 #baitap{
-    padding: 0 15px 10px 15px;
+   
+    padding:10px;
+    
 }
 .content-1 p{
     font-weight: bold;
@@ -145,20 +150,16 @@ a{
     background: none;
     border: none;
 }
+.repair-content{
+    float:left;
+    
+   
+}
 
 .create-1::placeholder {
     color:black;
     font-size:15px;
 }
-.modal-body {
-    display: flex;
-}
-.modal-body textarea{
-  width:100%;
-}
-/* .modal-body .upload{
-   display:none; 
-} */
 .create-1{
   width:250px;
   height:40px;

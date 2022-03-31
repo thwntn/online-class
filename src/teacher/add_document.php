@@ -2,51 +2,45 @@
 include './connect.php';
 include './header.php';
 
-if(isset($_GET['code'])){
-    $code=$_GET['code'];
-    $sql="SELECT * FROM subject where subject_code='$code'";
+
+if(isset($_GET['id'])){
+    $id=$_GET['id'];
+    $sql="SELECT * FROM subject where subject_id='$id'";
     $kq=$con->query($sql);
     $row=$kq->fetch_assoc(); 
 
      }
      ?>
-      <p style="font-size:40px;margin-top:100px;margin-left:350px">Them tai lieu</p> 
+      <p style="font-size:40px;margin-top:100px;margin-left:350px">Thêm bài giảng</p> 
  <form method = "POST"  class="add">           
-                                            <table>
-                                               <tr> 
-                                               <td style="font-size:25px"><?php 
-                                                    echo $row["subject_id"]; echo "&nbsp";
-                                                  echo $row["subject_name"];
-                                                  ?></td>
-                                            </tr>   
-                                            <input type="hidden" name="subject_code" value = " <?php echo $row["subject_code"]; ?>" >
-                                            
-                                            
-                                            <tr>    
-                                                <td colspan='2'><textarea class='create-1' name="dc-content"></textarea></td>
-                                            </tr>
-                                            <tr>    
-                                                <td>
-                                                <input class='upload' type='file'>
-                                                 <!-- <p class='create'>Chưa chọn file</p></td>  -->
-                                            </tr>
-                                        </table>  
-                                        <button type='submit' class="btn btn-primary" name="submit-dc" style="margin-left:550px">Hoàn tất </button>
+    
+        <p style="font-size:25px"><?php 
+                    echo $row["subject_code"]; echo "&nbsp";
+                    echo $row["subject_name"];
+                    ?> </p>
+        
+        <input type="hidden" name="subject_id" value = " <?php echo $row["subject_id"]; ?>" >
+
+        <p colspan='2'><textarea class='create-1' name="content" ></textarea></p>
+        <input class='upload' type='file'>
+        <p class='create' >Chưa chọn file</p>  
+
+            
+    
+    <button type='submit' class="btn btn-primary" name="submit" style="margin-left:550px">Hoàn tất </button>
     </form>                                           
 
 
 <?php
-    if (isset($_POST["submit-dc"])) {
-        $code=$_POST["subject_code"];
-        $date = $_POST["homework_finish"];
+    if (isset($_POST["submit"])) {
+        $id=$_POST["subject_id"];
         $content = $_POST["content"];
-        // $file_hw=$_POST["content"];
-        if ( $date == "" || $content == "") {
+        if ($content == "") {
     
             echo "Nhập đầy đủ thông tin!";
         
     }else{
-        $sql = "INSERT INTO homework( subject_code, homework_finish, homework_content) VALUES ('$code', '$date', '$content')";
+        $sql = "INSERT INTO homework(subject_id, homework_content ) VALUES ('$id',  '$content')";
         mysqli_query($con,$sql); 
         echo "Đăng bài viết thành công!";
         }
@@ -58,10 +52,10 @@ if(isset($_GET['code'])){
 <script src="modulemanage/framework/js/bootstrap.js"></script>
 <script> 
 //upload file
-// document.querySelector('.create').addEventListener('click', function () {
-//         document.querySelector('.upload').click()
-//     })
-//     document.querySelector('.upload').addEventListener('change', function () {
-//         document.querySelector('.create').innerHTML = document.querySelector('.upload').value
-//     })
+ document.querySelector('.create').addEventListener('click', function () {
+         document.querySelector('.upload').click()
+     })
+     document.querySelector('.upload').addEventListener('change', function () {
+         document.querySelector('.create').innerHTML = document.querySelector('.upload').value
+     })
 </script>

@@ -10,6 +10,6 @@ if (isset($_POST["submit-btn"])) {
     $user = $_POST["user_name"];
     $sql = "INSERT INTO subject(subject_id, subject_name, subject_image, subject_year, subject_semester, subject_credit, user_name) VALUES ( '$id', '$name','$image', '$year', '$semester','$credit', '$user')";
     mysqli_query($con,$sql);
-    echo "Bài viết đã thêm thành công";
+    header("Location:manage.php"); 
 }
 ?>

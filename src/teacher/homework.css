@@ -67,10 +67,10 @@
 .menu ul li a{
     transition: linear 0.5s;
 }
-.main{
-    position: absolute;
-    left:300px;
-}
+/* .main{
+     position: absolute; 
+      left:300px;  
+} */
 .menu.hide{
     width:0;
 }
@@ -103,7 +103,22 @@
 .main .img1{
     float:right;
     width:20px;
+    border: none;
+    background: none;
+    
 }
+.create{
+    width:250px;
+    height:40px;
+     background-color: rgb(218, 214, 214); 
+    border:none;
+    padding:5px;
+    margin:10px;
+    /* margin:10px; */
+    border-radius: 10px;
+    color:black;
+  }
+  
 .comment-1{
     display:flex;
 }
@@ -210,7 +225,6 @@
     .popup-content {
     position: relative;
     background-color: #FAFAFA;
-    padding: 15px;
     margin: auto;
     width: 70%;
     }
@@ -225,4 +239,16 @@
     }
 .modal-body{
     width: 35%;
+}
+.delete{
+    background: none;
+    border: none;
+}
+.repair-content{
+    width: 20px;
+}
+.add_baigiang{
+    margin-left:300px; 
+    width:60%;
+    
 }

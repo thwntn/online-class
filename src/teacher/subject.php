@@ -20,22 +20,22 @@
 </head>
 <body>
   
-    <?php // include 'header.php'; ?>
+    <?php //include 'header.php'; ?>
     <div class="main-subject">
         <?php
         
         
-            $sql = ' SELECT * FROM subject sj join user u on sj.user_name=u.user_name join homework hw on sj.subject_code=hw.subject_code where sj.subject_code='.$_GET["code"].' ';
-            echo $sql;
+            $sql = ' SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
+                                             join homework hw on sj.subject_id=hw.subject_id
+                                             where sj.subject_id='.$_GET["id"].' ';
             $kq = $con->query($sql);
             $row=$kq->fetch_assoc();
-
             $anh = $row['subject_image'];
             echo "
                 <div class='name-subject' style='background:url($anh)'>
                 <a href='' class='repair'><i class='fa-solid fa-pencil'></i></a>
                     <p>
-                        <b>".$row['subject_id']."</b>
+                        <b>".$row['subject_code']."</b>
                         ".$row['subject_name']."
                     </p>
                 </div>
@@ -45,9 +45,9 @@
     </div> <br>
     
     
-    <form action="add_document.php" method = "GET"  >   
+    <form action="./add_document.php" method = "GET"  >   
         <button class='add-dl'>Thêm tài liệu</button>
-        <input type="hidden" name="code" value = " <?php echo $row['subject_code']; ?>" >  
+        <input type="hidden" name="id" value = " <?php echo $row['subject_id']; ?>" >  
     </form>    
                                 
 
@@ -65,15 +65,15 @@
         </div>
     </div> 
     <?php
-        $name = $row['user_full_name'];
+        $name = $row['user_fullname'];
         $img_user = $row['user_image'];
         $sql = ' SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                                            join homework hw on sj.subject_code=hw.subject_code
-                                            where sj.subject_code='.$_GET["code"].' ';
+                                            join homework hw on sj.subject_id=hw.subject_id
+                                            where sj.subject_id='.$_GET["id"].' order by homework_time desc';
         $kq = $con->query($sql);
         while($row=$kq->fetch_assoc()){
  
-           
+            
              $k = $row['homework_time'];
              $day = substr($k,-11,2);
              $month = substr($k,-14,2);
@@ -99,7 +99,8 @@
                      </div>
                      <hr>
                      <div id='baitap'>
-                         <a href='./homework.php?id="<?php echo $row['homework_id'];?>"'>
+                     
+                         <a href='./homework.php?id=<?php echo $row['homework_id'];?>'>
                              <p><?php echo $row['homework_content']?> </p>
                          </a>
                          <h6></h6>

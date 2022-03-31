@@ -2,9 +2,9 @@
 include './connect.php';
 include './header.php';
 
-if(isset($_GET['code'])){
-    $code=$_GET['code'];
-    $sql="SELECT * FROM subject where subject_code='$code'";
+if(isset($_GET['id'])){
+    $id=$_GET['id'];
+    $sql="SELECT * FROM subject where subject_id='$id'";
     $kq=$con->query($sql);
     $row=$kq->fetch_assoc(); 
 
@@ -14,37 +14,36 @@ if(isset($_GET['code'])){
      <p style="font-size:40px;margin-top:100px;margin-left:350px">Thêm bài tập</p> 
  <form method = "POST" class="add" >          
  
-                                            <table>
-                                               <tr> 
-                                               <td style="font-size:25px"><?php 
-                                                    echo $row["subject_id"]; echo "&nbsp";
-                                                  echo $row["subject_name"];
-                                                  ?></td>
+    <table>
+        <tr> 
+            <td style="font-size:25px"><?php 
+                echo $row["subject_code"]; echo "&nbsp";
+                echo $row["subject_name"];
+                ?></td>
 
-                                            </tr>   
-                                            <input type="hidden" name="subject_code" value = " <?php echo $row["subject_code"]; ?>" >
-                                            
-                                            <tr> 
-                                                <td><p class='create-1'>Ngày hết hạn</p></td>
-                                                <td><input class='create-1'   type='date' name="homework_finish"></td>
-                                            </tr>
-                                            <tr>    
-                                                <td colspan='2'><textarea class='create-1' name="content"></textarea></td>
-                                            </tr>
-                                            <tr>    
-                                                <td>
-                                                 <input class='upload' type='file'> 
-                                                <!-- <p class='create'>Chưa chọn file</p> -->
-                                                </td>
-                                            </tr>
-                                        </table>  
-                                        <button type='submit' class="btn btn-primary" name="btn_submit" style="margin-left:570px">Hoàn tất </button>
+        </tr>   
+        <input type="hidden" name="subject_id" value = " <?php echo $row["subject_id"]; ?>" >                                           
+        <tr> 
+            <td><p class='create-1'>Ngày hết hạn</p></td>
+            <td><input class='create-1'   type='date' name="homework_finish"></td>
+        </tr>
+        <tr>    
+        <td colspan='2'><textarea class='create-1' name="content"></textarea></td>
+        </tr>
+        <tr>    
+        <td>
+        <input class='upload' type='file'>  
+        <p class='create'>Chưa chọn file</p> 
+        </td>
+        </tr>
+    </table>  
+    <button type='submit' class="btn btn-primary" name="btn_submit" style="margin-left:570px">Hoàn tất </button>
     </form>                                           
 
 
 <?php
     if (isset($_POST["btn_submit"])) {
-        $code=$_POST["subject_code"];
+        $id=$_POST["subject_id"];
         $date = $_POST["homework_finish"];
         $content = $_POST["content"];
         // $file_hw=$_POST["content"];
@@ -53,7 +52,7 @@ if(isset($_GET['code'])){
             echo "Nhập đầy đủ thông tin!";
         
     }else{
-        $sql = "INSERT INTO homework( subject_code, homework_finish, homework_content) VALUES ('$code', '$date', '$content')";
+        $sql = "INSERT INTO homework( subject_id, homework_finish, homework_content) VALUES ('$id', '$date', '$content')";
         mysqli_query($con,$sql); 
         echo "Đăng bài viết thành công!";
         }

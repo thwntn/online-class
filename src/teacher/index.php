@@ -1,6 +1,6 @@
 <?php
-//  echo $_POST['userOL'];
-//  $user=$_POST['userOL'];
+  //$user=$_POST['userOL'];
+  //echo $_POST['userOL'];
 include 'connect.php' ; 
  ?>
 <!DOCTYPE html>
@@ -37,7 +37,7 @@ include 'connect.php' ;
                     echo "<img src=".$row['subject_image'].">";
                     echo "</div>";
                     echo  "<div class = 'contentNoti'>";
-                    echo "<h4>"; echo $row['subject_id']; echo "</h4>";
+                    echo "<h4>"; echo $row['subject_name']; echo "</h4>";
                     echo $row['noti_content'];
                     echo "</div>";
                     echo "</div>";
@@ -136,12 +136,13 @@ include 'connect.php' ;
                 Tin nhắn
                 
             </li>
+           
         </ul>
     </div>
     <div id = 'home' class="content">
         <h1><b>Trang giảng viên</h1>
         <p>Chào mừng đến trang giảng viên</b></p>
-        <form action="search.php" method="GET" class="text">
+        <form action="./search.php" method="GET" class="text">
             <input class="search" type="text" name="search" placeholder="Nhập nội dung"> <br>
 
             <button type="submit" class="submit">Search...</button>
@@ -188,7 +189,7 @@ include 'connect.php' ;
                             
                         
                             
-                            $sql=" SELECT * FROM calendar cd JOIN subject sj ON cd.subject_id=sj.subject_id where user_name='$user' ";
+                            $sql=" SELECT * FROM calendar cd JOIN subject sj ON cd.subject_id=sj.subject_id where user_name='ngocdiem' ";
                             $kq=$con->query($sql);
                             
                             while($row=$kq->fetch_assoc()){
@@ -198,7 +199,7 @@ include 'connect.php' ;
                             <tr>
                             <td>".$time."</td>
                             <td>".$row['calendar_start']."</td>
-                            <td>".$row['subject_id']."</td>
+                            <td>".$row['subject_code']."</td>
                             <td>".$row['subject_name']."</td>
                           
                          
