@@ -31,19 +31,19 @@
                                 <i class="fas fa-book"></i>Bài tập được giao
                             </h5>
                                 <?php
-                                    $sql = "SELECT * FROM registry rg join homework hw on rg.subject_code=hw.subject_code
-                                    join subject sj on rg.subject_code=sj.subject_code where rg.user_name='thuylien' order by homework_time ASC";
+                                    $sql = "SELECT * FROM registry rg join homework hw on rg.subject_id=hw.subject_id
+                                    join subject sj on rg.subject_id=sj.subject_id where rg.user_name='thuylien' order by homework_time ASC";
                                     $result = $conn->query($sql);
                                     while($row = $result->fetch_assoc()) {
                                         echo "
-                                        <a href='./subject.php?code=".$row['subject_code']."'>
+                                        <a href='./subject.php?code=".$row['subject_id']."'>
                                             <div class = itemNoti>
                                                 <div class = 'imageNoti'>
                                                     <img src=".$row['subject_image'].">
                                                 </div>
                                                 <div class = 'contentNoti'>
-                                                    <h4>".$row['subject_id']."</h4>
-                                                    <p>".$row['homework_content']."</p>
+                                                    <h4>".$row['subject_code']."</h4>
+                                                    <p class='p-homework'>".$row['homework_content']."</p>
                                                 </div>
                                             </div>
                                         </a>
@@ -69,7 +69,7 @@
                                                 <img src=".$row['subject_image'].">
                                             </div>
                                             <div class = 'contentNoti'>
-                                                <h4>".$row['subject_id']."</h4>
+                                                <h4>".$row['subject_code']."</h4>
                                                 <p>".$row['noti_content']."</p>
                                             </div>
                                         </div>
@@ -81,7 +81,7 @@
                                                 <img src=".$row['subject_image'].">
                                             </div>
                                             <div class = 'contentNoti'>
-                                                <h4>".$row['subject_id']."</h4>
+                                                <h4>".$row['subject_code']."</h4>
                                                 <p>".$row['noti_content']."</p>
                                             </div>
                                         </div>
@@ -156,8 +156,8 @@
     <div class="main-subject">
         <?php
             $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                                             join homework hw on sj.subject_code=hw.subject_code
-                                                        where sj.subject_code='.$_GET["code"].'';
+                                             join homework hw on sj.subject_id=hw.subject_id
+                                                        where sj.subject_id='.$_GET["id"].'';
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
 
@@ -165,7 +165,7 @@
             echo "
                 <div class='name-subject' style='background:url($anh)'>
                     <p>
-                        <b>".$result['subject_id']."</b>
+                        <b>".$result['subject_code']."</b>
                         ".$result['subject_name']."
                     </p>
                 </div>
@@ -184,10 +184,10 @@
         </div>
     </div> 
     <?php
-        $name = $result['user_full_name'];
+        $name = $result['user_fullname'];
         $img_user = $result['user_image'];
-        $sql = 'SELECT * FROM  subject sj join homework hw on hw.subject_code=sj.subject_code
-            where sj.subject_code='.$_GET["code"].' ';
+        $sql = 'SELECT * FROM  subject sj join homework hw on hw.subject_id=sj.subject_id
+            where sj.subject_id='.$_GET["id"].' ';
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) {
             $k = $row['homework_time'];

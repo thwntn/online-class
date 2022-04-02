@@ -849,3 +849,10 @@ background: #555;
     height: 1000px;
     background-color: #555;
 }
+
+.p-homework{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}

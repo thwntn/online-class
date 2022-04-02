@@ -32,7 +32,7 @@
             <i class="fas fa-bell"></i>Thông báo
         </h5>
         <?php
-            $sql = "SELECT * FROM subject sj join registry rg on sj.subject_code=rg.subject_code  
+            $sql = "SELECT * FROM subject sj join registry rg on sj.subject_id=rg.subject_id 
                 join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
             $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
@@ -43,7 +43,7 @@
                                 <img src=".$row['subject_image'].">
                             </div>
                             <div class = 'contentNoti'>
-                                <h4>".$row['subject_id']."</h4>
+                                <h4>".$row['subject_code']."</h4>
                                 <p>".$row['noti_content']."</p>
                             </div>
                         </div>
@@ -55,7 +55,7 @@
                                 <img src=".$row['subject_image'].">
                             </div>
                             <div class = 'contentNoti'>
-                                <h4>".$row['subject_id']."</h4>
+                                <h4>".$row['subject_code']."</h4>
                                 <p>".$row['noti_content']."</p>
                             </div>
                         </div>
@@ -133,19 +133,19 @@
                                 <i class="fas fa-book"></i>Bài tập được giao
                             </h5>
                                 <?php
-                                    $sql = "SELECT * FROM registry rg join homework hw on rg.subject_code=hw.subject_code
-                                        join subject sj on rg.subject_code=sj.subject_code where rg.user_name='$user_name' order by homework_time ASC";
+                                    $sql = "SELECT * FROM registry rg join homework hw on rg.subject_id=hw.subject_id
+                                        join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by homework_time ASC";
                                     $result = $conn->query($sql);
                                     while($row = $result->fetch_assoc()) {
                                         echo "
-                                        <a href='./subject.php?code=".$row['subject_code']."'>
+                                        <a href='./subject.php?id=".$row['subject_id']."'>
                                             <div class = itemNoti>
                                                 <div class = 'imageNoti'>
                                                     <img src=".$row['subject_image'].">
                                                 </div>
                                                 <div class = 'contentNoti'>
-                                                    <h4>".$row['subject_id']."</h4>
-                                                    <p>".$row['homework_content']."</p>
+                                                    <h4>".$row['subject_code']."</h4>
+                                                    <p class='p-homework'>".$row['homework_content']."</p>
                                                 </div>
                                             </div>
                                         </a>
@@ -161,7 +161,7 @@
                         <div class = 'frameNoti noti1'>
                             <h5><i class="fas fa-bell"></i>Thông báo</h5>
                             <?php
-                                $sql = "SELECT * FROM subject sj join registry rg on sj.subject_code=rg.subject_code  
+                                $sql = "SELECT * FROM subject sj join registry rg on sj.subject_id=rg.subject_id 
                                     join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
                                 $result = $conn->query($sql);
                                 while($row = $result->fetch_assoc()) {
@@ -172,7 +172,7 @@
                                                 <img src=".$row['subject_image'].">
                                             </div>
                                             <div class = 'contentNoti'>
-                                                <h4>".$row['subject_id']."</h4>
+                                                <h4>".$row['subject_code']."</h4>
                                                 <p>".$row['noti_content']."</p>
                                             </div>
                                         </div>
@@ -184,7 +184,7 @@
                                                 <img src=".$row['subject_image'].">
                                             </div>
                                             <div class = 'contentNoti'>
-                                                <h4>".$row['subject_id']."</h4>
+                                                <h4>".$row['subject_code']."</h4>
                                                 <p>".$row['noti_content']."</p>
                                             </div>
                                         </div>
@@ -278,14 +278,14 @@
                 </button>
             </div>
             <?php
-                $sql = "SELECT * FROM registry rg join subject sj on rg.subject_code=sj.subject_code where rg.user_name='$user_name'";
+                $sql = "SELECT * FROM registry rg join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name'";
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                     echo "
-                        <div class='slide' id='a".$row['subject_code']."'>
+                        <div class='slide' id='a".$row['subject_id']."'>
                             <img src=".$row['subject_image'].">
-                            <h4><a href='./subject.php?code=".$row['subject_code']."'>".$row["subject_id"]."</a></h4>
-                            <p><a href='./subject.php?code=".$row['subject_code']."'>".$row["subject_name"]."</a></p>
+                            <h4><a href='./subject.php?id=".$row['subject_id']."'>".$row["subject_code"]."</a></h4>
+                            <p><a href='./subject.php?id=".$row['subject_id']."'>".$row["subject_name"]."</a></p>
                         </div>
                     ";
                 }
@@ -332,8 +332,8 @@
                             <th>Tên môn</th>
                         </tr>
                         <?php
-                            $sql = "SELECT * FROM registry rg join calendar cl on rg.subject_code=cl.subject_code
-                                join subject sj on rg.subject_code=sj.subject_code where rg.user_name='$user_name' order by calendar_time ASC";
+                            $sql = "SELECT * FROM registry rg join calendar cl on rg.subject_id=cl.subject_id
+                                join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by calendar_time ASC";
                             $result = $conn->query($sql);
                             while($row = $result->fetch_assoc()) {
                                 $k = $row['calendar_time'];
@@ -344,7 +344,7 @@
                                     <tr>
                                         <td>".$hour."</td>
                                         <td>".$day1."/".$month1."</td>
-                                        <td>".$row['subject_id']."</td>
+                                        <td>".$row['subject_code']."</td>
                                         <td>".$row['subject_name']."</td>
                                     </tr>
                                 ";
