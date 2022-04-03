@@ -375,3 +375,12 @@ a{
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
 }
+
+.header-subject{
+    border: none;
+    background: none;
+}
+
+.header-subject1{
+    min-width: none;
+}

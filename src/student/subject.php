@@ -1,5 +1,7 @@
 <?php
     include './demo/connect.php';
+    $subject_id = $_GET['subject_id'];
+    $user_name = $_GET['userOL'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +15,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="./header.css" media="screen" />
-    <!-- <link rel="stylesheet" type="text/css" href="./style.css" media="screen" /> -->
     <link rel="stylesheet" type="text/css" href="./giaovien.css" media="screen" />
 </head>
 <body>
@@ -22,7 +23,12 @@
             <div class = 'backgroundNav'>
                 <h2 class = 'titleNav'>Online Class</h2>
                 <ul class = 'listItemsNav'>
-                    <li class = 'itemNav'><a href = './index.php'>Trang chủ</a></li>
+                    <li class = 'itemNav'>
+                        <form action="./index.php" method='post'>
+                            <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
+                            <input class='header-subject' type="submit" value="Trang chủ">
+                        </form>
+                    </li>
                     <li class = 'itemNav'><a href = './index.php#monhoc'>Môn học</a></li>
                     <li class = 'itemNav baitap1'>
                         Bài tập được giao
@@ -32,7 +38,7 @@
                             </h5>
                                 <?php
                                     $sql = "SELECT * FROM registry rg join homework hw on rg.subject_id=hw.subject_id
-                                    join subject sj on rg.subject_id=sj.subject_id where rg.user_name='thuylien' order by homework_time ASC";
+                                    join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by homework_time ASC";
                                     $result = $conn->query($sql);
                                     while($row = $result->fetch_assoc()) {
                                         echo "
@@ -157,7 +163,7 @@
         <?php
             $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                              join homework hw on sj.subject_id=hw.subject_id
-                                                        where sj.subject_id='.$_GET["id"].'';
+                                                        where sj.subject_id='. $subject_id.'';
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
 
@@ -187,13 +193,15 @@
         $name = $result['user_fullname'];
         $img_user = $result['user_image'];
         $sql = 'SELECT * FROM  subject sj join homework hw on hw.subject_id=sj.subject_id
-            where sj.subject_id='.$_GET["id"].' ';
+            where sj.subject_id='.$_GET["subject_id"].' ';
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) {
             $k = $row['homework_time'];
             $day = substr($k,-11,2);
             $month = substr($k,-14,2);
             $year = substr($k,-20,4);
+
+            $nd = $row['homework_content'];
             echo "
             <div id='content'>
                 <div class='content-1'>
@@ -206,10 +214,15 @@
                     </div>
                     <hr>
                     <div id='baitap'>
-                        <a href='./homework.php?id=".$row['homework_id']."'>
-                            <p>".$row['homework_content']." :</p>
-                        </a>
-                        <h6></h6>
+                        <form action='./homework.php' method='get'>
+                            <input type='hidden' name='userOL' value=$user_name>
+                            <input type='hidden' name='homework_id' value=".$row['homework_id'].">
+                            <input type='hidden' name='subject_id' value=$subject_id>
+                            <p>
+                                <input  style='border:none; background: none;' type='submit' value='&#9679;' >
+                                ".$row['homework_content']."
+                            </p>
+                        </form>
                     </div>
                 </div>
             </div>

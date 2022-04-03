@@ -1,5 +1,6 @@
 <?php
     include './demo/connect.php';
+    $user_name = $_GET['userOL'];
 ?>
 
 <!DOCTYPE html>
@@ -16,7 +17,15 @@
 <body>
     <div class="menu">
         <ul class="menu-1">
-            <li><a href="index.php">&nbsp;<img src="image/Home-2-2-icon.png" style="width:20px">&nbsp;Trang chủ</a></li>
+            <li>
+                <form action="./index.php" method='post'>
+                    <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
+                    <p>
+                        &nbsp;<img src="image/Home-2-2-icon.png" style="width:20px">&nbsp;
+                        <input class='header-subject' type="submit" value="Trang chủ">
+                    </p>
+                </form>
+            </li>
              <hr>
         </ul>
         <ul class="menu-2">
@@ -28,8 +37,16 @@
                     $img = $row['subject_image'];
                     echo"
                     <li>
-                        <div class = 'item' style='background-image: url($img)'></div>
-                        <a href='./subject.php?id=".$row['subject_id']."'>".$row['subject_name']."</a>
+                        <form action='./subject.php' method='get'>
+                            <input type='hidden' name='userOL' value=$user_name>
+                            <input type='hidden' name='subject_id' value=".$_GET['subject_id'].">
+                            <div class = 'item' style='background-image: url($img)'></div>
+                            <p> 
+                                &nbsp;
+                                <input style='border:none; background: none;' type='submit' value=".$row['subject_code'].">
+                                &nbsp;".$row['subject_name']."
+                            </p>
+                        </form>
                     </li>
                     ";
                 }
@@ -40,7 +57,7 @@
         <?php
             $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                              join homework hw on sj.subject_id=hw.subject_id
-                                             where homework_id='.$_GET["id"].'';
+                                             where homework_id='.$_GET["homework_id"].'';
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
 
@@ -53,7 +70,7 @@
             echo"
             <p>
                 <a href=''>
-                    <img src='image/format+list+icon.png'>&nbsp;".$result['subject_code']."  ".$result['subject_name']."
+                    <img class='icon' src='image/format+list+icon.png'>&nbsp;".$result['subject_code']."  ".$result['subject_name']."
                 </a>
             </p>
         
@@ -73,20 +90,20 @@
         ?>
         </ul><hr>
         <div class="comment">
-            <img src="image/user-profile-icon-free-vector.jpg">
+            <img class='img' src='<?php echo $user_img ?>'>
             <form action="" method="post" class="comment-1">
                 <input class="comment-2" type="text" name="comment" require>
                 <button class="send" type="submit" name="upload"><i class="fas fa-paper-plane"></i></button>
             </form>
             <?php
                 if(isset($_POST['comment'])){
-                    $homework_id=$_GET['id'];
+                    $homework_id=$_GET['homework_id'];
                     $content=$_POST["comment"];
                     if($content == ""){
 
                     }else{
                     $sql1 = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
-                        VALUES ('$content', now(),'thuylien','$homework_id')";
+                        VALUES ('$content', now(),'$user_name','$homework_id')";
                     $kq1=$conn->query($sql1);
                 }
             }
@@ -95,7 +112,7 @@
         <?php 
             $sql = 'SELECT * FROM comment cmt join homework hw on cmt.homework_id=hw.homework_id 
                                               join user on cmt.user_name=user.user_name
-                                              where hw.homework_id= '.$_GET["id"].' order by comment_time DESC';
+                                              where hw.homework_id= '.$_GET["homework_id"].' order by comment_time DESC';
             $kq = $conn->query($sql);
             while($row = mysqli_fetch_array($kq)){
                 $k1 = $row['comment_time'];
@@ -103,8 +120,8 @@
                 $day1 = substr($k1,-11,2);
                 $month1 = substr($k1,-14,2);
                 $year1 = substr($k1,-20,4);
-                $user_name=$row['user_name'];
-                if($user_name=='thuylien'){
+                $user_name1 = $row['user_name'];
+                if($user_name1==$user_name){
                     echo "
                     <ul>
                         <img src=".$row['user_image']." class='img2'> 
@@ -117,9 +134,11 @@
                                 <button type='submit' class ='button'>Sửa</button>
                                 <input type='hidden' name='id' value = ".$row['comment_id']." >
                             </form>
-                            <form action = 'delete_comment.php' method = 'GET'  class = 'formDelete' >
+
+                            <form action = './delete_comment.php' method = 'GET'  class = 'formDelete' >
                                 <button type='submit' class ='button'>Xóa</button>
                                 <input type='hidden' name='id' value =".$row['comment_id']." >
+                                <input type='hidden' name='userOL' value =".$user_name." >
                                 <input type='hidden' name='homework_id' value = ".$row['homework_id']." >
                             </form>
                         </li>
@@ -150,14 +169,13 @@
         </div>
         <?php
             if (isset($_POST["btn_submit"])) {
-                $homework_id=$_GET["id"];
+                $homework_id=$_GET["homework_id"];
                 $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                              join homework hw on sj.subject_id=hw.subject_id
-                                             where homework_id='.$_GET["id"].'';
+                                             where homework_id='.$_GET["homework_id"].'';
                 $data = $conn->query($sql);
                 $data = mysqli_fetch_array($data);
                 $subject_id = $data['subject_id'];
-                $user_name = "thuylien";
                 
                 $duongdan = $_FILES['fileUpload']['name'];
                 move_uploaded_file($_FILES['fileUpload']['tmp_name'],'./homework/' . $duongdan);

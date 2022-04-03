@@ -247,7 +247,7 @@ ul#main-menu p{
 
 .subject{
     text-align: center;
-    margin-top: 200px;
+    margin-top: 250px;
 }
 
 .subject h1{
@@ -261,7 +261,6 @@ ul#main-menu p{
 }
 
 .subject p{
-    margin-bottom: 120px;
     font-size: 18px;
 }
 
@@ -315,7 +314,7 @@ ul#main-menu p{
 }
 
 .slide{
-    width: 23%;
+    /* width: 23%; */
     padding: 0px 50px;
     margin: 0 20px;
     display: none;
@@ -855,4 +854,12 @@ background: #555;
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
+}
+
+.form-subject{
+    margin-bottom: 130px;
+}
+
+.subject-logo{
+    margin-bottom: 100px;
 }

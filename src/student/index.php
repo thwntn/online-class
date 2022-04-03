@@ -268,8 +268,8 @@
         </div>
     </div>
     <br>
-    <div class="subject" id="monhoc">
-        <p><i> Học là học để mà hành <br>
+    <div class="subject">
+        <p class="subject-logo"id="monhoc"><i> Học là học để mà hành <br>
             Vừa hành vừa học mới là người khôn.</i></p>
         <div class="slide-anh">
             <div id="btn-left" onclick="moveLeft()">
@@ -277,16 +277,23 @@
                     <img src="./image/btn-right.jpg" alt="">
                 </button>
             </div>
+            
             <?php
                 $sql = "SELECT * FROM registry rg join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name'";
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                     echo "
-                        <div class='slide' id='a".$row['subject_id']."'>
-                            <img src=".$row['subject_image'].">
-                            <h4><a href='./subject.php?id=".$row['subject_id']."'>".$row["subject_code"]."</a></h4>
-                            <p><a href='./subject.php?id=".$row['subject_id']."'>".$row["subject_name"]."</a></p>
-                        </div>
+                        <form action='./subject.php' method='get' class='form-subject'>
+                            <div class='slide' id='a".$row['subject_id']."'>
+                                <input type='hidden' value=".$row['subject_id']." name='subject_id'>
+                                <input type='hidden' name='userOL' value=$user_name>
+                                <img src=".$row['subject_image'].">
+                                <h4>
+                                    <input style='border:none; background: none;' type='submit' value=".$row['subject_code'].">
+                                </h4>
+                                <p>".$row["subject_name"]."</p>
+                            </div>
+                        </form>
                     ";
                 }
             ?>
