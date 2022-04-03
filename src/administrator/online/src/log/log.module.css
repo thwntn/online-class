@@ -1,6 +1,7 @@
 .frame {
-    background-color: rgba(247, 247, 255);
+    background-color: rgba(0, 0, 0, 0.035);
     animation: show 0.3s ease;
+    height: 100vh;
 }
 @keyframes show {
     from {
@@ -28,11 +29,8 @@
 }
 .frameLog {
     padding: 0 !important;
-    border-radius: 48px 48px 0px 0px;
+    border-radius: 12px;
     overflow: hidden;
-}
-.title {
-    padding-bottom: 56px;
 }
 .titleNav,
 .item {

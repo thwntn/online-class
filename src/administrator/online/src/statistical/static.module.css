@@ -118,6 +118,13 @@
     border-radius: 4px;
     margin-bottom: 16px !important;
 }
+.itemDocument button,
+.itemSignUp button,
+.itemLogin button {
+    border: none;
+    background: none;
+    color: rgb(9, 0, 94);
+}
 .itemDocument .img div {
     background-image: url(./img/document.png);
     background-size: 110%;

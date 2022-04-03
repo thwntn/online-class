@@ -39,7 +39,7 @@ function Static() {
                             Kích hoạt
                         </div>
                     </div>
-                    <div className = {style.button + ' col-md-2'}><button>Thay đổi</button></div>
+                    <div className = {style.button + ' col-md-2'}><button><i className="fas fa-exchange"></i></button></div>
                 </div>
                 <div className = {style.itemSignUp + ' row'}>
                     <div className = {style.img + ' col-md-1'}>
@@ -52,7 +52,7 @@ function Static() {
                             Kích hoạt
                         </div>
                     </div>
-                    <div className = {style.button + ' col-md-2'}><button>Thay đổi</button></div>
+                    <div className = {style.button + ' col-md-2'}><button><i className="fas fa-exchange"></i></button></div>
                 </div>
                 <div className = {style.itemDocument + ' row'}>
                     <div className = {style.img + ' col-md-1'}>
@@ -65,7 +65,7 @@ function Static() {
                             Kích hoạt
                         </div>
                     </div>
-                    <div className = {style.button + ' col-md-2'}><button>Thay đổi</button></div>
+                    <div className = {style.button + ' col-md-2'}><button><i className="fas fa-exchange"></i></button></div>
                 </div>
             </div>
         </div>

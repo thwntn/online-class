@@ -51,3 +51,51 @@
     background-color: rgb(255, 228, 253);
     color: rgb(112, 0, 112);
 }
+.administrators {
+    background-color: rgba(0, 0, 0, 0.02);
+    padding: 12px;
+}
+.administrators .item_ad {
+    background-color: #fff;
+    padding: 8px;
+    border-radius: 8px;
+    margin: 12px 0px;
+}
+.item_ad .img_ad {
+    height: 60px;
+    width: 60px;
+    background-color: #333;
+    border-radius: 100%;
+}
+.item_ad div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.item_ad .status_ad button {
+    background-color: rgb(104, 255, 104);
+    width: 12px;
+    height: 12px;
+    border: none;
+    border-radius: 12px;
+}
+.item_ad .del_ad:hover {
+    color: red;
+}
+.addAdmin {
+    display: flex;
+    justify-content: center;
+    margin-top: 24px !important;
+}
+.addAdmin button {
+    background-color: rgba(0, 0, 0, 0.02);
+    border-radius: 12px;
+    border: none;
+    padding: 8px 0px;
+    margin-bottom: 24px;
+    color: #999;
+}
+.addAdmin button:hover {
+    background-color: rgba(0, 0, 0, 0.06);
+    color: #000;
+}

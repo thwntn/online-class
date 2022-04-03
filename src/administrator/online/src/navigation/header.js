@@ -55,7 +55,10 @@ function Header ({setMain}) {
                     className = {style.item}
                     onClick = {() => setMain(<Statistical></Statistical>)}
                 ><a href = '#manage'>Thống kê</a></li>
-                <li className = {style.item}><a href = '#log'>Nhật kí</a></li>
+                <li
+                    onClick = {() => setMain(<Log></Log>)}
+                    className = {style.item}
+                ><a href = '#log'>Nhật kí</a></li>
                 <li onClick={() => setActiveNoti(!activeNoti)} className = {style.item}>
                     Thông báo
                     {activeNoti && <Noti></Noti>}

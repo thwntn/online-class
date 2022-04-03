@@ -1,0 +1,56 @@
+.frame {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(8px);
+}
+.boxAdd h5 {
+    color: rgb(255, 0, 98);
+    margin-bottom: 24px;
+}
+.boxAdd {
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    display: flex;
+    flex-wrap: wrap;
+    width: 360px;
+    border-radius: 18px;
+    padding: 16px;
+    border: 2px solid rgba(187, 187, 187, 0.35);
+}
+.boxAdd input {
+    border: none;
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    padding: 8px 12px;
+    margin: 16px 0px;
+}
+.nav {
+    width: 100%;
+    margin-top: 24px;
+}
+.nav button {
+    border: none;
+    background-color: rgba(0, 0, 0, 0.05);
+    padding: 6px 18px;
+    border-radius: 12px;
+}
+.nav .fns {
+    margin-left: 12px;
+}
+.nav .fns:hover {
+    background-color: rgb(0, 189, 0);
+    color: #fff;
+}
+.nav .close:hover {
+    background-color: rgb(255, 81, 81);
+    color: #fff;
+}
