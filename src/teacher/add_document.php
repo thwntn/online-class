@@ -1,28 +1,28 @@
 <?php
 include './connect.php';
-include './header.php';
+$user=$_GET['userOL'];
+$subject_id = $_GET['subject_id'];
 
 
-if(isset($_GET['id'])){
-    $id=$_GET['id'];
-    $sql="SELECT * FROM subject where subject_id='$id'";
+if(isset($subject_id)){
+    $sql="SELECT * FROM subject where subject_id='$subject_id'";
     $kq=$con->query($sql);
     $row=$kq->fetch_assoc(); 
 
      }
      ?>
       <p style="font-size:40px;margin-top:100px;margin-left:350px">Thêm bài giảng</p> 
- <form method = "POST"  class="add">           
+ <form method = "POST"  class="add" enctype="multipart/form-data">           
     
         <p style="font-size:25px"><?php 
                     echo $row["subject_code"]; echo "&nbsp";
                     echo $row["subject_name"];
                     ?> </p>
         
-        <input type="hidden" name="subject_id" value = " <?php echo $row["subject_id"]; ?>" >
-
+        <input type="hidden" name="subject_id" value = " <?php echo $row["subject_id"]; ?>" >   
+        <td><input class='create-1' name="tittle" placeholder="Tiêu đề"></td>      
         <p colspan='2'><textarea class='create-1' name="content" ></textarea></p>
-        <input class='upload' type='file'>
+        <input class='upload' type='file' name = "fileUpload">
         <p class='create' >Chưa chọn file</p>  
 
             
@@ -33,16 +33,23 @@ if(isset($_GET['id'])){
 
 <?php
     if (isset($_POST["submit"])) {
-        $id=$_POST["subject_id"];
+        $idsj=$_POST["subject_id"];
         $content = $_POST["content"];
-        if ($content == "") {
+        $tittle = $_POST["tittle"];
+         $duongdan = $_FILES["fileUpload"]["name"];
+         move_uploaded_file($_FILES["fileUpload"]["tmp_name"],'./filetailieu/' . $duongdan);
+        if ($tittle == "") {
     
-            echo "Nhập đầy đủ thông tin!";
+            echo "<div class='alert alert-danger' role='alert'>
+            Vui lòng nhập đầy đủ thông tin!
+            </div>
+        ";
         
     }else{
-        $sql = "INSERT INTO homework(subject_id, homework_content ) VALUES ('$id',  '$content')";
+        $sql = "INSERT INTO homework(subject_id, homework_tittle, homework_content, homework_file) VALUES ('$idsj', '$tittle', '$content', '$duongdan')";
         mysqli_query($con,$sql); 
-        echo "Đăng bài viết thành công!";
+        //header('Location:subject.php?id='.$idsj.'');
+        header('Location:subject.php?subject_id='.$idsj.'&userOL='.$user.'');
         }
     }
                                          

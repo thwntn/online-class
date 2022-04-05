@@ -1,10 +1,14 @@
+<?php
+include 'connect.php'; 
+$user=$_GET['userOL'];
+ ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./header.css">
+     <link rel="stylesheet" href="./header.css"> 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
@@ -13,7 +17,7 @@
 <body>
  <div class="nav-mobile">
         <ul class="nav-mobile_list">
-            <li class="item-mobile"><a href="./index.php"><i class="fas fa-home"></i></a></li>
+            <li class="item-mobile"><a href="./#homepage"><i class="fas fa-home"></i></a></li>
             <li class="item-mobile"><a href="./manage.php"><i class="fas fa-suitcase"></i></a></li>
             <li class="item-mobile"><a href="#lich"><i class="fas fa-calendar"></i></a></li>
             <li class="item-mobile"><a class ='noti-mobile'><i class="fas fa-bell"></i></a></li>
@@ -101,9 +105,34 @@
     <div class = 'backgroundNav'>
         <h2 class = 'titleNav'>Online Class</h2>
         <ul class = 'listItemsNav'>
-            <li class = 'itemNav'><a href = './index.php'>Trang chủ</a></li>
-            <li class = 'itemNav'><a href = './manage.php'>Môn học</a></li>
-            <li class = 'itemNav'><a href = './index.php#lich'>Lịch dạy</a></li>
+        <li class='itemNav'>
+            <form action="./index.php" method='post'>
+                <input type="hidden" name="userOL" value=<?php echo $user?>>
+                <input class='itemNav' type="submit" value="Trang chủ">
+            </form>
+        </li>
+        <?php
+                    $sql = "SELECT * FROM subject sj join user on sj.user_name=user.user_name where sj.user_name='$user'";
+                    $result = $con->query($sql);
+                    $row = $result->fetch_assoc();
+                        echo "
+                    
+                         <form action='./manage.php' method='get'>
+                             <input type='hidden' name='userOL' value=$user>
+                             <li class = 'itemNav'><input type='submit' value='Môn học'></li>
+                         </form>
+
+                            ";
+                    
+                        ?>
+            
+        <li class='itemNav'>
+            <form action='./index.php#lich' method='post'>
+                <input type="hidden" name="userOL" value=<?php echo $user?>>
+                <input class='itemNav' type="submit" value="Lịch dạy">
+            </form>
+        </li>
+
             <li class = 'itemNav actNoti'>
                 Thông báo
                 
@@ -112,6 +141,11 @@
                 Tin nhắn
                 
             </li>
+            <li>
+            <?php
+                echo  $user;
+                ?>
+                </li>  
         </ul>
     </div> 
     

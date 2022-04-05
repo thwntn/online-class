@@ -1,9 +1,9 @@
 <?php
 include './connect.php';
-
-if(isset($_GET['id'])){
-    $id=$_GET['id'];   
-    $sql="SELECT * FROM subject where subject_id='$id'";
+$user=$_GET['userOL'];
+$subject_id = $_GET['subject_id'];
+if(isset($subject_id)){ 
+    $sql="SELECT * FROM subject where subject_id='$subject_id'";
     $kq=$con->query($sql);
     $row=$kq->fetch_assoc();
    
@@ -23,9 +23,9 @@ if(isset($_GET['id'])){
         if ( $code == "" || $name == "") {
     
         }else{
-        $sql = "UPDATE subject SET subject_code='$code', subject_name='$name' WHERE subject_id='$id'";
+        $sql = "UPDATE subject SET subject_code='$code', subject_name='$name' WHERE subject_id='$subject_id'";
          mysqli_query($con,$sql);
-        header('Location:manage.php');  
+         header('Location:manage.php?userOL='.$user.'');
         }
     }
 } 

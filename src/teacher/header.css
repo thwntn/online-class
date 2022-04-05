@@ -32,10 +32,14 @@
     padding-left: 12px;
 }
 .itemNav {
-    padding: 0px 32px;
+    padding: 0px 20px;
     display: flex;
     position: relative;
     cursor: pointer;
+}
+.itemNav input{
+    border: none;
+    background: none;
 }
 .itemNav a{
     text-decoration: none;
@@ -101,7 +105,7 @@
     color: #333;
     margin-top: 4.5%;
     border-radius: 12px;
-    margin-left: -204px;
+    margin-right: 900px;
     width: 300px;
     padding: 12px 0px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);

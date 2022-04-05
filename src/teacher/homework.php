@@ -1,5 +1,7 @@
 <?php
     include './connect.php';
+    $homework_id = $_GET['homework_id'];
+    $user = $_GET['userOL'];
 ?>
 
 <!DOCTYPE html>
@@ -21,22 +23,38 @@
     <br>
     <div class="menu">
         <ul class="menu-1">
-            <li><a href="index.php">&nbsp;<img src="image/Home-2-2-icon.png" style="width:20px">&nbsp;Trang chủ</a></li>
-             <hr>
+            <!-- <li><a href="index.php">&nbsp;<img src="image/Home-2-2-icon.png" style="width:20px">&nbsp;Trang chủ</a></li> -->
+            <li>
+            <form action='./index.php' method='post'>                                  
+                <input type="hidden" name="userOL" value=<?php echo $user?>>
+                <img src="image/Home-2-2-icon.png" style="width:20px">&nbsp;<input style="border:none;background:none" type="submit" value="Trang chủ">
+            </form>
+                        
+                   
+            </li>
+            <hr>
         </ul>
         <ul class="menu-2">
             <li>Lớp học</li>
             <?php
-                $sql = "SELECT * FROM subject";
+                $sql = "SELECT * FROM subject sj join user on sj.user_name=user.user_name where sj.user_name='$user'";
                 $kq = $con->query($sql);
                 while($row = $kq->fetch_assoc()) {
                     $img = $row['subject_image'];
-                    echo"
+                   
+                    
+                    echo "
                     <li>
-                        <div class = 'item' style='background-image: url($img)'></div>
-                        <a href='./subject.php?id=".$row['subject_id']."'>".$row['subject_name']."</a>
+                    <form action='./subject.php' method='get'>                                  
+                        <input type='hidden' value=".$row['subject_id']." name='subject_id'>
+                        <input type='hidden' name='userOL' value=$user>                                                                    
+                        <div class = 'item' style='background-image: url($img)'></div> 
+                        <p><input class='sj-name' type='submit' value=".$row['subject_code']."> 
+                        ".$row['subject_name']."</p>
+                    </form>
                     </li>
                     ";
+                
                 }
             ?>
         </ul>
@@ -45,11 +63,15 @@
         <?php
             $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                              join homework hw on sj.subject_id=hw.subject_id
-                                             where homework_id='.$_GET["id"].' ';
+                                             where homework_id='.$homework_id.' ';
             $kq = $con->query($sql);
             $row = mysqli_fetch_array($kq);
-
             $k = $row['homework_time'];
+            $hw_finish = $row['homework_finish'];
+            // $hw_day = substr($hw_finish,-11,2);
+            // $hw_month = substr($hw_finish,-14,2);    
+            // $hw_time = substr($hw_finish,-9,6);  
+
             $day = substr($k,-11,2);
             $month = substr($k,-14,2);
             $year = substr($k,-20,4);
@@ -58,76 +80,108 @@
             <p>
             <img src='image/format+list+icon.png' class='listmenu'>
                 <a href=''>
-                    &nbsp;<?php echo $row['subject_code']; 
+                    &nbsp;<?php echo $row['subject_code']; echo "&nbsp;";
                                 echo $row['subject_name']; ?>
                 </a>
             </p>
-        <ul>
         
-        <button class='img1' data-bs-toggle='collapse' data-bs-target='#collapseWidthExample' aria-expanded='false' aria-controls='collapseWidthExample'><i class='fa-solid fa-pencil'></i></button>
-        <div class='collapse collapse-horizontal' id='collapseWidthExample'>  
-                         <form action = "./delete_homework.php" method = "GET"  class = "formXoa" >
-                            <button type="submit" class = "delete"><i class='fa-solid fa-xmark'></i></button>
-                            <input type="hidden" name="id" value = "<?php echo $row['homework_id'] ?>" >
-                        </form>  
-        </div> 
+        <?php if($user){?>                  
+            <form action = "./suahomework.php" method = "GET" >
+                <button type="submit" class = "img1"><i class='fa-solid fa-pencil'></i></button>
+                <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+                <input type="hidden" name="userOL" value=<?php echo $user?>>
+            </form> 
+                        
+        <?php } ?>  
+        
+        <ul>
         <img src="<?php echo $user_img; ?>" class='img2'>
             <li><b>&nbsp;<?php echo $row['user_fullname']; ?> <br>
                 &nbsp; 
                 <i>
-                <?php echo $day; echo "/"; echo $month;echo "/"; echo $year;?>
+                <?php echo $day; echo "/"; echo $month;echo "/"; echo $year;
+                ?>
                 </i> </b>
-            
             </li>
+            <?php 
+            if($hw_finish == ""){
+
+            }else{
+            echo"
+                <li class='hw-finish'><i>Đến hạn: ".$hw_finish."  </i>
+                    
+                </li> ";
+            }
+            ?>
             <hr style='width:95%'>
-              <div class='collapse collapse-horizontal' id='collapseWidthExample'>  
-                    <form action = "./suahomework.php" method = "GET" >
-                            <button type="submit" class = "delete"><i class='fa-solid fa-pencil'></i></button>
-                            <input type="hidden" name="id" value = "<?php echo $row['homework_id'] ?>" >
-                        </form> 
-                        &nbsp;
-            </div> 
-            
-            <li style='color:red'>
-                <?php echo $row['homework_content']; ?>
+             
+             <li style="color:red">      
+            <?php echo $row['homework_tittle'] ;?>
             </li>
-            
+            <li>
+                <?php echo $row['homework_content'];?>
+            </li>
+            <li>
+                <?php echo $row['homework_file'];?>
+            </li>
         
         </ul> <br> <hr> <br>
         <div class="comment">
-    
-    
-            
-
-             <img src="image/user.png">
-             <form action="" method="post" class="comment-1">
+        
+             <img src="<?php echo $user_img?>">
+             <form action="" method="POST" class="comment-1">
                 <input class="comment-2" type="text" name="comment">
-                <button class="send" type="submit" name="upload"><i class="fas fa-paper-plane"></i></button>
+                <button class="send" type="submit" name="update"><i class="fas fa-paper-plane"></i></button>
             </form>
             <?php
             if(isset($_POST['comment'])){
-                $homework_id=$_GET['id'];
+               
                 $content=$_POST["comment"];
                 $sql1 = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
-                    VALUES ('$content', now(),'ngocdiem','$homework_id')";
+                    VALUES ('$content', now(),'$user','$homework_id')";
                 $kq1=$con->query($sql1);
+             
             }
-    ?>
+
+            ?>
          </div>  
                 <?php 
                 $sql = 'SELECT * FROM comment cmt join homework hw on cmt.homework_id=hw.homework_id 
                                                   join user on cmt.user_name=user.user_name
-                                                  where hw.homework_id= '.$_GET["id"].' ';
+                                                  where hw.homework_id= '.$homework_id.' order by comment_time desc';
                 $kq = $con->query($sql);
-                while($row = mysqli_fetch_array($kq)){
-                    echo "
-                    <ul>
-                    <img src=".$row['user_image']." class='img2'>
-                    <li><b>".$row['user_fullname']."</li>
-                    <li style='font-size:10px'>".$row['comment_time']."</b></li>
-                    <li>".$row['comment_content']."</li>
+                while($row = mysqli_fetch_assoc($kq)){
+                   
+                    $user1=$row['user_name'];
+                    if($user1 == $user){
+                    ?>
+                    
+                    <form action="delete_comment.php" method="GET" class="formXoa">
+                        <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+                        <button type="submit"  class='img3' name ="delete"><i class='fa-solid fa-xmark'></i></button>
+                        <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
+                        <input type="hidden" name="userOL" value="<?php echo $user?>">
+                         
+
+                    </form>
+                    
+                    <form action="sua_comment.php" method="get">
+                        <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+                        <button class='img3'><i class='fa-solid fa-pencil'></i></button>
+                        <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
+                        <input type="hidden" name="userOL" value="<?php echo $user?>">
+                        
+                    </form>
+                    <?php
+                    }
+                    ?>
+                     <ul>
+                    <img src="<?php echo $row['user_image'] ?>" class='img2'>
+                    <li><b><?php echo $row['user_fullname'] ?></li>
+                    <li style='font-size:10px'><?php echo $row['comment_time'] ?></b></li>
+                    <li><?php echo $row['comment_content'] ?></li>
                     </ul>
-                    ";
+                <?php
                 }
                 ?>
 
@@ -141,7 +195,7 @@
             <?php 
             $sql='SELECT * FROM homework hw join score on hw.homework_id=score.homework_id
                                             join user on score.user_name=user.user_name
-                                            where hw.homework_id= '.$_GET["id"].' ';
+                                            where hw.homework_id= '.$homework_id.' ';
              $kq = $con->query($sql);
              while($row = mysqli_fetch_assoc($kq)){
                  echo "
@@ -171,7 +225,7 @@
                     <?php
                         $sql='SELECT * FROM homework hw join score on hw.homework_id=score.homework_id
                                                         join user on score.user_name=user.user_name
-                                                        where hw.homework_id= '.$_GET["id"].' ';
+                                                        where hw.homework_id= '.$homework_id.' ';
                         $kq = $con->query($sql);
                         while($row = mysqli_fetch_assoc($kq)){
                             echo "

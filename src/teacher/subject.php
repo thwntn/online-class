@@ -1,5 +1,7 @@
 <?php
     include './connect.php';
+    $subject_id = $_GET['subject_id'];
+    $user = $_GET['userOL'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,19 +22,19 @@
 </head>
 <body>
   
-    <?php //include 'header.php'; ?>
+    <?php include 'header.php'; ?>
     <div class="main-subject">
         <?php
         
         
             $sql = ' SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                              join homework hw on sj.subject_id=hw.subject_id
-                                             where sj.subject_id='.$_GET["id"].' ';
+                                             where sj.subject_id='.$subject_id.' ';
             $kq = $con->query($sql);
             $row=$kq->fetch_assoc();
             $anh = $row['subject_image'];
             echo "
-                <div class='name-subject' style='background:url($anh)'>
+                <div class='name-subject' style='background:url($anh); '>
                 <a href='' class='repair'><i class='fa-solid fa-pencil'></i></a>
                     <p>
                         <b>".$row['subject_code']."</b>
@@ -45,9 +47,10 @@
     </div> <br>
     
     
-    <form action="./add_document.php" method = "GET"  >   
-        <button class='add-dl'>Thêm tài liệu</button>
-        <input type="hidden" name="id" value = " <?php echo $row['subject_id']; ?>" >  
+    <form action="./add_homework.php" method = "GET" >   
+        <button class='add-dl'>Thêm bài tập</button>
+        <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id']; ?>" >  
+        <input type="hidden" name="userOL" value=<?php echo $user?>>
     </form>    
                                 
 
@@ -69,7 +72,7 @@
         $img_user = $row['user_image'];
         $sql = ' SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                             join homework hw on sj.subject_id=hw.subject_id
-                                            where sj.subject_id='.$_GET["id"].' order by homework_time desc';
+                                            where sj.subject_id='.$subject_id.' order by homework_time desc';
         $kq = $con->query($sql);
         while($row=$kq->fetch_assoc()){
  
@@ -78,16 +81,28 @@
              $day = substr($k,-11,2);
              $month = substr($k,-14,2);
              $year = substr($k,-20,4);
+             $user=$row['user_name'];
              ?>
              <div id='content'>
                  <div class='content-1'>
-                 <button class='repair' data-bs-toggle='collapse' data-bs-target='#collapseWidthExample' aria-expanded='false' aria-controls='collapseWidthExample'><i class='fa-solid fa-pencil'></i></button>
-                 <div class='collapse collapse-horizontal' id='collapseWidthExample'>  
-                         <form action = "./delete_homework.php" method = "GET"  class = "formXoa" >
-                            <button type="submit" class = "delete"><i class='fa-solid fa-xmark'></i></button>
-                            <input type="hidden" name="id" value = "<?php echo $row['homework_id'] ?>" >
-                        </form>  
-                </div> 
+                    
+                 <form action = "./delete_homework.php" method = "GET"  class = "formXoa" >
+                            <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id'] ?>" >
+                            <button type="submit" class = "img1"><i class='fa-solid fa-xmark'></i></button>
+                            
+                            <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+                            <input type="hidden" name='userOL' value=<?php echo $user ?>>
+                </form>  
+                <?php 
+                  
+            
+        
+                  
+
+                ?>
+
+
+
                      <div class='media'>
                         
                          <img src="<?php echo $img_user; ?>" class='mr-3' alt='...'>
@@ -100,9 +115,19 @@
                      <hr>
                      <div id='baitap'>
                      
-                         <a href='./homework.php?id=<?php echo $row['homework_id'];?>'>
-                             <p><?php echo $row['homework_content']?> </p>
-                         </a>
+                         <!-- <a href='./homework.php?id=<php echo $row['homework_id'];?>'>
+                             <p><php echo $row['homework_content']?> </p>
+                         </a> -->
+
+                         <form action='./homework.php' method='get' class='form-subject'>                                  
+                            <input type='hidden' value="<?php echo $row['homework_id']; ?>" name='homework_id'>
+                            <input type='hidden' name='userOL' value=<?php echo $user ?>>                                                                    
+                            <input  type='submit' value="<?php echo $row['homework_tittle'] ;?>"> <br>
+                            <?php echo $row['homework_content'] ;?>
+                        </form> 
+
+                         <p><?php 
+                            echo $row['homework_file']; ?></p>
                          <h6></h6>
                     </div>
                  </div>

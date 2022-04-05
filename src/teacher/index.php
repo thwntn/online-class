@@ -1,6 +1,6 @@
 <?php
-  //$user=$_POST['userOL'];
-  //echo $_POST['userOL'];
+    $user=$_POST['userOL'];
+    $_POST['userOL'];
 include 'connect.php' ; 
  ?>
 <!DOCTYPE html>
@@ -17,7 +17,7 @@ include 'connect.php' ;
 <div class="main">
     <div class="nav-mobile">
         <ul class="nav-mobile_list">
-            <li class="item"><a href="./index.php"><i class="fas fa-home"></i></a></li>
+            <li class="item"><a href="#homepage"><i class="fas fa-home"></i></a></li>
             <li class="item"><a href="./manage.php"><i class="fas fa-suitcase"></i></a></li>
             <li class="item"><a href="#lich"><i class="fas fa-calendar"></i></a></li>
             <li class="item"><a class ='noti-mobile'><i class="fas fa-bell"></i></a></li>
@@ -122,33 +122,62 @@ include 'connect.php' ;
             </div>
         </div>
     </div>
-    <div class = 'backgroundNav'>
-        <h2 class = 'titleNav'>Online Class</h2>
-        <ul class = 'listItemsNav'>
-            <li class = 'itemNav'><a href = './index.php'>Trang chủ</a></li>
-            <li class = 'itemNav'><a href = './manage.php'>Môn học</a></li>
-            <li class = 'itemNav'><a href = '#lich'>Lịch dạy</a></li>
-            <li class = 'itemNav actNoti'>
-                Thông báo
-                
-                </li>
-            <li class="itemNav actMess">
-                Tin nhắn
-                
-            </li>
-           
-        </ul>
-    </div>
-    <div id = 'home' class="content">
-        <h1><b>Trang giảng viên</h1>
-        <p>Chào mừng đến trang giảng viên</b></p>
-        <form action="./search.php" method="GET" class="text">
-            <input class="search" type="text" name="search" placeholder="Nhập nội dung"> <br>
+    <div id='homepage'>
+        <div class = 'backgroundNav'>
+            <h2 class = 'titleNav'>Online Class</h2>
+            <ul class = 'listItemsNav'>
+                <li class = 'itemNav'><a href = '#homepage'>Trang chủ</a></li>
+        
+                <?php
+                    $sql = "SELECT * FROM subject sj join user on sj.user_name=user.user_name where sj.user_name='$user'";
+                    $result = $con->query($sql);
+                    $row = $result->fetch_assoc();
+                        echo "
 
-            <button type="submit" class="submit">Search...</button>
-        </form>
+                         <form action='./manage.php' method='get'>
+                             <input type='hidden' name='userOL' value=$user>
+                             <li class = 'itemNav'><input type='submit' value='Môn học'></li>
+                         </form>
+
+                            ";
+                    
+                        ?>
+                <li class = 'itemNav'><a href = '#lich'>Lịch dạy</a></li>
+                <li class = 'itemNav actNoti'>
+                    Thông báo
+                    
+                    </li>
+                <li class="itemNav actMess">
+                    Tin nhắn
+                    
+                </li>
+                <li>
+                <?php
+                $sql="SELECT * FROM user where user_name='$user'";
+                $result = $con->query($sql);
+                $row = $result->fetch_assoc();
+                //echo "<img src=".$row['user_image']." class='login'>"; 
+                echo $row['user_name']; 
+                ?>
+                <!-- <php echo "<img src=".$row['user_image']." class='login'>" ?> -->
+                
+
+  
+                    
+                </li>
+            </ul>
+        </div>
     </div>
-   
+        <div  class="content">
+            <h1><b>Trang giảng viên</h1>
+            <p>Chào mừng đến trang giảng viên</b></p>
+            <form action="./search.php" method="GET" class="text">
+                <input class="search" type="text" name="search" placeholder="Nhập nội dung"> <br>
+                <input type="hidden" name="userOL" value=<?php echo $user?>>
+               
+                <button type="submit" class="submit">Search...</button>
+            </form>      
+        </div>
 </div>
 <div id="lich">
         <div id="ten-lich">Lịch dạy</div>
@@ -166,7 +195,7 @@ include 'connect.php' ;
                                 <div>Tháng ".$month."</div>
                                 <button class = 'nav-cal_next'><i class='fas fa-angle-right'></i></button>
                             </div>
-                            <div class = 'header_year'>2020</div>
+                            <div class = 'header_year'>2022</div>
                         </div>
                         <div class = 'calendar-content'>
                         ";
@@ -174,9 +203,7 @@ include 'connect.php' ;
                         echo "</div>";
                     ?>
                 </div>
-                <div class="col-1">
-
-                </div>
+            
                 <div class="col-5">
                      <table>
                         <tr> 
@@ -189,16 +216,18 @@ include 'connect.php' ;
                             
                         
                             
-                            $sql=" SELECT * FROM calendar cd JOIN subject sj ON cd.subject_id=sj.subject_id where user_name='ngocdiem' ";
+                            $sql=" SELECT * FROM calendar cd JOIN subject sj ON cd.subject_id=sj.subject_id where user_name='$user' ";
                             $kq=$con->query($sql);
                             
                             while($row=$kq->fetch_assoc()){
                             $calendar = $row['calendar_time'];
                             $time = substr($calendar,-9,6);
+                            $ngay = substr($calendar,-11,2);
+                            $thang = substr($calendar,-14,2);
                             echo "
                             <tr>
                             <td>".$time."</td>
-                            <td>".$row['calendar_start']."</td>
+                            <td>".$ngay."/".$thang."</td>
                             <td>".$row['subject_code']."</td>
                             <td>".$row['subject_name']."</td>
                           

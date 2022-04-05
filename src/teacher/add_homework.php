@@ -1,10 +1,10 @@
 <?php
 include './connect.php';
-include './header.php';
+$user=$_GET['userOL'];
+$subject_id = $_GET['subject_id'];
 
-if(isset($_GET['id'])){
-    $id=$_GET['id'];
-    $sql="SELECT * FROM subject where subject_id='$id'";
+if(isset($subject_id)){
+    $sql="SELECT * FROM subject where subject_id='$subject_id'";
     $kq=$con->query($sql);
     $row=$kq->fetch_assoc(); 
 
@@ -12,7 +12,7 @@ if(isset($_GET['id'])){
      }
      ?>
      <p style="font-size:40px;margin-top:100px;margin-left:350px">Thêm bài tập</p> 
- <form method = "POST" class="add" >          
+ <form method = "POST" class="add" enctype="multipart/form-data">          
  
     <table>
         <tr> 
@@ -22,17 +22,20 @@ if(isset($_GET['id'])){
                 ?></td>
 
         </tr>   
-        <input type="hidden" name="subject_id" value = " <?php echo $row["subject_id"]; ?>" >                                           
+        <input type="hidden" name="subject_id" value = " <?php echo $row["subject_id"]; ?>" >  
+        <tr>    
+        <td><input style="width:300px" class='create-1' name="tittle" placeholder="Tiêu đề"></td>
+        </tr>                                         
         <tr> 
             <td><p class='create-1'>Ngày hết hạn</p></td>
-            <td><input class='create-1'   type='date' name="homework_finish"></td>
+            <td><input style="width:300px" class='create-1'   type='date' name="homework_finish"></td>
         </tr>
         <tr>    
         <td colspan='2'><textarea class='create-1' name="content"></textarea></td>
         </tr>
         <tr>    
         <td>
-        <input class='upload' type='file'>  
+        <input class='upload' type='file' name = "fileUpload">  
         <p class='create'>Chưa chọn file</p> 
         </td>
         </tr>
@@ -45,16 +48,21 @@ if(isset($_GET['id'])){
     if (isset($_POST["btn_submit"])) {
         $id=$_POST["subject_id"];
         $date = $_POST["homework_finish"];
+        $tittle = $_POST["tittle"];
         $content = $_POST["content"];
-        // $file_hw=$_POST["content"];
-        if ( $date == "" || $content == "") {
+        $duongdan = $_FILES["fileUpload"]["name"];
+         move_uploaded_file($_FILES["fileUpload"]["tmp_name"],'./filetailieu/' . $duongdan);
+        if ($tittle == "") {
     
-            echo "Nhập đầy đủ thông tin!";
+            echo "<div class='alert alert-danger' role='alert'>
+            Vui lòng nhập đầy đủ thông tin!
+            </div>
+        ";
         
     }else{
-        $sql = "INSERT INTO homework( subject_id, homework_finish, homework_content) VALUES ('$id', '$date', '$content')";
+        $sql = "INSERT INTO homework( subject_id, homework_finish, homework_tittle,homework_content, homework_file) VALUES ('$id', '$date','$tittle', '$content', '$duongdan')";
         mysqli_query($con,$sql); 
-        echo "Đăng bài viết thành công!";
+        header('Location:subject.php?subject_id='.$id.'&userOL='.$user.'');
         }
     }
                                          
