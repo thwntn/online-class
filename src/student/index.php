@@ -243,7 +243,7 @@
                             </div>
                         </div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <form action="#" method="get">
                             <div class="search-box">
                                 <input type="text" name="timkiem" class="search-text" placeholder="Tìm kiếm">
@@ -252,7 +252,7 @@
                                 </div>
                             </div>
                         </form>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </header>
@@ -260,24 +260,62 @@
             <h1>Trang Sinh Viên</h1>
             <p>Chào mừng đến với trang sinh viên</p>
             <div>
-                <form action="./demo/search.php" method="get">
+                <form action="" method="post">
                     <input type="text" name="search" id="search" placeholder="Nhập mã môn học"><br>
                     <button type="submit" name="btnsearch" id="btt-search" value="search">Search...</button>
+                    <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
                 </form>
+    <!-- Tìm kiếm môn học-->
+                <?php
+                    if (isset( $_POST['btnsearch'])) {
+                        $search = $_POST['search'];
+                        $sql = "SELECT * FROM subject WHERE (subject_code like '%$search%') ";
+                        $kq=$conn->query($sql);
+                        $num = mysqli_num_rows($kq);
+                        if ($num > 0 && $search != "") {
+                            while($row=$kq->fetch_assoc()){
+                                $subject_id = $row['subject_id'];
+                                $get_registry = "SELECT * FROM registry rg join subject sj on rg.subject_id=sj.subject_id
+                                    where rg.subject_id='$subject_id' and rg.user_name='$user_name'";
+                                $result = $conn->query($get_registry);
+                                $result = mysqli_fetch_array($result);
+                                if(isset($result)){
+                                echo "
+                                    <h6>".$result['subject_code']." &nbsp;  ".$result['subject_name']." </h6>
+                                ";
+                                }else{
+                                    echo "
+                                    <h6>".$row['subject_code']." &nbsp;  ".$row['subject_name']." &nbsp; 
+                                        <u> 
+                                            <form action='./registry.php' method='post'>
+                                                <input type='hidden' name='userOL' value=$user_name>
+                                                <input type='hidden' name='subject_id' value=$subject_id>
+                                                <input class='submit' type='submit' value='Đăng ký' name='submit'>
+                                            </form>
+                                        </u>
+                                    </h6>
+                                ";
+                                }
+                            }
+                        }
+                        else {
+                            echo "Không tìm thấy kết quả!";
+                        }
+                    }
+                ?>
             </div>
         </div>
     </div>
     <br>
+<!-- Môn học  -->
     <div class="subject">
         <p class="subject-logo"id="monhoc"><i> Học là học để mà hành <br>
             Vừa hành vừa học mới là người khôn.</i></p>
         <div class="slide-anh">
             <div id="btn-left" onclick="moveLeft()">
-                <button class="btn btn-outline-light">
-                    <img src="./image/btn-right.jpg" alt="">
-                </button>
+                <button class="btn btn-outline-light"><img src="./image/btn-right.jpg" alt=""></button>
             </div>
-            
+    <!-- Lấy môn học ra -->
             <?php
                 $sql = "SELECT * FROM registry rg join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name'";
                 $result = $conn->query($sql);
@@ -303,6 +341,7 @@
         </div>
     </div>
     <br>
+<!-- Lịch học -->
     <div id="lich">
         <div id="ten-lich">Lịch học</div>
         <div class="container">
@@ -327,9 +366,7 @@
                         echo "</div>";
                     ?>
                 </div>
-                <div class="col-1">
-
-                </div>
+                <div class="col-1"></div>
                 <div class="col-5">
                     <table>
                         <tr>

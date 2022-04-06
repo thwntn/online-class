@@ -2,7 +2,7 @@
 include 'connect.php';
     if (isset( $_GET['btnsearch'])) {
         $search = $_GET['search'];
-        $sql = "SELECT * FROM subject WHERE (subject_id like '%$search%') ";
+        $sql = "SELECT * FROM subject WHERE (subject_code like '%$search%') ";
      
         $kq=$conn->query($sql);
         $num = mysqli_num_rows($kq);

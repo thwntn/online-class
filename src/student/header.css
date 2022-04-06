@@ -3,14 +3,6 @@
     src: url(./Bandon.ttf);
 }
 
-* {
-    box-sizing: border-box;
-    padding: 0;
-    margin: 0;
-    color: #000 !important;
-    font-family: basic;
-}
-
 .backgroundNav {
     height: 74px;
     position: fixed;
@@ -37,17 +29,13 @@
     display: flex;
     position: relative;
     cursor: pointer;
+    font-size: 19px;
 }
 
 .itemNav h5{
     font-family: basic;
 }
 
-.itemNav a{
-    text-decoration: none;
-    display: block;
-    color: #fff;
-}
 .activeNav a{
     color: #333;
 }

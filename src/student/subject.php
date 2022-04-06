@@ -29,7 +29,7 @@
                             <input class='header-subject' type="submit" value="Trang chủ">
                         </form>
                     </li>
-                    <li class = 'itemNav'><a href = './index.php#monhoc'>Môn học</a></li>
+                    <li class = 'itemNav'><a href = '#'>Môn học</a></li>
                     <li class = 'itemNav baitap1'>
                         Bài tập được giao
                         <div class = 'frameNoti btap1'>
@@ -145,7 +145,7 @@
                             </div>
                         </div>
                     </li>
-                    <li>
+                    <!-- <li>
                         <form action="#" method="get">
                             <div class="search-box">
                                 <input type="text" name="timkiem" class="search-text" placeholder="Tìm kiếm">
@@ -154,7 +154,7 @@
                                 </div>
                             </div>
                         </form>
-                    </li>
+                    </li> -->
                 </ul>
             </div>
         </header>
@@ -166,7 +166,6 @@
                                                         where sj.subject_id='. $subject_id.'';
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
-
             $anh = $result['subject_image'];
             echo "
                 <div class='name-subject' style='background:url($anh)'>
@@ -201,7 +200,7 @@
             $month = substr($k,-14,2);
             $year = substr($k,-20,4);
 
-            $nd = $row['homework_content'];
+            $homework_tittle = $row['homework_tittle'];
             echo "
             <div id='content'>
                 <div class='content-1'>
@@ -219,9 +218,9 @@
                             <input type='hidden' name='homework_id' value=".$row['homework_id'].">
                             <input type='hidden' name='subject_id' value=$subject_id>
                             <p>
-                                <input  style='border:none; background: none;' type='submit' value='&#9679;' >
-                                ".$row['homework_content']."
-                            </p>
+                                <input  class='tittle' type='submit' value='$homework_tittle' > <br>
+                                ".$row['homework_content']." <br>
+                                ".$row['homework_file']."</p>
                         </form>
                     </div>
                 </div>
