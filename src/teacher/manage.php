@@ -63,7 +63,7 @@
                                 </form>  
                         </div> 
                         <div class = 'item'>
-                             <div class = 'backgroundItem' style="background:url(<?php echo $row['subject_image'];; ?> ); background-size: cover" >
+                             <div class = 'backgroundItem' style="background:url(<?php echo $row['subject_image']; ?> ); background-size: cover" >
                               
                           
                             </div>

@@ -11,6 +11,7 @@ include 'connect.php' ;
 <meta name="viewport" content="width=device-width, initial-scale=0.8">
 <link rel="stylesheet" type="text/css" href="./style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
@@ -134,7 +135,7 @@ include 'connect.php' ;
                     $row = $result->fetch_assoc();
                         echo "
 
-                         <form action='./manage.php' method='get'>
+                         <form action='./manage.php' method='GET'>
                              <input type='hidden' name='userOL' value=$user>
                              <li class = 'itemNav'><input type='submit' value='Môn học'></li>
                          </form>
@@ -156,10 +157,28 @@ include 'connect.php' ;
                 $sql="SELECT * FROM user where user_name='$user'";
                 $result = $con->query($sql);
                 $row = $result->fetch_assoc();
-                //echo "<img src=".$row['user_image']." class='login'>"; 
-                echo $row['user_name']; 
+                echo "
+                
+                <img src=".$row['user_image']." style='width:45px;border-radius:50px'>
+                ".$row['user_fullname']."
+
+                <div class='dropdown'>
+                    <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
+                    <div class='noidung_dropdown'>
+                        <a href='#'>Tài khoản</a> 
+                        <a href='#'>Đăng xuất &nbsp;
+                        <i class='fa-solid fa-right-from-bracket'></i>
+                        </a>
+                    </div>
+                    </div>
+                ";
                 ?>
-                <!-- <php echo "<img src=".$row['user_image']." class='login'>" ?> -->
+                <script>
+                    function hamDropdown() {
+                document.querySelector(".noidung_dropdown").classList.toggle("hienThi");
+                }
+                </script>
+               
                 
 
   

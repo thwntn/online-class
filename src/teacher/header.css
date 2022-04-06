@@ -24,7 +24,7 @@
     transition: top 0.2s, height 0.2s;
     z-index: 5;
     box-shadow: 0px 0px 4px rgba(0, 0, 0 ,0.1);
-    padding: 0px 48px;
+    padding: 0px 55px;
 }
 .titleNav {
     display: flex;
@@ -70,6 +70,7 @@
     list-style: none;
     margin: 0px;
 }
+
 @keyframes showNav {
     from {
         background-color: transparent;
@@ -332,3 +333,42 @@ border-radius: 48px;
 ::-webkit-scrollbar-thumb:hover {
 background: #555;
 }
+
+.nut_dropdown {
+    background: none;
+    border: none;
+  }
+  
+  /* Thiết lập vị trí cho thẻ div với class dropdown*/
+  .dropdown {
+    position: relative;
+    display: inline-block;
+    margin:10px;
+
+  }
+  
+  /* Nội dung Dropdown */
+  .noidung_dropdown {
+    /*Ẩn nội dụng các đường dẫn*/
+    display: none;
+    position: absolute;
+    background-color:rgba(3, 3, 3, 0.3);
+    min-width: 150px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-left:-130px;
+    border-radius: 10px;
+    
+  }
+  
+  /* Thiết kế style cho các đường dẫn tronng Dropdown */
+  .noidung_dropdown a {
+    color:white;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+    font-size:17px;
+  }
+  .hienThi{
+    display:block;
+  }

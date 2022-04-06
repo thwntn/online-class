@@ -34,10 +34,10 @@
             $row=$kq->fetch_assoc();
             $anh = $row['subject_image'];
             echo "
-                <div class='name-subject' style='background:url($anh); '>
-                <a href='' class='repair'><i class='fa-solid fa-pencil'></i></a>
+                <div class='name-subject' style='background:url($anh); background-size: cover '>
+             
                     <p>
-                        <b>".$row['subject_code']."</b>
+                        ".$row['subject_code']."
                         ".$row['subject_name']."
                     </p>
                 </div>
@@ -122,12 +122,17 @@
                          <form action='./homework.php' method='get' class='form-subject'>                                  
                             <input type='hidden' value="<?php echo $row['homework_id']; ?>" name='homework_id'>
                             <input type='hidden' name='userOL' value=<?php echo $user ?>>                                                                    
-                            <input  type='submit' value="<?php echo $row['homework_tittle'] ;?>"> <br>
+                            <input  type='submit' value="<?php echo $row['homework_tittle'] ;?>" style="font-size:17px;color:blue!important"> <br>
                             <?php echo $row['homework_content'] ;?>
                         </form> 
 
-                         <p><?php 
-                            echo $row['homework_file']; ?></p>
+                         <p>
+            
+                             <?php 
+                            $file= $row['homework_file']; 
+                          echo $file;
+                            
+                            ?></p>
                          <h6></h6>
                     </div>
                  </div>

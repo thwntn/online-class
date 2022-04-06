@@ -143,8 +143,31 @@ $user=$_GET['userOL'];
             </li>
             <li>
             <?php
-                echo  $user;
+            
+                $sql="SELECT * FROM user where user_name='$user'";
+                $result = $con->query($sql);
+                $row = $result->fetch_assoc();
+                echo "
+                <img src=".$row['user_image']." style='width:40px;border-radius:50px'>
+                ".$row['user_fullname']."
+
+                <div class='dropdown'>
+                    <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
+                    <div class='noidung_dropdown'>
+                        <a href='#'>Tài khoản</a> 
+                        <a href='#'>Đăng xuất 
+                        <i class='fa-solid fa-right-from-bracket'></i>
+                        </a>
+                    </div>
+                    </div>
+                ";
                 ?>
+                <script>
+                    function hamDropdown() {
+                document.querySelector(".noidung_dropdown").classList.toggle("hienThi");
+                }
+                </script>
+                
                 </li>  
         </ul>
     </div> 

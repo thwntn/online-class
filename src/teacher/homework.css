@@ -289,3 +289,9 @@
     padding:8px;
     width:500px;
 }
+.user-img{
+    border-radius: 30px;
+    width:40px;
+    height:40px;
+    background-color: white;
+}

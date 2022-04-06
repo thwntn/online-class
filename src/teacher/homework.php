@@ -115,7 +115,7 @@
             ?>
             <hr style='width:95%'>
              
-             <li style="color:red">      
+             <li style="color:blue;font-size:17px">      
             <?php echo $row['homework_tittle'] ;?>
             </li>
             <li>
@@ -200,7 +200,8 @@
              while($row = mysqli_fetch_assoc($kq)){
                  echo "
                     <ul>
-                    <li><img src=".$row['user_image']." style='width:40px;border-radius:20px;''></li> 
+                    
+                    <li><img src=".$row['user_image']." class='user-img'></li>
                     <li style='font-size:15px'>".$row['user_fullname']."</li> 
                     <li><a href=''><img src='image/free-file-icon-1453-thumb.png' style='width:15px'></a></li>
                     <li><a href=''><img src='image/img_179653.png' style='width:10px'></i></a></li>
