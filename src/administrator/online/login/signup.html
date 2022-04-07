@@ -59,15 +59,15 @@
                     <label class="email_err"></label>
                     <input class="email" type='text' placeholder="Nhập email">
                     <div class="sex">
-                        <button class="choose-sex" data = 1>Nam</button>
-                        <button class="choose-sex" data = 2>Nữ</button>
-                        <button class="choose-sex" data = 0>Khác</button>
+                        <button class="choose-sex" value = 1>Nam</button>
+                        <button class="choose-sex" value = 2>Nữ</button>
+                        <button class="choose-sex" value = 0>Khác</button>
                     </div>
                     <label class="major_err"></label>
                     <input class="major" type='pasword' placeholder="Nhập ngành học">
                     <div class="type">
-                        <button class="choose-type" data = 9>Giáo viên</button>
-                        <button class="choose-type" data = 8>Học sinh</button>
+                        <button class="choose-type" value = 9>Giáo viên</button>
+                        <button class="choose-type" value = 8>Học sinh</button>
                     </div>
                     <input class="upload" type='file'>
                     <button class="choose-file">Chưa chọn file</button>
@@ -241,6 +241,7 @@
 
         
         handle: function () {
+            _this = this
             $('.submit').on('click', () => {
                 this.status = this.checkData()
                 if(this.status) {
@@ -255,23 +256,23 @@
                 }
             })
 
-            $('.choose-sex').on('click', () => {
-                this.setData('gendle', $('.choose-sex').attr('data'))
+            $('.choose-sex').on('click', function () {
+                _this.setData('gendle', this.value)
             })
 
-            $('.choose-type').on('click', () => {
-                this.setData('type', $('.choose-type').attr('data'))
+            $('.choose-type').on('click', function () {
+                _this.setData('type', this.value)
             })
 
             $('.content').on('change', () => {
                 const reSet = () => {
-                    this.setData('username', $('.username').val())
-                    this.setData('password', md5($('.password').val()))
-                    this.setData('address', $('.address').val())
-                    this.setData('phone', $('.phone').val())
-                    this.setData('major', $('.major').val())
-                    this.setData('email', $('.email').val())
-                    this.setData('fullname', $('.fullname').val())
+                    _this.setData('username', $('.username').val())
+                    _this.setData('password', md5($('.password').val()))
+                    _this.setData('address', $('.address').val())
+                    _this.setData('phone', $('.phone').val())
+                    _this.setData('major', $('.major').val())
+                    _this.setData('email', $('.email').val())
+                    _this.setData('fullname', $('.fullname').val())
                 }
                 reSet()          
             })
