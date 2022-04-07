@@ -1,7 +1,7 @@
 <?php
     include './demo/connect.php';
-    $subject_id = $_GET['subject_id'];
-    $user_name = $_GET['userOL'];
+    $subject_id = $_POST['subject_id'];
+    $user_name = $_POST['userOL'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,7 +29,12 @@
                             <input class='header-subject' type="submit" value="Trang chủ">
                         </form>
                     </li>
-                    <li class = 'itemNav'><a href = '#'>Môn học</a></li>
+                    <li class = 'itemNav'>
+                        <form action="./index.php#monhoc" method='post'>
+                            <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
+                            <input class='header-subject' type="submit" value="Môn học">
+                        </form>
+                    </li>
                     <li class = 'itemNav baitap1'>
                         Bài tập được giao
                         <div class = 'frameNoti btap1'>
@@ -59,7 +64,12 @@
                         </div>
                         </li>
                     </li>
-                    <li class = 'itemNav'><a href = './index.php#lich'>Lịch học</a></li>
+                    <li class = 'itemNav'>
+                        <form action="./index.php#lich" method='post'>
+                            <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
+                            <input class='header-subject' type="submit" value="Lịch học">
+                        </form>
+                    </li>
                     <li class = 'itemNav actNoti1'>
                         Thông báo
                         <div class = 'frameNoti noti1'>
@@ -192,7 +202,7 @@
         $name = $result['user_fullname'];
         $img_user = $result['user_image'];
         $sql = 'SELECT * FROM  subject sj join homework hw on hw.subject_id=sj.subject_id
-            where sj.subject_id='.$_GET["subject_id"].' ';
+            where sj.subject_id='.$_POST["subject_id"].' ';
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) {
             $k = $row['homework_time'];
@@ -213,7 +223,7 @@
                     </div>
                     <hr>
                     <div id='baitap'>
-                        <form action='./homework.php' method='get'>
+                        <form action='./homework.php' method='post'>
                             <input type='hidden' name='userOL' value=$user_name>
                             <input type='hidden' name='homework_id' value=".$row['homework_id'].">
                             <input type='hidden' name='subject_id' value=$subject_id>
