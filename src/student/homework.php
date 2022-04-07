@@ -1,8 +1,8 @@
 <?php
     include './demo/connect.php';
-    $user_name = $_GET['userOL'];
-    $subject_id = $_GET['subject_id'];
-    $homework_id = $_GET['homework_id'];
+    $user_name = $_POST['userOL'];
+    $subject_id = $_POST['subject_id'];
+    $homework_id = $_POST['homework_id'];
 ?>
 
 <!DOCTYPE html>
@@ -45,7 +45,7 @@
                     $subject_name = $row['subject_name'];
                     echo"
                     <li>
-                        <form action='./subject.php' method='get'>
+                        <form action='./subject.php' method='POST'>
                             <input type='hidden' name='userOL' value=$user_name>
                             <input type='hidden' name='subject_id' value=".$subject_id1.">
                             <div class = 'item' style='background-image: url($img)'></div>
@@ -64,7 +64,7 @@
         <?php
             $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                              join homework hw on sj.subject_id=hw.subject_id
-                                             where homework_id='.$_GET["homework_id"].'';
+                                             where homework_id='.$_POST["homework_id"].'';
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
 
@@ -114,11 +114,14 @@
             ?>
             <form action="" method="post" class="comment-1">
                 <input class="comment-2" type="text" name="comment" require>
+                <input type='hidden' name='userOL' value=<?php echo $user_name ?>>
+                <input type='hidden' name='subject_id' value=<?php echo $subject_id ?>>
+                <input type='hidden' name='homework_id' value=<?php echo $homework_id ?>>
                 <button class="send" type="submit" name="upload"><i class="fas fa-paper-plane"></i></button>
             </form>
             <?php
                 if(isset($_POST['comment'])){
-                    $homework_id=$_GET['homework_id'];
+                    $homework_id=$_POST['homework_id'];
                     $content=$_POST["comment"];
                     if($content == ""){
 
@@ -133,7 +136,7 @@
         <?php 
             $sql = 'SELECT * FROM comment cmt join homework hw on cmt.homework_id=hw.homework_id 
                                               join user on cmt.user_name=user.user_name
-                                              where hw.homework_id= '.$_GET["homework_id"].' order by comment_time DESC';
+                                              where hw.homework_id= '.$_POST["homework_id"].' order by comment_time DESC';
             $kq = $conn->query($sql);
             while($row = mysqli_fetch_array($kq)){
                 $k1 = $row['comment_time'];
@@ -151,7 +154,7 @@
                         <li style='font-size:10px'></b>".$hour1." &nbsp; ".$day1."/".$month1."/".$year1."</li>
                         <li>".$row['comment_content']."</li>
                         <li>
-                            <form action = './edit_comment.php' method = 'GET'  >
+                            <form action = './edit_comment.php' method = 'post'  >
                                 <button type='submit' class ='button'>Sửa</button>
                                 <input type='hidden' name='comment_id' value = ".$row['comment_id']." >
                             </form>
@@ -202,15 +205,20 @@
                 if(isset($result)){
             ?>
                 <form action="" method = "POST" enctype="multipart/form-data">
-                    <input class='upload' name="homework_id"><p class='create'> <?php echo $result['doucument_directory'] ?></p>
-                    <input type='hidden' name='id' value = <?php echo $homework_id ?>>
+                    <input class='upload' name="id"><p class='create'> <?php echo $result['doucument_directory'] ?></p>
+                    <input type='hidden' name='homework_id' value = <?php echo $homework_id ?>>
+                    <input type='hidden' name='userOL' value=<?php echo $user_name ?>>
+                    <input type='hidden' name='subject_id' value=<?php echo $subject_id ?>>
                     <button type="submit" class="btn btn-outline-secondary" name="edit_submit">Hủy Nộp bài</button>
                 </form>
             <?php
                 }else{
             ?>
-                <form action="" method = "POST" enctype="multipart/form-data">
+                <form action="" method="post" enctype="multipart/form-data">
                     <input class='upload' type='file' name='fileUpload'><p class='create'><i class='fas fa-plus'></i>Thêm bài tập</p>
+                    <input type='hidden' name='userOL' value=<?php echo $user_name ?>>
+                    <input type='hidden' name='subject_id' value=<?php echo $subject_id ?>>
+                    <input type='hidden' name='homework_id' value=<?php echo $homework_id ?>>
                     <button type="submit" class="btn btn-outline-secondary" name="btn_submit">Nộp bài</button>
                 </form>  
             <?php
@@ -220,10 +228,9 @@
 <!-- Xử lý Nộp bài tập -->
                 <?php
                     if (isset($_POST["btn_submit"])) {
-                        $homework_id=$_GET["homework_id"];
+                        $homework_id=$_POST["homework_id"];
                         $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                                                    join homework hw on sj.subject_id=hw.subject_id
-                                                    where homework_id='.$_GET["homework_id"].'';
+                                join homework hw on sj.subject_id=hw.subject_id where homework_id='.$homework_id.'';
                         $data = $conn->query($sql);
                         $data = mysqli_fetch_array($data);
                         $subject_id = $data['subject_id'];
@@ -249,7 +256,7 @@
 <!-- Xử lý Hủy nộp bài -->
         <?php
             if (isset( $_POST['edit_submit'])) {
-                $sql='DELETE FROM document where homework_id='.$_POST["id"].'';
+                $sql='DELETE FROM document where homework_id='.$_POST["homework_id"].'';
                 mysqli_query($conn,$sql);
             }
         ?>

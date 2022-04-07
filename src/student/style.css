@@ -137,6 +137,11 @@ header.sticky #logo{
     font-family: abc;
 }
 
+.content .btn-submit{
+    background: none;
+    border: none;
+}
+
 .content .submit{
     background: none;
     border: none;

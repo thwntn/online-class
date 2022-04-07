@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="./style.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="./header.css" media="screen" />
 </head>
-<body>
+<body onload="show()">
     <div class="nav-mobile">
             <ul class="nav-mobile_list">
             <li class="item"><a href="#home"><i class="fas fa-home"></i></a></li>
@@ -280,8 +280,15 @@
                                 $result = $conn->query($get_registry);
                                 $result = mysqli_fetch_array($result);
                                 if(isset($result)){
+                                    $subject_code = $result['subject_code'];
+                                    $subject_name = $result['subject_name'];
                                 echo "
-                                    <h6>".$result['subject_code']." &nbsp;  ".$result['subject_name']." </h6>
+                                        <form action='./subject.php' method='post'>
+                                            <input type='hidden' name='userOL' value=$user_name>
+                                            <input type='hidden' name='subject_id' value=$subject_id>
+                                            <input class='btn-submit' type='submit' value='$subject_code &nbsp; $subject_name' name='submit'>
+                                        </form>
+                                    
                                 ";
                                 }else{
                                     echo "
@@ -321,7 +328,7 @@
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                     echo "
-                        <form action='./subject.php' method='get' class='form-subject'>
+                        <form action='./subject.php' method='post' class='form-subject'>
                             <div class='slide' id='a".$row['subject_id']."'>
                                 <input type='hidden' value=".$row['subject_id']." name='subject_id'>
                                 <input type='hidden' name='userOL' value=$user_name>
