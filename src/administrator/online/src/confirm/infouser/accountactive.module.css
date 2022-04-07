@@ -5,9 +5,10 @@
     flex-wrap: wrap;
     box-shadow: 0px 0px 24px rgba(0, 0, 0, 0.05);
     border: 5px solid linear-gradient(to left, #743ad5, #d53a9d);
-    border-radius: 12px;
-    animation: show 0.3s ease;
+    border-radius: 20px;
+    animation: accani 0.3s ease;
     overflow: auto;
+    border: 3px solid rgba(190, 218, 255, 0.5);
     min-width: 1400px;
 }
 @keyframes show {
@@ -56,11 +57,11 @@
 }
 @keyframes accani {
     from {
-        transform: translateY(-20px);
+        transform: translateY(5%) scale(95%);
         opacity: 0;
     }
     to {
-        transform: translateY(0px);
+        transform: translateY(0px) scale(100%);
         opacity: 1;
     }
 }
@@ -73,22 +74,25 @@
     height: 68vh;
     overflow: auto;
 }
+.close:hover {
+    background-color: rgb(255, 87, 87);
+    color: #fff;
+}
 .close {
     width: 86px;
     height: 32px;
-    background-color: rgb(255, 0, 0);
-    color: #fff;
+    background-color: rgb(255, 255, 255);
     border-radius: 48px;
     border: none;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.1);
 }
 .search {
-    padding: 4px 12px;
+    padding: 0px 12px;
     width: 256px;
     border-radius: 48px;
-    border: 2px solid rgba(0, 0, 0, 0.05);
+    border: none;
     outline: none;
     margin-right: 12px;
+    height: 32px;
 }
 .item {
     position: relative;

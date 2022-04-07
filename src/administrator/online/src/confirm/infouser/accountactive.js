@@ -3,10 +3,10 @@ import InfoUser from './infouser.js'
 import {useEffect, useState} from 'react'
 import Confirm from '../confirm.js'
 import Convert from './convert.js'
+import SendNoti from './sendNotification'
 
 const AccountActive = (property) => {
     //fetch data
-    const [users, setUsers] = useState([])
     const [viewUsers, setViewUsers] = useState([])
 
     const [refesh, setReFesh] = useState()
@@ -16,16 +16,24 @@ const AccountActive = (property) => {
     const [convert, setConvert] = useState('none')
     
     useEffect(() => {
-        async function fetchData() {
+        function fetchData() {
             fetch('http://localhost/online-class/src/administrator/api/user.php')
             .then((response) => response.json())
             .then((usersJson) => {
-                setUsers(usersJson)
                 setViewUsers(usersJson)
             })
         }
         fetchData()
-    }, [refesh])
+
+        const id = setInterval(() => {
+            fetchData()
+        }, 5000);
+
+        return () => {
+            clearInterval(id)
+        }
+
+    }, [])
     const closed = () => {
         setTimeout(() => {
             setView('none')
@@ -35,16 +43,6 @@ const AccountActive = (property) => {
         setReFesh(Math.random())
     }
 
-    const search = (e) => {
-        const data = e.target.value
-        let kq = users.filter((user) => {
-            return user.user_fullname == data
-        })
-        setViewUsers(kq)
-        if(e.target.value == '') {
-            setViewUsers(users)
-        }
-    }
     
     return (
         <div className = {style.frame + ' ' + style.active}>
@@ -59,7 +57,6 @@ const AccountActive = (property) => {
                     ></div>
                     <input
                         className = {style.search} placeholder = 'Nhập tên cần tìm kiếm'
-                        onChange={(e) => search(e)}
                     ></input>
                     <button onClick = {() => property.func()} className = {style.close}>Đóng</button>
                     <div className = {style.boxItems + ' row'}>
@@ -71,12 +68,12 @@ const AccountActive = (property) => {
                                 case '1': {
                                     type = 'accountactive_student__5ed6a'
                                     imgType = './image/student.png'
-                                    content = 'Sinh Viên'
+                                    content = 'Giảng Viên'
                                     break
                                 }
                                 case '2': {
                                     type = 'accountactive_teacher__XHkc9'
-                                    content = 'Giảng Viên'
+                                    content = 'Sinh Viên'
                                     break
                                 }
                                 case '3': case '4': {
@@ -85,11 +82,19 @@ const AccountActive = (property) => {
                                     break 
                                 }
                             }
+
                             return (
                                 <div key = {index} className = {style.itemsElement + ' col-md-3'}>
                                     <div className = {style.item}>
                                         <div className = {style.actionUser}>
-                                            <button className = {style.gotoUser}><i className="fad fa-sign-in"></i></button>
+                                            <button
+                                                className = {style.gotoUser}
+                                            >
+                                                <form method = 'post' action = {(user.user_type == 1) || (user.user_type == 4) == true ? 'http://localhost/online-class/src/teacher/index.php' : 'sv'}>
+                                                    <input name = 'userOL' value = {user.user_name} ></input>
+                                                    <input type = 'submit'></input>
+                                                </form>
+                                            </button>
                                             <button
                                                 className = {style.convertUser}
                                                 onMouseOver={() => setConvert(index)}
@@ -103,7 +108,7 @@ const AccountActive = (property) => {
                                                 className = {style.viewUser}
                                             >
                                                 <i className="fad fa-eye"></i>
-                                                {view === index && <InfoUser func = {{close: closed,finish: finish}}></InfoUser>}
+                                                {view === index && <InfoUser object = {{close: closed, userName: user.user_name}}></InfoUser>}
                                             </button>
                                         </div>
                                         <div className = {type}>

@@ -2,10 +2,10 @@ import './App.css';
 import Header from './navigation/header.js'
 import HomePage from './homepage/homepage.js'
 import NavMobile from './navigation/navmobile.js';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function App() {
-  console.log(sessionStorage.getItem('userOL') == undefined);
+  // console.log(sessionStorage.getItem('userOL') == undefined);
   const [main, setMain] = useState(<HomePage></HomePage>)
   if (window.innerWidth < 998) {
     return (

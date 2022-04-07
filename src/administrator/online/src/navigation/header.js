@@ -14,6 +14,36 @@ function Header ({setMain}) {
     const [scroll, setScroll] = useState(style.noActive)
     const [activeNoti, setActiveNoti] = useState(false)
     const [activeMessage, setActiveMess] = useState(false)
+    const [notRead, setNotRead] = useState(null)
+
+    //đặt thông báo về trạng thái đã đọc hết
+    const resetNotification = () => {
+        const url = 'http://localhost/online-class/src/administrator/api/resetNotification.php'
+        fetch(url)
+    }
+
+    const fetchNotification = () => {
+      const url = 'http://localhost/online-class/src/administrator/api/fetchNotification.php'
+      fetch(url)
+      .then(response => response.json())
+      .then(responseJson => {
+          console.log(responseJson);
+          setNotRead(responseJson[responseJson.length-1].notRead)
+      })
+    }
+  
+    useEffect(() => {
+      fetchNotification()
+    }, [])
+
+    useEffect(() => {
+      const id = setInterval(() => {
+        fetchNotification()
+      }, 5000);
+      return () => {
+        clearInterval(id)
+      }
+    }, [])
 
     let expandMenu = '48px';
     const setExpandMenu = () => {
@@ -59,10 +89,16 @@ function Header ({setMain}) {
                     onClick = {() => setMain(<Log></Log>)}
                     className = {style.item}
                 ><a href = '#log'>Nhật kí</a></li>
-                <li onClick={() => setActiveNoti(!activeNoti)} className = {style.item}>
-                    Thông báo
-                    {activeNoti && <Noti></Noti>}
-                    </li>
+                <li
+                    onClick={() => {
+                        setActiveNoti(!activeNoti)
+                        resetNotification()
+                    }}
+                    className = {style.item}
+                >
+                    Thông báo {notRead == 0 ? null : <h5 className={style.notRead}>{notRead}</h5>}
+                    {activeNoti && <Noti setNotRead = {setNotRead}></Noti>}
+                </li>
                 <li onClick={() => setActiveMess(!activeMessage)} className = {style.item}>
                     Tin nhắn
                     {activeMessage && <Message></Message>}

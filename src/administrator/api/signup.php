@@ -5,11 +5,10 @@
 
     //Open:data
     $open = fopen('php://input', 'r');
-    while($resonse = fread($open, 1024)) {
-        $resonseJSON = json_decode($resonse, true);
+    while($response = fread($open, 1024)) {
+        $resonseJSON = json_decode($response, true);
     }
 
-    
     function encrypt ($simple_string, $password) {
         $ciphering = "aes-256-cbc";
         

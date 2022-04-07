@@ -52,13 +52,13 @@
     color: rgb(112, 0, 112);
 }
 .administrators {
-    background-color: rgba(0, 0, 0, 0.02);
+    background-color: #fff;
     padding: 12px;
 }
 .administrators .item_ad {
-    background-color: #fff;
-    padding: 8px;
-    border-radius: 8px;
+    background-color: rgba(0, 0, 0, 0.025);
+    padding: 12px 12px;
+    border-radius: 20px;
     margin: 12px 0px;
 }
 .item_ad .img_ad {

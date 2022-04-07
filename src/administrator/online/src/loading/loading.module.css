@@ -1,0 +1,38 @@
+.frame {
+    position: fixed;
+    top: 0;bottom: 0;right: 0;left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    z-index: 2;
+}
+.content h5 {
+    text-align: center;
+    margin-top: 24px;
+}
+.frameIcon {
+    background-color: #fff;
+    position: relative;
+    border: 2px solid rgb(127, 219, 255);
+    border-radius: 2px;
+    width: 320px;
+    height: 16px;
+}
+.child {
+    position: absolute;
+    top: 0;left: 0;right: 0;bottom: 0;
+    background-color: rgb(128, 208, 255);
+    animation: aniBox 5s ease forwards;
+}
+@keyframes aniBox {
+    from {
+        width: 0px;
+    }
+    to {
+        width: 100%;
+    }
+}

@@ -29,7 +29,7 @@ const NavMobile = () => {
                 ><i className = "fas fa-bell"></i></li>
                 <li className = {style.item}><i className ="fas fa-clipboard"></i></li>
             </ul>
-            {noti && <Noti></Noti>}
+            {noti && <Noti ></Noti>}
             {mess && <Mess></Mess>}
             {func && <Function data = {{setFunc, func}}></Function>}
         </div>

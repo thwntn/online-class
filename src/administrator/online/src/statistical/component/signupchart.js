@@ -1,36 +1,63 @@
 import { Bar, Line, PolarArea } from 'react-chartjs-2'
 import { Chart } from 'chart.js/auto'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const chart = require('chart.js')
 
 function SignUpChart() {
 
     const [signupData, setSignUpData] = useState({
-        labels: ['20/9', '21/9', '22/9', '23/9'],
+        labels: [],
         datasets: [
             {
-                label: 'Thống kê đăng nhập',
-                data: [5, 2, 7, 3, 9, 6, 6, 2, 4, 9],
-                backgroundColor: [
-                    "rgba(255, 100, 0 ,0.12)",
-                    "rgba(255, 100, 0, 0.5)",
-                    "rgba(255, 0, 0, 0.5",
-                    "rgba(50, 100, 255, 0.5)",
-                ],
-                borderColor: [
-                    "rgba(255, 100, 0, 0.35)",
-                    "rgba(255, 100, 0, 0.8)",
-                    "rgba(255, 0, 0, 0.8)",
-                    "rgba(50, 100, 255, 0.8)",
-                ],
-                borderWidth: 2,
-                tension: 0.5,
-                fill: true,
-                pointBackgroundColor: 'rgba(0, 0, 200, 0)',
+                data: [],
             }
         ],
     })
+
+    const fetchData = () => {
+        const url = 'http://localhost/online-class/src/administrator/api/statictical.php' 
+        fetch(url)
+        .then(response => response.json())
+        .then(responseJson => {
+            setSignUpData({
+                labels: responseJson.signUp.map(item => item.time.slice(-5)),
+                datasets: [
+                    {
+                        label: 'Đăng kí',
+                        data: responseJson.signUp.map(item => item.amount),
+                        backgroundColor: [
+                            "rgba(255, 100, 0 ,0.12)",
+                            "rgba(255, 100, 0, 0.5)",
+                            "rgba(255, 0, 0, 0.5",
+                            "rgba(50, 100, 255, 0.5)",
+                        ],
+                        borderColor: [
+                            "rgba(255, 100, 0, 0.35)",
+                            "rgba(255, 100, 0, 0.8)",
+                            "rgba(255, 0, 0, 0.8)",
+                            "rgba(50, 100, 255, 0.8)",
+                        ],
+                        borderWidth: 2,
+                        tension: 0.5,
+                        fill: true,
+                        pointBackgroundColor: 'rgba(0, 0, 200, 0)',
+                    }
+                ],
+            })
+        })
+    }
+
+    useEffect(() => fetchData(), [])
+
+    useEffect(() => {
+        const id = setInterval(() => {
+            fetchData()
+        }, 6000);
+        return () => {
+            clearInterval(id)
+        }
+    }, [])
 
     const options = {
         plugins: {
@@ -44,4 +71,4 @@ function SignUpChart() {
      );
 }
 
-export default SignUpChart;
+export default SignUpChart

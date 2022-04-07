@@ -1,21 +1,74 @@
+import { useEffect, useState } from 'react';
 import style from './infouser.module.css'
 
 
-const InfoUser = (property) => {
-    console.log(property);
+const InfoUser = ({object}) => {
+    console.log(object);
+    
+    const [user, setUser] = useState({})
+
+    const updateInfo = () => {
+        const url = 'http://localhost/online-class/src/administrator/api/updateUser.php'
+        fetch(url, {
+            method: 'post',
+            body: JSON.stringify(user)
+        })
+        .then(response => response.json())
+        .then(responseJson => console.log(responseJson))
+    }
+
+    // Lấy dữ liệu User từ cơ sở dữ liệu
+    useEffect(() => {
+        const url = 'http://localhost/online-class/src/administrator/api/getInfoUser.php'
+        fetch(url, {
+            method: 'post',
+            body: JSON.stringify(object.userName)
+        })
+        .then(response => response.json())
+        .then(responseJson => {
+            setUser(responseJson)
+            console.log(responseJson);
+        })
+    }, [])
+
+
     return (
     <div className = {style.boxInfo}>
         <div className = {style.imgUser}></div>
         <div className = {style.nameUser}>Tên tài khoản</div>
-        <input className = {style.inputInfo} value = 'nttansv@gmail.com'></input>
-        <input className = {style.inputInfo} type = 'password' value = 'hfjkfdblgl'></input>
-        <input className = {style.inputInfo} value = '216 Tầm Vu, Ninh Kiều, cần Thơ'></input>
-        <input className = {style.inputInfo} value = 'Nam'></input>
-        <input className = {style.inputInfo} value = 'Mạng máy tính và truyền thông dữ liệu'></input>
-        <input className = {style.inputInfo} value = 'Tài khoản sinh viên'></input>
+        <input
+            className = {style.inputInfo}
+            placeholder = {user.user_fullname}
+            onChange = {(e) => {
+                user.user_fullname = e.target.value
+            }}
+        ></input>
+        <input
+            className = {style.inputInfo}
+            placeholder = {user.user_address}
+            onChange = {(e) => {
+                user.user_address = e.target.value
+            }}
+        ></input>
+        <input
+            className = {style.inputInfo}
+            placeholder = {user.user_major}
+            onChange = {(e) => {
+                user.user_major = e.target.value
+            }}
+        ></input>
+        <input
+            className = {style.inputInfo}
+            placeholder = {user.user_type == 2 ? 'Tài khoản giáo viên' : 'Tài khoản Sinh Viên'}
+        ></input>
         <div className = {style.nav}>
-            <button className = {style.close} onClick = {property.func.close}>Đóng</button>
-            <button className = {style.finish} onClick = {property.func.finish}>Cập nhật</button>
+            <button className = {style.close} onClick = {object.close}>Đóng</button>
+            <button
+                className = {style.finish}
+                onClick = {() => {
+                    updateInfo()
+                }}
+            >Cập nhật</button>
         </div>
     </div>
 )}

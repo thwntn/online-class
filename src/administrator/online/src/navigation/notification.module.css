@@ -64,6 +64,10 @@
 .content h4 {
     font-size: 18px;
 }
+.frameNoti {
+    height: 374px;
+    overflow: auto;
+}
 .itemStatus,
 .item {
     display: flex;

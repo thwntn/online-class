@@ -1,8 +1,34 @@
+import { useEffect, useState } from 'react'
+import Loading from '../loading/loading'
 import style from './log.module.css'
 
 const Log = (property) => {
+    const [log, setLog] = useState([])
+
+    const fetchData = () => {
+        const url = 'http://localhost/online-class/src/administrator/api/fetchLog.php'
+        fetch(url)
+        .then(response => response.json())
+        .then(responseJson => {
+            setLog(responseJson)
+            console.log(responseJson);
+        })
+    }
+
+    useEffect(() => fetchData(), [])
+
+    useEffect(() => {
+        const id = setInterval(() => {
+            fetchData()
+        }, 5000);
+        return () => {
+            clearInterval(id)
+        }
+    }, [])
+
     return (
         <div id = 'log' className = {style.frame + ' row pad'}>
+            {log.length == 0 ? <Loading></Loading> : null}
             <div className = {style.titleMobile}>
                 <h5>Nhật kí</h5>
             </div>
@@ -17,11 +43,15 @@ const Log = (property) => {
                         <li className = {style.titleNav + ' col-md-3'}><h5>Thời gian</h5></li>
                     </ul>
                     <div className = {style.content}>
-                        <ul className = {style.items}>
-                            <li className={style.item + ' col-md-6'}>Đăng kí tài khoản</li>
-                            <li className={style.item + ' col-md-3'}>Nguyễn Trần Thiên Tân</li>
-                            <li className={style.item + ' col-md-3'}>15:10 20/2/2022</li>
-                        </ul>
+                        {log.map(item => {
+                            return (
+                                <ul className = {style.items}>
+                                    <li className={style.item + ' col-md-6'}>{item.content}</li>
+                                    <li className={style.item + ' col-md-3'}>{item.username}</li>
+                                    <li className={style.item + ' col-md-3'}>{item.time}</li>
+                                </ul>
+                            )
+                        })}
                     </div>
                 </div>
             </div>
