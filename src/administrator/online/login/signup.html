@@ -160,6 +160,7 @@
                     })
                     .then(responseAu => responseAu.json())
                     .then((responseJsonAu) => {
+                        console.log(responseJsonAu);
                         if(responseJsonAu == 1) {
                             location.href = 'http://localhost/online-class/src/administrator/online/login/authentication.html'
                         }
@@ -272,7 +273,6 @@
                     this.setData('email', $('.email').val())
                     this.setData('fullname', $('.fullname').val())
                 }
-
                 reSet()          
             })
 

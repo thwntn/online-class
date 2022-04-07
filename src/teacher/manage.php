@@ -47,7 +47,8 @@
         </div>
         <div class = "items row">
             <?php 
-                
+                include('./connect.php');
+
                 $sql="SELECT * FROM subject where user_name='$user'";
                 $kq=$con->query($sql);
                 while($row=$kq->fetch_assoc()){

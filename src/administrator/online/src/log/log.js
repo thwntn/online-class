@@ -47,7 +47,7 @@ const Log = (property) => {
                             return (
                                 <ul className = {style.items}>
                                     <li className={style.item + ' col-md-6'}>{item.content}</li>
-                                    <li className={style.item + ' col-md-3'}>{item.username}</li>
+                                    <li className={style.item + ' col-md-3'}>{item.user_name}</li>
                                     <li className={style.item + ' col-md-3'}>{item.time}</li>
                                 </ul>
                             )

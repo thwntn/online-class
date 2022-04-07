@@ -17,7 +17,7 @@
     <link rel="stylesheet" type="text/css" href="./style.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="./header.css" media="screen" />
 </head>
-<body onload="show()">
+<body>
     <div class="nav-mobile">
             <ul class="nav-mobile_list">
             <li class="item"><a href="#home"><i class="fas fa-home"></i></a></li>

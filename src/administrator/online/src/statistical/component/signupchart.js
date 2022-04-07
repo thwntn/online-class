@@ -16,7 +16,7 @@ function SignUpChart() {
     })
 
     const fetchData = () => {
-        const url = 'http://localhost/online-class/src/administrator/api/statictical.php' 
+        const url = 'http://localhost/online-class/src/administrator/api/statistical.php' 
         fetch(url)
         .then(response => response.json())
         .then(responseJson => {

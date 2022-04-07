@@ -23,7 +23,7 @@
     $retval = mail ($email,$subject,$message,$header);
     
     if( $retval == true ) {
-        $query = "INSERT INTO authentication VALUE ('$userName', '$code', '$time')";
+        $query = "INSERT INTO authentication (authen_code, authen_time, user_name) VALUE ('$code', '$time', '$userName')";
         echo $conn -> query($query);
     }else {
         echo -1;

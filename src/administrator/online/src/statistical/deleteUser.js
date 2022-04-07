@@ -5,7 +5,7 @@ import style from './deleteUser.module.css'
 function AskDelete({user, setUserDelete, fullName, setRefesh}) {
 
     const transUser = (userName) => {
-        const url = 'http://localhost/online-class/src/administrator/api/deleteUser.php'
+        const url = 'http://localhost/online-class/src/administrator/api/deleteUserAdmin.php'
         fetch(url, {
             method: 'post',
             mode: 'cors',

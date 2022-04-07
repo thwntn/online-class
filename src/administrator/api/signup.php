@@ -24,7 +24,7 @@
 
     $password_en = encrypt($resonseJSON['password'], $resonseJSON['username']);   
 
-    $query = "INSERT INTO user VALUE ('$resonseJSON[username]', '$resonseJSON[fullname]', '$password_en', '$resonseJSON[address]', '$resonseJSON[phone]', '$resonseJSON[gendle]', '$resonseJSON[major]', '$resonseJSON[type]', '$resonseJSON[image]')";
+    $query = "INSERT INTO user VALUE ('$resonseJSON[username]', '$password_en', '$resonseJSON[fullname]', '$resonseJSON[email]', '$resonseJSON[phone]', '$resonseJSON[address]', '$resonseJSON[gendle]', '$resonseJSON[major]', '$resonseJSON[type]', '$resonseJSON[image]')";
     $responseQ = $conn -> query($query);
     if($responseQ) echo 1;
     else echo -1;

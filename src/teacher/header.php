@@ -28,7 +28,7 @@ $user=$_GET['userOL'];
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
         <?php 
-                    $con = mysqli_connect('localhost', 'root','', 'online-class');
+                    include('./connect.php');
 
                     $sql="SELECT * FROM notification nt JOIN subject sj ON nt.user_name = sj.user_name  ";
                     $kq=$con->query($sql);

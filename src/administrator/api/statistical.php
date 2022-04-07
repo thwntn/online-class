@@ -7,9 +7,9 @@
     $reviousLogin = $time->modify("-240 hours")->format('Y-m-d');
     $reviousSignUp = $time->modify("-96 hours")->format('Y-m-d');
 
-    $queryLogin = "SELECT * FROM statictical WHERE time > '$reviousLogin' && type = 'login'";
-    $querySignUp = "SELECT * FROM statictical WHERE time > '$reviousSignUp' && type = 'signup'";
-    $queryInteractive = "SELECT * FROM statictical WHERE time > '$reviousSignUp' && type = 'interactive'";
+    $queryLogin = "SELECT * FROM statistical WHERE statis_time > '$reviousLogin' && statis_type = 'login'";
+    $querySignUp = "SELECT * FROM statistical WHERE statis_time > '$reviousSignUp' && statis_type = 'signup'";
+    $queryInteractive = "SELECT * FROM statistical WHERE statis_time > '$reviousSignUp' && statis_type = 'interactive'";
 
     $result = $conn -> query($queryLogin);
     

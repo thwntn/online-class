@@ -60,6 +60,7 @@ const InfoUser = ({object}) => {
         <input
             className = {style.inputInfo}
             placeholder = {user.user_type == 2 ? 'Tài khoản giáo viên' : 'Tài khoản Sinh Viên'}
+            onChange={null}
         ></input>
         <div className = {style.nav}>
             <button className = {style.close} onClick = {object.close}>Đóng</button>

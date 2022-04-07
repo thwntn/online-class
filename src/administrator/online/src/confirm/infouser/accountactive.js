@@ -33,7 +33,7 @@ const AccountActive = (property) => {
             clearInterval(id)
         }
 
-    }, [])
+    }, [refesh])
     const closed = () => {
         setTimeout(() => {
             setView('none')
@@ -89,9 +89,13 @@ const AccountActive = (property) => {
                                         <div className = {style.actionUser}>
                                             <button
                                                 className = {style.gotoUser}
+                                                onClick= {(e) => {
+                                                    e.target.nextElementSibling.submit()
+                                                }}
                                             >
-                                                <form method = 'post' action = {(user.user_type == 1) || (user.user_type == 4) == true ? 'http://localhost/online-class/src/teacher/index.php' : 'sv'}>
-                                                    <input name = 'userOL' value = {user.user_name} ></input>
+                                                <i className="fad fa-sign-in"></i>
+                                                <form style={{display: 'none'}} method = 'post' action = {(user.user_type == 1) || (user.user_type == 4) == true ? 'http://localhost/online-class/src/teacher/index.php' : 'http://localhost/online-class/src/student/index.php'}>
+                                                    <input name = 'userOL' value = {user.user_name} style= {{display: 'none'}}></input>
                                                     <input type = 'submit'></input>
                                                 </form>
                                             </button>

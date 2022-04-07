@@ -1,7 +1,7 @@
 <?php
     include('./connect.php');
 
-    $query = "SELECT * FROM  log";
+    $query = "SELECT * FROM log INNER JOIN user on log.user_name = user.user_name";
 
     $data = [];
 
