@@ -8,7 +8,7 @@
 
     $code = $response;
 
-    $query = "SELECT user_name FROM authentication WHERE code = '$code'";
+    $query = "SELECT user_name FROM authentication WHERE authen_code = '$code'";
     $result = $conn -> query($query);
 
     $data = $result -> fetch_assoc();
