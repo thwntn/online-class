@@ -38,14 +38,13 @@
                     <li class = 'itemNav baitap1'>
                         Bài tập được giao
                         <div class = 'frameNoti btap1'>
-                            <h5>
-                                <i class="fas fa-book"></i>Bài tập được giao
-                            </h5>
+                            <h5><i class="fas fa-book"></i>Bài tập được giao</h5>
                                 <?php
                                     $sql = "SELECT * FROM registry rg join homework hw on rg.subject_id=hw.subject_id
                                     join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by homework_time ASC";
                                     $result = $conn->query($sql);
                                     while($row = $result->fetch_assoc()) {
+                                        $sj_id = substr($row['subject_id'],-13,5);
                                         echo "
                                         <a href='./subject.php?code=".$row['subject_id']."'>
                                             <div class = itemNoti>
@@ -53,7 +52,7 @@
                                                     <img src=".$row['subject_image'].">
                                                 </div>
                                                 <div class = 'contentNoti'>
-                                                    <h4>".$row['subject_code']."</h4>
+                                                    <h4>".$sj_id."</h4>
                                                     <p class='p-homework'>".$row['homework_content']."</p>
                                                 </div>
                                             </div>
@@ -75,9 +74,11 @@
                         <div class = 'frameNoti noti1'>
                             <h5><i class="fas fa-bell"></i>Thông báo</h5>
                             <?php
-                                $sql = "SELECT * FROM notification join subject on notification.user_name = subject.user_name";
+                                $sql = "SELECT * FROM subject sj join registry rg on sj.subject_id=rg.subject_id 
+                                    join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
                                 $result = $conn->query($sql);
                                 while($row = $result->fetch_assoc()) {
+                                    $sj_id = substr($row['subject_id'],-13,5);
                                     if($row['noti_status'] == 1){
                                         echo "
                                         <div class = itemNoti>
@@ -85,7 +86,7 @@
                                                 <img src=".$row['subject_image'].">
                                             </div>
                                             <div class = 'contentNoti'>
-                                                <h4>".$row['subject_code']."</h4>
+                                                <h4>".$sj_id."</h4>
                                                 <p>".$row['noti_content']."</p>
                                             </div>
                                         </div>
@@ -97,7 +98,7 @@
                                                 <img src=".$row['subject_image'].">
                                             </div>
                                             <div class = 'contentNoti'>
-                                                <h4>".$row['subject_code']."</h4>
+                                                <h4>".$sj_id."</h4>
                                                 <p>".$row['noti_content']."</p>
                                             </div>
                                         </div>
@@ -106,13 +107,11 @@
                                 }
                             ?>
                         </div>
-                        </li>
+                    </li>
                     <li class="itemNav actMess1">
                         Tin nhắn
                         <div class = 'frameNoti mess1'>
-                            <h5 class = 'titleNoti'>
-                                <i class="fab fa-facebook-messenger"></i> Tin nhắn
-                            </h5>
+                            <h5 class = 'titleNoti'><i class="fab fa-facebook-messenger"></i>Tin nhắn</h5>
                             <?php
                                 $sql = "SELECT * FROM chat join user on chat.user_name = user.user_name";
                                 $result = $conn->query($sql);
@@ -171,16 +170,16 @@
     </div>
     <div class="main-subject">
         <?php
-            $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                                             join homework hw on sj.subject_id=hw.subject_id
-                                                        where sj.subject_id='. $subject_id.'';
+            $sql = "SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
+                join homework hw on sj.subject_id=hw.subject_id where sj.subject_id='$subject_id'";
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
             $anh = $result['subject_image'];
+            $sj_id = substr($result['subject_id'],-13,5);
             echo "
                 <div class='name-subject' style='background:url($anh)'>
                     <p>
-                        <b>".$result['subject_code']."</b>
+                        <b>".$sj_id."</b>
                         ".$result['subject_name']."
                     </p>
                 </div>
@@ -194,23 +193,22 @@
             <a href="https://meet.google.com/hfz-duwk-hzq">https://meet.google.com/hfz-duwk-hzq</a>
         </div>
         <div class="shadow p-4 mb-5 bg-white rounded">
-            <p>Bài tập sắp đến hạn</p>
-            <button>Empty</button>
+            <p>Danh sách lớp:</p>
+            <button >Xem</button>
         </div>
     </div> 
     <?php
         $name = $result['user_fullname'];
         $img_user = $result['user_image'];
-        $sql = 'SELECT * FROM  subject sj join homework hw on hw.subject_id=sj.subject_id
-            where sj.subject_id='.$_POST["subject_id"].' ';
+        $sql = "SELECT * FROM  subject sj join homework hw on hw.subject_id=sj.subject_id
+            where sj.subject_id='$subject_id'";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) {
             $k = $row['homework_time'];
             $day = substr($k,-11,2);
             $month = substr($k,-14,2);
             $year = substr($k,-20,4);
-
-            $homework_tittle = $row['homework_tittle'];
+            $homework_content = $row['homework_content'];
             echo "
             <div id='content'>
                 <div class='content-1'>
@@ -228,9 +226,8 @@
                             <input type='hidden' name='homework_id' value=".$row['homework_id'].">
                             <input type='hidden' name='subject_id' value=$subject_id>
                             <p>
-                                <input  class='tittle' type='submit' value='$homework_tittle' > <br>
-                                ".$row['homework_content']." <br>
-                                ".$row['homework_file']."</p>
+                                <input  class='tittle' type='submit' value='$homework_content' > <br>
+                            </p>
                         </form>
                     </div>
                 </div>
@@ -239,7 +236,7 @@
         }
     ?>
     <div id="xemthem">
-        <button>Xem thêm...</button>
+        <button class="btn btn-light">Xem thêm...</button>
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>

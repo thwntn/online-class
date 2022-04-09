@@ -42,6 +42,7 @@
                 while($row = $result->fetch_assoc()) {
                     $img = $row['subject_image'];
                     $subject_id1 = $row['subject_id'];
+                    $sj_id = substr($subject_id1,-13,5);
                     $subject_name = $row['subject_name'];
                     echo"
                     <li>
@@ -50,7 +51,7 @@
                             <input type='hidden' name='subject_id' value=".$subject_id1.">
                             <div class = 'item' style='background-image: url($img)'></div>
                             <p> 
-                                &nbsp; ".$row['subject_code']."
+                                &nbsp; ".$sj_id."
                                 <input style='border:none; background: none;' type='submit' value='$subject_name'>
                             </p>
                         </form>
@@ -77,7 +78,7 @@
             echo"
             <p>
                 <a href=''>
-                    <img class='icon' src='image/format+list+icon.png'>&nbsp;".$result['subject_code']."  ".$result['subject_name']."
+                    <img class='icon' src='image/format+list+icon.png'>&nbsp;".$result['subject_id']."  ".$result['subject_name']."
                 </a>
             </p>
         
@@ -91,9 +92,7 @@
             </li>
             <hr style='width:95%'>
             <li class='homework_content'>
-                <b>".$result['homework_tittle']."</b> <br>
-                ".$result['homework_content']." <br>
-                ".$result['homework_file']."
+                <b>".$result['homework_content']."</b>
             </li>
             ";
         ?>
@@ -183,6 +182,7 @@
                 }
             }
         ?>
+        
                             
         <!-- Xóa bình luận -->
         <?php
@@ -243,8 +243,8 @@
                                     Chưa chọn file!
                                 </div>";  
                     }else{
-                        $sql2 = "INSERT INTO document( doucument_directory, document_date, user_name, subject_id, homework_id) 
-                            VALUES ('$duongdan', now(), '$user_name','$subject_id','$homework_id')";
+                        $sql2 = "INSERT INTO document( doucument_directory, user_name, subject_id, homework_id) 
+                            VALUES ('$duongdan','$user_name','$subject_id','$homework_id')";
                         mysqli_query($conn,$sql2); 
                         echo "
                             <div class='alert alert-primary' role='alert' >
