@@ -12,6 +12,7 @@
     <meta charset="UFT-8">
     <title>Document</title>
     <link rel="stylesheet" type="text/css" href="./homework.css">
+    <link rel="stylesheet" type="text/css" href="./modal.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -144,6 +145,7 @@
                 $month1 = substr($k1,-14,2);
                 $year1 = substr($k1,-20,4);
                 $user_name1 = $row['user_name'];
+                $comment_id = $row['comment_id'];
                 if($user_name1==$user_name){
                     echo "
                     <ul>
@@ -152,12 +154,48 @@
                         
                         <li style='font-size:10px'></b>".$hour1." &nbsp; ".$day1."/".$month1."/".$year1."</li>
                         <li>".$row['comment_content']."</li>
-                        <li>
-                            <form action = './edit_comment.php' method = 'post'  >
-                                <button type='submit' class ='button'>Sửa</button>
-                                <input type='hidden' name='comment_id' value = ".$row['comment_id']." >
+                        <li>";
+                        ?>
+                            <form action = '' method = 'post'  >
+                                <input type='hidden' name='comment_id' value =<?php echo  $row['comment_id'] ?>>
+                                <input type='hidden' name='userOL' value = <?php echo $user_name ?>>
+                                <input type='hidden' name='subject_id' value =<?php echo $subject_id ?>>
+                                <input type='hidden' name='homework_id' value =<?php echo $row['homework_id'] ?>>
+                                <button type='button' class ='button' id="myBtn" >Sửa</button>
+                                <div class="container">
+                                    <div id="myModal" class="modal">
+                                        <div class="modal-content">
+<!-- Nội dung form edit_comment -->                                    
+                                            <form action="" method="post">
+                                                <h2>Chỉnh sửa bình luận</h2>
+                                                <div class="fomrgroup">
+                                                    <b>Nội dung:</b>
+                                                    <input type="text" name="comment_content" value="<?php echo $row["comment_content"] ?>">
+                                                </div>
+                                                <div class="fomrgroup" style="text-align:center;">
+                                                    <button class="btn btn-danger" id="close">Đóng</button> &nbsp;
+                                                    <button class="btn btn-primary" type='submit' name="update">Lưu</button>
+                                                </div>
+                                            </form>
+                                            <?php
+                                                if(isset($_POST["update"])) {
+                                                    $comment_content = $_POST["comment_content"];
+                                                    if ($comment_content == "") {
+                                                
+                                                    }else{
+                                                    $sql = "UPDATE comment SET comment_content='$comment_content', comment_time=now() WHERE comment_id='$comment_id'";
+                                                    mysqli_query($conn,$sql);    
+                                                    }
+                                                }
+                                            ?>
+                                        </div>
+                                    </div>
+                                </div>
+
                             </form>
-                        
+<!-- Form xóa comment  -->
+                        <?php
+                        echo "
                             <form action = '' method = 'post' >
                             <button type='submit' class ='button' name='delete'>Xóa</button>
                             <input type='hidden' name='id' value =".$row['comment_id']." >
@@ -165,6 +203,7 @@
                             <input type='hidden' name='subject_id' value =$subject_id >
                             <input type='hidden' name='homework_id' value = ".$row['homework_id']." >
                         </form>
+                        
                         </li>
                     </ul> 
                     "; 
@@ -182,8 +221,7 @@
                 }
             }
         ?>
-        
-                            
+                   
         <!-- Xóa bình luận -->
         <?php
             if (isset( $_POST['delete'])) {
@@ -292,6 +330,34 @@ document.querySelector('.create').addEventListener('click', function () {
         });
     }  
         }, false);
+
+
+// Sửa comment
+    var modal = document.getElementById('myModal');
+    
+    // Lấy phần button mở Modal
+    var btn = document.getElementById("myBtn");
+
+    // Lấy phần span đóng Modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Khi button được click thi mở Modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Khi span được click thì đóng Modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Khi click ngoài Modal thì đóng Modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
 </script>
 </body>
 </html>
