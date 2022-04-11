@@ -25,13 +25,16 @@ function Profile() {
                         <l>Lớp học</l>
                     </p>
                 </div>
+                <div className= {style.change + ' row'}>
+                    <button>Chỉnh sửa thông tin</button>
+                </div>
             </div>
-            <div className={style.rightBar + ' col-md-9'}>
+            <div className={style.rightBar + ' col-md-6'}>
                 <div className={style.banner + ' row'}>
                     <div className={style.bannerImg}></div>
                 </div>
                 <div className={style.content + ' row'}>
-                    <div className={style.ofUser + ' col-md-9'}>
+                    <div className={style.ofUser + ' col-md-12'}>
                         <h5>Bạn bè</h5>
                         <div className={style.friend + ' row'}>
                             <div className={style.friendItem}>
@@ -87,21 +90,20 @@ function Profile() {
                             </div>
                         </div>
                     </div>
-                    <div className={style.discription + ' col-md-3'}>
-                        <h5>Description</h5>
-                        <p>
-                        Experts predict that annual eCommerce sales will exceed $6 trillion dollars by 2023. 
-
-                        Retail conglomerates and small businesses alike turn to online stores to sell products to a wider audience and increase their revenue. 
-
-                        However, as more eCommerce websites pop up each day, staying competitive can be challenging. 
-
-                        When it comes to your online store, you don’t have the luxury of an in-person sales team to close the deal. Conversions come down to the effectiveness of your product page and product descriptions. 
-                        </p>
-                    </div>
                 </div>
             </div>
+            <div className={style.discription + ' col-md-3'}>
+                <h5>Description</h5>
+                <p>
+                Experts predict that annual eCommerce sales will exceed $6 trillion dollars by 2023. 
 
+                Retail conglomerates and small businesses alike turn to online stores to sell products to a wider audience and increase their revenue. 
+
+                However, as more eCommerce websites pop up each day, staying competitive can be challenging. 
+
+                When it comes to your online store, you don’t have the luxury of an in-person sales team to close the deal. Conversions come down to the effectiveness of your product page and product descriptions. 
+                </p>
+            </div>
         </div>
      );
 }
