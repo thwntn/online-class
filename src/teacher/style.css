@@ -65,13 +65,14 @@
 /* Tạo môn học */
   .addclass{
     margin-left:150px;
-    margin-right:150px;
+    margin-right:200px;
 }
 .addclass-1{
     float:left;
 }
 .addclass-2{
     float:right;
+    margin-top:100px;
   
 }
   .addclass-1 .create-1{
@@ -120,7 +121,7 @@
     background-color: rgb(236, 235, 235);
     padding:8px;
     border-radius: 10px;
-    margin-top:10px;
+ 
     margin-bottom:30px;
 }
 .create-1::placeholder {

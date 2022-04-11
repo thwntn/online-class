@@ -164,7 +164,7 @@ html{
     display:none;
 }
 .create-1{
-    width:95%;
+    width:500px;
     height:40px;
     background-color: rgb(218, 214, 214);
     border:none;
@@ -202,6 +202,94 @@ html{
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15); 
 
 }
+/* Modal */
+
+.container {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+.btn {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  outline: none;
+}
+
+.btn:active {
+  transform: scale(0.9);
+}
+
+
+.fomrgroup {
+    width: 50%;
+    margin-left:140px;
+    display: block;
+    height: 250px;
+}
+.fomrgroup input{
+    line-height: 40px;
+    background-color: rgb(218, 214, 214);
+    border:none;
+    border-radius: 10px;
+    margin-top:10px;
+    
+}
+
+.fomrgroup b{
+    font-size: 20px;
+}
+.fomrgroup-1{
+    margin-top:70px;
+}
+.fomrgroup-1 button{
+    width:70px;
+    height:40px;
+    
+}
+
+.modal {
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 0;
+    top: -50%;
+    width: 50%;
+    height: 100%; 
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4); 
+   
+ 
+}
+
+
+.modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 60%!important;
+
+}
+ 
+.close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 40px;
+    font-weight: bold;
+}
+ 
+.close:hover,
+.close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+} 
+
+
 
 /*Header*/
 
@@ -579,4 +667,6 @@ background: #555;
     display: flex;
     width: 100%;
     justify-content: space-between;
-}  
+ }  
+
+
