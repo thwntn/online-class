@@ -11,24 +11,44 @@ const Confirm = () => {
 
     return(
         <div  id = 'account' className = {style.background + ' row pad'}>
-            <h2 className = {style.title + ' col-md-10'}>Tài khoản</h2>
             <div className = {style.boxItems}>
-                <div className = {style.items + ' col-md-6'}>
-                    <div className = {style.itemsImage} style = {{backgroundImage: 'url(./image/confirm.png'}}></div>
+                <div className = {style.items + ' col-md-5'}>
+                    <div className={style.navConfirm}>
+                        <button className={style.itemNav}>
+                            <i className={style.pinAccount + ' fad fa-map-pin'}></i>
+                        </button>
+                        <button className={style.itemNav}>
+                            <i className={style.iconAccount + " fad fa-user-shield"}></i>
+                        </button>
+                    </div>
+                    <h5>Tài khoản</h5>
+                    <p>
+                        Quản lí tài khoản đang hoạt động, truy xuất thông tin <br></br> khóa tài khoản, xóa tài khoản, truy cập trực tiếp
+                    </p>
                     <div className = {style.space}></div>
                     <button
                         onClick = {() => setView(!view)}
-                        className = {style.submit}
-                        style = {{backgroundColor: 'rgb(255, 0, 0)'}}
+                        className = {style.openControl}
                     >
-                        Tài khoản hiện hành
+                        Mở bảng điều khiển
                     </button>
                 </div>
-                <div className = {style.items + ' col-md-6'}>
-                    <div className = {style.itemsImage} style = {{backgroundImage: 'url(./image/active.png'}}></div>
+                <div className = {style.items + ' col-md-5'}>
+                    <div className={style.navConfirm}>
+                        <button className={style.itemNav}>
+                            <i className={style.pinAccept + " fad fa-map-pin"}></i>
+                        </button>
+                        <button className={style.itemNav}>
+                            <i className={style.iconAccept + " fad fa-lock"}></i>
+                        </button>
+                    </div>
+                    <h5>Xác nhận</h5>
+                    <p>
+                        Quản lí tài khoản đang hoạt động, truy xuất thông tin <br></br> khóa tài khoản, xóa tài khoản, truy cập trực tiếp
+                    </p>
                     <div className = {style.space}></div>
                     <button
-                        className = {style.submit}
+                        className = {style.openConfirm}
                         style = {{backgroundColor: 'rgb(0, 104, 55)'}}
                         onClick = {() => setWait(!wait)}
                     >

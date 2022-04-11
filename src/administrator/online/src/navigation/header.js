@@ -27,7 +27,6 @@ function Header ({setMain}) {
       fetch(url)
       .then(response => response.json())
       .then(responseJson => {
-          console.log(responseJson);
           setNotRead(responseJson[responseJson.length-1].notRead)
       })
     }
@@ -57,38 +56,38 @@ function Header ({setMain}) {
         }
     }
 
-    useEffect(() => {
-        document.addEventListener('scroll', () => {
-            if(window.scrollY > 0) setScroll (style.active)
-            else setScroll (style.noActive)
-        })
-    }, [])
-    useEffect(() => {
-        document.querySelector('.header_expandMenu__V7fSv').addEventListener('click', () => {
-            document.querySelector('.header_background__PngjP').style.height = setExpandMenu()
-        })
-    })
-
     return(
         <div className = {style.background + ` ${scroll}`}>
             <h2 className = {style.title}>Online Class</h2>
             <ul className = {style.listItems} style = {{display: 'flex', listStyle: 'none', margin: '0px'}}>
                 <li
                     className = {style.item}
-                    onClick = {() => setMain(<HomePage></HomePage>)}
-                    ><a href = '#home'>Trang chủ</a></li>
+                    onClick = {() => {
+                        setMain(<HomePage></HomePage>)
+                        setScroll (style.noActive)
+                    }}
+                    ><a href = '#home'><i className="fal fa-home"></i></a></li>
                 <li
                     className = {style.item}
-                    onClick = {() => setMain(<Confirm></Confirm>)}
-                ><a href = '#account'>Tài khoản</a></li>
+                    onClick = {() => {
+                        setMain(<Confirm></Confirm>)
+                        setScroll (style.active)
+                    }}
+                ><a href = '#account'><i className="fal fa-user-alt"></i></a></li>
                 <li
                     className = {style.item}
-                    onClick = {() => setMain(<Statistical></Statistical>)}
-                ><a href = '#manage'>Thống kê</a></li>
+                    onClick = {() => {
+                        setMain(<Statistical></Statistical>)
+                        setScroll (style.active)
+                    }}
+                ><a href = '#manage'><i className="fal fa-chart-bar"></i></a></li>
                 <li
-                    onClick = {() => setMain(<Log></Log>)}
+                    onClick = {() => {
+                        setScroll (style.active)
+                        setMain(<Log></Log>)
+                    }}
                     className = {style.item}
-                ><a href = '#log'>Nhật kí</a></li>
+                ><a href = '#log'><i className="fal fa-clipboard"></i></a></li>
                 <li
                     onClick={() => {
                         setActiveNoti(!activeNoti)
@@ -96,11 +95,11 @@ function Header ({setMain}) {
                     }}
                     className = {style.item}
                 >
-                    Thông báo {notRead == 0 ? null : <h5 className={style.notRead}>{notRead}</h5>}
+                    <i className="fal fa-bell"></i> {notRead == 0 ? null : <h5 className={style.notRead}>{notRead}</h5>}
                     {activeNoti && <Noti setNotRead = {setNotRead}></Noti>}
                 </li>
                 <li onClick={() => setActiveMess(!activeMessage)} className = {style.item}>
-                    Tin nhắn
+                    <i className="fal fa-comment"></i>
                     {activeMessage && <Message></Message>}
                 </li>
             </ul>

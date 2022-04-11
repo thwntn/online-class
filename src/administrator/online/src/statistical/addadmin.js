@@ -11,6 +11,7 @@ function AddAdmin({ setAddAd, setRefesh }) {
         address: null,
         phone: null,
         gendle: 1,
+        email: 'admin@gmail.com',
         major: null,
         type: 50,
         image: null,

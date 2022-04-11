@@ -21,11 +21,11 @@ function SignUpChart() {
         .then(response => response.json())
         .then(responseJson => {
             setSignUpData({
-                labels: responseJson.signUp.map(item => item.time.slice(-5)),
+                labels: responseJson.signUp.map(item => item.statis_time.slice(-5)),
                 datasets: [
                     {
                         label: 'Đăng kí',
-                        data: responseJson.signUp.map(item => item.amount),
+                        data: responseJson.signUp.map(item => item.statis_amount),
                         backgroundColor: [
                             "rgba(255, 100, 0 ,0.12)",
                             "rgba(255, 100, 0, 0.5)",

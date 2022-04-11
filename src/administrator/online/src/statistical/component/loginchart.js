@@ -19,7 +19,6 @@ function LoginChart() {
         ],
     }
     const [loginData, setLoginData] = useState(objectStart)
-   
     const fetchData = () => {
         const url = 'http://localhost/online-class/src/administrator/api/statistical.php' 
         fetch(url)
@@ -27,13 +26,13 @@ function LoginChart() {
         .then(responseJson => {
             setLoginData({
                     labels: responseJson.login.map(item => {
-                        return item.time.slice(-5)
+                        return item.statis_time.slice(-5)
                     }),
                     datasets: [
                         {
                             label: 'Đăng nhập',
                             data: responseJson.login.map(item => {
-                                return item.amount
+                                return item.statis_amount
                             }),
                             backgroundColor: [
                                 "rgba(50, 200, 50, 0.12)",

@@ -3,13 +3,10 @@
 
     $open = fopen('php://input', 'r');
     while($read = fread($open, 1024)) {
-        $responseJson = json_decode($read);
+        $responseJson = json_decode($read, true);
     }
-    $userName = $responseJson['userName'];
-    $userFriend = $responseJson['userFriend'];
-    $chatId = $responseJson['chatId'];
-    $content = $responseJson['content'];
-    $time = date("Y-m-d h:i:s");
 
-    $query = "INSERT INTO message VALUE ('$content', '$time', '1', '$chatId') WHERE (SELECT )"
+    $query = "INSERT INTO message (mess_content, mess_time, mess_type, chat_id) VALUE ('$responseJson[content]', NOW(), '1', '$responseJson[chatId]')";
+
+    echo $conn -> query($query);
 ?>

@@ -21,6 +21,7 @@ const AccountActive = (property) => {
             .then((response) => response.json())
             .then((usersJson) => {
                 setViewUsers(usersJson)
+                console.log(usersJson);
             })
         }
         fetchData()

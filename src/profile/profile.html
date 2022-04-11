@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./profile.css">
+
+    <!-- bootstrap -->
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <!-- jQuery library -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <!-- Latest compiled JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+
+    <script src="https://use.fontawesome.com/f4fe177e5d.js"></script>
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+</head>
+<body>
+    <div class='frame row'>
+        <div class='background'></div>
+        <div class='leftBar col-md-3'>
+            <div class = 'row'>
+                <div class='imageUser col-md-12'}>
+                    <button class ='changeUser'><i class="fal fa-camera-alt"></i></button>
+                </div>
+            </div>
+            <div class='infoAdd row'>
+                <h4>Thiên Tân</h4>
+                <i>Mạng máy tính và truyền thông dữ liệu</i>
+                <button>Kết bạn</button>
+            </div>
+            <div class='count row'>
+                <div class='homeWork'>
+                    <h3>23</h3>
+                    <l>Bài tập</l>
+                </div>
+                <div class='class'>
+                    <h3>23</h3>
+                    <l>Lớp học</l>
+                </div>
+            </div>
+            <div class='change row'>
+                <button>Chỉnh sửa thông tin</button>
+            </div>
+        </div>
+        <div class='rightBar col-md-6'}>
+            <div class='banner row'>
+                <div class='bannerImg'></div>
+            </div>
+            <div class='content row'>
+                <div class='ofUser col-md-12'>
+                    <h5>Bạn bè</h5>
+                    <div class='friend row'>
+                        <div class='friendItem'>
+                            <div class='imageFriend'></div>
+                        </div>
+                        <div class = 'friendItem'>
+                            <div class='imageFriend'></div>
+                        </div>
+                        <div class='friendItem'>
+                            <div class='imageFriend'></div>
+                        </div>
+                    </div>
+                    <h5>Môn học</h5>
+                    <div class='subject row'>
+                        <div class='subjectItem'>
+                            <div class='icon'>
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <div class='imageSubject'></div>
+                            <div class='infoSuject'>
+                                <div>
+                                    <h5>Kỹ thuật phát hiện tấn công mạng</h5>
+                                    <l>Đỗ Thanh Nghị</l>
+                                    <button>Truy cập</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='subjectItem'>
+                            <div class='icon'>
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <div class='imageSubject'></div>
+                            <div class='infoSuject'>
+                                <div>
+                                    <h5>Kỹ thuật phát hiện tấn công mạng</h5>
+                                    <l>Đỗ Thanh Nghị</l>
+                                    <button>Truy cập</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='subjectItem'>
+                            <div class='icon'>
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <div class='imageSubject'></div>
+                            <div class='infoSuject'>
+                                <div>
+                                    <h5>Kỹ thuật phát hiện tấn công mạng</h5>
+                                    <l>Đỗ Thanh Nghị</l>
+                                    <button>Truy cập</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='subjectItem'>
+                            <div class='icon'>
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <div class='imageSubject'></div>
+                            <div class='infoSuject'>
+                                <div>
+                                    <h5>Kỹ thuật phát hiện tấn công mạng</h5>
+                                    <l>Đỗ Thanh Nghị</l>
+                                    <button>Truy cập</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class='subjectItem'>
+                            <div class='icon'>
+                                <i class="fas fa-book-reader"></i>
+                            </div>
+                            <div class='imageSubject'></div>
+                            <div class='infoSuject'>
+                                <div>
+                                    <h5>Kỹ thuật phát hiện tấn công mạng</h5>
+                                    <l>Đỗ Thanh Nghị</l>
+                                    <button>Truy cập</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class='discription col-md-3'>
+            <h5>Description</h5>
+            <p>
+            Experts predict that annual eCommerce sales will exceed $6 trillion dollars by 2023. 
+
+            Retail conglomerates and small businesses alike turn to online stores to sell products to a wider audience and increase their revenue. 
+
+            However, as more eCommerce websites pop up each day, staying competitive can be challenging. 
+
+            When it comes to your online store, you don’t have the luxury of an in-person sales team to close the deal. Conversions come down to the effectiveness of your product page and product descriptions. 
+            </p>
+        </div>
+    </div>
+
+
+    <script>
+        const handle = {
+            randomColor: function() {
+                return `rgb(${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)}, ${Math.floor(Math.random()*255)})`
+            },
+            event: function() {
+                const iconBook = document.querySelectorAll('.icon i')
+                for(let item of iconBook) {
+                    item.style.color = this.randomColor()
+                }
+            },
+            start: function () {
+                this.event()
+            }
+        }
+
+        handle.start()
+    </script>
+</body>
+</html>

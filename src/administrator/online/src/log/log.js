@@ -46,9 +46,9 @@ const Log = (property) => {
                         {log.map(item => {
                             return (
                                 <ul className = {style.items}>
-                                    <li className={style.item + ' col-md-6'}>{item.content}</li>
-                                    <li className={style.item + ' col-md-3'}>{item.user_name}</li>
-                                    <li className={style.item + ' col-md-3'}>{item.time}</li>
+                                    <li className={style.item + ' col-md-6'}>{item.log_content}</li>
+                                    <li className={style.item + ' col-md-3'}>{item.user_fullname}</li>
+                                    <li className={style.item + ' col-md-3'}>{item.log_time}</li>
                                 </ul>
                             )
                         })}

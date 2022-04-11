@@ -1,0 +1,63 @@
+.frame {
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    backdrop-filter: blur(4px);
+}
+.box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+    align-items: center;
+
+    width: 465px;
+
+    padding: 18px;
+
+    border-radius: 20px;
+    border: 2px solid rgba(190, 220, 255, 0.5);
+    background-color: #fff;
+
+    animation: ani 0.3s ease;
+}
+@keyframes ani {
+    from {
+        transform: translateY(20px) scale(95%);
+        opacity: 0.6;
+    }
+    to {
+        transform: translateY(0) scale(100%);
+        opacity: 1;
+    }
+}
+.box p {
+    width: 100%;
+
+    margin-top: 8px;
+    margin-bottom: 0px;
+
+    word-spacing: 2px;
+    line-height: 48px;
+}
+.box h4 {
+    display: flex;
+    justify-content: space-between;
+
+    width: 100%;
+}
+.box button:hover {
+    color: red;
+}
+.box button {
+    font-size: 16px;
+    margin-top: -18px;
+    background: none;
+    border: none;
+}

@@ -5,8 +5,10 @@
     while($read = fread($open, 1024)) {
         $response = json_decode($read, true);
     }
+    
+    $type = ($response['userType'] == 8 ? 2 : 1);
 
-    $query = "INSERT INTO notification (noti_content, noti_status, noti_time, user_name) VALUE ('$response[content]', 1, NOW(), '$response[userName]')";
+    $query = "UPDATE user SET user_type = '$type' WHERE user_name = '$response[userName]'";
 
     echo $conn -> query($query);
 ?>

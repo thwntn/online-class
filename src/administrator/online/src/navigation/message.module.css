@@ -4,12 +4,13 @@
     position: fixed;
     align-content: flex-start;
     flex-wrap: wrap;
-    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(14px);
     color: #333;
     margin-top: 4.5%;
-    border-radius: 12px;
-    margin-left: -204px;
+    border-radius: 20px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(235, 246, 255, 0.45);
+    margin-left: -15%;
     width: 300px;
     padding: 12px 0px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
@@ -17,7 +18,7 @@
     animation: show 0.3s ease;
     transition: all 0.2s;
     transform-origin: 80% top;
-    color: #fff;
+    color: #555;
     overflow: hidden;
 }
 @keyframes show {
@@ -57,6 +58,9 @@
 .content {
     flex: 1;
     margin-left: 16px;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
 }
 .content p {
     margin: 0 !important;

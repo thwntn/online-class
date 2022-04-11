@@ -7,7 +7,7 @@ const Mess = () => {
     const [messages, setMessages] = useState([])
     const [gotoMess, setGoToMess] = useState(false)
     const [friend, setFriend] = useState({})
-    
+
     useEffect(() => {
         fetch("http://localhost/online-class/src/administrator/api/chat.php")
         .then(response => response.json())
@@ -24,17 +24,16 @@ const Mess = () => {
                         event.stopPropagation()
                         setGoToMess(true)
                         setFriend(message)
-                        console.log(friend);
                     }}
                 >
                     <div className = {style.image}></div>
                     <div className = {style.content}>
-                        <h4>{message.friend_user}</h4>
-                        <p>{message.mess}</p>
+                        <h4>{message.user_fullname}</h4>
+                        <p>{message.user_email}</p>
                     </div>
                 </div>
             ))}
-            {gotoMess && <ChatBox data = {{setGoToMess, friend}}></ChatBox>}
+            {gotoMess && <ChatBox object = {{setGoToMess, friend}}></ChatBox>}
         </div>
     )
 }

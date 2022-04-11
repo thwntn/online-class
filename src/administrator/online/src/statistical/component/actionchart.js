@@ -20,11 +20,11 @@ function ActionChart() {
         .then(response => response.json())
         .then(responseJson => {
             setActionData({
-                labels: responseJson.interactive.map(item => item.time.slice(-5)),
+                labels: responseJson.interactive.map(item => item.statis_time.slice(-5)),
                 datasets: [
                     {
                         label: 'Tương tác',
-                        data: responseJson.interactive.map(item => item.amount),
+                        data: responseJson.interactive.map(item => item.statis_amount),
                         backgroundColor: [
                             "rgba(255, 100, 0 ,0.12)",
                             "rgba(255, 100, 0, 0.5)",

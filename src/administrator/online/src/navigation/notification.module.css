@@ -2,11 +2,12 @@
     display: flex;
     position: fixed;
     flex-wrap: wrap;
-    background-color: rgba(0, 0, 0, 0.4);
     backdrop-filter: blur(14px);
     color: #333;
     margin-top: 4.5%;
-    border-radius: 12px;
+    background-color: rgba(255, 255, 255, 0.5);
+    border: 2px solid rgba(235, 246, 255, 0.45);
+    border-radius: 20px;
     margin-left: -204px;
     width: 300px;
     padding: 12px 0px;
@@ -15,7 +16,7 @@
     animation: show 0.3s ease;
     transition: all 0.2s;
     transform-origin: 80% top;
-    color: #fff;
+    color: #555;
 }
 @keyframes show {
     from {
@@ -27,16 +28,7 @@
         opacity: 1;
     }
 }
-.frame::after {
-    position: absolute;
-    content: "";
-    border-left: 14px solid transparent;
-    border-top: 14px solid transparent;
-    border-right: 14px solid transparent;
-    border-bottom: 14px solid rgba(0, 0, 0, 0.4);
-    top: -28px;
-    right: 48px;
-}
+
 .frame h5 {
     width: 100%;
     font-size: 18;
