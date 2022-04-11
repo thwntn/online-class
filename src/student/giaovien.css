@@ -203,8 +203,7 @@ ul#main-menu p{
 .content-1 #baitap .tittle{
     border: none;
     background: none;
-    font-size: 18px;
-    color: blue;
+    font-size: 17px;
 }
 
 .itemNav a{
@@ -365,16 +364,17 @@ h6{
     margin-right: 34%;
     margin-bottom: 10%;
 }
-#xemthem button{
+#xemthem .btn{
     width: 200px;
     height: 35px;
-    background-color: white;
+    border-radius: 30px;
+    /* background-color: white; */
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
 }
-i{
+/* i{
     width: 18px;
     float: right;
-}
+} */
 a{
     color: black;
 }

@@ -8,39 +8,39 @@ $(document).ready(function(){
     });
 });
 
-var left=1;
-var right=3;
-function show(){
-    for(i=left; i<=right; i++){
-        document.getElementById("a"+i).style.display="inline-block";
-    }
-}
+// var left=1;
+// var right=3;
+// function show(){
+//     for(i=left; i<=right; i++){
+//         document.getElementById("a"+i).style.display="inline-block";
+//     }
+// }
 
-function moveLeft(){
-    if(left<=3 && right<=6){
-        document.getElementById("a"+left).style.display="none";
-        left+=1;
-        right+=1;
-        for(i=left; i<=right; i++){
-            document.getElementById("a"+i).style.display="inline-block";
-        }
-    } 
-    else
-        return;
-}
+// function moveLeft(){
+//     if(left<=3 && right<=6){
+//         document.getElementById("a"+left).style.display="none";
+//         left+=1;
+//         right+=1;
+//         for(i=left; i<=right; i++){
+//             document.getElementById("a"+i).style.display="inline-block";
+//         }
+//     } 
+//     else
+//         return;
+// }
 
-function moveRight(){
-    if(left>=2 && right>=5){
-        document.getElementById("a"+right).style.display="none";
-        left-=1;
-        right-=1;
-        for(i=left; i<=right; i++){
-            document.getElementById("a"+i).style.display="inline-block";
-        }
-    } 
-    else
-        return;
-}
+// function moveRight(){
+//     if(left>=2 && right>=5){
+//         document.getElementById("a"+right).style.display="none";
+//         left-=1;
+//         right-=1;
+//         for(i=left; i<=right; i++){
+//             document.getElementById("a"+i).style.display="inline-block";
+//         }
+//     } 
+//     else
+//         return;
+// }
 
 
 

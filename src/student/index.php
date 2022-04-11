@@ -37,13 +37,14 @@
             $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                 if($row['noti_status'] == 1){
+                    $sj_id = substr($row['subject_id'],-13,5);
                     echo "
                         <div class = itemNoti>
                             <div class = 'imageNoti'>
                                 <img src=".$row['subject_image'].">
                             </div>
                             <div class = 'contentNoti'>
-                                <h4>".$row['subject_code']."</h4>
+                                <h4>".$sj_id."</h4>
                                 <p>".$row['noti_content']."</p>
                             </div>
                         </div>
@@ -55,7 +56,7 @@
                                 <img src=".$row['subject_image'].">
                             </div>
                             <div class = 'contentNoti'>
-                                <h4>".$row['subject_code']."</h4>
+                                <h4>".$sj_id."</h4>
                                 <p>".$row['noti_content']."</p>
                             </div>
                         </div>
@@ -137,6 +138,7 @@
                                         join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by homework_time ASC";
                                     $result = $conn->query($sql);
                                     while($row = $result->fetch_assoc()) {
+                                        $sj_id = substr($row['subject_id'],-13,5);
                                         echo "
                                         <a href='./subject.php?id=".$row['subject_id']."'>
                                             <div class = itemNoti>
@@ -144,7 +146,7 @@
                                                     <img src=".$row['subject_image'].">
                                                 </div>
                                                 <div class = 'contentNoti'>
-                                                    <h4>".$row['subject_code']."</h4>
+                                                    <h4>".$sj_id."</h4>
                                                     <p class='p-homework'>".$row['homework_content']."</p>
                                                 </div>
                                             </div>
@@ -165,6 +167,7 @@
                                     join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
                                 $result = $conn->query($sql);
                                 while($row = $result->fetch_assoc()) {
+                                    $sj_id = substr($row['subject_id'],-13,5);
                                     if($row['noti_status'] == 1){
                                         echo "
                                         <div class = itemNoti>
@@ -172,7 +175,7 @@
                                                 <img src=".$row['subject_image'].">
                                             </div>
                                             <div class = 'contentNoti'>
-                                                <h4>".$row['subject_code']."</h4>
+                                                <h4>".$sj_id."</h4>
                                                 <p>".$row['noti_content']."</p>
                                             </div>
                                         </div>
@@ -184,7 +187,7 @@
                                                 <img src=".$row['subject_image'].">
                                             </div>
                                             <div class = 'contentNoti'>
-                                                <h4>".$row['subject_code']."</h4>
+                                                <h4>".$sj_id."</h4>
                                                 <p>".$row['noti_content']."</p>
                                             </div>
                                         </div>
@@ -269,30 +272,32 @@
                 <?php
                     if (isset( $_POST['btnsearch'])) {
                         $search = $_POST['search'];
-                        $sql = "SELECT * FROM subject WHERE (subject_code like '%$search%') ";
+                        $sql = "SELECT * FROM subject WHERE (subject_id like '%$search%') ";
                         $kq=$conn->query($sql);
                         $num = mysqli_num_rows($kq);
                         if ($num > 0 && $search != "") {
                             while($row=$kq->fetch_assoc()){
                                 $subject_id = $row['subject_id'];
+                                $sj_id = substr($subject_id,-13,5);
+
                                 $get_registry = "SELECT * FROM registry rg join subject sj on rg.subject_id=sj.subject_id
                                     where rg.subject_id='$subject_id' and rg.user_name='$user_name'";
                                 $result = $conn->query($get_registry);
                                 $result = mysqli_fetch_array($result);
                                 if(isset($result)){
-                                    $subject_code = $result['subject_code'];
+                                    $subject_id = $result['subject_id'];
                                     $subject_name = $result['subject_name'];
                                 echo "
                                         <form action='./subject.php' method='post'>
                                             <input type='hidden' name='userOL' value=$user_name>
                                             <input type='hidden' name='subject_id' value=$subject_id>
-                                            <input class='btn-submit' type='submit' value='$subject_code &nbsp; $subject_name' name='submit'>
+                                            <input class='btn-submit' type='submit' value='$sj_id &nbsp; $subject_name' name='submit'>
                                         </form>
                                     
                                 ";
                                 }else{
                                     echo "
-                                    <h6>".$row['subject_code']." &nbsp;  ".$row['subject_name']." &nbsp; 
+                                    <h6>".$sj_id." &nbsp;  ".$row['subject_name']." &nbsp; 
                                         <u> 
                                             <form action='./registry.php' method='post'>
                                                 <input type='hidden' name='userOL' value=$user_name>
@@ -324,23 +329,23 @@
             </div>
     <!-- Lấy môn học ra -->
             <?php
-                $sql = "SELECT * FROM registry rg join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name'";
-                $result = $conn->query($sql);
-                while($row = $result->fetch_assoc()) {
-                    echo "
-                        <form action='./subject.php' method='post' class='form-subject'>
-                            <div class='slide' id='a".$row['subject_id']."'>
-                                <input type='hidden' value=".$row['subject_id']." name='subject_id'>
-                                <input type='hidden' name='userOL' value=$user_name>
-                                <img src=".$row['subject_image'].">
-                                <h4>
-                                    <input style='border:none; background: none;' type='submit' value=".$row['subject_code'].">
-                                </h4>
-                                <p>".$row["subject_name"]."</p>
-                            </div>
-                        </form>
-                    ";
-                }
+                // $sql = "SELECT * FROM registry rg join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name'";
+                // $result = $conn->query($sql);
+                // while($row = $result->fetch_assoc()) {
+                //     echo "
+                //         <form action='./subject.php' method='post' class='form-subject'>
+                //             <div class='slide' id='a1'>
+                //                 <input type='hidden' value=".$row['subject_id']." name='subject_id'>
+                //                 <input type='hidden' name='userOL' value=$user_name>
+                //                 <img src=".$row['subject_image'].">
+                //                 <h4>
+                //                     <input style='border:none; background: none;' type='submit' value=".$row['subject_id'].">
+                //                 </h4>
+                //                 <p>".$row["subject_name"]."</p>
+                //             </div>
+                //         </form>
+                //     ";
+                // }
             ?>
             <div id="btn-right" onclick="moveRight()">
                 <button class="btn btn-outline-light"><img src="./image/btn-right.jpg" alt=""></button>
@@ -384,18 +389,20 @@
                         </tr>
                         <?php
                             $sql = "SELECT * FROM registry rg join calendar cl on rg.subject_id=cl.subject_id
-                                join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by calendar_time ASC";
+                                join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by cl.subject_time ASC";
                             $result = $conn->query($sql);
                             while($row = $result->fetch_assoc()) {
-                                $k = $row['calendar_time'];
-                                $day1 = substr($k,-11,3);
-                                $month1 = substr($k,-14,2);
-                                $hour = substr($k,-8,5);
+                                $k = $row['subject_time'];
+                                $k1 = $row['subject_id'];
+                                $code = substr($k1,-14,5);
+                                $day1 = substr($k,-2,2);
+                                $month1 = substr($k,-5,2);
+                                $hour = substr($k,-3,2);
                                 echo"
                                     <tr>
-                                        <td>".$hour."</td>
+                                        <td></td>
                                         <td>".$day1."/".$month1."</td>
-                                        <td>".$row['subject_code']."</td>
+                                        <td>".$code."</td>
                                         <td>".$row['subject_name']."</td>
                                     </tr>
                                 ";
