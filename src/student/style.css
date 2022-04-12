@@ -469,3 +469,7 @@ header.sticky #logo{
 table{
     text-align: center;
 }
+.header-subject{
+    border: none;
+    background: none;
+}

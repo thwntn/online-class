@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" type="text/css" href="./style.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="./header.css" media="screen" />
+    <link rel="stylesheet" type="text/css" href="./modal_index.css">
 </head>
 <body onload="show()">
     <div class="nav-mobile">
@@ -126,7 +127,12 @@
                 <h2 class = 'titleNav'>Online Class</h2>
                 <ul class = 'listItemsNav'>
                     <li class = 'itemNav'><a href = '#wrapper'>Trang chủ</a></li>
-                    <li class = 'itemNav'><a href = '#monhoc'>Môn học</a></li>
+                    <li class = 'itemNav'>
+                        <form action="./all_subject.php" method='post'>
+                            <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
+                            <input class='header-subject' type="submit" value="Môn học">
+                        </form>
+                    </li>
                     <li class = 'itemNav baitap1'>
                         Bài tập được giao
                         <div class = 'frameNoti btap1'>
@@ -278,7 +284,7 @@
                         if ($num > 0 && $search != "") {
                             while($row=$kq->fetch_assoc()){
                                 $subject_id = $row['subject_id'];
-                                $sj_id = substr($subject_id,-13,5);
+                                $sj_id = substr($row['subject_id'],-13,5);
 
                                 $get_registry = "SELECT * FROM registry rg join subject sj on rg.subject_id=sj.subject_id
                                     where rg.subject_id='$subject_id' and rg.user_name='$user_name'";
@@ -292,8 +298,7 @@
                                             <input type='hidden' name='userOL' value=$user_name>
                                             <input type='hidden' name='subject_id' value=$subject_id>
                                             <input class='btn-submit' type='submit' value='$sj_id &nbsp; $subject_name' name='submit'>
-                                        </form>
-                                    
+                                        </form>                                    
                                 ";
                                 }else{
                                     echo "
@@ -307,6 +312,7 @@
                                         </u>
                                     </h6>
                                 ";
+// Xử lý đăng ký môn học
                                 }
                             }
                         }
@@ -314,19 +320,20 @@
                             echo "Không tìm thấy kết quả!";
                         }
                     }
+                    
                 ?>
             </div>
         </div>
     </div>
     <br>
 <!-- Môn học  -->
-    <div class="subject">
+    <!-- <div class="subject">
         <p class="subject-logo"id="monhoc"><i> Học là học để mà hành <br>
             Vừa hành vừa học mới là người khôn.</i></p>
         <div class="slide-anh">
             <div id="btn-left" onclick="moveLeft()">
                 <button class="btn btn-outline-light"><img src="./image/btn-right.jpg" alt=""></button>
-            </div>
+            </div> -->
     <!-- Lấy môn học ra -->
             <?php
                 // $sql = "SELECT * FROM registry rg join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name'";
@@ -347,11 +354,11 @@
                 //     ";
                 // }
             ?>
-            <div id="btn-right" onclick="moveRight()">
+            <!-- <div id="btn-right" onclick="moveRight()">
                 <button class="btn btn-outline-light"><img src="./image/btn-right.jpg" alt=""></button>
             </div>
         </div>
-    </div>
+    </div> -->
     <br>
 <!-- Lịch học -->
     <div id="lich">
