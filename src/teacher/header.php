@@ -1,6 +1,6 @@
 <?php
 include 'connect.php'; 
-$user=$_GET['userOL'];
+$user=$_POST['userOL'];
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -28,7 +28,7 @@ $user=$_GET['userOL'];
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
         <?php 
-                    include('./connect.php');
+                    $con = mysqli_connect('localhost', 'root','', 'online-class');
 
                     $sql="SELECT * FROM notification nt JOIN subject sj ON nt.user_name = sj.user_name  ";
                     $kq=$con->query($sql);
@@ -117,7 +117,7 @@ $user=$_GET['userOL'];
                     $row = $result->fetch_assoc();
                         echo "
                     
-                         <form action='./manage.php' method='get'>
+                         <form action='./manage.php' method='post'>
                              <input type='hidden' name='userOL' value=$user>
                              <li class = 'itemNav'><input type='submit' value='Môn học'></li>
                          </form>

@@ -135,7 +135,7 @@ include 'connect.php' ;
                     $row = $result->fetch_assoc();
                         echo "
 
-                         <form action='./manage.php' method='GET'>
+                         <form action='./manage.php' method='POST'>
                              <input type='hidden' name='userOL' value=$user>
                              <li class = 'itemNav'><input type='submit' value='Môn học'></li>
                          </form>
@@ -190,7 +190,7 @@ include 'connect.php' ;
         <div  class="content">
             <h1><b>Trang giảng viên</h1>
             <p>Chào mừng đến trang giảng viên</b></p>
-            <form action="./search.php" method="GET" class="text">
+            <form action="./search.php" method="posT" class="text">
                 <input class="search" type="text" name="search" placeholder="Nhập nội dung"> <br>
                 <input type="hidden" name="userOL" value=<?php echo $user?>>
                
@@ -239,15 +239,17 @@ include 'connect.php' ;
                             $kq=$con->query($sql);
                             
                             while($row=$kq->fetch_assoc()){
-                            $calendar = $row['calendar_time'];
-                            $time = substr($calendar,-9,6);
-                            $ngay = substr($calendar,-11,2);
-                            $thang = substr($calendar,-14,2);
+                            $calendar = $row['subject_time'];
+                            $subject = $row['subject_id'];
+                            $time = substr($calendar,-12,0);
+                            $ngay = substr($calendar,-2,2);
+                            $thang = substr($calendar,-5,2);
+                            $id = substr($subject,0,5);
                             echo "
                             <tr>
                             <td>".$time."</td>
                             <td>".$ngay."/".$thang."</td>
-                            <td>".$row['subject_code']."</td>
+                            <td>".$id."</td>
                             <td>".$row['subject_name']."</td>
                           
                          

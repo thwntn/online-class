@@ -1,7 +1,7 @@
 <?php
     include './connect.php';
-    $subject_id = $_GET['subject_id'];
-    $user = $_GET['userOL'];
+    $subject_id = $_POST['subject_id'];
+    $user = $_POST['userOL'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,52 +27,89 @@
         <?php
         
         
-            $sql = ' SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
+            $sql = "SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                              join homework hw on sj.subject_id=hw.subject_id
-                                             where sj.subject_id='.$subject_id.' ';
+                                             where sj.subject_id='$subject_id' ";
             $kq = $con->query($sql);
             $row=$kq->fetch_assoc();
             $anh = $row['subject_image'];
-            echo "
-                <div class='name-subject' style='background:url($anh); background-size: cover '>
-             
+            $subject = $row['subject_id'];
+            $id = substr($subject,0,5);
+            ?>
+                <div class='name-subject' style='background:url(<?php echo $anh ?>); background-size: cover '>
                     <p>
-                        ".$row['subject_code']."
-                        ".$row['subject_name']."
-                    </p>
+                        <?php echo $id ?>
+                        <?php echo $row['subject_name'] ?>
+                        <form action = "" method = "POST" style="margin-top:-50px;margin-right:20px" >
+                            <button type ="button" class="repair" id="myBtn" style="width:50px"><i class="fa-solid fa-pencil"></i></button>
+                            <input type="hidden" name="subject_id" value = " <?php echo $row['subject_id']; ?>" >
+                            <input type="hidden" name="userOL" value=<?php echo $user?>>
+                             <!-- Sửa môn học -->
+                             <div class="container">       
+                                           <div id="myModal" class="modal">
+                                                <div class="modal-content" >                                 
+                                                    <form action="" method="post">
+                                                        <h2>Chỉnh sửa môn học</h2>
+                                                        <div class="fomrgroup">
+                                                            <input type="text" name="subject_id" value="<?php echo $row["subject_id"] ?>"> <br> <br>
+                                                            <input type="text" name="subject_name" value="<?php echo $row["subject_name"] ?>">
+
+                                                        </div>
+                                                        <div class="fomrgroup-1" style="text-align:center;">                   
+                                                            <button class="btn btn-primary" type='submit' name="update_sj">Save</button>
+                                                            <button class="btn btn-danger" id="close">Cancel</button> &nbsp;
+                                                        </div>
+                                                    </form>
+                                                    <?php
+                                                        $user=$_POST['userOL'];
+                                                        $subject = $_POST['subject_id'];
+                                                        if(isset($_POST["update_sj"])) {
+                                                            $sjid = $_POST["subject_id"];
+                                                            $name = $_POST["subject_name"];
+                                                            if ($name == "" || $sjid == "") {
+                                                                echo  "<script>alert('Vui lòng nhập đầy đủ thông tin')</script>";
+                                                            }else{
+                                                            $sql = "UPDATE subject SET subject_id = '$sjid', subject_name='$name' WHERE subject_id='$subject'";
+                                                            mysqli_query($con,$sql);    
+                                                        
+                                                            }
+                                                        } 
+                                                        ?>
+                                                </div>
+                                            </div>                                       
+                                        </div>  
+                        </form>
+                    <p>
                 </div>
-            ";
-            
-        ?>       
+        
+
+           
     </div> <br>
     
     
-    <form action="./add_homework.php" method = "GET" >   
+    <!-- <form action="./add_homework.php" method = "post" >   
         <button class='add-dl'>Thêm bài tập</button>
-        <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id']; ?>" >  
-        <input type="hidden" name="userOL" value=<?php echo $user?>>
+        <input type="hidden" name="subject_id" value = "<php echo $row['subject_id']; ?>" >  
+        <input type="hidden" name="userOL" value=<php echo $user?>>
     </form>    
-                                
+                                 -->
 
     <div class="link">
     <a href="" class='repair'><i class='fa-solid fa-pencil'></i></a>
 
 
+       
         <div class="shadow p-4 mb-5 bg-white rounded">
-            <p>Đường dẫn cuộc họp</p>
-            <a href="https://meet.google.com/hfz-duwk-hzq">https://meet.google.com/hfz-duwk-hzq</a>
-        </div>
-        <div class="shadow p-4 mb-5 bg-white rounded">
-            <p>Bài tập sắp đến hạn</p>
-            <button class='button'>Empty</button>
+            <p>Danh sách thành viên</p>
+            
         </div>
     </div> 
     <?php
         $name = $row['user_fullname'];
         $img_user = $row['user_image'];
-        $sql = ' SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
+        $sql = " SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                             join homework hw on sj.subject_id=hw.subject_id
-                                            where sj.subject_id='.$subject_id.' order by homework_time desc';
+                                            where sj.subject_id='$subject_id' order by homework_time desc";
         $kq = $con->query($sql);
         while($row=$kq->fetch_assoc()){
  
@@ -85,20 +122,20 @@
              ?>
              <div id='content'>
                  <div class='content-1'>
-                    
-                 <form action = "./delete_homework.php" method = "GET"  class = "formXoa" >
+                    <!-- Xóa bài tập, bài giảng -->
+                 <form action = "" method = "post"  class = "formXoa" >
                             <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id'] ?>" >
-                            <button type="submit" class = "img1"><i class='fa-solid fa-xmark'></i></button>
+                            <button type="submit" class = "img1" name ="delete"><i class='fa-solid fa-xmark'></i></button>
                             
                             <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
                             <input type="hidden" name='userOL' value=<?php echo $user ?>>
                 </form>  
                 <?php 
-                  
-            
-        
-                  
-
+                if(isset($_POST['homework_id'])){
+                $homework_id = $_POST['homework_id'];
+                    $sql="DELETE FROM homework where homework_id='$homework_id'";
+                    mysqli_query($con,$sql);
+                }
                 ?>
 
 
@@ -119,21 +156,13 @@
                              <p><php echo $row['homework_content']?> </p>
                          </a> -->
 
-                         <form action='./homework.php' method='get' class='form-subject'>                                  
+                         <form action='./homework.php' method='post' class='form-subject'>                                  
                             <input type='hidden' value="<?php echo $row['homework_id']; ?>" name='homework_id'>
                             <input type='hidden' name='userOL' value=<?php echo $user ?>>                                                                    
-                            <input  type='submit' value="<?php echo $row['homework_tittle'] ;?>" style="font-size:17px;color:blue!important"> <br>
-                            <?php echo $row['homework_content'] ;?>
+                            <input  type='submit' value="<?php echo $row['homework_content'] ;?>" style="font-size:17px;color:blue!important"> <br>
                         </form> 
 
-                         <p>
-            
-                             <?php 
-                            $file= $row['homework_file']; 
-                          echo $file;
-                            
-                            ?></p>
-                         <h6></h6>
+                     
                     </div>
                  </div>
              </div>
@@ -143,7 +172,9 @@
                     
     <div id="xemthem">
         <button class='button'>Xem thêm...</button>
-    </div>
+    
+
+ 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
@@ -172,6 +203,32 @@
         });
     }  
         }, false);
+    
+    //Sửa môn học
+    var modal = document.getElementById('myModal');
+    
+    // Lấy phần button mở Modal
+    var btn = document.getElementById("myBtn");
+
+    // Lấy phần span đóng Modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Khi button được click thi mở Modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Khi span được click thì đóng Modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Khi click ngoài Modal thì đóng Modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
 </script>
 </body>
 </html>

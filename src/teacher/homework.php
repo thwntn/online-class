@@ -1,7 +1,7 @@
 <?php
     include './connect.php';
-    $homework_id = $_GET['homework_id'];
-    $user = $_GET['userOL'];
+    $homework_id = $_POST['homework_id'];
+    $user = $_POST['userOL'];
 ?>
 
 <!DOCTYPE html>
@@ -41,15 +41,16 @@
                 $kq = $con->query($sql);
                 while($row = $kq->fetch_assoc()) {
                     $img = $row['subject_image'];
-                   
+                    $subject = $row['subject_id'];
+                    $id = substr($subject,0,5);
                     
                     echo "
                     <li>
-                    <form action='./subject.php' method='get'>                                  
+                    <form action='./subject.php' method='post'>                                  
                         <input type='hidden' value=".$row['subject_id']." name='subject_id'>
                         <input type='hidden' name='userOL' value=$user>                                                                    
                         <div class = 'item' style='background-image: url($img)'></div> 
-                        <p><input class='sj-name' type='submit' value=".$row['subject_code']."> 
+                        <p><input class='sj-name' type='submit' value=".$id."> 
                         ".$row['subject_name']."</p>
                     </form>
                     </li>
@@ -71,28 +72,30 @@
             // $hw_day = substr($hw_finish,-11,2);
             // $hw_month = substr($hw_finish,-14,2);    
             // $hw_time = substr($hw_finish,-9,6);  
-
+            $subject = $row['subject_id'];
+            $id = substr($subject,0,5);    
             $day = substr($k,-11,2);
             $month = substr($k,-14,2);
             $year = substr($k,-20,4);
             $user_img = $row['user_image'];
             ?>
-            <p>
+            <p style ="font-size:30px" class="tittle">
             <img src='image/format+list+icon.png' class='listmenu'>
-                <a href=''>
-                    &nbsp;<?php echo $row['subject_code']; echo "&nbsp;";
+              
+                    &nbsp;<?php echo $id; echo "&nbsp;";
                                 echo $row['subject_name']; ?>
-                </a>
+                
             </p>
         
-        <?php if($user){?>                  
-            <form action = "./suahomework.php" method = "GET" >
+                 
+            <form action = "./suahomework.php" method = "POST" >
                 <button type="submit" class = "img1"><i class='fa-solid fa-pencil'></i></button>
-                <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+                <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id']; ?>" >
                 <input type="hidden" name="userOL" value=<?php echo $user?>>
             </form> 
+
                         
-        <?php } ?>  
+
         
         <ul>
         <img src="<?php echo $user_img; ?>" class='img2'>
@@ -115,62 +118,95 @@
             ?>
             <hr style='width:95%'>
              
-             <li style="color:blue;font-size:17px">      
-            <?php echo $row['homework_tittle'] ;?>
-            </li>
             <li>
                 <?php echo $row['homework_content'];?>
             </li>
-            <li>
-                <?php echo $row['homework_file'];?>
-            </li>
+            
         
         </ul> <br> <hr> <br>
         <div class="comment">
         
              <img src="<?php echo $user_img?>">
              <form action="" method="POST" class="comment-1">
-                <input class="comment-2" type="text" name="comment">
-                <button class="send" type="submit" name="update"><i class="fas fa-paper-plane"></i></button>
+                <input class="comment-2" type="text" name="comment_content" >
+                <input type="hidden" name="userOL" value="<?php echo $user?>">  
+                <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+                <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
+                <button class="send" type="submit" name="submit_cmt"><i class="fas fa-paper-plane"></i></button>
             </form>
             <?php
-            if(isset($_POST['comment'])){
+            if(isset($_POST["submit_cmt"])){
                
-                $content=$_POST["comment"];
-                $sql1 = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
-                    VALUES ('$content', now(),'$user','$homework_id')";
-                $kq1=$con->query($sql1);
-             
-            }
-
-            ?>
+               $content=$_POST["comment_content"];
+               $sql = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
+                   VALUES ('$content', now(),'$user','$homework_id')";
+               $kq=$con->query($sql);
+               require_once("homework.php");
+           }
+           ?>
          </div>  
                 <?php 
-                $sql = 'SELECT * FROM comment cmt join homework hw on cmt.homework_id=hw.homework_id 
+                $sql = "SELECT * FROM comment cmt join homework hw on cmt.homework_id=hw.homework_id 
                                                   join user on cmt.user_name=user.user_name
-                                                  where hw.homework_id= '.$homework_id.' order by comment_time desc';
+                                                  where hw.homework_id= '$homework_id' order by comment_time desc";
                 $kq = $con->query($sql);
                 while($row = mysqli_fetch_assoc($kq)){
-                   
+                    $comment_id=$row['comment_id'];
                     $user1=$row['user_name'];
                     if($user1 == $user){
                     ?>
                     
-                    <form action="delete_comment.php" method="GET" class="formXoa">
+                    <form action="" method="post">
                         <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
-                        <button type="submit"  class='img3' name ="delete"><i class='fa-solid fa-xmark'></i></button>
+                        <button type="submit"  class='img3' name ="cmt_delete"><i class='fa-solid fa-xmark'></i></button>
                         <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
-                        <input type="hidden" name="userOL" value="<?php echo $user?>">
-                         
-
-                    </form>
-                    
-                    <form action="sua_comment.php" method="get">
-                        <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
-                        <button class='img3'><i class='fa-solid fa-pencil'></i></button>
-                        <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
-                        <input type="hidden" name="userOL" value="<?php echo $user?>">
                         
+                        <input type="hidden" name="userOL" value="<?php echo $user?>">                       
+                    </form>
+                    <?php
+                            if (isset( $_POST["cmt_delete"])) {
+                                $sql="DELETE FROM comment where comment_id='$comment_id'";
+                                mysqli_query($con,$sql);
+                            }
+                        ?>
+                    <form action="" method="post">
+                        <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+                        <button type="button" class='img3' id="myBtn"><i class='fa-solid fa-pencil'></i></button>
+                        <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
+                        <input type="hidden" name="userOL" value="<?php echo $user?>">
+                        <div class="container">
+                            <div id="myModal" class="modal">
+                                <div class="modal-content">
+                                <!-- Nội dung form edit_comment -->                                    
+                                    <form action="" method="post">
+                                        <h2>Chỉnh sửa bình luận</h2>
+                                        <div class="fomrgroup">
+                                            <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
+                                            <input type="text" name="comment_content" value="<?php echo $row["comment_content"] ?>">
+                                        </div>
+                                        <div class="fomrgroup" style="text-align:center;">
+                                            <button class="btn btn-primary" type='submit' name="update-cmt">Lưu</button>&nbsp;
+                                            <button class="btn btn-danger" id="close">Đóng</button> 
+                                                    
+                                        </div>
+                                    </form>
+                                    <?php
+                                    if(isset($_POST["update-cmt"])) {
+                                        $cmt_content = $_POST["comment_content"];
+                                        if ($cmt_content == "") {
+                                            echo  "<script>alert('Vui lòng nhập đầy đủ thông tin')</script>";
+                                        }else{
+                                        $sql2 = "UPDATE comment SET comment_content='$cmt_content', comment_time=now() WHERE comment_id=' $comment_id'";
+                                        mysqli_query($con,$sql2);    
+                                        
+                                        }
+                                    }
+                                    ?>           
+                                </div>
+                            </div>
+                         </div>
+
+
                     </form>
                     <?php
                     }
@@ -178,7 +214,7 @@
                      <ul>
                     <img src="<?php echo $row['user_image'] ?>" class='img2'>
                     <li><b><?php echo $row['user_fullname'] ?></li>
-                    <li style='font-size:10px'><?php echo $row['comment_time'] ?></b></li>
+                    <li style='font-size:12px'><?php echo $row['comment_time'] ?></b></li>
                     <li><?php echo $row['comment_content'] ?></li>
                     </ul>
                 <?php
@@ -209,11 +245,17 @@
                  ";
              }
             ?>
-            <button type="button" class="score" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
-                Bảng điểm
-            </button>
+            <!-- Bảng điểm -->
+            <form action="" method="post">
+            <button type="button" class="score">Bảng điểm</button> 
+            <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+            <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id'] ?>" >
+            <input type="hidden" name="user_name" value = "<?php echo $row['user_name'] ?>" >
+            <input type="hidden" name="userOL" value="<?php echo $user?>">
 
-            <!-- Modal -->
+            </form>
+
+            <!-- Modal
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content">
@@ -223,10 +265,10 @@
                     </div>
                     <div class="modal-body">
             
-                    <?php
-                        $sql='SELECT * FROM homework hw join score on hw.homework_id=score.homework_id
+                    <php
+                        $sql="SELECT * FROM homework hw join score on hw.homework_id=score.homework_id
                                                         join user on score.user_name=user.user_name
-                                                        where hw.homework_id= '.$homework_id.' ';
+                                                        where hw.homework_id= '$homework_id'";
                         $kq = $con->query($sql);
                         while($row = mysqli_fetch_assoc($kq)){
                             echo "
@@ -243,13 +285,17 @@
                     
                     </div>
                 </div>
-            </div>
+            </div> -->
     </div>
     </div>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script> 
+                                    function tai_lai_trang(){
+                                        location.reload();
+                                    }
+                                
     const menu = document.querySelector('.menu');
     const listmenu = document.querySelector('.listmenu');
     const main = document.querySelector('.main');
@@ -279,6 +325,34 @@
         });
     }  
         }, false);
+
+// Sửa comment
+var modal = document.getElementById('myModal');
+    
+    // Lấy phần button mở Modal
+    var btn = document.getElementById("myBtn");
+
+    // Lấy phần span đóng Modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Khi button được click thi mở Modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Khi span được click thì đóng Modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Khi click ngoài Modal thì đóng Modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+       
+   
 </script>
 </body>
 </html>
