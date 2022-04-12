@@ -50,11 +50,7 @@ html {
     opacity: 0.2;
 }
 .frame {
-<<<<<<< HEAD
-    height: 100vh !important;
-=======
     height: 100vh;
->>>>>>> 895e2a0dd37ab77e2f27c126456b7a1fb6366eb4
     justify-content: center;
     align-content: center;
     background-size: 130%;
