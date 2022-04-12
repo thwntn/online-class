@@ -28,7 +28,21 @@
                 <div class="in_data flex">
                     <input type="text" maxlength = 6>
                 </div>
-                <button>Tự động xác thực...</button>
+                <a class='reSend'>Gửi lại</a>
+            </div>
+        </div>
+        <div class="frameReSend">
+            <div class="boxReSend">
+                <i class="icon fab fa-cloudsmith"></i>
+                <h5>Nhập lại tài khoản</h5>
+                <p>
+                    Nhập lại tên tài khoản <br>
+                    nhận mã xác thự tại email của bạn <br>
+                    điền vào ô xác thực <br>
+                    bạn sẽ hoàn tất xác thực
+                </p>
+                <input type="text" class="userRes">
+                <button class="sendAu"><i class="fas fa-share"></i></button>
             </div>
         </div>
     </div>
@@ -58,11 +72,35 @@
                 }
             })
         },
+        reSend: function() {
+            const url = 'http://localhost/online-class/src/administrator/api/reSendAuthentication.php'
+
+            fetch(url, {
+                method: 'post',
+                body: JSON.stringify({
+                    username: document.querySelector('.userRes').value
+                })
+            })
+            .then(response => response.json())
+            .then(responseJson => console.log(responseJson))
+        },
         handle: function () {
             _this = this
             document.querySelector('input').addEventListener('change', function () {
                 _this.code = document.querySelector('input').value
                 _this.send()
+            })
+
+            document.querySelector('.reSend').addEventListener('click', function() {
+                document.querySelector('.frameReSend').style.display = 'flex'
+            })
+
+            document.querySelector('.boxReSend .icon').addEventListener('click', function() {
+                document.querySelector('.frameReSend').style.display = 'none'
+            })
+
+            document.querySelector('.sendAu').addEventListener('click', function() {
+                _this.reSend()
             })
         },
         start: function() {

@@ -19,20 +19,9 @@
    </head>
 <body>
     <div id="root">
-        <div class="header">
-            <ul>
-                <li>Trang chủ</li>
-                <li>Liên hệ</li>
-                <li>Thông tin</li>
-            </ul>
-            <ul>
-                <li>Ngôn ngữ</li>
-                <li class="active">Đăng nhập</li>
-                <li class="registry">Đăng kí</li>
-            </ul>
-        </div>
         <div class="container-fluid">
             <div class="frame row">
+                <div class="background"></div>
                 <div class="img_desk col-md-6"  style="background-image: url(./assets/image/icon.png);">
                     <h1>Chào mừng bạn!</h1>
                     <p>Đến với trang đăng nhập vui lòng nhâp tài khoản và mật khẩu <br> chúng tôi sẽ đưa bạn đến deadline <br> của bạn! :)</p>
@@ -54,6 +43,9 @@
     <div class="errBox">
         <h5>Sai tên đăng nhập hoặc mật khẩu !</h5>
     </div>
+    <a href="./signup.html" class="signUp">
+        Đăng kí
+    </a>
 </body>
 <script>
     //Create Form Login
@@ -94,7 +86,7 @@
             await response.json().then((responseJSON) => {
                     console.log(responseJSON)
                 switch(responseJSON) {
-                    case 100: {
+                    case 100: case 50:{
                         window.sessionStorage.setItem('userOL', document.querySelector('.username').value)
                         window.location.href = "http://localhost/online-class/src/administrator/online/build/index.html"
                         break
