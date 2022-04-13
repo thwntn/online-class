@@ -80,7 +80,7 @@ html{
 }
 .nameSubject {
     margin-bottom: 0;
-    margin-top: 6px;
+    
     margin-left: 8px;
     
 }
@@ -186,12 +186,13 @@ html{
 }
 .delete{
      margin-top:50px;
-    margin-left:-30px; 
+    margin-left:-50px; 
     float:right; 
     background: none;
     border: none;
 }
 .repair{
+    margin-top:30px;
     background: none;
     border: none;
 }
@@ -203,8 +204,7 @@ html{
 
 }
 /* Modal */
-
-.container {
+ .container {
     width: 70%;
     margin: auto;
     text-align: center;
@@ -224,24 +224,25 @@ html{
 
 .fomrgroup {
     width: 50%;
-    margin-left:140px;
+    margin: auto;
     display: block;
-    height: 250px;
+    height: 50px;
 }
 .fomrgroup input{
-    line-height: 40px;
+    float: right;
+     width: 100%;
+  
+    line-height: 50px;
     background-color: rgb(218, 214, 214);
     border:none;
     border-radius: 10px;
     margin-top:10px;
-    
 }
-
 .fomrgroup b{
     font-size: 20px;
 }
 .fomrgroup-1{
-    margin-top:70px;
+    margin-top:90px;
 }
 .fomrgroup-1 button{
     width:70px;
@@ -255,23 +256,21 @@ html{
     z-index: 1; 
     padding-top: 100px; 
     left: 0;
-    top: -50%;
+    top: 0;
     width: 50%;
     height: 100%; 
     overflow: auto;
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); 
-   
- 
 }
-
+ 
 
 .modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 60%!important;
+    width: 40%!important;
 
 }
  
@@ -287,8 +286,7 @@ html{
     color: #000;
     text-decoration: none;
     cursor: pointer;
-} 
-
+}  
 
 
 /*Header*/

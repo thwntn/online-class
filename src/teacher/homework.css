@@ -207,23 +207,38 @@
     border-radius: 10px;
     padding:10px;
 }
-.right-2 a{
-    text-decoration: none;
-    color:black;
+.right-2 button{
+    background: none;
+    border:none;
     
 }
 .right-2 ul{
     background-color: rgb(235, 235, 235); 
     border-radius:20px;
     display: flex;
-    justify-content: space-between;
+    margin:10px;
+    padding:0px 10px ;
+    margin-top:6px;
+}
+
+.right-2 li{
+    list-style-type: none;
+    margin-left:10px;
+   
+}
+.list-score {
+    background-color: rgb(235, 235, 235); 
+    border-radius:20px;
+    
+
     margin:0;
     padding:0px 10px ;
     margin-top:6px;
-    
+    margin-right:10px;
 }
-.right-2 li{
+.list-score li{
     list-style-type: none;
+  
 } 
 
 .score{
@@ -258,10 +273,11 @@
     }
     .close-btn:hover {
     color: #D2D2D2;
-    }
-.modal-body{
-    width: 35%;
-} */
+    } */
+ .modal-body button{
+    background:none;
+    border:none;
+}  
 .delete{
     background: none;
     border: none;
@@ -293,6 +309,7 @@
     width:40px;
     height:40px;
     background-color: white;
+    margin-left:-8px
 }
 /* Modal */
 .container {
@@ -300,7 +317,7 @@
     margin: auto;
     text-align: center;
 }
-.btn {
+ .btn {
   padding: 0.5rem 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -308,19 +325,19 @@
   outline: none;
 }
 
-.btn:active {
+ .btn:active {
   transform: scale(0.9);
 }
 
 
-.fomrgroup {
+ .fomrgroup {
     width: 50%;
     margin: auto;
     display: block;
     height: 50px;
     margin-top:20px;
 }
-.fomrgroup input{
+ .fomrgroup input{
     float: right;
      width: 100%;
     line-height: 50px;
@@ -328,24 +345,24 @@
     border:none;
     border-radius: 10px;
 }
-.fomrgroup b{
+ .fomrgroup b{
     font-size: 20px;
 }
-.fomrgroup-1{
-    margin-top:90px;
+ .fomrgroup-1{
+    margin-top:30px;
 }
-.fomrgroup-1 button{
+ .fomrgroup-1 button{
     width:70px;
     height:40px;
 }
 
-.modal {
+ .modal {
     display: none; 
     position: fixed; 
     z-index: 1; 
     padding-top: 100px; 
     left: 0;
-    top: 0;
+    transition: top 0.3s ease-in-out;
     width: 50%;
     height: 100%; 
     overflow: auto;
@@ -353,65 +370,23 @@
     background-color: rgba(0,0,0,0.4); 
 }
  
- 
-.modal-content {
+ .modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 40%!important;
-
+    width: 40%;
 }
- 
-.close {
+ .close {
     color: #aaaaaa;
     float: right;
     font-size: 40px;
     font-weight: bold;
 }
  
-.close:hover,
-.close:focus {
+ .close:hover,
+ .close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
 } 
-
-.modal1 {
-    display: none; 
-    position: fixed; 
-    z-index: 1; 
-    padding-top: 100px; 
-    left: 0;
-    top: 0;
-    width: 50%;
-    height: 100%; 
-    overflow: auto;
-    background-color: rgb(0,0,0); 
-    background-color: rgba(0,0,0,0.4); 
-}
-
-.close1 {
-    color: #aaaaaa;
-    float: right;
-    font-size: 40px;
-    font-weight: bold;
-}
- 
-.close1:hover,
-.close1:focus {
-    color: #000;
-    text-decoration: none;
-    cursor: pointer;
-} 
-.btn1 {
-    padding: 0.5rem 1rem;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    cursor: pointer;
-    outline: none;
-  }
-  
-  .btn1:active {
-    transform: scale(0.9);
-  }

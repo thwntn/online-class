@@ -88,12 +88,7 @@
             </p>
         
                  
-            <form action = "./suahomework.php" method = "POST" >
-                <button type="submit" class = "img1"><i class='fa-solid fa-pencil'></i></button>
-                <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id']; ?>" >
-                <input type="hidden" name="userOL" value=<?php echo $user?>>
-            </form> 
-
+           
                         
 
         
@@ -138,10 +133,13 @@
             if(isset($_POST["submit_cmt"])){
                
                $content=$_POST["comment_content"];
+               if($content == ""){
+
+               }else{
                $sql = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
                    VALUES ('$content', now(),'$user','$homework_id')";
                $kq=$con->query($sql);
-               require_once("homework.php");
+               }
            }
            ?>
          </div>  
@@ -165,26 +163,27 @@
                     </form>
                     <?php
                             if (isset( $_POST["cmt_delete"])) {
-                                $sql="DELETE FROM comment where comment_id='$comment_id'";
+                                $cmt_id=$_POST["comment_id"];
+                                $sql="DELETE FROM comment where comment_id='$cmt_id'";
                                 mysqli_query($con,$sql);
                             }
                         ?>
-                    <form action="" method="post">
+                        <!-- Sua comment --> 
+                    <form action="" method="post" class="formSua">
                         <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
                         <button type="button" class='img3' id="myBtn"><i class='fa-solid fa-pencil'></i></button>
                         <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
                         <input type="hidden" name="userOL" value="<?php echo $user?>">
                         <div class="container">
                             <div id="myModal" class="modal">
-                                <div class="modal-content">
-                                <!-- Nội dung form edit_comment -->                                    
+                                <div class="modal-content" style="width:40%">                                                              
                                     <form action="" method="post">
                                         <h2>Chỉnh sửa bình luận</h2>
                                         <div class="fomrgroup">
                                             <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
                                             <input type="text" name="comment_content" value="<?php echo $row["comment_content"] ?>">
                                         </div>
-                                        <div class="fomrgroup" style="text-align:center;">
+                                        <div class="fomrgroup-1" style="text-align:center;">
                                             <button class="btn btn-primary" type='submit' name="update-cmt">Lưu</button>&nbsp;
                                             <button class="btn btn-danger" id="close">Đóng</button> 
                                                     
@@ -192,6 +191,7 @@
                                     </form>
                                     <?php
                                     if(isset($_POST["update-cmt"])) {
+                                        
                                         $cmt_content = $_POST["comment_content"];
                                         if ($cmt_content == "") {
                                             echo  "<script>alert('Vui lòng nhập đầy đủ thông tin')</script>";
@@ -204,8 +204,8 @@
                                     ?>           
                                 </div>
                             </div>
-                         </div>
-
+                        </div>
+                       
 
                     </form>
                     <?php
@@ -235,19 +235,15 @@
              $kq = $con->query($sql);
              while($row = mysqli_fetch_assoc($kq)){
                  echo "
-                    <ul>
-                    
-                    <li><img src=".$row['user_image']." class='user-img'></li>
-                    <li style='font-size:15px'>".$row['user_fullname']."</li> 
-                    <li><a href=''><img src='image/free-file-icon-1453-thumb.png' style='width:15px'></a></li>
-                    <li><a href=''><img src='image/img_179653.png' style='width:10px'></i></a></li>
-                    </ul>
+                 <div class='list-score'>                                                  
+                    <p><img src=".$row['user_image']." class='user-img'> ".$row['user_fullname']."</p>                                                       
+                 </div>   
                  ";
              }
             ?>
             <!-- Bảng điểm -->
             <form action="" method="post">
-            <button type="button" class="score">Bảng điểm</button> 
+            <button type="button" class="score" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Bảng điểm</button> 
             <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
             <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id'] ?>" >
             <input type="hidden" name="user_name" value = "<?php echo $row['user_name'] ?>" >
@@ -255,37 +251,57 @@
 
             </form>
 
-            <!-- Modal
+            
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-                <div class="modal-dialog modal-lg">
+                <div class="modal-dialog modal-xl" style="width:70%">
                     <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="staticBackdropLabel">Bảng điểm</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <button type="button" data-bs-dismiss="modal" aria-label="Close" style="color:red">Đóng</button>
                     </div>
                     <div class="modal-body">
             
-                    <php
+                    <?php
                         $sql="SELECT * FROM homework hw join score on hw.homework_id=score.homework_id
                                                         join user on score.user_name=user.user_name
                                                         where hw.homework_id= '$homework_id'";
                         $kq = $con->query($sql);
+                        echo"<table>";
                         while($row = mysqli_fetch_assoc($kq)){
-                            echo "
-                            <ul>
-                            <li><img src=".$row['user_image']." style='width:40px;border-radius:20px;'></li>
-                            <li>".$row['user_fullname']."</li>
-                            <li><a href=''><img src='image/free-file-icon-1453-thumb.png' style='width:15px'></a></li>
-                            <li style='color:red'><b>".$row['score_level']."</b></li>
-                        </ul>
-                            ";
-                        }
+                            echo "<tr>";
+                            for($i=1;$i<4;$i++)
+                            {
+                                echo "<td style='width:300px'>";
+                                if($row!=false)
+                                    {  
+                                    echo "
+                                    <ul>
+                                    <li><img src=".$row['user_image']." style='width:40px;border-radius:20px;margin-left:-10px'></li>
+                                    <li style='margin-top:8px'>".$row['user_fullname']."</li>
+                                    <li style='margin-top:8px'><button><img src='image/free-file-icon-1453-thumb.png' style='width:15px'></button></li>
+                                    <li style='color:red; margin-top:10px'><b>".$row['score_level']."</b></li> 
+                                    </ul> 
+                                    ";
+                                    }else{
+                                    echo "&nbsp;";
+                                    }
+                                    echo"</td>";
+                                        if($i!=3)
+                                        {
+                                            $row= $kq->fetch_assoc();
+                                        }
+                                    } 
+                                    echo"</tr>";
+                            }
+                            echo"</table>";
+
+
                 ?>
                     </div>
                     
                     </div>
                 </div>
-            </div> -->
+            </div> 
     </div>
     </div>
 

@@ -27,23 +27,7 @@ $user=$_POST['userOL'];
     
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
-        <?php 
-                    $con = mysqli_connect('localhost', 'root','', 'online-class');
-
-                    $sql="SELECT * FROM notification nt JOIN subject sj ON nt.user_name = sj.user_name  ";
-                    $kq=$con->query($sql);
-                    while($row=$kq->fetch_assoc()){
-                    echo "<div class = 'itemNoti'>";
-                    echo "<div class = 'imageNoti'>";
-                    echo "<img src=".$row['subject_image'].">";
-                    echo "</div>";
-                    echo  "<div class = 'contentNoti'>";
-                    echo "<h4>"; echo $row['subject_code']; echo "</h4>";
-                    echo $row['noti_content'];
-                    echo "</div>";
-                    echo "</div>";
-                    }
-                ?> 
+       
             
     </div>
     <div class = 'frameNoti mess'>
@@ -144,23 +128,7 @@ $user=$_POST['userOL'];
             <li>
             <?php
             
-                $sql="SELECT * FROM user where user_name='$user'";
-                $result = $con->query($sql);
-                $row = $result->fetch_assoc();
-                echo "
-                <img src=".$row['user_image']." style='width:40px;border-radius:50px'>
-                ".$row['user_fullname']."
-
-                <div class='dropdown'>
-                    <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
-                    <div class='noidung_dropdown'>
-                        <a href='#'>Tài khoản</a> 
-                        <a href='#'>Đăng xuất 
-                        <i class='fa-solid fa-right-from-bracket'></i>
-                        </a>
-                    </div>
-                    </div>
-                ";
+               
                 ?>
                 <script>
                     function hamDropdown() {

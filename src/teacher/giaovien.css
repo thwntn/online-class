@@ -64,6 +64,28 @@ img{
     float: right;
     width: 20px;
 }
+.linl .modal-body button{
+    background:none;
+    border:none;
+} 
+.link .modal-body ul{
+    background-color: rgb(235, 235, 235); 
+    border-radius:20px;
+    display: flex;
+    margin:10px;
+    padding:0px 10px ;
+    margin-top:6px;
+  
+}
+.link .modal-body li{
+    list-style-type: none;
+    margin-left:20px;
+}
+.link .modal-body li img{
+    width:40px;
+    border-radius: 20px;
+    margin-left:-25px;
+}
 .add-dl{
     margin-right:150px; 
     float:right;
@@ -104,6 +126,7 @@ img{
     float:right;
     border:none;
     background:none;
+    
 }
 .media{
     padding: 15px 15px 0 15px;
@@ -170,7 +193,7 @@ a{
     font-size:15px;
 }
 .create-1{
-  width:250px;
+  width:500px;
   height:40px;
   background-color: rgb(218, 214, 214);
   border:none;
@@ -181,7 +204,7 @@ a{
 
 }
 .create-1::placeholder {
-  color:black;
+  color:rgb(184, 184, 184);
 }
 .create{
   background-color: rgb(218, 214, 214);
@@ -197,14 +220,17 @@ a{
     border:none;
     background: none;
 }
-
+.upload{
+    display:none;
+}
 /* Modal */
-.container {
+
+ .container {
     width: 70%;
     margin: auto;
     text-align: center;
 }
-.btn {
+ .btn {
   padding: 0.5rem 1rem;
   border: 1px solid #ccc;
   border-radius: 4px;
@@ -212,76 +238,77 @@ a{
   outline: none;
 }
 
-.btn:active {
+ .btn:active {
   transform: scale(0.9);
 }
 
 
-.fomrgroup {
+ .fomrgroup {
     width: 50%;
-    margin: auto;
+    margin-left:140px;
     display: block;
-    height: 50px;
+    height: 250px;
 }
-.fomrgroup input{
-    float: right;
-     width: 100%;
-  
-    line-height: 50px;
+ .fomrgroup input{
+    line-height: 40px;
     background-color: rgb(218, 214, 214);
     border:none;
     border-radius: 10px;
     margin-top:10px;
+    
 }
-.fomrgroup b{
+
+ .fomrgroup b{
     font-size: 20px;
 }
-.fomrgroup-1{
-    margin-top:90px;
+ .fomrgroup-1{
+    margin-top:70px;
 }
-.fomrgroup-1 button{
+ .fomrgroup-1 button{
     width:70px;
     height:40px;
     
 }
 
-.modal {
+ .modal {
     display: none; 
     position: fixed; 
     z-index: 1; 
     padding-top: 100px; 
     left: 0;
-    top: 0;
+    top: -50%;
     width: 50%;
     height: 100%; 
     overflow: auto;
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); 
-}
+   
  
+}
 
-.modal-content {
+
+ .modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 40%!important;
+    width: 60%;
 
 }
  
-.close {
+ .close {
     color: #aaaaaa;
     float: right;
     font-size: 40px;
     font-weight: bold;
 }
  
-.close:hover,
-.close:focus {
+ .close:hover,
+ .close:focus {
     color: #000;
     text-decoration: none;
     cursor: pointer;
-} 
+}  
 
 
 /*Header*/

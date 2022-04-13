@@ -47,13 +47,13 @@ $user=$_POST['userOL'];
           
                     <div class = 'itemBox col-md-4'>
                         <!--Xóa môn học -->
-                        <div class="collapse collapse-horizontal" id="collapseWidthExample">  
+                  
                                 <form action = "./deletesubject.php" method = "GET"  class = "formDelete" >
                                     <button type="submit" class = "delete"><i class="fa-solid fa-xmark"></i></button>
                                     <input type="hidden" name="subject_id" value = " <?php echo $row['subject_id']; ?>" >
                                     <input type="hidden" name="userOL" value=<?php echo $user?>>
                                 </form>  
-                        </div> 
+                      
                         <div class = 'item'>
                              <div class = 'backgroundItem' style="background:url(<?php echo $row['subject_image']; ?> ); background-size: cover" >
                             </div>
@@ -65,7 +65,7 @@ $user=$_POST['userOL'];
                                     <h3 class = 'keySubject'><input type='submit' value="<?php echo $id ;?>"></h3>
                                     <h5 class = 'nameSubject'><input type='submit' value="<?php echo $row['subject_name'] ;?>"><h5>
                                 </form> 
-                                <div class="collapse collapse-horizontal" id="collapseWidthExample">                                                           
+                                                                                          
                                      <form action = "" method = "POST"  >
                                         <button type="button" class="btn" id="myBtn" data-target="#modal1"><i class="fa-solid fa-pencil"></i></button>
                                         <input type="hidden" name="subject_id" value = " <?php echo $row['subject_id']; ?>" >
@@ -130,39 +130,11 @@ $user=$_POST['userOL'];
                             
                             
                             </div>
-                            <div class = 'navItem'>
-                                <button class = 'submit'><i class='fas fa-user'></i></button>
-                                <button class = 'submit'><i class='fas fa-user-plus'></i></button>
-                                
-                                <!--Them bài giảng -->
-                                <form action = "" method = "post"  >   
-                                    <button type="button" class="btn" data-target="#modal2" ><i class='fas fa-file-alt'></i></button>
-                                    <input type="hidden" name="subject_id" value = " <?php echo $row['subject_id']; ?>" >  
-                                    <input type="hidden" name="userOL" value=<?php echo $user?>>
-                                    </form> 
-                                    <div class="modal" id="modal2">
-                                    <div class="header">
-                                        <div class="title">Second Modal</div>
-                                        <button class="btn close-modal">&times;</button>
-                                    </div>
-                                    <div class="body">
-                                        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facere ea
-                                        officia consectetur. Laborum, dolor? Assumenda quo corrupti eveniet
-                                        velit fugit fugiat odit, dolorum labore obcaecati quia. Commodi
-                                        assumenda sed maxime!
-                                    </div>
-                                    </div>
-                                </form>                                        
-                                                        
-                                <button class = 'submit' data-bs-toggle='collapse' data-bs-target='#collapseWidthExample' aria-expanded='false' aria-controls='collapseWidthExample'><i class='fas fa-pen'></i></button>
-                                <button class = 'submit'><i class='fas fa-star'></i></button>
-                                
-                            </div>
+                            
                         </div>
                     </div>
 
-                                  
-        </div> 
+ 
 
 
 
@@ -183,3 +155,30 @@ $user=$_POST['userOL'];
     
 ?> 
 
+<script> 
+    //Sửa tài liệu
+    var modal = document.getElementById('myModal');
+    
+    // Lấy phần button mở Modal
+    var btn = document.getElementById("myBtn");
+
+    // Lấy phần span đóng Modal
+    var span = document.getElementsByClassName("close")[0];
+
+    // Khi button được click thi mở Modal
+    btn.onclick = function() {
+        modal.style.display = "block";
+    }
+
+    // Khi span được click thì đóng Modal
+    span.onclick = function() {
+        modal.style.display = "none";
+    }
+
+    // Khi click ngoài Modal thì đóng Modal
+    window.onclick = function(event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+</script>
