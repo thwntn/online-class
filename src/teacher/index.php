@@ -166,7 +166,7 @@ include 'connect.php' ;
                     <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
                     <div class='noidung_dropdown'>
                         <a href='#'>Tài khoản</a> 
-                        <a href='#'>Đăng xuất &nbsp;
+                        <a href='logout.php'>Đăng xuất &nbsp;
                         <i class='fa-solid fa-right-from-bracket'></i>
                         </a>
                     </div>

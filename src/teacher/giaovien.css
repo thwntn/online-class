@@ -64,7 +64,7 @@ img{
     float: right;
     width: 20px;
 }
-.linl .modal-body button{
+.link .modal-body button{
     background:none;
     border:none;
 } 
@@ -261,9 +261,7 @@ a{
  .fomrgroup b{
     font-size: 20px;
 }
- .fomrgroup-1{
-    margin-top:70px;
-}
+
  .fomrgroup-1 button{
     width:70px;
     height:40px;
@@ -282,7 +280,7 @@ a{
     overflow: auto;
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); 
-   
+  
  
 }
 

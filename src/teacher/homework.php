@@ -86,12 +86,7 @@
                                 echo $row['subject_name']; ?>
                 
             </p>
-        
-                 
-           
-                        
-
-        
+              
         <ul>
         <img src="<?php echo $user_img; ?>" class='img2'>
             <li><b>&nbsp;<?php echo $row['user_fullname']; ?> <br>
@@ -171,11 +166,11 @@
                         <!-- Sua comment --> 
                     <form action="" method="post" class="formSua">
                         <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
-                        <button type="button" class='img3' id="myBtn"><i class='fa-solid fa-pencil'></i></button>
+                        <button type="button" class='img3' id="myBtn" data-target=".modal2" data-toggle="modal"><i class='fa-solid fa-pencil'></i></button>
                         <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
                         <input type="hidden" name="userOL" value="<?php echo $user?>">
                         <div class="container">
-                            <div id="myModal" class="modal">
+                            <div id="myModal" class="modal modal2">
                                 <div class="modal-content" style="width:40%">                                                              
                                     <form action="" method="post">
                                         <h2>Chỉnh sửa bình luận</h2>

@@ -48,17 +48,17 @@
            
     </div> <br>
     <form action="" method = "post" enctype="multipart/form-data">   
-                    <button type="button"  class='add-dl' id = "myBtn">Thêm bài tập</button>
+                    <button type="button"  class='add-dl' id = "myBtn" data-target=".modal1">Thêm bài tập</button>
                     <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id']; ?>" >  
                     <input type="hidden" name="userOL" value=<?php echo $user?>>
                     
                      <div class="container">       
-                        <div id="myModal" class="modal">
-                            <div class="modal-content" style="width:60%" >                                 
+                        <div id="myModal" class="modal modal1">
+                            <div class="modal-content" style="width:60%;height:70%" >                                 
                                 <form action="" method="post" enctype="multipart/form-data">
                                     <h2>Thêm tài liệu</h2>
                                     <div class="fomrgroup">
-                                        <input class='create-1' type="text" name="subject_id" value="<?php echo $row['subject_id']; ?>">
+                                        <input class='create-1' type="hidden" name="subject_id" value="<?php echo $row['subject_id']; ?>">
                                         <input class='create-1' type="text" name="homework_id" placeholder="Mã tài liệu">
                                         <input class='create-1' name="content" placeholder="Nội dung">
                                                                     
@@ -93,7 +93,48 @@
                                                     
                     </div>   
              </form>
-                   
+             <form action="" method = "post" enctype="multipart/form-data">   
+                    <button style="width:150px;margin-right:10px" type="button"  class='add-dl' id = "myBtn" data-target=".modal3" data-toggle="modal">Thêm thông báo</button>
+                    <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id']; ?>" >  
+                    <input type="hidden" name="userOL" value=<?php echo $user?>>
+                    
+                     <div class="container">       
+                        <div id="myModal" class="modal modal3">
+                            <div class="modal-content" style="width:55%;height:30%" >                                 
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <h2>Thêm thông báo</h2>
+                                    <div class="fomrgroup">
+                                        <input type="hidden" name="subject_id" value="<?php echo $row['subject_id']; ?>">
+                                       
+                                        <input style="width:400px" class='create-1' name="noti_content" placeholder="Nội dung">
+                                                                    
+                                      
+                                                                                              
+                                    </div>
+                                    <div class="fomrgroup-1" style="text-align:center;">                   
+                                        <button class="btn btn-primary" type='submit' name="submit_noti">Save</button>
+                                        <button class="btn btn-danger" id="close">Cancel</button> &nbsp;
+                                    </div>
+                                </form>
+                                <?php
+                                    if (isset($_POST["submit_noti"])) {
+                                        $content_noti= $_POST["noti_content"];
+                                    
+                                       
+                                        if ($content_noti == "") {     
+                                            echo  "<script>alert('Vui lòng nhập đầy đủ thông tin')</script>";
+                                        }else{
+                                            $sql1 = "INSERT INTO notification( noti_content, noti_time, noti_status, user_name) VALUES ('$content_noti', now(),0,'$user')";
+                                            mysqli_query($con,$sql1); 
+                                            
+                                            }
+                                        }
+                                ?>
+                            </div>
+                        </div>
+                                                    
+                    </div>   
+             </form>
                              
 
     <div class="link">
@@ -124,16 +165,30 @@
                             for($i=1;$i<4;$i++)
                             {
                                 echo "<td style='width:300px'>";
-                                if($row!=false)
-                                    {  
+                                if($row!=false){  
+                                    $sql3="SELECT friend_user FROM friend where user_name='$user' ";
+                                    $kq3 = $con->query($sql3);
+                                    while($row3 = mysqli_fetch_assoc($kq3)){
+                             
+                                    $friend=$row3['friend_user']; echo $friend;
+                                    //$friend_status=$row3['friend_status'];
                                     echo "
                                     <ul>
                                     <li><img src=".$row['user_image']." ></li>
-                                    <li style='margin-top:10px'>".$row['user_fullname']."</li>  
-                                    ";            
+                                    <li style='margin-top:10px'>".$row['user_fullname']."</li> 
+                                    ";
+                                   
+                                     if($friend == ""){
+                                    echo "<li style='margin-top:10px'><i class='fa-solid fa-user-plus'></i></li>";
+                                     }else{
+                                        echo "<li style='margin-top:10px'><i class='fa-solid fa-user-group'></i></li>";
+                                    }
+                                    
+                                        //echo "<li style='margin-top:10px'><i class='fa-solid fa-user-group'></i></li>"; 
+                                    
                                                                                             
                                     echo "</ul>"; 
-                                    
+                                     }  
                                     }else{
                                     echo "&nbsp;";
                                     }
@@ -213,12 +268,47 @@
                             <input type='submit' value="<?php echo $row['homework_content'] ;?>" style="font-size:17px;color:blue!important"> <br>
                         </form> 
                         <!-- Sửa tài liệu -->  
-                        <form action = "./suahomework.php" method = "POST" >
-                            <button style="margin-top:-70px" type = "submit" class = "img1" ><i class='fa-solid fa-pencil'></i></button>
+                        <form action = "" method = "POST" >
+                            <button style="margin-top:-70px" type = "button" class = "img1" id="myBtn" data-target=".modal2" data-toggle="modal"><i class='fa-solid fa-pencil'></i></button>
                             <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id']; ?>" >
                             <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id']; ?>" >
                             <input type="hidden" name="userOL" value=<?php echo $user?>> 
-                           
+                            <div class="container">       
+                        <div id="myModal" class="modal modal2">
+                            <div class="modal-content" style="width:60%" >                                 
+                                <form action="" method="post" enctype="multipart/form-data">
+                                    <h2>Sửa tài liệu</h2>
+                                    <div class="fomrgroup" >
+                                         
+                                   
+                                    <input class='create-1' type="text" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+                                    <textarea class='create-1' name="homework_content"> <?php echo $row["homework_content"]; ?> </textarea>        
+                                    <input class='create-1' name="homework_finish" value= "<?php echo $row["homework_finish"]; ?> "> <br> <br>
+                                  
+                                    </div>
+                                    <div class="fomrgroup-1" style="text-align:center;">                   
+                                        <button class="btn btn-primary" type='submit' name="update-hw">Save</button>
+                                        <button class="btn btn-danger" id="close">Cancel</button> &nbsp;
+                                    </div>
+                                </form>
+                                <?php
+                                    if(isset($_POST["update-hw"])) {
+                                        $homework = $_POST["homework_id"];
+                                        $content = $_POST["homework_content"];
+                                        $hw_finish = $_POST["homework_finish"];
+                                        if ($content == "") {
+                                            echo "Vui lòng nhập đầy đủ thông tin.";
+                                       }else{
+                                        $sql2 = "UPDATE homework SET homework_id='$homework',  homework_content='$content', homework_time=now(), homework_finish='$hw_finish' WHERE homework_id='$homework_id'";
+                                         mysqli_query($con,$sql2);
+                                            
+                                            }
+                                        }
+                                ?>
+                            </div>
+                        </div>
+                                                    
+                    </div>   
                         </form> 
 
                      
