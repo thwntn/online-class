@@ -177,7 +177,10 @@
                     <div class='dropdown'>
                         <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
                         <div class='noidung_dropdown'>
-                            <a href='#'>Tài khoản</a> 
+                            <form action='./profile.php' method='post'>
+                                <input type='hidden' name='userOL' value=$user_name>
+                                <input class='sub-taikhoan' type='submit' value='Tài khoản'>
+                            </form> 
                             <a href='logout.php'>Đăng xuất &nbsp;
                             <i class='fa-solid fa-right-from-bracket'></i>
                             </a>

@@ -451,6 +451,8 @@ background: #555;
     text-decoration: none;
     display: block;
     font-size:17px;
+    text-align: center;
+    /* padding-left: 15px; */
   }
   .hienThi{
     display:block;
@@ -705,4 +707,15 @@ a{
     background-color: white;
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
 
+}
+
+.sub-taikhoan{
+    background: none;
+    border: none;
+    color: white;
+    padding-left: 20px;
+    font-size: 17px;
+}
+.sub-taikhoan:hover{
+    color: blue;
 }

@@ -1,0 +1,333 @@
+@font-face {
+    font-family: basic;
+    src: url(./Bandon.ttf);
+}
+
+html {
+    padding: 0;
+    margin: 0;
+}
+
+* {
+    box-sizing: border-box;
+}
+.frame {
+    position: relative;
+
+
+
+
+    padding: 48px 12px 0px 12px;
+
+    background-color: rgba(250, 250, 252);
+    color: #555;
+
+    font-family: basic;
+    z-index: 100;
+}
+.background {
+    position: absolute;
+
+    background-image: url(./image/Scandinavia.jpg);
+    background-size: cover;
+
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+
+    z-index: -1;
+    opacity: 0.3;
+}
+.image,
+.imageUser {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    width: 220px !important;
+    height: 220px !important;
+
+    /* background-color: #333; */
+    border-radius: 100%;
+}
+
+.banner {
+    justify-content: center;
+
+    margin-bottom: 32px !important;
+    opacity: 0.6;
+}
+.changeUser {
+    position: absolute;
+
+    background: none;
+
+    border: none;
+    /* color: rgb(5, 3, 3); */
+}
+.leftBar {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-content: flex-start !important;
+}
+.bannerImg {
+    position: relative;
+    width: 100%;
+    height: 356px;
+
+    background-image: url(./image/banner.jpg);
+    background-size: 150%;
+    background-position: left;
+
+    border-radius: 20px;
+}
+.bannerImg::after {
+    content: "Profile";
+
+    position: absolute;
+    
+    top: 4%;
+    left: 2%;
+    font-size: 3rem;
+
+    color: rgb(88, 175, 146);
+}
+.subject,
+.friend {
+    margin: 12px 0px !important;
+    padding: 12px 0px;
+
+    border-radius: 20px;
+}
+.friend {
+    display: flex;
+    flex-wrap: nowrap!important;
+    /* overflow: auto; */
+}
+.friendItem {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 86px!important;
+    height: 86px !important;
+    /* padding: 12px;  */
+    margin: 0px 12px;
+    
+    background-color: rgba(240, 240, 240);
+    border-radius: 8px;
+
+    background-color: #333;
+
+    border-radius: 100%;
+}
+.name{
+    padding-top: 5px;
+    text-align: center;
+}
+.image1{
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 86px!important;
+    height: 86px !important;
+    /* padding: 12px; */
+    /* margin: 0px 12px; */
+    
+    /* background-color: rgba(240, 240, 240); */
+    border-radius: 8px;
+
+    /* background-color: #333; */
+
+    border-radius: 100%;
+}
+.subject {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+
+    padding: 0px !important;
+}
+.subjectItem {
+    display: flex;
+    flex-wrap: wrap;
+
+    width: 46% !important;
+
+    padding: 12px !important;
+    margin: 2% 2% !important;
+
+    background-color: rgba(255, 255, 255, 0.4);
+    border-radius: 20px;
+}
+.image2,
+.imageSubject {
+    width: 120px;
+    height: 120px;
+
+
+    /* background-image: url(./img/inter.png); */
+    background-size: 100%;
+
+    /* background-color: #333; */
+    border-radius: 100%;
+    /* border: 2px solid rgba(160, 160, 160, 0.2); */
+}
+/* .image2{
+
+} */
+.infoSuject {
+    width: 100%;
+    
+    padding: 0px 0px 0px 12px;
+}
+.infoSuject div {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+    
+    flex: 1;
+
+    margin: 0 !important;
+}
+.infoSuject div h5 {
+    width: 100%;
+
+    margin: 24px 0px 12px 0px !important;
+    margin-bottom: 12px;
+    font-size: 18px;
+
+    text-align: left;
+}
+.infoSuject button {
+    padding: 8px 16px;
+    margin: 86px 8px 8px 0px !important;
+
+    box-shadow: 0px 0px 12px rgba(0, 0, 0, 0.1);
+    border: none;
+    border-radius: 100px;
+    color: #fff;
+    background-image: linear-gradient(120deg, rgb(216, 95, 65), rgb(190, 65, 159));
+}
+.infoSuject l {
+    width: 100%;
+
+    text-align: left;
+}
+.infoAdd {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.infoAdd h4 {
+    width: 100%;
+
+    margin: 32px 0px 12px 0px;
+
+    text-align: center;
+}
+.infoAdd i {
+    width: 100%;
+
+    margin: 0px 0px 24px 0px !important;
+
+    text-align: center;
+}
+.infoAdd button {
+    width: 120px;
+    padding: 8px 12px;
+    
+    border-radius: 100px;
+    color: #fff;
+    background-image: linear-gradient(120deg, rgb(11, 129, 90), rgb(190, 65, 159));
+    border: none;
+}
+.ofUser h5 {
+    margin: 12px !important;
+}
+.homeWork {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+
+    padding: 20px;
+    margin: 8px;
+
+    color: rgb(77, 110, 148);
+
+    border-radius: 100%;
+}
+.class {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+
+    padding: 20px;
+    margin: 8px;
+
+    color: rgb(134, 62, 62);
+
+    border-radius: 100%;
+}
+.class h3,
+.homeWork h3 {
+    width: 100%;
+    text-align: center;
+}
+.count {
+    display: flex;
+    justify-content: center;
+
+    margin-top: 20px !important;
+
+    border-top: 2px solid rgba(0, 0, 0, 0.1);
+}
+.count p {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+
+    width: 100px !important;
+    height: 100px !important;
+
+    text-align: center;
+}
+.count p i {
+    width: 100%;
+}
+.count p l {
+    font-size: 12px;
+}
+.discription p {
+    line-height: 36px;
+}
+.discription {
+    padding: 0px 48px !important;
+}
+.icon {
+    width: 100%;
+    padding: 12px 8px 24px 8px;
+}
+.icon i {
+    font-size: 28px;
+}
+.change {
+    display: flex;
+    justify-content: center;
+
+    width: 100%;
+    margin-top: 40px;
+}
+.change button {
+    padding: 8px 16px;
+
+    color: white;
+
+    background-image: linear-gradient(120deg, rgb(97, 141, 177), rgb(207, 85, 85));
+    border-radius: 100px;
+    border: none;
+}

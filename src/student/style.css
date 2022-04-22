@@ -690,6 +690,8 @@ background: #555;
     text-decoration: none;
     display: block;
     font-size:17px;
+    text-align: center;
+    /* padding-left: 15px; */
   }
   .hienThi{
     display:block;
@@ -760,3 +762,55 @@ background: #555;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 1;
 }
+
+
+.search-class{
+    border-radius:20px;
+    border:none;
+    text-align:center;
+}
+
+.box input{
+    background: none;
+    outline: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    width: 0px;
+    transition: 0.8s ease;
+    color: black;
+    font-size: 15px;
+    font-weight: 500;
+  }
+   
+  .box input::placeholder {
+    color: rgb(254, 249, 249);
+  }
+  .box:hover input {
+    width: 150px;
+    margin: 0 10px;
+    border: 1px solid white;
+    background: rgb(248, 247, 245,0.3);
+  }
+
+  .fa-search{
+      /* margin-right: 10px; */
+      font-size: 18px;
+  }
+
+  .submit{
+      background: none;
+      border: none;
+      color: #fff;
+  }
+
+  .sub-taikhoan{
+      background: none;
+      border: none;
+      color: white;
+      padding-left: 20px;
+      font-size: 17px;
+  }
+  .sub-taikhoan:hover{
+      color: blue;
+  }

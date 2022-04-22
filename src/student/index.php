@@ -1,5 +1,5 @@
 <?php
-include './demo/connect.php';
+    include './demo/connect.php';
     $user_name=$_POST['userOL'];
     $_POST['userOL'];
 
@@ -8,12 +8,12 @@ include './demo/connect.php';
 <html lang="en">
 <html>
 <head>
-<meta charset="UFT-8">
-<meta name="viewport" content="width=device-width, initial-scale=0.8">
-<link rel="stylesheet" type="text/css" href="./style.css">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta charset="UFT-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.8">
+    <link rel="stylesheet" type="text/css" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
 <div class="main">
@@ -147,35 +147,59 @@ include './demo/connect.php';
                 <li class = 'itemNav'><a href = '#homepage'>Trang chủ</a></li>
                 <li class = 'itemNav'>
                     <form action="./all_subject.php" method='post'>
-                            <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
-                            <input class='header-subject' type="submit" value="Môn học">
-                        </form>
+                        <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
+                        <input class='header-subject' type="submit" value="Môn học">
+                    </form>
                 </li>
                 <li class = 'itemNav baitap1'>Bài tập được giao</li>
                 <li class = 'itemNav'><a href = '#lich'>Lịch dạy</a></li>
                 <li class = 'itemNav actNoti'>Thông báo</li>
                 <li class="itemNav actMess">Tin nhắn</li>
+                <!-- <li> -->
+                    <!-- <form action="" method="post" class="box">
+                        <button type="submit" name='submit' class='submit'><i class="fas fa-search"></i></button>
+                        <input class="search-class" type="text" name="search" placeholder="Nhập nội dung"> 
+                        <input type="hidden" name="userOL" value=<?php echo $user_name?>>
+                    </form> -->
+                    <?php
+                        // if (isset( $_POST['search'])) {
+                        //     $search = $_POST['search'];
+                        //     $sql = "SELECT * FROM user WHERE (user_name like '%$search%') ";
+                        //     $kq=$conn->query($sql);
+                        //     $num = mysqli_num_rows($kq);
+                        //     if ($num > 0 && $search != "") {
+                        //         while($row=$kq->fetch_assoc()){
+                        //             $user = $row['user_name'];
+                        //             echo $user;
+                        //         }
+                        //     }
+                        // }
+                    ?>
+                <!-- </li> -->
                 <li>
-                <?php
-                    $sql="SELECT * FROM user where user_name='$user_name'";
-                    $result = $conn->query($sql);
-                    $row = $result->fetch_assoc();
-                    echo "
-                    
-                    <img src=".$row['user_image']." style='width:40px;border-radius:50px'>
-                    ".$row['user_fullname']."
+                    <?php
+                        $sql="SELECT * FROM user where user_name='$user_name'";
+                        $result = $conn->query($sql);
+                        $row = $result->fetch_assoc();
+                        echo "
+                        
+                        <img src=".$row['user_image']." style='width:40px;border-radius:50px'>
+                        ".$row['user_fullname']."
 
-                    <div class='dropdown'>
-                        <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
-                        <div class='noidung_dropdown'>
-                            <a href='#'>Tài khoản</a> 
-                            <a href='logout.php'>Đăng xuất &nbsp;
-                            <i class='fa-solid fa-right-from-bracket'></i>
-                            </a>
-                        </div>
-                        </div>
-                    ";
-                ?>
+                        <div class='dropdown'>
+                            <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
+                            <div class='noidung_dropdown'>
+                                <form action='./profile.php' method='post'>
+                                    <input type='hidden' name='userOL' value=$user_name>
+                                    <input class='sub-taikhoan' type='submit' value='Tài khoản'>
+                                </form>
+                                <a href='logout.php'>Đăng xuất &nbsp;
+                                <i class='fa-solid fa-right-from-bracket'></i>
+                                </a>
+                            </div>
+                            </div>
+                        ";
+                    ?>
                 <script>
                     function hamDropdown() {
                         document.querySelector(".noidung_dropdown").classList.toggle("hienThi");
@@ -197,7 +221,7 @@ include './demo/connect.php';
             <?php
                 if (isset( $_POST['btnsearch'])) {
                     $search = $_POST['search'];
-                    $sql = "SELECT * FROM subject WHERE (subject_id like '%$search%') ";
+                    $sql = "SELECT * FROM subject  WHERE (subject_id like '%$search%') ";
                     $kq=$conn->query($sql);
                     $num = mysqli_num_rows($kq);
                     if ($num > 0 && $search != "") {
@@ -239,11 +263,11 @@ include './demo/connect.php';
                         }
                     }
                     
-            ?>      
+            ?>
     </div>
 </div>
 <div id="lich">
-        <div id="ten-lich">Lịch dạy</div>
+    <div id="ten-lich">Lịch dạy</div>
         <div class="container">
             <div class="row">
                 <div class="col-6 calendar-frame">
@@ -299,7 +323,7 @@ include './demo/connect.php';
                 </div>
             </div>
         </div>
-    </div>
+</div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
