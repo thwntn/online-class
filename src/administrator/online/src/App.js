@@ -18,9 +18,9 @@ function App() {
   }
   else return (
       <div className='container-fluid' style = {{ padding: '0px', margin: '0px'}}>
-        <Profile></Profile>
+        {/* <Profile></Profile> */}
         <Header setMain = {setMain}></Header>
-        {/* {main} */}
+        {main}
       </div>
   )
 }
