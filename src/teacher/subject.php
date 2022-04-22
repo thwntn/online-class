@@ -35,20 +35,56 @@
             $anh = $row['subject_image'];
             $subject = $row['subject_id'];
             $id = substr($subject,0,5);
-            ?>
+            ?>       
                 <div class='name-subject' style='background:url(<?php echo $anh ?>); background-size: cover '>
-                    <p>
+                        <p>
                         <?php echo $id ?>
-                        <?php echo $row['subject_name'] ?>
-                        
-                    <p>
-                </div>
-        
+                        <?php echo $row['subject_name'] ?>   
+                        </p>
+                        <form action = "" method = "POST" >
+                                    <button type="button" class = "repair-1" id="myBtn" data-target=".modal2" data-toggle="modal"><i class='fas fa-pen'></i></button>
+                                    <input type="hidden" name="subject_id" value = " <?php echo $row['subject_id']; ?>" >
+                                    <input type="hidden" name="userOL" value=<?php echo $user?>>      
+                                   
+                                    <div class="container">       
+                                           <div id="myModal" class="modal modal2">
+                                                <div class="modal-content" style="width:40%;height:50%" >                                 
+                                                    <form action="" method="post">
+                                                        <h2>Chỉnh sửa môn học</h2>
+                                                        <div class="fomrgroup">
+                                                            <input style="width:250px;margin-left:-30px" class='create-1' type="text" name="subject_id" value="<?php echo $row["subject_id"] ?>"> 
+                                                            <input style="width:250px;margin-left:-30px" class='create-1' type="text" name="subject_name" value="<?php echo $row["subject_name"] ?>">
 
-           
+                                                        </div>
+                                                        <div class="fomrgroup-1" style="text-align:center;">                   
+                                                            <button class="btn btn-primary" type='submit' name="update_sj">Save</button>&nbsp;
+                                                            <button class="btn btn-danger" id="close">Cancel</button> 
+                                                        </div>
+                                                    </form>
+                                                    <?php
+                                                      
+                                                        if(isset($_POST["update_sj"])) {
+                                                            $sjid = $_POST["subject_id"];
+                                                            $name = $_POST["subject_name"];
+                                                            if ($name == "" || $sjid == "") {
+                                                                echo  "<script>alert('Vui lòng nhập đầy đủ thông tin')</script>";
+                                                            }else{
+                                                            $sql = "UPDATE subject SET subject_id = '$sjid', subject_name='$name' WHERE subject_id='$subject'";
+                                                            mysqli_query($con,$sql);    
+                                                        
+                                                            }
+                                                        } 
+                                                        ?>
+                                                </div>
+                                            </div>                                       
+                                        </div>  
+                                    </form>
+                </div>
     </div> <br>
+    
+    <!-- Thêm tài liệu -->
     <form action="" method = "post" enctype="multipart/form-data">   
-                    <button type="button"  class='add-dl' id = "myBtn" data-target=".modal1">Thêm bài tập</button>
+                    <button type="button"  class='add-dl' id = "myBtn" data-target=".modal1" data-toggle="modal">Thêm tài liệu</button>
                     <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id']; ?>" >  
                     <input type="hidden" name="userOL" value=<?php echo $user?>>
                     
@@ -93,23 +129,25 @@
                                                     
                     </div>   
              </form>
-             <form action="" method = "post" enctype="multipart/form-data">   
+             <!-- Thêm thông báo -->
+             
+
+             <form action="" method = "post" >   
                     <button style="width:150px;margin-right:10px" type="button"  class='add-dl' id = "myBtn" data-target=".modal3" data-toggle="modal">Thêm thông báo</button>
                     <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id']; ?>" >  
                     <input type="hidden" name="userOL" value=<?php echo $user?>>
                     
                      <div class="container">       
                         <div id="myModal" class="modal modal3">
-                            <div class="modal-content" style="width:55%;height:30%" >                                 
-                                <form action="" method="post" enctype="multipart/form-data">
+                            <div class="modal-content" style="width:55%;height:50%" >   
+                                                     
+                                <form action="" method="post" >
                                     <h2>Thêm thông báo</h2>
                                     <div class="fomrgroup">
-                                        <input type="hidden" name="subject_id" value="<?php echo $row['subject_id']; ?>">
-                                       
-                                        <input style="width:400px" class='create-1' name="noti_content" placeholder="Nội dung">
-                                                                    
-                                      
-                                                                                              
+                                        <input type="hidden" name="subject_id" value="<?php echo $subject_id; ?>">
+                                
+                                        <textarea style="width:400px;height:100px" class='create-1' name="noti_content"> </textarea>                                                                   
+                                                         
                                     </div>
                                     <div class="fomrgroup-1" style="text-align:center;">                   
                                         <button class="btn btn-primary" type='submit' name="submit_noti">Save</button>
@@ -117,25 +155,30 @@
                                     </div>
                                 </form>
                                 <?php
+                                 $sql3="SELECT * FROM registry where subject_id = '$subject_id' ";
+                                 $kq3 = $con->query($sql3);
+                                 while($row3=$kq3->fetch_assoc()){
+                                    $user_rg= $row3['user_name'];                                                                                                    
                                     if (isset($_POST["submit_noti"])) {
                                         $content_noti= $_POST["noti_content"];
-                                    
+                                        
                                        
                                         if ($content_noti == "") {     
                                             echo  "<script>alert('Vui lòng nhập đầy đủ thông tin')</script>";
                                         }else{
-                                            $sql1 = "INSERT INTO notification( noti_content, noti_time, noti_status, user_name) VALUES ('$content_noti', now(),0,'$user')";
-                                            mysqli_query($con,$sql1); 
+                                            $sql = "INSERT INTO notification( noti_content, noti_time, noti_status, user_name) VALUES ('$content_noti', now(),0,'$user_rg')";
+                                            mysqli_query($con,$sql); 
                                             
                                             }
                                         }
+                                    }
                                 ?>
                             </div>
                         </div>
                                                     
                     </div>   
              </form>
-                             
+                            
 
     <div class="link">
         <form action="" method="post">
@@ -154,10 +197,7 @@
                     <div class="modal-body">
              
                     <?php
-                        $sql="SELECT * FROM user join registry rg on user.user_name=rg.user_name
-                                                 join subject sj on rg.subject_id=sj.subject_id   
-                                                                                 
-                                                        where sj.subject_id= '$subject_id'";
+                        $sql="SELECT * FROM user join registry rg on user.user_name=rg.user_name where subject_id= '$subject_id'";
                         $kq = $con->query($sql);
                         echo"<table>";
                         while($row = mysqli_fetch_assoc($kq)){
@@ -166,30 +206,18 @@
                             {
                                 echo "<td style='width:300px'>";
                                 if($row!=false){  
-                                    $sql3="SELECT friend_user FROM friend where user_name='$user' ";
-                                    $kq3 = $con->query($sql3);
-                                    while($row3 = mysqli_fetch_assoc($kq3)){
-                             
-                                    $friend=$row3['friend_user']; echo $friend;
-                                    //$friend_status=$row3['friend_status'];
+                                  
+                                    
                                     echo "
+                                   
                                     <ul>
                                     <li><img src=".$row['user_image']." ></li>
                                     <li style='margin-top:10px'>".$row['user_fullname']."</li> 
                                     ";
-                                   
-                                     if($friend == ""){
-                                    echo "<li style='margin-top:10px'><i class='fa-solid fa-user-plus'></i></li>";
-                                     }else{
-                                        echo "<li style='margin-top:10px'><i class='fa-solid fa-user-group'></i></li>";
-                                    }
+                            
                                     
-                                        //echo "<li style='margin-top:10px'><i class='fa-solid fa-user-group'></i></li>"; 
-                                    
-                                                                                            
-                                    echo "</ul>"; 
-                                     }  
-                                    }else{
+                                     
+                                }else{
                                     echo "&nbsp;";
                                     }
                                     echo"</td>";
@@ -202,9 +230,8 @@
                                 
                             }
                             echo"</table>";
-
-
                 ?> 
+                
                     </div>
                     
                     </div>
@@ -237,20 +264,20 @@
                  <div class='content-1'>
                     <!-- Xóa bài tập, bài giảng -->
                     
-                 <form action = "" method = "post"  >
+                 <form action = "" method = "POST" class="formDelete" >
                             <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id'] ?>" >
-                            <button type="submit" class = "img1" name ="delete_hw"><i class='fa-solid fa-xmark'></i></button>
+                            <button type="submit" class = "img1" name="delete-hw" ><i class='fa-solid fa-xmark'></i></button>
                             
-                            <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+                            <input type="hidden" name="id" value = "<?php echo $row['homework_id'] ?>" >
                             <input type="hidden" name='userOL' value=<?php echo $user ?>>
                 </form>  
                 <?php 
-                if(isset($_POST['delete_hw'])){
-                
-                    $sql='DELETE FROM homework where homework_id='.$_POST['homework_id'].'';
-                    mysqli_query($con,$sql);
-                }
-                ?>
+                                    if(isset($_POST["id"])){    
+                                                        
+                                    $sql1="DELETE FROM homework where homework_id='$homework_id'";
+                                    mysqli_query($con,$sql1);
+                                }
+                                ?>
                 
                      <div class='media'>                        
                          <img src="<?php echo $img_user; ?>" class='mr-3' alt='...'>                      
@@ -267,49 +294,7 @@
                             <input type='hidden' name='userOL' value=<?php echo $user ?>>                                                                    
                             <input type='submit' value="<?php echo $row['homework_content'] ;?>" style="font-size:17px;color:blue!important"> <br>
                         </form> 
-                        <!-- Sửa tài liệu -->  
-                        <form action = "" method = "POST" >
-                            <button style="margin-top:-70px" type = "button" class = "img1" id="myBtn" data-target=".modal2" data-toggle="modal"><i class='fa-solid fa-pencil'></i></button>
-                            <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id']; ?>" >
-                            <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id']; ?>" >
-                            <input type="hidden" name="userOL" value=<?php echo $user?>> 
-                            <div class="container">       
-                        <div id="myModal" class="modal modal2">
-                            <div class="modal-content" style="width:60%" >                                 
-                                <form action="" method="post" enctype="multipart/form-data">
-                                    <h2>Sửa tài liệu</h2>
-                                    <div class="fomrgroup" >
-                                         
-                                   
-                                    <input class='create-1' type="text" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
-                                    <textarea class='create-1' name="homework_content"> <?php echo $row["homework_content"]; ?> </textarea>        
-                                    <input class='create-1' name="homework_finish" value= "<?php echo $row["homework_finish"]; ?> "> <br> <br>
-                                  
-                                    </div>
-                                    <div class="fomrgroup-1" style="text-align:center;">                   
-                                        <button class="btn btn-primary" type='submit' name="update-hw">Save</button>
-                                        <button class="btn btn-danger" id="close">Cancel</button> &nbsp;
-                                    </div>
-                                </form>
-                                <?php
-                                    if(isset($_POST["update-hw"])) {
-                                        $homework = $_POST["homework_id"];
-                                        $content = $_POST["homework_content"];
-                                        $hw_finish = $_POST["homework_finish"];
-                                        if ($content == "") {
-                                            echo "Vui lòng nhập đầy đủ thông tin.";
-                                       }else{
-                                        $sql2 = "UPDATE homework SET homework_id='$homework',  homework_content='$content', homework_time=now(), homework_finish='$hw_finish' WHERE homework_id='$homework_id'";
-                                         mysqli_query($con,$sql2);
-                                            
-                                            }
-                                        }
-                                ?>
-                            </div>
-                        </div>
-                                                    
-                    </div>   
-                        </form> 
+                     
 
                      
                     </div>
@@ -338,29 +323,30 @@
     
    
 
-    //Xoa bai tap
-    document.addEventListener('DOMContentLoaded', function() {
-        var el = document.getElementsByClassName("formXoa"); 
-        for(var i=0;i < el.length;i++) {
-        el[i].addEventListener("submit", function(e) { 
-                e.preventDefault();
-                Swal.fire({ 
-                    title: 'Bạn chắc chắn muốn xóa?',
-                    showCancelButton: true,
-                    confirmButtonColor: '#d33',
-                    cancelButtonColor: '#3085d6',
-                    confirmButtonText: 'Delete'
-                }).then((result) => {
-                    if (result.isConfirmed) {            
-                    e.target.submit();
-                    }
-                })
-        });
-    }  
-        }, false);
-    
-    //Sửa tài liệu
-    var modal = document.getElementById('myModal');
+  //Xóa tài liệu
+  document.addEventListener('DOMContentLoaded', function() {
+    var el = document.getElementsByClassName("formDelete"); 
+    for(var i=0;i < el.length;i++) {
+    el[i].addEventListener("submit", function(e) { 
+            e.preventDefault();
+            Swal.fire({ 
+                title: 'Bạn có chắc chắn muốn xóa không?',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#3085d6',
+                confirmButtonText: 'Delete'
+            }).then((result) => {
+                if (result.isConfirmed) {            
+                e.target.submit();
+                }
+            })
+    });
+}  
+}, false);
+
+
+ // Thêm tài liệu, thông báo
+ var modal = document.getElementById('myModal');
     
     // Lấy phần button mở Modal
     var btn = document.getElementById("myBtn");
@@ -384,6 +370,7 @@
             modal.style.display = "none";
         }
     }
+
        
 </script>
 </body>

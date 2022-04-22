@@ -36,6 +36,7 @@
         </ul>
         <ul class="menu-2">
             <li>Lớp học</li>
+            
             <?php
                 $sql = "SELECT * FROM subject sj join user on sj.user_name=user.user_name where sj.user_name='$user'";
                 $kq = $con->query($sql);
@@ -62,9 +63,9 @@
     </div>
     <div class="main">
         <?php
-            $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
+            $sql = "SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                              join homework hw on sj.subject_id=hw.subject_id
-                                             where homework_id='.$homework_id.' ';
+                                             where homework_id='$homework_id' ";
             $kq = $con->query($sql);
             $row = mysqli_fetch_array($kq);
             $k = $row['homework_time'];
@@ -86,7 +87,51 @@
                                 echo $row['subject_name']; ?>
                 
             </p>
-              
+            
+             <!-- Sửa tài liệu -->  
+             <form action = "" method = "POST" >
+                            <button type = "button" class = "img1" id="myBtn" data-target=".modal1" data-toggle="modal"><i class='fa-solid fa-pencil'></i></button>
+                            <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id']; ?>" >
+                            <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id']; ?>" >
+                            <input type="hidden" name="userOL" value=<?php echo $user?>> 
+                            <div class="container">       
+                            <div id="myModal" class="modal modal1">
+                            <div class="modal-content" style="width:60%;height:70%" >                                 
+                                <form action="" method="post" >
+                                    <h2>Sửa tài liệu</h2>
+                                    <div class="fomrgroup" >
+                                         
+                                   
+                                    <input class='create' type="text" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
+                                    <textarea class='create' name="homework_content" style="height:100px"> <?php echo $row["homework_content"]; ?> </textarea>        
+                                    <input class='create' type="text" name="homework_finish" value= <?php echo $row["homework_finish"]; ?> > 
+                                  
+                                    </div>
+                                    <div class="fomrgroup-1" style="text-align:center;">                   
+                                        <button class="btn btn-primary" type='submit' name="update-hw">Save</button>
+                                        <button class="btn btn-danger" id="close">Cancel</button> &nbsp;
+                                    </div>
+                                </form>
+                                <?php
+                                    if(isset($_POST["update-hw"])) {
+                                        $homework = $_POST["homework_id"];
+                                        $content = $_POST["homework_content"];
+                                        $hw_finish = $_POST["homework_finish"];
+                                        if ($content == "") {
+                                            echo "Vui lòng nhập đầy đủ thông tin.";
+                                       }else{
+                                        $sql2 = "UPDATE homework SET homework_id='$homework',  homework_content='$content', homework_time=now(), homework_finish='$hw_finish' WHERE homework_id='$homework_id'";
+                                         mysqli_query($con,$sql2);
+                                            
+                                            }
+                                        }
+                                ?>
+                            </div>
+                        </div>
+                                                    
+                    </div>   
+                        </form> 
+            
         <ul>
         <img src="<?php echo $user_img; ?>" class='img2'>
             <li><b>&nbsp;<?php echo $row['user_fullname']; ?> <br>
@@ -110,6 +155,7 @@
              
             <li>
                 <?php echo $row['homework_content'];?>
+              
             </li>
             
         
@@ -117,26 +163,26 @@
         <div class="comment">
         
              <img src="<?php echo $user_img?>">
-             <form action="" method="POST" class="comment-1">
-                <input class="comment-2" type="text" name="comment_content" >
-                <input type="hidden" name="userOL" value="<?php echo $user?>">  
-                <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
-                <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
-                <button class="send" type="submit" name="submit_cmt"><i class="fas fa-paper-plane"></i></button>
+             <form action="" method="post" class="comment-1">
+                <input class="comment-2" type="text" name="comment" require>
+                <input type='hidden' name='userOL' value=<?php echo $user ?>>
+                <input type='hidden' name='subject_id' value=<?php echo $row['subject_id']; ?>>
+                <input type='hidden' name='homework_id' value=<?php echo $homework_id ?>>
+                <button class="send" type="submit" name="upload"><i class="fas fa-paper-plane"></i></button>
             </form>
             <?php
-            if(isset($_POST["submit_cmt"])){
-               
-               $content=$_POST["comment_content"];
-               if($content == ""){
+                if(isset($_POST['comment'])){
+                    $homework_id=$_POST['homework_id'];
+                    $content=$_POST["comment"];
+                    if($content == ""){
 
-               }else{
-               $sql = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
-                   VALUES ('$content', now(),'$user','$homework_id')";
-               $kq=$con->query($sql);
-               }
-           }
-           ?>
+                    }else{
+                    $sql1 = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
+                        VALUES ('$content', now(),'$user','$homework_id')";
+                    $kq1=$con->query($sql1);
+                }
+            }
+            ?>
          </div>  
                 <?php 
                 $sql = "SELECT * FROM comment cmt join homework hw on cmt.homework_id=hw.homework_id 
@@ -148,41 +194,44 @@
                     $user1=$row['user_name'];
                     if($user1 == $user){
                     ?>
-                    
-                    <form action="" method="post">
+                    <!-- Xóa comment -->
+                    <form action="" method="post" class="formDelete" >
                         <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
-                        <button type="submit"  class='img3' name ="cmt_delete"><i class='fa-solid fa-xmark'></i></button>
-                        <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
+                        <button type="submit"  class='img3' name="delete_cmt" ><i class='fa-solid fa-xmark'></i></button>
+                        <input type="hidden" name="id" value = "<?php echo $row['comment_id'] ?>" >
                         
                         <input type="hidden" name="userOL" value="<?php echo $user?>">                       
                     </form>
                     <?php
-                            if (isset( $_POST["cmt_delete"])) {
-                                $cmt_id=$_POST["comment_id"];
-                                $sql="DELETE FROM comment where comment_id='$cmt_id'";
-                                mysqli_query($con,$sql);
+                            if (isset( $_POST["id"])) {
+                                $cmt_id=$_POST["id"];
+                                $sql3="DELETE FROM comment where comment_id=' $cmt_id'";
+                                mysqli_query($con,$sql3);
                             }
                         ?>
-                        <!-- Sua comment --> 
-                    <form action="" method="post" class="formSua">
+                    <!-- Sửa comment -->   
+                    <form action="" method="post" >
                         <input type="hidden" name="homework_id" value = "<?php echo $row['homework_id'] ?>" >
-                        <button type="button" class='img3' id="myBtn" data-target=".modal2" data-toggle="modal"><i class='fa-solid fa-pencil'></i></button>
                         <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
                         <input type="hidden" name="userOL" value="<?php echo $user?>">
-                        <div class="container">
-                            <div id="myModal" class="modal modal2">
-                                <div class="modal-content" style="width:40%">                                                              
-                                    <form action="" method="post">
-                                        <h2>Chỉnh sửa bình luận</h2>
+                        <button type="button" class="img3" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <i class='fa-solid fa-pencil'></i>
+                        </button>                                          
+                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="height:200px">
+                        
+                            <h3 style="text-align:center">Sửa bình luận</h3>
+               
+                        
+                       
+                        <form action="" method="post">
+                                        
                                         <div class="fomrgroup">
                                             <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
                                             <input type="text" name="comment_content" value="<?php echo $row["comment_content"] ?>">
                                         </div>
-                                        <div class="fomrgroup-1" style="text-align:center;">
-                                            <button class="btn btn-primary" type='submit' name="update-cmt">Lưu</button>&nbsp;
-                                            <button class="btn btn-danger" id="close">Đóng</button> 
-                                                    
-                                        </div>
+                                        
                                     </form>
                                     <?php
                                     if(isset($_POST["update-cmt"])) {
@@ -196,13 +245,18 @@
                                         
                                         }
                                     }
-                                    ?>           
+                                    ?>     
+                        
+                        
+                        <div class="fomrgroup-1" style="text-align:center;">   
+                            <button style="width:70px;"  type="submit" class="btn btn-primary" name="update-cmt">Save</button>
+                            <button style="width:70px"   type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
                                 </div>
-                            </div>
                         </div>
-                       
-
+                    </div>
+                    </div>
                     </form>
+                     
                     <?php
                     }
                     ?>
@@ -221,12 +275,13 @@
         
         <div class="right-2">
             <p><b>Danh sách sinh viên đã nộp bài
-                20/40</b></p>
-
+                </b></p>
+                
+              
             <?php 
-            $sql='SELECT * FROM homework hw join score on hw.homework_id=score.homework_id
+            $sql="SELECT * FROM homework hw join score on hw.homework_id=score.homework_id
                                             join user on score.user_name=user.user_name
-                                            where hw.homework_id= '.$homework_id.' ';
+                                            where hw.homework_id= '$homework_id' ";
              $kq = $con->query($sql);
              while($row = mysqli_fetch_assoc($kq)){
                  echo "
@@ -236,6 +291,9 @@
                  ";
              }
             ?>
+            <div id="xemthem">
+            <button class='button'>Xem thêm...</button>
+            </div>
             <!-- Bảng điểm -->
             <form action="" method="post">
             <button type="button" class="score" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Bảng điểm</button> 
@@ -297,15 +355,13 @@
                     </div>
                 </div>
             </div> 
+            
     </div>
     </div>
-
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script> 
-                                    function tai_lai_trang(){
-                                        location.reload();
-                                    }
+                                   
                                 
     const menu = document.querySelector('.menu');
     const listmenu = document.querySelector('.listmenu');
@@ -318,7 +374,7 @@
     }
     //Xoa bai tap
     document.addEventListener('DOMContentLoaded', function() {
-        var el = document.getElementsByClassName("formXoa"); 
+        var el = document.getElementsByClassName("formDelete"); 
         for(var i=0;i < el.length;i++) {
         el[i].addEventListener("submit", function(e) { 
                 e.preventDefault();

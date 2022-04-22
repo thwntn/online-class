@@ -35,7 +35,7 @@
                     <input type='hidden' name='userOL' value=<?php echo $user ?>>
                     <li><input type='submit' value='Thêm lớp học' style="border:none;background:none"></li>
                 </form>
-                <li><a href="">Xem vi phạm</a></li>
+                
                 <li>
                 <form action="./search.php" method="post" class="box">
                     <b>Tìm kiếm</b>
@@ -80,45 +80,7 @@
                                     <h3 class = 'keySubject'><input type='submit' value="<?php echo $id ;?>"></h3>
                                     <h5 class = 'nameSubject'><input type='submit' value="<?php echo $row['subject_name'] ;?>"><h5>
                                 </form>
-                         
-                                    <form action = "" method = "POST" >
-                                    <button type="button" class = "repair" id="myBtn"><i class='fas fa-pen'></i></i></button>
-                                    <input type="hidden" name="subject_id" value = " <?php echo $row['subject_id']; ?>" >
-                                    <input type="hidden" name="userOL" value=<?php echo $user?>>      
-                                    <!-- Sửa môn học                        -->
-                                    <div class="container">       
-                                           <div id="myModal" class="modal">
-                                                <div class="modal-content" >                                 
-                                                    <form action="" method="post">
-                                                        <h2>Chỉnh sửa môn học</h2>
-                                                        <div class="fomrgroup">
-                                                            <input type="text" name="subject_id" value="<?php echo $row["subject_id"] ?>"> <br> <br>
-                                                            <input type="text" name="subject_name" value="<?php echo $row["subject_name"] ?>">
-
-                                                        </div>
-                                                        <div class="fomrgroup-1" style="text-align:center;">                   
-                                                            <button class="btn btn-primary" type='submit' name="update_sj">Save</button>&nbsp;
-                                                            <button class="btn btn-danger" id="close">Cancel</button> 
-                                                        </div>
-                                                    </form>
-                                                    <?php
-                                                      
-                                                        if(isset($_POST["update_sj"])) {
-                                                            $sjid = $_POST["subject_id"];
-                                                            $name = $_POST["subject_name"];
-                                                            if ($name == "" || $sjid == "") {
-                                                                echo  "<script>alert('Vui lòng nhập đầy đủ thông tin')</script>";
-                                                            }else{
-                                                            $sql = "UPDATE subject SET subject_id = '$sjid', subject_name='$name' WHERE subject_id='$subject'";
-                                                            mysqli_query($con,$sql);    
-                                                        
-                                                            }
-                                                        } 
-                                                        ?>
-                                                </div>
-                                            </div>                                       
-                                        </div>  
-                                    </form>
+                                    
                                                            
                             </div>
                             <!-- <div class = 'navItem'>

@@ -11,6 +11,65 @@
     font-family: basic;
 }
 
+/*Navigation Mobile*/
+.nav-mobile {
+    position: fixed;
+    bottom: 10px;
+    display: none;
+    left: 20px;
+    right: 20px;
+    backdrop-filter: blur(120px);
+    background-color: rgba(255, 255, 255, 1);
+    color: #333;
+    padding: 20px 24px;
+    border-radius: 48px;
+    box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
+}
+.nav-mobile .nav-mobile_list i{
+    font-size: 20px;
+    color:#333;
+}
+.nav-mobile .nav-mobile_list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.col-5 th {
+    text-align: center;
+}
+ @media (max-width: 1090px) {
+    .backgroundNav {
+        display: none !important;
+    }
+    .nav-mobile {
+        display: flex;
+    }
+    .col-5,
+    .col-6 {
+        width: 100% !important;
+    }
+    #lich {
+        padding: 12px;
+    }
+ }
+
+ @font-face {
+    font-family: basic;
+    src: url(./font/Bandon.ttf);
+}
+
+ 
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+     /* color: #000 !important;  */
+     font-family: basic; 
+}
+
 .backgroundNav {
     height: 74px;
     position: fixed;
@@ -20,11 +79,9 @@
     display: flex;
     justify-content: space-between;
     color: white;
-    padding: 0px 8px;
     transition: top 0.2s, height 0.2s;
     z-index: 5;
-    box-shadow: 0px 0px 4px rgba(0, 0, 0 ,0.1);
-    padding: 0px 55px;
+    padding: 0px 40px;
 }
 .titleNav {
     display: flex;
@@ -32,21 +89,27 @@
     padding-left: 12px;
 }
 .itemNav {
-    padding: 0px 20px;
+    padding: 0px 32px;
     display: flex;
     position: relative;
     cursor: pointer;
+    font-size:20px;
+   
 }
 .itemNav input{
-    border: none;
-    background: none;
+    border:none;
+    background:none;
+    color:white;
 }
 .itemNav a{
     text-decoration: none;
     display: block;
-    color: #fff;
+     color: #fff; 
 }
 .activeNav a{
+    color: #333;
+}
+.activeNav input{
     color: #333;
 }
 .activeNav {
@@ -70,7 +133,6 @@
     list-style: none;
     margin: 0px;
 }
-
 @keyframes showNav {
     from {
         background-color: transparent;
@@ -97,6 +159,8 @@
     }
 }
 
+/* Header */
+
 .frameNoti {
     display: none;
     position: fixed;
@@ -106,7 +170,7 @@
     color: #333;
     margin-top: 4.5%;
     border-radius: 12px;
-    margin-right: 900px;
+    margin-left: 900px;
     width: 300px;
     padding: 12px 0px;
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
@@ -131,16 +195,6 @@
         opacity: 1;
     }
 }
-.frameNoti::after {
-    position: absolute;
-    content: "";
-    border-left: 14px solid transparent;
-    border-top: 14px solid transparent;
-    border-right: 14px solid transparent;
-    border-bottom: 14px solid rgba(0, 0, 0, 0.4);
-    top: -28px;
-    right: 48px;
-}
 .frameNoti h5 {
     width: 100%;
     font-size: 18;
@@ -148,13 +202,14 @@
     padding-bottom: 10px;
     border-bottom: 2px solid rgba(0, 0, 0, 0.04);
 }
-.imageNoti img {
+.imageNoti img{
     width: 60px;
     height: 60px;
-    background-color: white;
+    /* background-color: white; */
     box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.1);
     border-radius: 48px;
 }
+
 .contentNoti {
     flex: 1;
     margin-left: 16px;
@@ -334,6 +389,12 @@ border-radius: 48px;
 background: #555;
 }
 
+.temp {
+    width: 100%;
+    height: 1000px;
+    background-color: #555;
+}
+
 .nut_dropdown {
     background: none;
     border: none;
@@ -343,8 +404,6 @@ background: #555;
   .dropdown {
     position: relative;
     display: inline-block;
-    margin:10px;
-
   }
   
   /* Nội dung Dropdown */

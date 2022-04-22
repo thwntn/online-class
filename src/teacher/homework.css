@@ -13,11 +13,9 @@
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15); 
     /* z-index: 1000; */
      transition: ease-in-out 0.5s; 
-    
+     overflow: hidden;
 }
-.menu ul{
-    overflow: hidden;
-}
+
 
 .menu-1 li{
     margin-bottom:20px;
@@ -123,13 +121,13 @@
     
 }
 .create{
-    width:250px;
+    width:500px;
     height:40px;
      background-color: rgb(218, 214, 214); 
     border:none;
     padding:5px;
     margin:10px;
-    /* margin:10px; */
+    margin-left:10px; 
     border-radius: 10px;
     color:black;
   }
@@ -311,6 +309,9 @@
     background-color: white;
     margin-left:-8px
 }
+#xemthem{
+    margin-left:80px;
+}
 /* Modal */
 .container {
     width: 70%;
@@ -332,28 +333,28 @@
 
  .fomrgroup {
     width: 50%;
-    margin: auto;
+    margin-left:140px;
     display: block;
-    height: 50px;
-    margin-top:20px;
+    height: 250px;
 }
  .fomrgroup input{
-    float: right;
-     width: 100%;
-    line-height: 50px;
+    line-height: 40px;
     background-color: rgb(218, 214, 214);
     border:none;
     border-radius: 10px;
+    margin-top:10px;
+    
 }
+
  .fomrgroup b{
     font-size: 20px;
 }
- .fomrgroup-1{
-    margin-top:30px;
-}
+
  .fomrgroup-1 button{
     width:70px;
     height:40px;
+   
+    
 }
 
  .modal {
@@ -362,21 +363,26 @@
     z-index: 1; 
     padding-top: 100px; 
     left: 0;
-    transition: top 0.3s ease-in-out;
+    top: -50%;
     width: 50%;
     height: 100%; 
     overflow: auto;
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); 
-}
+  
  
+}
+
+
  .modal-content {
     background-color: #fefefe;
     margin: auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 40%;
+    width: 60%;
+
 }
+ 
  .close {
     color: #aaaaaa;
     float: right;
@@ -389,4 +395,5 @@
     color: #000;
     text-decoration: none;
     cursor: pointer;
-} 
+}  
+

@@ -33,6 +33,25 @@
 .content p{
     font-size:30px;
 } 
+.text{
+    margin-bottom:10px;
+}
+.add-user button{
+    background: none;
+    border: none;
+
+}
+
+.add-user{
+    background-color: rgb(196, 195, 195,0.5);
+    width:280px;
+    padding:10px;
+    color:black;
+}
+
+.add-user li{
+    list-style-type: none;
+}
 .search{
     width:300px;
     height:40px;

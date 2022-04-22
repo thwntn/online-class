@@ -164,8 +164,11 @@ include 'connect.php' ;
 
                 <div class='dropdown'>
                     <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
-                    <div class='noidung_dropdown'>
-                        <a href='#'>Tài khoản</a> 
+                    <div class='noidung_dropdown'>                        
+                        <form action='./profile.php' method='POST'>
+                             <input type='hidden' name='userOL' value=$user>
+                             <li class = 'itemNav'><input type='submit' value='Tài khoản'></li>
+                         </form>
                         <a href='logout.php'>Đăng xuất &nbsp;
                         <i class='fa-solid fa-right-from-bracket'></i>
                         </a>
@@ -190,12 +193,85 @@ include 'connect.php' ;
         <div  class="content">
             <h1><b>Trang giảng viên</h1>
             <p>Chào mừng đến trang giảng viên</b></p>
-            <form action="./search.php" method="posT" class="text">
+            <form action="" method="posT" class="text">
                 <input class="search" type="text" name="search" placeholder="Nhập nội dung"> <br>
                 <input type="hidden" name="userOL" value=<?php echo $user?>>
                
                 <button type="submit" class="submit">Search...</button>
             </form>      
+            <?php
+                if (isset($_POST['search'])){
+                    $search=$_POST['search'];
+                    $sql="SELECT * FROM user where user_fullname like '%$search%'";
+                    $kq=$con->query($sql);
+                    $num = mysqli_num_rows($kq);
+                    //<input style='width:100px' type='submit' name='submit-add' value=".$row['user_fullname'].">
+                    if (empty($search)) {
+                        echo "<script>alert('Dữ liệu không được để trống')</script>";
+                        } else {
+                            if ($num > 0 && $search != "" ) {
+                                while($row=$kq->fetch_assoc()){
+                                $sql1="SELECT f.friend_user, f.friend_status, f.user_name, user.user_fullname
+                                        FROM friend f left join user on f.user_name=user.user_name";
+                                $kq1=$con->query($sql1);
+                                
+                                $row1=$kq1->fetch_assoc();
+                                $user_name=$row1['user_name'];
+                                $friend_user=$row1['friend_user'];
+                                $status=$row1['friend_status'];
+                                if(isset($friend_user)){
+                                    //<input type='submit' name='submit-add' value=".$row1['user_fullname'].">
+                                echo "
+                                
+                                <div class='add-user'> 
+                                                                
+                                    <form action='test.php' method='post' >
+                                    <input type='hidden' name='userOL' value=$user>  
+                                    <input type='hidden' name='friend_user' value= ".$row1['friend_user'].">                                                                       
+                                    
+                                    ".$row1['user_fullname']."
+                                    <i class='fa-solid fa-user-group'></i>
+                                    </form>
+                                    
+                                    </div>
+                                    
+                                  
+                                ";
+                              
+                                    }else{//<i class='fa-solid fa-user-plus'></i>
+                                        echo "
+                                          
+                                        <div class='add-user'>  
+                                        ".$row1['user_fullname']."       
+                                        <form action='' method='post' >
+                                        <input type='hidden' name='userOL' value=$user>  
+                                        <input type='hidden' name='friend_user' value= ".$row1['friend_user'].">  
+                                        <button type='submit' name='submit-add'><i class='fa-solid fa-user-plus'></i></button>
+                                                                     
+                                        
+                                        
+                                        </form>
+                                        </div>
+                                        
+                                    ";
+                                    
+                                    }
+                                }
+                            }
+                            
+                            else {
+                                echo  "<script>alert('Khong tim thay ket qua')</script>";
+                            
+                            }
+                        }
+                }
+                if(isset($_POST['submit-add'])){
+                    $friend=$_POST['friend_user'];
+                    $sql2 = "INSERT INTO friend(friend_user, user_name, friend_status) 
+                            VALUES ('$friend','$user','1')";
+                    $kq2=$con->query($sql2);
+                    }
+            ?>
         </div>
 </div>
 <div id="lich">
@@ -235,15 +311,15 @@ include 'connect.php' ;
                             
                         
                             
-                            $sql=" SELECT * FROM calendar cd JOIN subject sj ON cd.subject_id=sj.subject_id where user_name='$user' ";
+                            $sql=" SELECT cd.subject_time, sj.subject_id, sj.subject_name FROM calendar cd LEFT JOIN subject sj ON cd.subject_id=sj.subject_id where user_name='$user' ";
                             $kq=$con->query($sql);
                             
                             while($row=$kq->fetch_assoc()){
                             $calendar = $row['subject_time'];
                             $subject = $row['subject_id'];
-                            $time = substr($calendar,-12,0);
-                            $ngay = substr($calendar,-2,2);
-                            $thang = substr($calendar,-5,2);
+                            $time = substr($calendar,-8,5);
+                            $ngay = substr($calendar,-11,2);
+                            $thang = substr($calendar,-14,2);
                             $id = substr($subject,0,5);
                             echo "
                             <tr>
