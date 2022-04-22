@@ -5,10 +5,10 @@
 }
 /* Định dạng phần form đăng nhập*/
 .fomrgroup {
-    width: 60%;
+    /* width: 50%; */
     margin: auto;
     display: block;
-    height: 50px;
+    /* height: 50px; */
 }
 .fomrgroup input{
     float: right;
@@ -22,10 +22,11 @@
 }
 /* The Modal (background) */
 .modal {
-    display: none; /* mặc định được ẩn đi */
+    /* mặc định được ẩn đi */
+    /* display: none;  */
     position: fixed; /* vị trí cố định */
     z-index: 1; /* Ưu tiên hiển thị trên cùng */
-    padding-top: 100px; 
+    /* padding-top: 100px;  */
     left: 0;
     top: 0;
     width: 100%;
@@ -33,32 +34,45 @@
     overflow: auto;
     background-color: rgb(0,0,0); 
     background-color: rgba(0,0,0,0.4); 
-    padding-right: 30%;
-    padding-left: 30%;
+    /* padding-right: 25%;
+    padding-left: 25%; */
 }
  
 /* Modal Content */
 .modal-content {
     background-color: #fefefe;
     margin: auto;
-    /* padding: 20px; */
     border: 1px solid #888;
-    width: 60%;
+    width: 30%;
 }
 
 .modal-content h2{
     text-align: center;
-    margin-top: 20px;
-    margin-bottom: 30px;
-}
-
-.fomrgroup .btn{
-    width: 100px;
-    border-radius: 30px;
+    font-weight: bold;
+    margin-top: 40px;
 }
 
 #close:hover,
 #close:focus {
     text-decoration: none;
     cursor: pointer;
+}
+
+.btn-outline-primary{
+    width: 90px;
+    height: 35px;
+    border-radius: 20px;
+    border: none;
+    background: rgba(51, 2, 245, 0.5);
+    margin-bottom: 20px;
+    margin-top: 10px;
+    
+}
+
+.btn-outline-danger{
+    width: 90px;
+    height: 35px;
+    border-radius: 20px;
+    border: none;
+    background: rgb(242, 13, 13,0.5);
 }

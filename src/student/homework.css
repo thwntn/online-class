@@ -4,51 +4,135 @@
     margin: 0;
     padding: 0;
 }
-.menu{
-    width:20%;
-    height:90vh;
-    float:left;
-    padding:10px;
-    margin-left:20px;
-    margin-top:20px;
+
+li{
+    list-style: none;
+}
+
+header{
+    width: 100vw;
+    height: 100vh;
+}
+
+header .input-icon{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    opacity: 0;
+    z-index: 2;
+    cursor: pointer;
+    position: fixed;
+}
+
+header .input-icon:checked ~ .menu-icon .menu-line::before{
+    transform: rotate(90deg);
+    top: 0;
+}
+
+header .input-icon:checked ~ .menu-icon .menu-line::after{
+    transform: rotate(90deg);
+    top: 0;
+}
+
+header .input-icon:checked ~ .menu-icon .menu-line{
+    transform: rotate(135deg);
+    transition: 0.3s;
+}
+
+header .input-icon:checked ~ .menu-item{
+    right: 0;
+}
+
+/* .menu-item .fa-home{
+    width: 50px;
+    color: white;
+} */
+
+.menu-icon{
+    width: 50px;
+    height: 50px;
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    opacity: 1;
+    z-index: 1;
+    cursor: pointer;
+    position: fixed;
+    display: flex;
+    align-items: center;    
+    justify-content: center;
+}
+
+.menu-line{
+    height: 4px;
+    width: 100%;
+    background: black;
+    position: relative;
+}
+
+.menu-line::before{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    position: absolute;
+    background: black;
+    top: -14px;
+}
+
+.menu-line::after{
+    content: "";
+    display: block;
+    width: 100%;
+    height: 4px;
+    position: absolute;
+    background: black;
+    top: 14px;
+}
+.menu-item{
+    position: fixed;
+    width: 400px;
+    height: 100vh;
+    background: white;
+    top: 0;
+    right: -100%;
+    display: flex;
+    /* justify-content: center; */
+    /* text-align: center;
+    align-items: center; */
+    z-index: 10;
+    padding-left: 20px;
+    flex-direction: column;
+    transition: 0.7s;
+    padding-top: 30px;
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
+
 }
-.menu-1 li{
-    margin-bottom:20px;
-    margin-top:20px;
+
+.menu-item li{
+    line-height: 40px;
+    margin-left: 20px;
 }
-.menu-1 a{
-    text-decoration: none;
-    color:black;
+
+.menu-item li p{
+    color: black;
+    font-size: 18px;
 }
-.menu-2 li{
-    margin-bottom:20px;
-    margin-top:20px;
+
+.input-name{
+    padding-left: 90px;
+    padding-top: 25px;
+    font-size: 25px;
 }
-.menu-2 a{
-    text-decoration: none;
-    color:black;
-    margin-left:50px;
-    overflow: hidden;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    -webkit-line-clamp: 1;
-}
-.menu-2 .item{
-    width:35px;
-    height:35px;
-    border-radius: 18px;
-    float:left;
-    background-size: 100%;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
-}
-.menu li{
-    list-style-type: none;
-}
+
+/* Nội dung */
 .main{
     width:50%;
-    margin-left:50px;
+    margin-left:200px;
     float:left;
+    /* margin-top: 20px; */
 }
 .main p a{
     font-size:25px;
@@ -79,6 +163,18 @@
     float:left;
     margin-right:10px;
 }
+
+.menu-item .item{
+    width:40px;
+    height:40px;
+    border-radius: 18px;
+    float:left;
+    background-size: 100%;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5);
+    padding-right: 10px;
+    background-size: cover;
+}
+
 .main .img1{
     float:right;
     width:20px;
@@ -118,8 +214,8 @@
 .right{
     width:20%;
     float:right;
-    margin-right:20px;
-    margin-top:80px;
+    margin-right:180px;
+    margin-top:30px;
     padding:10px;
     border-radius:20px;
 }
@@ -246,11 +342,28 @@
     margin-left: 7px;
 }
 
+.header1-subject{
+    border: none;
+    background: none;
+    font-size: 22px;
+    margin-top: 5px;
+    color: black;
+    padding-top: 10px;
+    padding-left: 5px;
+    
+}
+
+.home-a{
+    padding-left: 10px;
+}
+
 .header-subject{
     border: none;
     background: none;
-    font-size: 19px;
-    margin-top: 5px;
+    font-size: 22px;
+    /* margin-top: 5px; */
+    color: black;
+    /* padding-left: 20px; */
 }
 
 .homework_content{
@@ -260,5 +373,3 @@
 .homework_content b{
     font-size: 17px;
 }
-
- 

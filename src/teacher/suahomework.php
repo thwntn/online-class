@@ -31,8 +31,8 @@ if(isset($hw_id)){
         if ($content == "") {
 			echo "Vui lòng nhập đầy đủ thông tin.";
 	   }else{
-        $sql = "UPDATE homework SET  homework_content='$content', homework_time=now(), homework_finish='$hw_finish' WHERE homework_id='$hw_id'";
-         mysqli_query($con,$sql);
+        $sql2 = "UPDATE homework SET  homework_content='$content', homework_time=now(), homework_finish='$hw_finish' WHERE homework_id='$hw_id'";
+         mysqli_query($con,$sql2);
          echo "Sửa thành công";
      
         }

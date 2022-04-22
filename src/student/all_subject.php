@@ -1,7 +1,7 @@
 <?php
-    include './demo/connect.php';
-    $subject_id = $_POST['subject_id'];
-    $user_name = $_POST['userOL'];
+include './demo/connect.php';
+    $user_name=$_POST['userOL'];
+    $_POST['userOL'];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,10 +9,10 @@
 <head>
     <meta charset="UFT-8">
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
-    <link rel="stylesheet" type="text/css" href="./giaovien.css">
-    <link rel="stylesheet" type="text/css" href="./modal_sj.css">
+    <link rel="stylesheet" type="text/css" href="./all_subject.css">
+    <!-- <link rel="stylesheet" type="text/css" href="./header.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
 <div class="main">
@@ -180,7 +180,7 @@
                             <form action='./profile.php' method='post'>
                                 <input type='hidden' name='userOL' value=$user_name>
                                 <input class='sub-taikhoan' type='submit' value='Tài khoản'>
-                            </form> 
+                            </form>
                             <a href='logout.php'>Đăng xuất &nbsp;
                             <i class='fa-solid fa-right-from-bracket'></i>
                             </a>
@@ -199,108 +199,34 @@
     </div>
     
 </div>
-<div class="main-subject">
-        <?php
-            $sql = "SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                join homework hw on sj.subject_id=hw.subject_id where sj.subject_id='$subject_id'";
-            $result = $conn->query($sql);
-            $result = mysqli_fetch_array($result);
-            $anh = $result['subject_image'];
-            $sj_id = substr($result['subject_id'],-13,5);
-            echo "
-                <div class='name-subject' style='background:url($anh)'>
-                    <p>
-                        <b>".$sj_id."</b>
-                        ".$result['subject_name']."
-                    </p>
-                </div>
-            ";
-            
-        ?>       
-    </div>
-    <div class="link">
-        <!-- <div class="shadow p-4 mb-5 bg-white rounded">
-            <p>Đường dẫn cuộc họp <a href=""></a></p>
-            <a href="https://meet.google.com/hfz-duwk-hzq">https://meet.google.com/hfz-duwk-hzq</a>
-        </div> -->
-        <div class="shadow p-4 mb-5 bg-white rounded">
-            <form action="" method="post">
-                <p>Danh sách lớp:</p>
-                <input type='hidden' name='userOL' value = <?php echo $user_name ?>>
-                <input type='hidden' name='subject_id' value =<?php echo $subject_id ?>>
-                <button type='button' class ='button' id="myBtn">Xem</button>
-                <div class="container">
-                    <div id="myModal" class="modal">
-                        <div class="modal-content">                             
-                            <form action="" method="post">
-                                <span class="close">&times;</span>
-                                <h3>DANH SÁCH LỚP</h3>
-                                <h4><?php echo $subject_id?></h4>
-                                <div class='list'>
-                                <?php   
-                                    $get_user = "SELECT * FROM  registry rg join user u on rg.user_name=u.user_name 
-                                        where subject_id='$subject_id'";
-                                    $data = $conn->query($get_user);
-                                    while($row = $data->fetch_assoc()) {
-                                        $img_user = $row['user_image'];
-                                        $user = $row['user_name'];
-                                        echo "
-                                                <p class='list-1'>
-                                                    <img src='$img_user' alt='' class='a1'> 
-                                                    ".$row['user_fullname']."
-                                                </p>
-                                          
-                                          ";
-                                    }
-                                ?>
+<div class="container-fluid">
+        <h6>DANH SÁCH MÔN HỌC ĐÃ ĐĂNG KÝ </h6>
+        <div class="row">
+           <?php
+                $sql = "SELECT * FROM subject sj join user u on sj.user_name=u.user_name join registry rg on sj.subject_id=rg.subject_id where rg.user_name='$user_name'";
+                    $result = $conn->query($sql);
+                    while($row = $result->fetch_assoc()) {
+                        $img = $row['subject_image'];
+                        $subject_id1 = $row['subject_id'];
+                        $sj_id = substr($subject_id1,-13,5);
+                        $subject_name = $row['subject_name'];
+                        echo"
+                        <div class='col-4'>
+                            <form action='./subject.php' method='POST'>
+                                <input type='hidden' name='userOL' value=$user_name>
+                                <input type='hidden' name='subject_id' value=".$subject_id1.">
+                                <div class = 'item' style='background-image: url($img);'> 
+                                    <p class='data'>
+                                        <input style='border:none; background: none;' type='submit' value='$sj_id &nbsp $subject_name'> <br>
+                                        &nbsp;<b class='data1'>".$row['user_fullname']."</b>
+                                    </p>
                                 </div>
                             </form>
                         </div>
-                    </div>
-                </div>
-            </form>
+                        ";
+                    }
+            ?>
         </div>
-    </div> 
-    <?php
-        $name = $result['user_fullname'];
-        $img_user = $result['user_image'];
-        $sql = "SELECT * FROM  subject sj join homework hw on hw.subject_id=sj.subject_id
-            where sj.subject_id='$subject_id'";
-        $result = $conn->query($sql);
-        while($row = $result->fetch_assoc()) {
-            $k = $row['homework_time'];
-            $day = substr($k,-11,2);
-            $month = substr($k,-14,2);
-            $year = substr($k,-20,4);
-            $homework_content = $row['homework_content'];
-            echo "
-            <div id='content'>
-                <div class='content-1'>
-                    <div class='media'>
-                        <img src='$img_user' class='mr-3' alt='...'>
-                        <div class='media-body'>
-                        <p class='mb-0'>".$name."</p>
-                        <i class='day'>".$day."/".$month."/".$year."</i>
-                        </div>
-                    </div>
-                    <hr>
-                    <div id='baitap'>
-                        <form action='./homework.php' method='post'>
-                            <input type='hidden' name='userOL' value=$user_name>
-                            <input type='hidden' name='homework_id' value=".$row['homework_id'].">
-                            <input type='hidden' name='subject_id' value=$subject_id>
-                            <p>
-                                <input  class='tittle' type='submit' value='$homework_content' > <br>
-                            </p>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            ";
-        }
-    ?>
-    <div id="xemthem">
-        <button class="btn btn-light">Xem thêm...</button>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
@@ -425,22 +351,6 @@
         noti = false
         }
     })
-
-    // Sửa comment
-    var modal = document.getElementById('myModal');
-    var btn = document.getElementById("myBtn");
-    var span = document.getElementsByClassName("close")[0];
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-    window.onclick = function(event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
 </script>
 </body>
 </html>

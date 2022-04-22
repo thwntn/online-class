@@ -22,21 +22,49 @@
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
-    <div class="menu">
-        <ul class="menu-1">
-            <li>
+    <header>
+        <?php
+            $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
+                                             join homework hw on sj.subject_id=hw.subject_id
+                                             where homework_id='.$_POST["homework_id"].'';
+            $result = $conn->query($sql);
+            $result = mysqli_fetch_array($result);
+
+            $k = $result['homework_time'];
+            $subject_id1 = $result['subject_id'];
+            $sj_id = substr($subject_id1,-13,5);
+            $hour= substr($k,-20,3);
+            $day = substr($k,-11,2);
+            $month = substr($k,-14,2);
+            $year = substr($k,-20,4);
+            $user_img = $result['user_image'];
+            ?>
+        <input type="checkbox" class='input-icon'> <p class='input-name'><?php echo ''.$sj_id.'  '.$result['subject_name'].' '?></p>
+        <div class='menu-icon'>
+            <div class='menu-line'>
+
+            </div>
+        </div>
+        <div class='menu-item'>
+            <div class='home-a'>
                 <form action="./index.php" method='post'>
                     <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
                     <p>
-                        &nbsp;<img src="image/Home-2-2-icon.png" style="width:20px;">&nbsp;
-                        <input class='header-subject' type="submit" value="Trang chủ">
+                        &nbsp;<img src="image/Home.png" style="width:26px">&nbsp;</i>&nbsp;
+                        <input class='header1-subject' type="submit" value="Trang chủ">
                     </p>
                 </form>
-            </li>
-             <hr>
-        </ul>
-        <ul class="menu-2">
-            <li>Lớp học</li>
+            </div>
+            <div>
+                <form action="./index.php#lich" method='post'>
+                    <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
+                    <p>
+                        &nbsp;<img src="image/calender.jpg" style="width:50px">&nbsp;
+                        <input class='header-subject' type="submit" value="Lịch học">
+                    </p>
+                </form>
+            </div>
+            <hr class='hr'>
             <?php
                 $sql = "SELECT * FROM subject sj join registry rg on sj.subject_id=rg.subject_id where rg.user_name='$user_name'";
                 $result = $conn->query($sql);
@@ -52,17 +80,18 @@
                             <input type='hidden' name='subject_id' value=".$subject_id1.">
                             <div class = 'item' style='background-image: url($img)'></div>
                             <p> 
-                                &nbsp; ".$sj_id."
-                                <input style='border:none; background: none;' type='submit' value='$subject_name'>
+                                &nbsp; ".$sj_id." &nbsp;
+                                <input style='border:none; background: none; color:black' type='submit' value='$subject_name'>
                             </p>
                         </form>
                     </li>
                     ";
                 }
             ?>
-        </ul>
-    </div>
-    <div class="main">
+        </div>
+        <div class='header-text'>
+            <hr>
+        <div class="main">
         <?php
             $sql = 'SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
                                              join homework hw on sj.subject_id=hw.subject_id
@@ -77,11 +106,6 @@
             $year = substr($k,-20,4);
             $user_img = $result['user_image'];
             echo"
-            <p>
-                <a href=''>
-                    <img class='icon' src='image/format+list+icon.png'>&nbsp;".$result['subject_id']."  ".$result['subject_name']."
-                </a>
-            </p>
         
         <ul>
             <img src='$user_img' class='img2'>
@@ -274,7 +298,14 @@
                         $subject_id = $data['subject_id'];
                         
                         $duongdan = $_FILES['fileUpload']['name'];
-                        move_uploaded_file($_FILES['fileUpload']['tmp_name'],'./homework/' . $duongdan);
+                        
+                        if(is_dir('../database/'.$user_name.'/homework/')) {
+                        }
+                        else {
+                            mkdir("../database/".$user_name."/homework/", 7777, true);
+                        }
+
+                        move_uploaded_file($_FILES['fileUpload']['tmp_name'],'../database/'.$user_name.'/homework/' . $duongdan);
                         if ( $duongdan == "") {
                             echo "
                                 <div class='alert alert-danger' role='alert' >
@@ -299,6 +330,8 @@
             }
         ?>
     </div>
+        </div>
+    </header>
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 <script> 

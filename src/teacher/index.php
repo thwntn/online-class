@@ -51,7 +51,7 @@ include 'connect.php' ;
 
     <div class = 'frameNoti mess'>
         <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
-        <?php 
+        <!-- <php 
             $sql="SELECT * FROM chat c JOIN message ms ON c.chat_id = ms.chat_id JOIN user ON c.user_name=user.user_name  ";
             $kq=$con->query($sql);
             while($row=$kq->fetch_assoc()){
@@ -69,7 +69,7 @@ include 'connect.php' ;
                  
             }
 
-        ?>
+        ?> -->
             <!-- <div class = 'itemNoti'>
                 <div class = 'imageNoti'></div>
                 <div class = 'contentNoti'>
@@ -166,7 +166,7 @@ include 'connect.php' ;
                     <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
                     <div class='noidung_dropdown'>
                         <a href='#'>Tài khoản</a> 
-                        <a href='#'>Đăng xuất &nbsp;
+                        <a href='logout.php'>Đăng xuất &nbsp;
                         <i class='fa-solid fa-right-from-bracket'></i>
                         </a>
                     </div>
