@@ -42,10 +42,31 @@ $user=$_POST['userOL'];$_POST['userOL'];
         <div class='background'></div>
         <div class='leftBar col-md-3'>
             <div class = 'row'>
-                
                 <div class='imageUser col-md-12' style='background:url(<?php echo $row['user_image'] ?>); background-size: cover '}>
                    
-                  
+                    <form action="" method='POST'>
+                             <input type='hidden' name='userOL' value=<?php echo $user ?>>
+                             <input class="upload" type="file" name="fileUpload">
+                             <p class="changeUser"><i class="fa-solid fa-camera"></i></p>
+                    </form>
+                    <?php 
+                     if(isset($_POST["fileUpload"])) {
+                        $duongdan = $_FILES['fileUpload']['name'];
+                        if(is_dir('../database/'.$user.'/image/')) {
+                        }
+                        else {
+                            mkdir("../database/".$user."/image/", 7777, true);
+                        }
+
+                        move_uploaded_file($_FILES['fileUpload']['tmp_name'],'../database/'.$user.'/image/' . $duongdan);
+                        if ($duongdan == "") {
+                    
+                        }else{
+                        $sql = "UPDATE user SET user_image='$duongdan' where user_name='$user'";
+                        mysqli_query($con,$sql);    
+                        }
+                     }
+                    ?>
                 </div>
             </div>
             <div class='infoAdd row'>
@@ -56,7 +77,6 @@ $user=$_POST['userOL'];$_POST['userOL'];
                 
             </div>
             <div class='count row'>
-          
                 <!-- <div class='homeWork'>
                     <h3>23</h3>
                     <l>Bài tập</l>
@@ -66,71 +86,12 @@ $user=$_POST['userOL'];$_POST['userOL'];
                     <l>Lớp học</l>
                 </div> -->
             </div>
-            
             <div class='change row'>
-
-                <div class="container">
-                
-                
-                <form action="" method = "post" >   
-                    <button type="button" id="myBtn" data-target=".modal1" >Chỉnh sửa thông tin</button>
-                    <input type="hidden" name="userOL" value=<?php echo $user?>>
-                    <!-- The Modal -->
-                    <div id="myModal" class="modal modal1">
-                        <div class="modal-content" style="width:60%;height:87%">
-                            <form action="" method = "post">
-                                <span class="close">&times;</span>
-                                <form action="" method="post" >
-                                    <h2>Chỉnh sửa thông tin</h2>
-                                    <div class="fomrgroup">
-                                        <input type="text" name="user_fullname" value="<?php echo $row['user_fullname']; ?>">
-                                        <input type="text" name="user_email" value="<?php echo $row['user_email'] ?>"> 
-                                        <input type="text" name="user_phone" value="<?php echo $row['user_phone'] ?>">    
-                                        <input type="text" name="user_address" value="<?php echo $row['user_address'] ?>">  
-                                        <input type="text" name="user_major" value="<?php echo $row['user_major'] ?>">                                            
-                                        <input style="display:none" class="upload" type="file" name="fileUpload">
-                                        <p class="user-image">Hình ảnh</p>              
-                                    </div>
-                                    <div class="fomrgroup-1" style="text-align:center;margin-top:30px">                   
-                                        <button class="btn btn-primary" type='submit' name="update-user">Save</button>
-                                    </div>
-                            </form>
-                            <?php 
-                                
-                                if(isset($_POST["update-user"])) {
-                                    $fullname = $_POST["user_fullname"];
-                                    $email = $_POST["user_email"];
-                                    $phone = $_POST["user_phone"];
-                                    $address = $_POST["user_address"];
-                                    $major = $_POST["user_major"];       
-                                    $duongdan = $_FILES['fileUpload']['name'];
-                                    if(is_dir('../database/'.$user.'/image/')) {
-                                    }
-                                    else {
-                                        mkdir("../database/".$user."/image/", 7777, true);
-                                    }
-            
-                                    move_uploaded_file($_FILES['fileUpload']['tmp_name'],'../database/'.$user.'/image/' . $duongdan);
-                                    if ($fullname == "" || $email == "" || $phone == "" || $address == "" || $major == "" || $duongdan == "") {
-                                     
-                                   }else{
-                                    $sql = "UPDATE user SET user_fullname='$fullname', user_email='$email', user_phone='$phone', user_address='$address', user_major='$major', user_image='$duongdan' WHERE user_name='$user'";
-                                     mysqli_query($con,$sql);
-                                        
-                                        }
-                                    }
-                            ?>
-                            
-                        </div>
-                    </div>
-                    </form> 
-                </div>
-         
-
-            
-            </div>       
-        </div>
+           
+            <button type = "button"  id="myBtn" >Chỉnh sửa thông tin </button>
         
+            </div>
+        </div>
         <div class='rightBar col-md-6'}>
             <div class='banner row'>
                 <div class='bannerImg'></div>
@@ -154,19 +115,18 @@ $user=$_POST['userOL'];$_POST['userOL'];
         
                             echo "
                             <form action='./profile_friend.php' method='post' >
-                                    <ul>
-                                    <li><p>".$row['user_fullname']."</p></li>
-                                    <input type='hidden' name='userOL' value=$user>
-                                    <input type='hidden' name='user' value=".$row['user_name'].">
-                                    <button type='submit' style='border:none;background:none'>
-                                    <li> 
-                                        <div class='friendItem' style='background:url($user_img); background-size: cover '>                                           
-                                        </div> 
-                                    </li>
-                                    </button>
-                                </ul>
-                                </form>
-                                
+                                <ul>
+                                <li><p>".$row['user_fullname']."</p></li>
+                                <input type='hidden' name='userOL' value=$user>
+                                <input type='hidden' name='user' value=".$row['user_name'].">
+                                <button type='submit' style='border:none;background:none'>
+                                <li> 
+                                    <div class='friendItem' style='background:url($user_img); background-size: cover '>                                           
+                                    </div> 
+                                </li>
+                                </button>
+                            </ul>
+                            </form>
                                 ";
                             }
                         }
@@ -200,11 +160,10 @@ $user=$_POST['userOL'];$_POST['userOL'];
                                  </div>
                              </div>
                         </div>
-                   <?php } ?>        
+                   <?php } ?>                      
                     </div> 
-                </div>              
-            </div>     
-                 
+                </div>
+            </div>
         </div>
         <div class='discription col-md-3'>
             <h5>Description</h5>
@@ -218,10 +177,7 @@ $user=$_POST['userOL'];$_POST['userOL'];
             When it comes to your online store, you don’t have the luxury of an in-person sales team to close the deal. Conversions come down to the effectiveness of your product page and product descriptions. 
             </p>
         </div>
-        
-    </div>   
-   
-                                                    
+    </div>
     <script>
         const handle = {
             randomColor: function() {
@@ -241,11 +197,11 @@ $user=$_POST['userOL'];$_POST['userOL'];
         handle.start()
 
          //Thêm hình ảnh
-         document.querySelector('.user-image').addEventListener('click', function () {
+         document.querySelector('.changeUser').addEventListener('click', function () {
          document.querySelector('.upload').click()
      })
      document.querySelector('.upload').addEventListener('change', function () {
-         document.querySelector('.user-image').innerHTML = document.querySelector('.upload').value
+         document.querySelector('.changeUser').innerHTML = document.querySelector('.upload').value
      })
 
 // Modal

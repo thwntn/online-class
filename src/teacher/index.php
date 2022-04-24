@@ -167,7 +167,7 @@ include 'connect.php' ;
                     <div class='noidung_dropdown'>                        
                         <form action='./profile.php' method='POST'>
                              <input type='hidden' name='userOL' value=$user>
-                             <li class = 'itemNav'><input type='submit' value='Tài khoản'></li>
+                            <input type='submit' class='account' value='Tài khoản'>
                          </form>
                         <a href='logout.php'>Đăng xuất &nbsp;
                         <i class='fa-solid fa-right-from-bracket'></i>
@@ -202,62 +202,39 @@ include 'connect.php' ;
             <?php
                 if (isset($_POST['search'])){
                     $search=$_POST['search'];
-                    $sql="SELECT * FROM user where user_fullname like '%$search%'";
+                    $sql="SELECT * FROM user  where user_fullname like '%$search%'";
                     $kq=$con->query($sql);
                     $num = mysqli_num_rows($kq);
                     //<input style='width:100px' type='submit' name='submit-add' value=".$row['user_fullname'].">
                     if (empty($search)) {
-                        echo "<script>alert('Dữ liệu không được để trống')</script>";
+                        
                         } else {
-                            if ($num > 0 && $search != "" ) {
+                            if ($num > 0 && $search != "" ) {                                                                           
                                 while($row=$kq->fetch_assoc()){
-                                $sql1="SELECT f.friend_user, f.friend_status, f.user_name, user.user_fullname
-                                        FROM friend f left join user on f.user_name=user.user_name";
-                                $kq1=$con->query($sql1);
-                                
-                                $row1=$kq1->fetch_assoc();
-                                $user_name=$row1['user_name'];
-                                $friend_user=$row1['friend_user'];
-                                $status=$row1['friend_status'];
-                                if(isset($friend_user)){
-                                    //<input type='submit' name='submit-add' value=".$row1['user_fullname'].">
+                                    
                                 echo "
                                 
                                 <div class='add-user'> 
                                                                 
-                                    <form action='test.php' method='post' >
-                                    <input type='hidden' name='userOL' value=$user>  
-                                    <input type='hidden' name='friend_user' value= ".$row1['friend_user'].">                                                                       
+                                                                                                      
+                                    <form action='./profile_friend.php' method='post' >
+                                
+                                    <input type='hidden' name='user' value=".$row['user_name'].">
+                                    <input type='hidden' name='userOL' value=$user>
                                     
-                                    ".$row1['user_fullname']."
-                                    <i class='fa-solid fa-user-group'></i>
+                                    <button type='submit'>".$row['user_fullname']."</button>
                                     </form>
+                                   
                                     
-                                    </div>
+                                </div>
                                     
-                                  
+                                    
                                 ";
-                              
-                                    }else{//<i class='fa-solid fa-user-plus'></i>
-                                        echo "
-                                          
-                                        <div class='add-user'>  
-                                        ".$row1['user_fullname']."       
-                                        <form action='' method='post' >
-                                        <input type='hidden' name='userOL' value=$user>  
-                                        <input type='hidden' name='friend_user' value= ".$row1['friend_user'].">  
-                                        <button type='submit' name='submit-add'><i class='fa-solid fa-user-plus'></i></button>
-                                                                     
-                                        
-                                        
-                                        </form>
-                                        </div>
-                                        
-                                    ";
                                     
+                                          
                                     }
+                                
                                 }
-                            }
                             
                             else {
                                 echo  "<script>alert('Khong tim thay ket qua')</script>";
@@ -265,12 +242,7 @@ include 'connect.php' ;
                             }
                         }
                 }
-                if(isset($_POST['submit-add'])){
-                    $friend=$_POST['friend_user'];
-                    $sql2 = "INSERT INTO friend(friend_user, user_name, friend_status) 
-                            VALUES ('$friend','$user','1')";
-                    $kq2=$con->query($sql2);
-                    }
+                
             ?>
         </div>
 </div>
@@ -303,7 +275,7 @@ include 'connect.php' ;
                      <table>
                         <tr> 
                             <th>Buổi</th>
-                            <th>Ngày</th>
+                            <th>Ngày </th>
                             <th>Mã môn</th>
                             <th>Tên môn</th> 
                             </tr>

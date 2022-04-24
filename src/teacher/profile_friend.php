@@ -37,26 +37,35 @@ $friend_user=$_POST['user'];
     $sql="SELECT * FROM user where user_name='$friend_user'";
     $kq = $con->query($sql);
     $row = $kq->fetch_assoc();
-    $user_name=$row['user_name'];
     ?>
     <div class='frame row'>
         <div class='background'></div>
         <div class='leftBar col-md-3'>
             <div class = 'row'>
-                <div class='imageUser col-md-12' style='background:url(<?php echo $row['user_image'] ?>); background-size: cover '}>
-                   
-                   
-                    <?php 
-                    
-                    ?>
+                <div class='imageUser col-md-12' style='background:url(<?php echo $row['user_image'] ?>); background-size: cover '}>                
                 </div>
             </div>
             <div class='infoAdd row'>
-                <h4><?php echo $row['user_fullname'] ?></h4>
-                <i><?php echo $row['user_major'] ?></i>
-               
-                 <button>Kết bạn</button> 
-                
+            <h4><?php echo $row['user_fullname'] ?></h4>
+                    <i><?php echo $row['user_major'] ?></i> 
+            <?php 
+                $sql2="SELECT * FROM friend where user_name = '$user' and friend_user = '$friend_user'";
+                $kq2 = $con->query($sql2);
+                $row2 = $kq2->fetch_assoc();
+                 if(isset($row2)){
+                if($row2['friend_status'] == 1){
+                    echo "                                 
+                    <button>Bạn bè</button>
+                 ";
+                }else{
+                    echo "
+                     
+                    <button>Kết bạn</button>
+                    
+                    ";
+                }
+                 }
+                ?>
             </div>
             <div class='count row'>
                 <!-- <div class='homeWork'>
@@ -90,14 +99,34 @@ $friend_user=$_POST['user'];
                         $get = "SELECT * FROM user where user_name='$user_friend'";
                         $data = $con->query($get);
                         while($row = $data->fetch_assoc()) {
+                            $user_fullname = $row['user_fullname'];
                             $user_img=$row['user_image'];
+                            if($row['user_name']==$user){
+                             
+                                echo "
+                                <form action='./profile.php' method='post' >
+                                        <ul>
+                                        <li><p>Bạn</p></li>
+                                        <input type='hidden' name='userOL' value=$user>
+                                      
+                                        <button type='submit' style='border:none;background:none'>
+                                        <li> 
+                                            <div class='friendItem' style='background:url($user_img); background-size: cover '>                                           
+                                            </div> 
+                                        </li>
+                                        </button>
+                                    </ul>
+                                    </form>
+                                    
+                                    ";
+                            }else{
                             
                                 echo "
-                                <form action='./profile_friend.php' method='post' >
+                            <form action='./profile_friend.php' method='post' >
                                     <ul>
                                     <li><p>".$row['user_fullname']."</p></li>
-                                    <input type='hidden' name='userOL' value=$friend_user>
-                                    <input type='hidden' name='user' value=".$row['user_name'].">
+                                    <input type='hidden' name='userOL' value=$user>
+                                    <input type='hidden' name='user' value=$user_friend>
                                     <button type='submit' style='border:none;background:none'>
                                     <li> 
                                         <div class='friendItem' style='background:url($user_img); background-size: cover '>                                           
@@ -106,8 +135,9 @@ $friend_user=$_POST['user'];
                                     </button>
                                 </ul>
                                 </form>
-                                ";
                                 
+                                ";
+                                }
                             }
                         }
                     ?>
@@ -201,6 +231,7 @@ $friend_user=$_POST['user'];
             </p>
         </div>
     </div>
+    
     <script>
         const handle = {
             randomColor: function() {

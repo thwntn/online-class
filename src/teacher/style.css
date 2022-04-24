@@ -738,6 +738,15 @@ background: #555;
     display: block;
     font-size:17px;
   }
+  .noidung_dropdown .account{
+    color:white;
+    padding: 5px;
+    text-decoration: none;
+    display: block;
+    font-size:17px;
+    border:none;
+    background:none;
+  }
   .hienThi{
     display:block;
   }
