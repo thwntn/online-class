@@ -125,7 +125,10 @@ html {
 }
 .name{
     padding-top: 5px;
-    text-align: center;
+    margin-left: 10px;
+    background: none;
+    border: none;
+
 }
 .image1{
     display: flex;

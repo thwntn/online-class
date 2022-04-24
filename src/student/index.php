@@ -55,7 +55,7 @@
                 join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
             $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
-                if($row['noti_status'] == 1){
+                // if($row['noti_status'] == 1){
                     $sj_id = substr($row['subject_id'],-13,5);
                     echo "
                         <div class = itemNoti>
@@ -68,21 +68,67 @@
                             </div>
                         </div>
                     ";
-                }else{
-                    echo "
-                        <div class = itemNotiStatus>
-                            <div class = 'imageNoti'>
-                                <img src=".$row['subject_image'].">
-                            </div>
-                            <div class = 'contentNoti'>
-                                <h4>".$sj_id."</h4>
-                                <p>".$row['noti_content']."</p>
-                            </div>
-                        </div>
-                    ";
-                    }
+                // }else{
+                //     echo "
+                //         <div class = itemNotiStatus>
+                //             <div class = 'imageNoti'>
+                //                 <img src=".$row['subject_image'].">
+                //             </div>
+                //             <div class = 'contentNoti'>
+                //                 <h4>".$sj_id."</h4>
+                //                 <p>".$row['noti_content']."</p>
+                //             </div>
+                //         </div>
+                //     ";
+                //     }
                 }
+            $get = "SELECT * FROM friend where friend_user='$user_name' and friend_status=2";
+                $data = $conn->query($get);
+            while($row1 = $data->fetch_assoc()) {
+                $user = $row1['user_name'];
+                $sql = "SELECT * FROM user where user_name='$user'";
+                $data1 = $conn->query($sql);
+                $data1 = mysqli_fetch_array($data1);
+
+                $name_user = $data1['user_fullname'];
+                $img_user = $data1['user_image'];
+                echo "
+                    <div class = itemNoti>
+                        <div class = 'imageNoti'>
+                            <img src=".$img_user.">
+                        </div>
+                        <div class = 'contentNoti'>
+                            <h4>".$name_user."</h4>
+                            <form action='' method='post'>
+                                <p class='p'>Đã gửi lời mời kết bạn &nbsp;  
+                                    <input type='hidden' name='userOL' value=$user_name> 
+                                    <input type='hidden' name='user' value=$user>
+                                    <button type='submit' class='add' name='add_friend'>Chấp nhận</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                ";
+            }
         ?>
+<!-- Xử lý kết bạn -->
+    <?php
+        if(isset($_POST['add_friend'])){
+            $user_name=$_POST['userOL'];
+            $user=$_POST["user"];
+            $sql1 = "INSERT INTO friend(friend_user, user_name, friend_status) 
+                VALUES ('$user','$user_name', 1)";
+            $kq1=$conn->query($sql1);
+            
+        }                
+    ?>
+    <?php
+        if(isset($_POST['add_friend'])){
+            $user = $_POST['user'];
+            $sql = "UPDATE friend SET friend_status=1 where friend_user='$user_name' and user_name='$user'";
+            mysqli_query($conn,$sql);  
+        }
+    ?>
     </div>
 
     <div class = 'frameNoti mess'>
@@ -213,49 +259,28 @@
         <h1>Trang Sinh Viên</h1>
         <p>Chào mừng đến với trang sinh viên</p>
             <form action="" method="post">
-                <input type="text" name="search" id="search" placeholder="Nhập mã môn học"><br>
-                <button type="submit" name="btnsearch" id="btt-search" value="search">Search...</button>
+                <input type="text" name="search" id="search" placeholder="Nhập nội dung tìm kiếm"><br>
+                <button type="submit" name="btnsearch" id="btt-search" value="search">Tìm kiếm</button>
                 <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
             </form>
             <!-- Tìm kiếm môn học-->
             <?php
                 if (isset( $_POST['btnsearch'])) {
                     $search = $_POST['search'];
-                    $sql = "SELECT * FROM subject  WHERE (subject_id like '%$search%') ";
+                    $sql = "SELECT * FROM user WHERE (user_name like '%$search%') ";
                     $kq=$conn->query($sql);
                     $num = mysqli_num_rows($kq);
                     if ($num > 0 && $search != "") {
                         while($row=$kq->fetch_assoc()){
-                            $subject_id = $row['subject_id'];
-                            $sj_id = substr($row['subject_id'],-13,5);
-
-                            $get_registry = "SELECT * FROM registry rg join subject sj on rg.subject_id=sj.subject_id
-                                where rg.subject_id='$subject_id' and rg.user_name='$user_name'";
-                            $result = $conn->query($get_registry);
-                            $result = mysqli_fetch_array($result);
-                            if(isset($result)){
-                                $subject_id = $result['subject_id'];
-                                $subject_name = $result['subject_name'];
+                            $user_fullname = $row['user_fullname'];
+                            $user = $row['user_name'];
                             echo "
-                                <form action='./subject.php' method='post'>
+                                <form action='./profile_user.php' method='post'>
                                     <input type='hidden' name='userOL' value=$user_name>
-                                    <input type='hidden' name='subject_id' value=$subject_id>
-                                    <input class='btn-submit' type='submit' value='$sj_id &nbsp; $subject_name' name='submit'>
+                                    <input type='hidden' name='user' value=$user>
+                                    <input class='btn-submit' type='submit' value='$user_fullname' name='submit'>
                                 </form>                                    
                             ";
-                            }else{
-                                echo "
-                                    <h6>".$sj_id." &nbsp;  ".$row['subject_name']." &nbsp; 
-                                        <u> 
-                                            <form action='./registry.php' method='post'>
-                                                <input type='hidden' name='userOL' value=$user_name>
-                                                <input type='hidden' name='subject_id' value=$subject_id>
-                                                <input class='submit' type='submit' value='Đăng ký' name='submit'>
-                                            </form>
-                                        </u>
-                                    </h6>
-                                ";
-                                }
                             }
                         }
                         else {

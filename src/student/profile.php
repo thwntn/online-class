@@ -72,7 +72,7 @@
                         <div class="container">
                             <div id="myModal" class="modal">
                                 <div class="modal-content">                             
-                                    <form action="" method="post">
+                                    <form action="" method="post" enctype="multipart/form-data">
                                         <h6>CHỈNH SỬA THÔNG TIN</h6>
                                         <div class="fomrgroup">
                                             <b>Họ và tên:</b>
@@ -80,7 +80,8 @@
                                             <b>Tên ngành:</b>
                                             <input class='a' type="text" name="user_major" value="<?php echo $row["user_major"] ?>">
                                             <b>Hình ảnh:</b>
-                                            <input class='a' type="file" name='fileUpload'>
+                                            <input class='a' type='file' name='fileUpload'>
+                                            <input type='hidden' name='userOL' value=<?php echo $user_name ?>>
                                             <!-- <input class="upload-1" type="file" name="fileUpload">
                                             <b class="create-3">Hình ảnh</b> -->
                                         </div>
@@ -134,11 +135,16 @@
                         $get = "SELECT * FROM user where user_name='$user_friend'";
                         $data = $conn->query($get);
                         while($row = $data->fetch_assoc()) {
+                            $user_fullname = $row['user_fullname'];
                             echo "
                                 <div class='friendItem'>
                                     <div class='imageFriend'>
-                                        <img src=".$row['user_image']." class='image1'>
-                                        <p class='name'>".$row['user_fullname']."</p>
+                                        <form action='./profile_user.php' method='post'>
+                                            <img src=".$row['user_image']." class='image1'>
+                                            <input type='hidden' name='userOL' value=$user_name>
+                                            <input type='hidden' name='user' value=$user_friend>
+                                            <input class='name'  type='submit' value='$user_fullname'>    
+                                        </form>
                                     </div>
                                 </div>
                                 ";

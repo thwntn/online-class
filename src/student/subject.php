@@ -54,7 +54,7 @@
                 join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
             $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
-                if($row['noti_status'] == 1){
+                // if($row['noti_status'] == 1){
                     $sj_id = substr($row['subject_id'],-13,5);
                     echo "
                         <div class = itemNoti>
@@ -67,20 +67,46 @@
                             </div>
                         </div>
                     ";
-                }else{
-                    echo "
-                        <div class = itemNotiStatus>
-                            <div class = 'imageNoti'>
-                                <img src=".$row['subject_image'].">
-                            </div>
-                            <div class = 'contentNoti'>
-                                <h4>".$sj_id."</h4>
-                                <p>".$row['noti_content']."</p>
-                            </div>
-                        </div>
-                    ";
-                    }
+                // }else{
+                //     echo "
+                //         <div class = itemNotiStatus>
+                //             <div class = 'imageNoti'>
+                //                 <img src=".$row['subject_image'].">
+                //             </div>
+                //             <div class = 'contentNoti'>
+                //                 <h4>".$sj_id."</h4>
+                //                 <p>".$row['noti_content']."</p>
+                //             </div>
+                //         </div>
+                //     ";
+                //     }
                 }
+                $get = "SELECT * FROM friend where friend_user='$user_name' and friend_status=2";
+                $data = $conn->query($get);
+            while($row1 = $data->fetch_assoc()) {
+                $user = $row1['user_name'];
+                $sql = "SELECT * FROM user where user_name='$user'";
+                $data1 = $conn->query($sql);
+                $data1 = mysqli_fetch_array($data1);
+
+                $name_user = $data1['user_fullname'];
+                $img_user = $data1['user_image'];
+                echo "
+                    <div class = itemNoti>
+                        <div class = 'imageNoti'>
+                            <img src=".$img_user.">
+                        </div>
+                        <div class = 'contentNoti'>
+                            <h4>".$name_user."</h4>
+                            <form action='' method='post'>
+                                <p class='p'>Đã gửi lời mời kết bạn &nbsp; 
+                                    <button type='submit' class='add' name='add-friend'>Chấp nhận</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                ";
+            }
         ?>
     </div>
 

@@ -38,7 +38,7 @@
         <div class='background'></div>
         <div class='leftBar col-md-3'>
             <?php
-                $sql="SELECT * FROM user where user_name='$user_name'";
+                $sql="SELECT * FROM user where user_name='$user'";
                 $result = $conn->query($sql);
                 $row = $result->fetch_assoc();
             ?>
@@ -51,7 +51,58 @@
             <div class='infoAdd row'>
                 <h4><?php echo $row['user_fullname'] ?></h4>
                 <i><?php echo $row['user_major'] ?></i>
-                <!-- <button>Kết bạn</button> -->
+                <?php
+                    $get_user = "SELECT * FROM friend where friend_user='$user' and user_name='$user_name'";
+                    $data = $conn->query($get_user);
+                    $data = mysqli_fetch_array($data); 
+                    if(isset($data)){
+                        if($data['friend_user']==$user and $data['user_name']==$user_name and $data['friend_status']==2){
+                        echo "
+                        <form action='' method='post'>
+                            <input type='hidden' name='userOL' value=$user_name>
+                            <input type='hidden' name='user' value=$user>
+                            <button type='submit' name='edit_submit' class='btn'>Đã gởi lời mời kết bạn</button>
+                        </form>
+                        ";
+                        }else if($data['friend_status']==1){
+                            echo "
+                                <button type='submit' name='edit_submit' class='btn'>Bạn bè</button>
+                            ";
+                        } 
+                    }else{
+                        echo "
+                        <form action='' method='post'>
+                            <input type='hidden' name='userOL' value=$user_name>
+                            <input type='hidden' name='user' value=$user>
+                            <button type='submit' name='btn_submit'>Kết bạn</button>
+                        </form>
+                        ";
+                    }
+                ?>
+                <h4 class='h4'>
+<!-- Xử lý kết bạn -->
+                    <?php
+                        if(isset($_POST['btn_submit'])){
+                            $user_name=$_POST['userOL'];
+                            $user=$_POST["user"];
+                            $sql1 = "INSERT INTO friend(friend_user, user_name, friend_status) 
+                                VALUES ('$user','$user_name', 2)";
+                            $kq1=$conn->query($sql1);
+                            echo "
+                                <div class='cont'>
+                                    Đã gửi lời mời kết bạn!
+                                </div>
+                            ";
+                        }
+                    ?>
+                </h4>
+<!-- Xử lý hủy kết bạn -->
+                <?php
+                    if (isset( $_POST['edit_submit'])) {
+                        $sql="DELETE FROM friend where friend_user='$user' and user_name='$user_name' and friend_status=2";
+                        mysqli_query($conn,$sql);
+                    }
+                ?>
             </div>
             <div class='count row'>
                 <div class='homeWork'>
@@ -64,58 +115,10 @@
                 </div>
             </div>
             <div class='change row'>
-                <!-- <button>Chỉnh sửa thông tin</button> -->
-                <div class="shadow p-4 mb-5 bg-white rounded">
-                    <form action="" method="post">
-                        <input type='hidden' name='userOL' value = <?php echo $user_name ?>>
-                        <button type='button' class ='button' id="myBtn">Chỉnh sửa thông tin</button>
-                        <div class="container">
-                            <div id="myModal" class="modal">
-                                <div class="modal-content">                             
-                                    <form action="" method="post">
-                                        <h6>CHỈNH SỬA THÔNG TIN</h6>
-                                        <div class="fomrgroup">
-                                            <b>Họ và tên:</b>
-                                            <input class='a' type="text" name="user_fullname" value="<?php echo $row["user_fullname"] ?>">
-                                            <b>Tên ngành:</b>
-                                            <input class='a' type="text" name="user_major" value="<?php echo $row["user_major"] ?>">
-                                            <b>Hình ảnh:</b>
-                                            <input class='a' type="file" name='fileUpload'>
-                                            <!-- <input class="upload-1" type="file" name="fileUpload">
-                                            <b class="create-3">Hình ảnh</b> -->
-                                        </div>
-                                        <div class="fomrgroup" style="text-align:center;">
-                                            <button class="btn btn-danger" id="close">Đóng</button> &nbsp;
-                                            <button class="btn btn-primary" type='submit' name="update">Lưu</button>
-                                        </div>
-                                        <?php
-                                                if(isset($_POST["update"])) {
-                                                    $user_fullname = $_POST["user_fullname"];
-                                                    $user_major = $_POST["user_major"];
-                                                    $duongdan = $_FILES['fileUpload']['name'];
-                                                    
-                                                    if(is_dir('../database/'.$user_name.'/image/')) {
-                                                    }
-                                                    else {
-                                                        mkdir("../database/".$user_name."/image/", 7777, true);
-                                                    }
-
-                                                    move_uploaded_file($_FILES['fileUpload']['tmp_name'],'../database/'.$user_name.'/image/' . $duongdan);
-                                                    if ($user_fullname == "" && $user_major == "" && $duongdan == "") {
-                                                
-                                                    }else{
-                                                    $sql = "UPDATE user SET user_fullname='$user_fullname',user_major='$user_major', user_image='$duongdan' where user_name='$user_name'";
-                                                    mysqli_query($conn,$sql);    
-                                                    }
-                                                }
-                                            ?>
-                                        
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
+                <form action="./index.php" method="post">
+                    <input type='hidden' name='userOL' value=<?php echo $user_name ?>>
+                    <button type='submit' class ='button' id="myBtn">Trang chủ</button>
+                </form>
             </div>
         </div>
         <div class='rightBar col-md-6'}>
@@ -127,30 +130,94 @@
                     <h5>Bạn bè</h5>
                     <div class='friend row'>
                     <?php
-                    $get_friend ="SELECT * FROM friend where user_name='$user_name' and friend_status=1";
+                    $get_friend ="SELECT * FROM friend where user_name='$user' and friend_status=1";
                     $result = $conn->query($get_friend);
                     while($row1 = $result->fetch_assoc()) {
                         $user_friend = $row1['friend_user'];
                         $get = "SELECT * FROM user where user_name='$user_friend'";
                         $data = $conn->query($get);
                         while($row = $data->fetch_assoc()) {
+                            $user_fullname = $row['user_fullname'];
+                            if($row['user_name']==$user_name){
+                                echo "
+                                    <div class='friendItem'>
+                                        <div class='imageFriend'>
+                                            <form action='./profile.php' method='post'>
+                                                <input type='hidden' name='userOL' value=$user_name>
+                                                <img src=".$row['user_image']." class='image1'>
+                                                <button type='submit' class ='btn_name' >Bạn</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                ";
+                            }else{
                             echo "
                                 <div class='friendItem'>
                                     <div class='imageFriend'>
-                                        <img src=".$row['user_image']." class='image1'>
-                                        <p class='name'>".$row['user_fullname']."</p>
+                                        <form action='./profile_user.php' method='post'>
+                                            <input type='hidden' name='userOL' value=$user_name>
+                                            <input type='hidden' name='user' value=$user_friend>
+                                            <img src=".$row['user_image']." class='image1'>
+                                            <input class ='name'  type='submit' value='$user_fullname'>
+                                        </form>
                                     </div>
                                 </div>
                                 ";
+                            }
                             }
                         }
                     ?>
                     </div>
                     <br>
-                    <h5>Môn học</h5>
+                    <?php
+                        $sql = "SELECT * FROM user where user_name='$user'";
+                        $data1 = $conn->query($sql);
+                        $data1 = mysqli_fetch_array($data1);
+                        if($data1['user_type']==1){
+                            echo "<h5>Môn dạy</h5>";
+                    ?>
                     <div class='subject row'>
                         <?php
-                        $sql = "SELECT * FROM subject sj join registry rg on sj.subject_id=rg.subject_id where rg.user_name='$user_name'";
+                        $sql = "SELECT * FROM subject where user_name='$user'";
+                        $result = $conn->query($sql);
+                        while($row = $result->fetch_assoc()) {
+                            $subject_id = $row['subject_id'];
+                            $sql = "SELECT * FROM user where user_name='$user'";
+                            $row2 = $conn->query($sql);
+                            $row2 = mysqli_fetch_array($row2);
+                            echo "
+                                <div class='subjectItem'>
+                                    <div class='icon'>
+                                        <i class='fas fa-book-reader'></i>
+                                    </div>
+                                    <div class='imageSubject'>
+                                        <img src=".$row['subject_image']." class='image2'>
+                                    </div>
+                                    <div class='infoSuject'>
+                                        <div>
+                                            <h5>".$row['subject_name']."</h5>
+                                            <l>".$row2['user_fullname']."</l>
+                                            
+                                            <form action='./subject.php' method='POST'>
+                                                <input type='hidden' name='userOL' value=$user_name>
+                                                <input type='hidden' name='subject_id' value=".$subject_id.">
+                                                <button type='submit'>Truy cập</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            ";
+                        }
+                        ?>
+                    </div>
+                    <?php
+                        }else{
+                            echo "<h5>Môn học</h5>";
+                        
+                    ?>
+                    <div class='subject row'>
+                        <?php
+                        $sql = "SELECT * FROM subject sj join registry rg on sj.subject_id=rg.subject_id where rg.user_name='$user'";
                         $result = $conn->query($sql);
                         while($row = $result->fetch_assoc()) {
                             $subject_id = $row['subject_id'];
@@ -183,6 +250,9 @@
                         }
                         ?>
                     </div>
+                    <?php
+                    }
+                    ?>
                 </div>
             </div>
         </div>
