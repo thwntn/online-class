@@ -341,6 +341,13 @@ html {
 }
 .discription p {
     line-height: 36px;
+    /* font-size: 15px; */
+}
+.discription h5{
+    font-size: 16px;
+}
+.discription b{
+    padding-right: 10px;
 }
 .discription {
     padding: 0px 48px !important;

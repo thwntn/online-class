@@ -276,7 +276,10 @@ include './demo/connect.php';
                             }
                         }
                         else {
-                            echo "<h6 class='name-sub'>Không tìm thấy kết quả!</h6>";
+                            echo "
+                                <h6 class='name-sub1'>Kết quả tìm kiếm :</h6>
+                                <h6 class='name-sub'>Không tìm thấy kết quả!</h6>
+                            ";
                         }
                     }
                     

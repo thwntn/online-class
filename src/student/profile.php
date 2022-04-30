@@ -44,29 +44,37 @@
             ?>
             <div class = 'row'>
                 <div class='imageUser col-md-12'}>
-                    <img src='<?php echo $row['user_image'] ?>' alt="" class='image'>
-                    <!-- <button class ='changeUser'><i class="material-icons" style="font-size:36px">photo_camera</i></button> -->
+                    <img src='<?php echo $row['user_image'] ?>'class='image'>
                 </div>
             </div>
             <div class='infoAdd row'>
                 <h4><?php echo $row['user_fullname'] ?></h4>
                 <i><?php echo $row['user_major'] ?></i>
-                <!-- <button>Kết bạn</button> -->
+                
+                <button></button>
             </div>
             <div class='count row'>
                 <div class='homeWork'>
-                    <h3>23</h3>
+                    <h3>7</h3>
                     <l>Bài tập</l>
                 </div>
                 <div class='class'>
-                    <h3>23</h3>
+                    <?php 
+                        $sql = "SELECT * FROM registry where user_name='$user_name'";
+                        $result = $conn->query($sql);
+                        $data = array();
+                        while($row1 = $result->fetch_assoc()) {
+                            $data[] = $row1;             
+                        }
+                    ?>
+                    <h3><?php echo count($data); ?></h3>
                     <l>Lớp học</l>
                 </div>
             </div>
             <div class='change row'>
                 <!-- <button>Chỉnh sửa thông tin</button> -->
                 <div class="shadow p-4 mb-5 bg-white rounded">
-                    <form action="" method="post">
+                    <form action="" method="post" enctype="multipart/form-data">
                         <input type='hidden' name='userOL' value = <?php echo $user_name ?>>
                         <button type='button' class ='button' id="myBtn">Chỉnh sửa thông tin</button>
                         <div class="container">
@@ -79,21 +87,28 @@
                                             <input class='a' type="text" name="user_fullname" value="<?php echo $row["user_fullname"] ?>">
                                             <b>Tên ngành:</b>
                                             <input class='a' type="text" name="user_major" value="<?php echo $row["user_major"] ?>">
+                                            <b>Phone:</b>
+                                            <input class='a' type="text" name="user_phone" value="<?php echo $row["user_phone"] ?>"><br>
+                                            <b>Email:</b>
+                                            <input class='a' type="text" name="user_email" value="<?php echo $row["user_email"] ?>"><br>
                                             <b>Hình ảnh:</b>
-                                            <input class='a' type='file' name='fileUpload'>
-                                            <input type='hidden' name='userOL' value=<?php echo $user_name ?>>
-                                            <!-- <input class="upload-1" type="file" name="fileUpload">
-                                            <b class="create-3">Hình ảnh</b> -->
+                                            <input class='a' type="file" name="avatar">
+                                            <input type='hidden' name='userOL' value=<?php echo $user_name ?>><br>
+                                            <b>Địa chỉ:</b>
+                                            <input class='a' type="text" name="user_address" value="<?php echo $row["user_address"] ?>">
                                         </div>
-                                        <div class="fomrgroup" style="text-align:center;">
+                                        <div class="fomrgroup1">
                                             <button class="btn btn-danger" id="close">Đóng</button> &nbsp;
                                             <button class="btn btn-primary" type='submit' name="update">Lưu</button>
                                         </div>
                                         <?php
                                                 if(isset($_POST["update"])) {
-                                                    $user_fullname = $_POST["user_fullname"];
-                                                    $user_major = $_POST["user_major"];
-                                                    $duongdan = $_FILES['fileUpload']['name'];
+                                                    $fullname = $_POST["user_fullname"];
+                                                    $major = $_POST["user_major"];
+                                                    $email = $_POST["user_email"];
+                                                    $phone = $_POST["user_phone"];
+                                                    $address = $_POST["user_address"];
+                                                    $duongdan = $_FILES['avatar']['name'];
                                                     
                                                     if(is_dir('../database/'.$user_name.'/image/')) {
                                                     }
@@ -101,12 +116,13 @@
                                                         mkdir("../database/".$user_name."/image/", 7777, true);
                                                     }
 
-                                                    move_uploaded_file($_FILES['fileUpload']['tmp_name'],'../database/'.$user_name.'/image/' . $duongdan);
-                                                    if ($user_fullname == "" && $user_major == "" && $duongdan == "") {
+                                                    move_uploaded_file($_FILES['avatar']['tmp_name'],'../database/'.$user_name.'/image/' . $duongdan);
+                                                    // move_uploaded_file($_FILES['avatar']['tmp_name'],'../student/image/' . $duongdan);
+                                                    if ($fullname == "" || $email == "" || $phone == "" || $address == "" || $major == "" || $duongdan == "") {
                                                 
                                                     }else{
-                                                    $sql = "UPDATE user SET user_fullname='$user_fullname',user_major='$user_major', user_image='$duongdan' where user_name='$user_name'";
-                                                    mysqli_query($conn,$sql);    
+                                                        $sql = "UPDATE user SET user_fullname='$fullname', user_email='$email', user_phone='$phone', user_address='$address', user_major='$major', user_image='$duongdan' WHERE user_name='$user_name'";
+                                                        mysqli_query($conn,$sql);    
                                                     }
                                                 }
                                             ?>
@@ -193,15 +209,18 @@
             </div>
         </div>
         <div class='discription col-md-3'>
-            <h5>Description</h5>
+            <h5>Mô tả bản thân</h5>
             <p>
-            Experts predict that annual eCommerce sales will exceed $6 trillion dollars by 2023. 
-
-            Retail conglomerates and small businesses alike turn to online stores to sell products to a wider audience and increase their revenue. 
-
-            However, as more eCommerce websites pop up each day, staying competitive can be challenging. 
-
-            When it comes to your online store, you don’t have the luxury of an in-person sales team to close the deal. Conversions come down to the effectiveness of your product page and product descriptions. 
+                <?php
+                    $sql="SELECT * FROM user where user_name='$user_name'";
+                    $result = $conn->query($sql);
+                    $row = $result->fetch_assoc();
+                    echo "
+                        <b>Địa chỉ : </b>".$row['user_address']."<br>
+                        <b>Email : </b>".$row['user_email']." 
+                         
+                    ";
+                ?>
             </p>
         </div>
     </div>
@@ -225,30 +244,30 @@
 
         handle.start()
 
-    // chỉnh sửa thông tin cá nhân
-    var modal = document.getElementById('myModal');
-    var btn = document.getElementById("myBtn");
-    var span = document.getElementsByClassName("close")[0];
-    btn.onclick = function() {
-        modal.style.display = "block";
-    }
-    span.onclick = function() {
-        modal.style.display = "none";
-    }
-    window.onclick = function(event) {
-        if (event.target == modal) {
+        var modal = document.getElementById('myModal');
+    
+        // modal
+        var btn = document.getElementById("myBtn");
+        var span = document.getElementsByClassName("close")[0];
+        btn.onclick = function() {
+            modal.style.display = "block";
+        }
+        span.onclick = function() {
             modal.style.display = "none";
         }
-    }
+        window.onclick = function(event) {
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
 
-    //Thêm hình ảnh
-    // document.querySelector('.create-3').addEventListener('click', function () {
-    //         console.log(123)
-    //     document.querySelector('.upload-1').click()
-    // })
-    // document.querySelector('.upload-1').addEventListener('change', function () {
-    //     document.querySelector('.create-3').innerHTML = document.querySelector('.upload-1').value
-    // })
+        //Thêm hình ảnh
+        // document.querySelector('.user-image').addEventListener('click', function () {
+        //      document.querySelector('.upload').click()
+        //  })
+        //  document.querySelector('.upload').addEventListener('change', function () {
+        //      document.querySelector('.user-image').innerHTML = document.querySelector('.upload').value
+        //  })
     </script>
 </body>
 </html>

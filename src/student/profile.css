@@ -125,7 +125,7 @@ html {
 }
 .name{
     padding-top: 5px;
-    margin-left: 10px;
+    /* margin-left: 10px; */
     background: none;
     border: none;
 
@@ -240,11 +240,12 @@ html {
 }
 .infoAdd button {
     width: 120px;
-    padding: 8px 12px;
+    /* padding: 8px 12px;
     
-    border-radius: 100px;
-    color: #fff;
-    background-image: linear-gradient(120deg, rgb(11, 129, 90), rgb(190, 65, 159));
+    border-radius: 100px; */
+    /* color: #fff;
+    background-image: linear-gradient(120deg, rgb(11, 129, 90), rgb(190, 65, 159)); */
+    background: none;
     border: none;
 }
 .ofUser h5 {
@@ -307,9 +308,16 @@ html {
 }
 .discription p {
     line-height: 36px;
+    /* font-size: 15px; */
+}
+.discription h5{
+    font-size: 16px;
 }
 .discription {
     padding: 0px 48px !important;
+}
+.discription b{
+    padding-right: 10px;
 }
 .icon {
     width: 100%;
@@ -333,4 +341,18 @@ html {
     background-image: linear-gradient(120deg, rgb(97, 141, 177), rgb(207, 85, 85));
     border-radius: 100px;
     border: none;
+}
+
+/* upload hinh */
+.create-3{
+    background-color: rgb(236, 235, 235);
+    padding:8px;
+    border-radius: 10px;
+ 
+    margin-bottom:30px;
+}
+
+.upload-1{
+    display:none;
+
 }

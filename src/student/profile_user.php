@@ -2,7 +2,6 @@
     include './demo/connect.php';
     $user_name=$_POST['userOL'];
     $user = $_POST['user'];
-
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,15 +57,19 @@
                     if(isset($data)){
                         if($data['friend_user']==$user and $data['user_name']==$user_name and $data['friend_status']==2){
                         echo "
-                        <form action='' method='post'>
-                            <input type='hidden' name='userOL' value=$user_name>
-                            <input type='hidden' name='user' value=$user>
-                            <button type='submit' name='edit_submit' class='btn'>Đã gởi lời mời kết bạn</button>
-                        </form>
+                            <form action='' method='post'>
+                                <input type='hidden' name='userOL' value=$user_name>
+                                <input type='hidden' name='user' value=$user>
+                                <button type='submit' name='edit_submit' class='btn'>Đã gởi lời mời kết bạn</button>
+                            </form>
                         ";
                         }else if($data['friend_status']==1){
                             echo "
-                                <button type='submit' name='edit_submit' class='btn'>Bạn bè</button>
+                            <form action='' method='post'>
+                                <input type='hidden' name='userOL' value=$user_name>
+                                <input type='hidden' name='user' value=$user>
+                                <button type='submit' name='delete_submit' class='btn'>Bạn bè</button>
+                            </form>
                             ";
                         } 
                     }else{
@@ -103,15 +106,59 @@
                         mysqli_query($conn,$sql);
                     }
                 ?>
+<!-- Xử lý Xóa kết bạn -->
+                <?php
+                    if (isset( $_POST['delete_submit'])) {
+                        $sql1="DELETE FROM friend where friend_user='$user' and user_name='$user_name'";
+                        mysqli_query($conn,$sql1);
+                    }
+                ?>
+                <?php
+                    if (isset( $_POST['delete_submit'])) {
+                        $sql2="DELETE FROM friend where friend_user='$user_name' and user_name='$user'";
+                        mysqli_query($conn,$sql2);
+                    }
+                ?>
+
             </div>
             <div class='count row'>
                 <div class='homeWork'>
-                    <h3>23</h3>
+                    <h3>10</h3>
                     <l>Bài tập</l>
                 </div>
                 <div class='class'>
-                    <h3>23</h3>
-                    <l>Lớp học</l>
+                    <?php
+                        $sql = "SELECT * FROM user where user_name='$user'";
+                        $data1 = $conn->query($sql);
+                        $data1 = mysqli_fetch_array($data1);
+                        if($data1['user_type']==2){
+                    ?>
+                    <?php 
+                        $sql = "SELECT * FROM registry where user_name='$user'";
+                        $result = $conn->query($sql);
+                        $data = array();
+                        while($row1 = $result->fetch_assoc()) {
+                            $data[] = $row1;             
+                        }
+                        echo "
+                            <h3>".count($data)."</h3>
+                            <l>Lớp học</l>
+                        ";
+                    ?>
+                    <?php
+                        }else{
+                            $sql = "SELECT * FROM subject where user_name='$user'";
+                            $result = $conn->query($sql);
+                            $data1 = array();
+                            while($row1 = $result->fetch_assoc()) {
+                                $data1[] = $row1;             
+                            }
+                            echo "
+                            <h3>".count($data1)."</h3>
+                            <l>Lớp học</l>
+                        ";
+                        }
+                    ?>
                 </div>
             </div>
             <div class='change row'>
@@ -151,19 +198,19 @@
                                     </div>
                                 ";
                             }else{
-                            echo "
-                                <div class='friendItem'>
-                                    <div class='imageFriend'>
-                                        <form action='./profile_user.php' method='post'>
-                                            <input type='hidden' name='userOL' value=$user_name>
-                                            <input type='hidden' name='user' value=$user_friend>
-                                            <img src=".$row['user_image']." class='image1'>
-                                            <input class ='name'  type='submit' value='$user_fullname'>
-                                        </form>
+                                echo "
+                                    <div class='friendItem'>
+                                        <div class='imageFriend'>
+                                            <form action='./profile_user.php' method='post'>
+                                                <input type='hidden' name='userOL' value=$user_name>
+                                                <input type='hidden' name='user' value=$user_friend>
+                                                <img src=".$row['user_image']." class='image1'>
+                                                <input class ='name'  type='submit' value='$user_fullname'>
+                                            </form>
+                                        </div>
                                     </div>
-                                </div>
-                                ";
-                            }
+                                    ";
+                                }
                             }
                         }
                     ?>
@@ -257,15 +304,18 @@
             </div>
         </div>
         <div class='discription col-md-3'>
-            <h5>Description</h5>
+            <h5>Mô tả bản thân</h5>
             <p>
-            Experts predict that annual eCommerce sales will exceed $6 trillion dollars by 2023. 
-
-            Retail conglomerates and small businesses alike turn to online stores to sell products to a wider audience and increase their revenue. 
-
-            However, as more eCommerce websites pop up each day, staying competitive can be challenging. 
-
-            When it comes to your online store, you don’t have the luxury of an in-person sales team to close the deal. Conversions come down to the effectiveness of your product page and product descriptions. 
+                <?php
+                    $sql="SELECT * FROM user where user_name='$user'";
+                    $result = $conn->query($sql);
+                    $row = $result->fetch_assoc();
+                    echo "
+                        <b>Địa chỉ : </b>".$row['user_address']."<br>
+                        <b>Email : </b>".$row['user_email']." 
+                         
+                    ";
+                ?>
             </p>
         </div>
     </div>

@@ -234,7 +234,7 @@
             $anh = $result['subject_image'];
             $sj_id = substr($result['subject_id'],-13,5);
             echo "
-                <div class='name-subject' style='background:url($anh)'>
+                <div class='name-subject' style='background:url($anh);background-repeat: no-repeat;background-size: cover;'>
                     <p>
                         <b>".$sj_id."</b>
                         ".$result['subject_name']."

@@ -9,6 +9,7 @@
 <html>
 <head>
     <meta charset="UFT-8">
+    <title>Document</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <link rel="stylesheet" type="text/css" href="./style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -51,6 +52,34 @@
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
         <?php
+            $get = "SELECT * FROM friend where friend_user='$user_name' and friend_status=2";
+            $data = $conn->query($get);
+            while($row1 = $data->fetch_assoc()) {
+                $user = $row1['user_name'];
+                $sql = "SELECT * FROM user where user_name='$user'";
+                $data1 = $conn->query($sql);
+                $data1 = mysqli_fetch_array($data1);
+
+                $name_user = $data1['user_fullname'];
+                $img_user = $data1['user_image'];
+                echo "
+                    <div class = itemNoti>
+                        <div class = 'imageNoti'>
+                            <img src=".$img_user.">
+                        </div>
+                        <div class = 'contentNoti'>
+                            <h4>".$name_user."</h4>
+                            <form action='' method='post'>
+                                <p class='p'>Đã gửi lời mời kết bạn &nbsp;  
+                                    <input type='hidden' name='userOL' value=$user_name> 
+                                    <input type='hidden' name='user' value=$user>
+                                    <button type='submit' class='add' name='add_friend'>Chấp nhận</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                ";
+            }
             $sql = "SELECT * FROM subject sj join registry rg on sj.subject_id=rg.subject_id 
                 join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
             $result = $conn->query($sql);
@@ -82,86 +111,60 @@
                 //     ";
                 //     }
                 }
-            $get = "SELECT * FROM friend where friend_user='$user_name' and friend_status=2";
-                $data = $conn->query($get);
-            while($row1 = $data->fetch_assoc()) {
-                $user = $row1['user_name'];
-                $sql = "SELECT * FROM user where user_name='$user'";
-                $data1 = $conn->query($sql);
-                $data1 = mysqli_fetch_array($data1);
+            
+        ?>
+        <!-- Xử lý kết bạn -->
+        <?php
+            if(isset($_POST['add_friend'])){
+                $user_name=$_POST['userOL'];
+                $user=$_POST["user"];
+                $sql1 = "INSERT INTO friend(friend_user, user_name, friend_status) 
+                    VALUES ('$user','$user_name', 1)";
+                $kq1=$conn->query($sql1);
+                
+            }                
+        ?>
+        <?php
+            if(isset($_POST['add_friend'])){
+                $user = $_POST['user'];
+                $sql = "UPDATE friend SET friend_status=1 where friend_user='$user_name' and user_name='$user'";
+                mysqli_query($conn,$sql);  
+            }
+        ?>
+    </div>
 
-                $name_user = $data1['user_fullname'];
-                $img_user = $data1['user_image'];
-                echo "
-                    <div class = itemNoti>
-                        <div class = 'imageNoti'>
-                            <img src=".$img_user.">
+    <div class = 'frameNoti mess'>
+        <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
+        <?php
+            $sql1 = "SELECT c.friend_user, cg.chatgroup_name FROM chat c join chat_group cg on c.user_name=cg.user_name where c.user_name='$user_name'";
+            $result1 = $conn->query($sql1);
+            while($row1 = $result1->fetch_assoc()) {
+                $friend = $row1['friend_user'];
+                if(isset($friend)){
+                    $get_user="SELECT * FROM user where user_name='$friend'";
+                    $result0 = $conn->query($get_user);
+                    $result0 = $result0->fetch_assoc();
+                    echo "
+                        <div class = 'itemNoti'>
+                            <div class = 'imageNoti'></div>
+                            <div class = 'contentNoti'>
+                                <h4>".$result0['user_fullname']."</h4>
+                                <p>Bài tập mới được giao</p>
+                            </div>
                         </div>
+                    ";
+                }
+                echo "
+                    <div class = 'itemNoti'>
+                        <div class = 'imageNoti'></div>
                         <div class = 'contentNoti'>
-                            <h4>".$name_user."</h4>
-                            <form action='' method='post'>
-                                <p class='p'>Đã gửi lời mời kết bạn &nbsp;  
-                                    <input type='hidden' name='userOL' value=$user_name> 
-                                    <input type='hidden' name='user' value=$user>
-                                    <button type='submit' class='add' name='add_friend'>Chấp nhận</button>
-                                </p>
-                            </form>
+                            <h4>".$row1['chatgroup_name']."</h4>
+                            <p>Bài tập mới được giao</p>
                         </div>
                     </div>
                 ";
             }
         ?>
-<!-- Xử lý kết bạn -->
-    <?php
-        if(isset($_POST['add_friend'])){
-            $user_name=$_POST['userOL'];
-            $user=$_POST["user"];
-            $sql1 = "INSERT INTO friend(friend_user, user_name, friend_status) 
-                VALUES ('$user','$user_name', 1)";
-            $kq1=$conn->query($sql1);
-            
-        }                
-    ?>
-    <?php
-        if(isset($_POST['add_friend'])){
-            $user = $_POST['user'];
-            $sql = "UPDATE friend SET friend_status=1 where friend_user='$user_name' and user_name='$user'";
-            mysqli_query($conn,$sql);  
-        }
-    ?>
-    </div>
-
-    <div class = 'frameNoti mess'>
-        <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-
         <div class = 'frameMess'>
             <div class = 'navigationMess'>
                 <button
@@ -291,8 +294,10 @@
             ?>
     </div>
 </div>
+<!-- <button class = 'nav-cal_next'><i class='fas fa-angle-right'></i></button>
+<button class = 'nav-cal_prev'><i class='fas fa-angle-left'></i></button> -->
 <div id="lich">
-    <div id="ten-lich">Lịch dạy</div>
+    <div id="ten-lich">Lịch Học</div>
         <div class="container">
             <div class="row">
                 <div class="col-6 calendar-frame">
@@ -303,9 +308,7 @@
                         echo "
                         <div class = 'calendar_header'>
                             <div class = 'nav-cal'>
-                                <button class = 'nav-cal_prev'><i class='fas fa-angle-left'></i></button>
                                 <div>Tháng ".$month."</div>
-                                <button class = 'nav-cal_next'><i class='fas fa-angle-right'></i></button>
                             </div>
                             <div class = 'header_year'>2022</div>
                         </div>
@@ -324,15 +327,15 @@
                             <th>Tên môn</th> 
                             </tr>
                             <?php
-                            $sql = "SELECT * FROM registry rg join calendar cl on rg.subject_id=cl.subject_id
+                            $sql = "SELECT cl.subject_time , sj.subject_id, sj.subject_name FROM registry rg join calendar cl on rg.subject_id=cl.subject_id
                                  join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by cl.subject_time ASC";
                             $result = $conn->query($sql);
                             while($row = $result->fetch_assoc()) {
                                 $k = $row['subject_time'];
                                 $k1 = $row['subject_id'];
                                 $code = substr($k1,-14,5);
-                                $day1 = substr($k,-2,2);
-                                $month1 = substr($k,-5,2);
+                                $day1 = substr($k,-11,2);
+                                $month1 = substr($k,-14,2);
                                 $hour = substr($k,-8,5);
                                 echo"
                                     <tr>

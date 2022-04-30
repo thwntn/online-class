@@ -122,7 +122,7 @@
             ";
         ?>
         </ul><hr>
-<!-- Bình luận -->
+        <!-- Bình luận -->
         <div class="comment">
             <?php
                 $get = "SELECT * FROM user";
@@ -189,7 +189,7 @@
                                 <div class="container">
                                     <div id="myModal" class="modal">
                                         <div class="modal-content">
-<!-- Nội dung form edit_comment -->                                    
+            <!-- Nội dung form edit_comment -->                                    
                                             <form action="" method="post">
                                                 <h2>Chỉnh sửa bình luận</h2>
                                                 <div class="fomrgroup">
@@ -217,7 +217,7 @@
                                 </div>
 
                             </form>
-<!-- Form xóa comment  -->
+            <!-- Form xóa comment  -->
                         <?php
                         echo "
                             <form action = '' method = 'post' >
