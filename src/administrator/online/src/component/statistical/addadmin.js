@@ -34,6 +34,7 @@ function AddAdmin({ setAddAd, setRefesh }) {
         .then(response => response.json())
         .then(responseJson => {
             if(responseJson == 1) {
+                console.log(responseJson);
                 setRefesh(Math.random())
                 setAddAd(false)
             }

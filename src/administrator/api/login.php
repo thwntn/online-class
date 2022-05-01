@@ -1,5 +1,6 @@
 <?php
     include('./connect.php');
+    include('./logSystem.php');
 
     $response = fopen("php://input", "r");
     while ($data = fread($response, 1024)) {
@@ -27,4 +28,11 @@
     $data = $sql -> fetch_assoc();
     if($data == null) echo -1;
     else echo $data['user_type'];
+
+
+    // log
+    logSystem('Đăng nhập', $username, $conn);
+    $query = "UPDATE statistical SET statis_amount = statis_amount+1 WHERE statis_type = 'login'";
+
+    $conn->query($query);
 ?>

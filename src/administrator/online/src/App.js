@@ -1,11 +1,15 @@
 import './App.css';
-import Header from './navigation/header.js'
-import HomePage from './homepage/homepage.js'
-import NavMobile from './navigation/navmobile.js';
+import Header from './component/navigation/header.js'
+import HomePage from './component/homepage/homepage.js'
+import NavMobile from './component/navigation/navmobile.js';
 import { useState, useEffect } from 'react';
-import Profile from './profile/profile.js';
+import Profile from './component/profile/profile.js';
 
 function App() {
+  //create
+  if(!localStorage.getItem('listFunc')){
+    localStorage.setItem('listFunc', JSON.stringify([]))
+  }
   // console.log(sessionStorage.getItem('userOL') == undefined);
   const [main, setMain] = useState(<HomePage></HomePage>)
   if (window.innerWidth < 998) {

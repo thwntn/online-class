@@ -67,18 +67,18 @@ const AccountActive = (property) => {
                             let content
                             switch (user.user_type) {
                                 case '1': {
-                                    type = 'accountactive_student__5ed6a'
+                                    type = style.teacher
                                     imgType = './image/student.png'
                                     content = 'Giảng Viên'
                                     break
                                 }
                                 case '2': {
-                                    type = 'accountactive_teacher__XHkc9'
+                                    type = style.student
                                     content = 'Sinh Viên'
                                     break
                                 }
                                 case '3': case '4': {
-                                    type = 'accountactive_lock__cPLT8'
+                                    type = style.lock
                                     content = 'Đã khóa'
                                     break 
                                 }

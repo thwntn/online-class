@@ -1,5 +1,6 @@
 <?php
     include('./connect.php');
+    include('./logSystem.php');
 
     $resonseJSON;
 
@@ -28,4 +29,11 @@
     $responseQ = $conn -> query($query);
     if($responseQ) echo 1;
     else echo -1;
+
+    // log
+    logSystem("Đăng kí tài khoản", $resonseJSON['username'], $conn);
+    $query = "UPDATE statistical SET statis_amount = statis_amount+1 WHERE statis_type = 'signup'";
+
+    $conn->query($query);
+
 ?>

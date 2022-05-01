@@ -9,12 +9,40 @@ const Confirm = () => {
     const [view, setView] = useState(false)
     const [wait, setWait] = useState(false)
 
+
+    function find(arr, string) {
+        let result = arr.find(item => item.key == string)
+        let final
+        result == undefined ? final = false : final = (result.key == string)
+        return final
+    }
+
+    
+    function pinItem () {
+        let listFunc = JSON.parse(localStorage.getItem('listFunc'))
+        console.log(find(listFunc, 'managerUser'));
+        listFunc.push(
+            {
+                name: 'Quản trị người dùng',
+                key: 'managerUser'
+            }
+        )
+        localStorage.setItem('listFunc', JSON.stringify(listFunc))
+    }
+
     return(
         <div  id = 'account' className = {style.background + ' row pad'}>
             <div className = {style.boxItems}>
                 <div className = {style.items + ' col-md-5'}>
                     <div className={style.navConfirm}>
-                        <button className={style.itemNav}>
+                        <button
+                            className={style.itemNav}
+                            onClick={() => {
+                                console.log('click');
+                                pinItem()
+                                
+                            }}
+                        >
                             <i className={style.pinAccount + ' fad fa-map-pin'}></i>
                         </button>
                         <button className={style.itemNav}>
