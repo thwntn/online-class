@@ -29,7 +29,7 @@ include './demo/connect.php';
     <div class = 'frameNoti btap1'>
         <h5><i class="fas fa-book"></i>Bài tập được giao</h5>
              <?php
-                $sql = "SELECT * FROM registry rg join homework hw on rg.subject_id=hw.subject_id
+                $sql = "SELECT sj.user_name, sj.subject_image, sj.subject_id, hw.homework_content FROM registry rg join homework hw on rg.subject_id=hw.subject_id
                     join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by homework_time ASC";
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
@@ -37,7 +37,7 @@ include './demo/connect.php';
                     echo "
                         <div class = itemNoti>
                             <div class = 'imageNoti'>
-                                <img src=".$row['subject_image'].">
+                                <img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['subject_image']}'>  
                             </div>
                             <div class = 'contentNoti'>
                                 <h4>".$sj_id."</h4>
@@ -51,7 +51,35 @@ include './demo/connect.php';
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
         <?php
-            $sql = "SELECT * FROM subject sj join registry rg on sj.subject_id=rg.subject_id 
+            $get = "SELECT * FROM friend where friend_user='$user_name' and friend_status=2";
+            $data = $conn->query($get);
+            while($row1 = $data->fetch_assoc()) {
+                $user = $row1['user_name'];
+                $sql = "SELECT * FROM user where user_name='$user'";
+                $data1 = $conn->query($sql);
+                $data1 = mysqli_fetch_array($data1);
+
+                $name_user = $data1['user_fullname'];
+                $img_user = $data1['user_image'];
+                echo "
+                    <div class = itemNoti>
+                        <div class = 'imageNoti'>
+                            <img src='http://localhost/online-class/src/database/{$user}/image/{$img_user}'>
+                        </div>
+                        <div class = 'contentNoti'>
+                            <h4>".$name_user."</h4>
+                            <form action='' method='post'>
+                                <p class='p'>Đã gửi lời mời kết bạn &nbsp;  
+                                    <input type='hidden' name='userOL' value=$user_name> 
+                                    <input type='hidden' name='user' value=$user>
+                                    <button type='submit' class='add' name='add_friend'>Chấp nhận</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                ";
+            }
+            $sql = "SELECT sj.user_name, sj.subject_image, sj.subject_id, nf.noti_content FROM subject sj join registry rg on sj.subject_id=rg.subject_id 
                 join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
             $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
@@ -60,7 +88,7 @@ include './demo/connect.php';
                     echo "
                         <div class = itemNoti>
                             <div class = 'imageNoti'>
-                                <img src=".$row['subject_image'].">
+                                <img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['subject_image']}'>  
                             </div>
                             <div class = 'contentNoti'>
                                 <h4>".$sj_id."</h4>
@@ -82,31 +110,24 @@ include './demo/connect.php';
                 //     ";
                 //     }
                 }
-                $get = "SELECT * FROM friend where friend_user='$user_name' and friend_status=2";
-                $data = $conn->query($get);
-            while($row1 = $data->fetch_assoc()) {
-                $name = $row1['user_name'];
-                $sql = "SELECT * FROM user where user_name='$name'";
-                $data1 = $conn->query($sql);
-                $data1 = mysqli_fetch_array($data1);
-
-                $name_user = $data1['user_fullname'];
-                $img_user = $data1['user_image'];
-                echo "
-                    <div class = itemNoti>
-                        <div class = 'imageNoti'>
-                            <img src=".$img_user.">
-                        </div>
-                        <div class = 'contentNoti'>
-                            <h4>".$name_user."</h4>
-                            <form action='' method='post'>
-                                <p class='p'>Đã gửi lời mời kết bạn &nbsp; 
-                                    <button type='submit' class='add' name='add-friend'>Chấp nhận</button>
-                                </p>
-                            </form>
-                        </div>
-                    </div>
-                ";
+            
+        ?>
+        <!-- Xử lý kết bạn -->
+        <?php
+            if(isset($_POST['add_friend'])){
+                $user_name=$_POST['userOL'];
+                $user=$_POST["user"];
+                $sql1 = "INSERT INTO friend(friend_user, user_name, friend_status) 
+                    VALUES ('$user','$user_name', 1)";
+                $kq1=$conn->query($sql1);
+                
+            }                
+        ?>
+        <?php
+            if(isset($_POST['add_friend'])){
+                $user = $_POST['user'];
+                $sql = "UPDATE friend SET friend_status=1 where friend_user='$user_name' and user_name='$user'";
+                mysqli_query($conn,$sql);  
             }
         ?>
     </div>
@@ -198,8 +219,8 @@ include './demo/connect.php';
                     $row = $result->fetch_assoc();
                     echo "
                     
-                    <img src=".$row['user_image']." style='width:40px;border-radius:50px'>
-                    ".$row['user_fullname']."
+                    <img src='http://localhost/online-class/src/database/{$user_name}/image/{$row['user_image']}' style='width:40px;border-radius:50px'>
+                        ".$row['user_fullname']."
 
                     <div class='dropdown'>
                         <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
@@ -293,20 +314,26 @@ include './demo/connect.php';
                         $subject_id1 = $row['subject_id'];
                         $sj_id = substr($subject_id1,-13,5);
                         $subject_name = $row['subject_name'];
-                        echo"
-                        <div class='col-4'>
-                            <form action='./subject.php' method='POST'>
-                                <input type='hidden' name='userOL' value=$user_name>
-                                <input type='hidden' name='subject_id' value=".$subject_id1.">
-                                <div class = 'item' style='background-image: url($img);'> 
-                                    <p class='data'>
-                                        <input style='border:none; background: none;' type='submit' value='$sj_id &nbsp $subject_name'> <br>
-                                        &nbsp;<b class='data1'>".$row['user_fullname']."</b>
-                                    </p>
-                                </div>
-                            </form>
-                        </div>
-                        ";
+
+                        $sql1 = "SELECT * FROM subject where subject_id='$subject_id1'";
+                        $result1 = $conn->query($sql1);
+                        while($row1= $result1->fetch_assoc()) {
+                            $user = $row1['user_name'];
+                            echo"
+                            <div class='col-4'>
+                                <form action='./subject.php' method='POST'>
+                                    <input type='hidden' name='userOL' value=$user_name>
+                                    <input type='hidden' name='subject_id' value=".$subject_id1.">
+                                    <div class = 'item' style='background-image: url(http://localhost/online-class/src/database/{$user}/image/{$img});'> 
+                                        <p class='data'>
+                                            <input style='border:none; background: none;' type='submit' value='$sj_id &nbsp $subject_name'> <br>
+                                            &nbsp;<b class='data1'>".$row['user_fullname']."</b>
+                                        </p>
+                                    </div>
+                                </form>
+                            </div>
+                            ";
+                        }
                     }
             ?>
         </div>

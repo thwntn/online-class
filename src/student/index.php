@@ -30,7 +30,7 @@
     <div class = 'frameNoti btap1'>
         <h5><i class="fas fa-book"></i>Bài tập được giao</h5>
              <?php
-                $sql = "SELECT * FROM registry rg join homework hw on rg.subject_id=hw.subject_id
+                $sql = "SELECT sj.user_name, sj.subject_image, sj.subject_id, hw.homework_content FROM registry rg join homework hw on rg.subject_id=hw.subject_id
                     join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by homework_time ASC";
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
@@ -38,7 +38,7 @@
                     echo "
                         <div class = itemNoti>
                             <div class = 'imageNoti'>
-                                <img src=".$row['subject_image'].">
+                                <img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['subject_image']}'>  
                             </div>
                             <div class = 'contentNoti'>
                                 <h4>".$sj_id."</h4>
@@ -65,7 +65,7 @@
                 echo "
                     <div class = itemNoti>
                         <div class = 'imageNoti'>
-                            <img src=".$img_user.">
+                            <img src='http://localhost/online-class/src/database/{$user}/image/{$img_user}'>
                         </div>
                         <div class = 'contentNoti'>
                             <h4>".$name_user."</h4>
@@ -80,7 +80,7 @@
                     </div>
                 ";
             }
-            $sql = "SELECT * FROM subject sj join registry rg on sj.subject_id=rg.subject_id 
+            $sql = "SELECT sj.user_name, sj.subject_image, sj.subject_id, nf.noti_content FROM subject sj join registry rg on sj.subject_id=rg.subject_id 
                 join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
             $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
@@ -89,7 +89,7 @@
                     echo "
                         <div class = itemNoti>
                             <div class = 'imageNoti'>
-                                <img src=".$row['subject_image'].">
+                                <img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['subject_image']}'>  
                             </div>
                             <div class = 'contentNoti'>
                                 <h4>".$sj_id."</h4>
@@ -136,14 +136,26 @@
     <div class = 'frameNoti mess'>
         <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
         <?php
-            $sql1 = "SELECT c.friend_user, cg.chatgroup_name FROM chat c join chat_group cg on c.user_name=cg.user_name where c.user_name='$user_name'";
+            $sql1 = "SELECT * FROM chat  where user_name='$user_name'";
             $result1 = $conn->query($sql1);
             while($row1 = $result1->fetch_assoc()) {
                 $friend = $row1['friend_user'];
                 if(isset($friend)){
-                    $get_user="SELECT * FROM user where user_name='$friend'";
+                    $get_user = "SELECT * FROM user where user_name='$friend'"; 
                     $result0 = $conn->query($get_user);
                     $result0 = $result0->fetch_assoc();
+                    //lấy chat id tin nhắn send
+                    $query = "SELECT chat_id FROM chat WHERE user_name = '$user_name' AND friend_user = '$friend'";
+
+                    foreach($conn -> query($query) as $value) {
+                        $idSend = $value['chat_id'];
+                    }
+                    //lấy chat id tin nhắn received
+                    $query = "SELECT chat_id FROM chat WHERE user_name = '$friend' AND friend_user = '$user_name'";
+                    
+                    foreach($conn -> query($query) as $value) {
+                        $idReceived = $value['chat_id'];
+                    }
                     echo "
                         <div class = 'itemNoti'>
                             <div class = 'imageNoti'></div>
@@ -152,24 +164,71 @@
                                 <p>Bài tập mới được giao</p>
                             </div>
                         </div>
+                        ";
+                    
+                    echo"
+                        <div class = 'frameMess'>
+                            <div class = 'navigationMess'>
+                                <button class = 'backMess'>
+                                    <i class='fas fa-angle-left'></i>
+                                </button>
+                                <div class = 'imageMess'></div>
+                                <h5 class = 'nameMess'>".$result0['user_fullname']."</h5>
+                            </div>
+                            <div class = 'contentMess'>
+                            ";
+                            $listMessSend = [];
+
+                            $query = "SELECT * FROM message WHERE chat_id = '$idSend' ORDER BY mess_time DESC";
+                            foreach($conn -> query($query) as $value) {
+                                echo "
+                                <div class = 'messMess'>
+                                    <p class = 'sendMess'>".$value['mess_content']."</p>
+                                </div>
+                                ";
+                            }
+                            $listMessReceived = [];
+
+                            $query = "SELECT * FROM message WHERE chat_id = '$idReceived' ORDER BY mess_time DESC";
+                            foreach($conn -> query($query) as $value) {
+                                echo "
+                                <div class = 'messMess'>
+                                    <p class = 'receiveMess'>".$value['mess_content']."</p>
+                                </div>
+                                ";
+                            }
+                        echo"
+                            </div>
+                            <div class = 'navigationMessSend'>
+                                
+                                    <input class = 'inputMessChat' placeholder = 'Nhập tin nhắn'></input>
+                                    <button  class = 'buttonMessSend'><i class ='fad fa-paper-plane'></i></button>
+                                
+                            </div>
+                        </div>
                     ";
                 }
-                echo "
-                    <div class = 'itemNoti'>
-                        <div class = 'imageNoti'></div>
-                        <div class = 'contentNoti'>
-                            <h4>".$row1['chatgroup_name']."</h4>
-                            <p>Bài tập mới được giao</p>
-                        </div>
-                    </div>
-                ";
             }
         ?>
-        <div class = 'frameMess'>
+        
+        <?php
+            $sql1 = "SELECT * FROM chat_group  where user_name='$user_name'";
+            $result1 = $conn->query($sql1);
+            while($row1 = $result1->fetch_assoc()) {
+                echo "
+                <div class = 'itemNoti'>
+                    <div class = 'imageNoti'></div>
+                    <div class = 'contentNoti'>
+                        <h4>".$row1['chatgroup_name']."</h4>
+                        <p>Bài tập mới được giao</p>
+                    </div>
+                </div>
+            ";
+        }
+         ?>
+        <!-- <div class = 'frameMess'>
             <div class = 'navigationMess'>
-                <button
-                    class = 'backMess'
-                >
+                <button class = 'backMess'>
                     <i class="fas fa-angle-left"></i>
                 </button>
                 <div class = 'imageMess'></div>
@@ -187,7 +246,7 @@
                 <input class = 'inputMessChat' placeholder = "Nhập tin nhắn"></input>
                 <button class = 'buttonMessSend'><i class ="fad fa-paper-plane"></i></button>
             </div>
-        </div>
+        </div> -->
     </div>
     <div id='homepage'>
         <div class = 'backgroundNav'>
@@ -201,7 +260,7 @@
                     </form>
                 </li>
                 <li class = 'itemNav baitap1'>Bài tập được giao</li>
-                <li class = 'itemNav'><a href = '#lich'>Lịch dạy</a></li>
+                <li class = 'itemNav'><a href = '#lich'>Lịch học</a></li>
                 <li class = 'itemNav actNoti'>Thông báo</li>
                 <li class="itemNav actMess">Tin nhắn</li>
                 <!-- <li> -->
@@ -232,7 +291,7 @@
                         $row = $result->fetch_assoc();
                         echo "
                         
-                        <img src=".$row['user_image']." style='width:40px;border-radius:50px'>
+                        <img src='http://localhost/online-class/src/database/{$user_name}/image/{$row['user_image']}' style='width:40px;border-radius:50px'>
                         ".$row['user_fullname']."
 
                         <div class='dropdown'>

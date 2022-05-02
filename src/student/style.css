@@ -442,6 +442,7 @@
     transition: all 0.2s;
     transform-origin: 80% top;
     color: #fff;
+
 }
 
 .actNotification {
@@ -538,6 +539,7 @@
     align-content: space-between;
     color: #666;
     animation: show 0.35s ease;
+    height: 426px;
 }
 
 @keyframes show {

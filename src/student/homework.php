@@ -59,6 +59,7 @@
                 <form action="./index.php#lich" method='post'>
                     <input type="hidden" name="userOL" value=<?php echo $user_name ?>>
                     <p>
+                        
                         &nbsp;<img src="image/calender.jpg" style="width:50px">&nbsp;
                         <input class='header-subject' type="submit" value="Lịch học">
                     </p>
@@ -66,7 +67,7 @@
             </div>
             <hr class='hr'>
             <?php
-                $sql = "SELECT * FROM subject sj join registry rg on sj.subject_id=rg.subject_id where rg.user_name='$user_name'";
+                $sql = "SELECT sj.subject_id, sj.subject_image, sj.user_name, sj.subject_name FROM subject sj join registry rg on sj.subject_id=rg.subject_id where rg.user_name='$user_name'";
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                     $img = $row['subject_image'];
@@ -78,7 +79,7 @@
                         <form action='./subject.php' method='POST'>
                             <input type='hidden' name='userOL' value=$user_name>
                             <input type='hidden' name='subject_id' value=".$subject_id1.">
-                            <div class = 'item' style='background-image: url($img)'></div>
+                            <div class = 'item' style='background-image: url(http://localhost/online-class/src/database/{$row['user_name']}/image/{$img})'></div>
                             <p> 
                                 &nbsp; ".$sj_id." &nbsp;
                                 <input style='border:none; background: none; color:black' type='submit' value='$subject_name'>
@@ -104,11 +105,13 @@
             $day = substr($k,-11,2);
             $month = substr($k,-14,2);
             $year = substr($k,-20,4);
+            $user = $result['user_name'];
             $user_img = $result['user_image'];
             echo"
         
         <ul>
-            <img src='$user_img' class='img2'>
+            <img src='http://localhost/online-class/src/database/{$user}/image/{$user_img}'class='img2'>
+            
             <li><b>&nbsp;".$result['user_fullname']." <br>
                 &nbsp; 
                 <i>
@@ -131,7 +134,8 @@
                     $name=$row['user_name'];
                     if($name==$user_name){
             ?>
-                <img class='img' src="<?php echo $row['user_image'] ?>">
+                <img src='<?php echo "http://localhost/online-class/src/database/{$user_name}/image/{$row['user_image']}" ?>'class='img'>
+                <!-- <img class='img' src="<?php echo $row['user_image'] ?>"> -->
             <?php
                     }
                 }
@@ -173,7 +177,7 @@
                 if($user_name1==$user_name){
                     echo "
                     <ul>
-                        <img src=".$row['user_image']." class='img2'> 
+                        <img src='http://localhost/online-class/src/database/{$user_name1}/image/{$row['user_image']}'class='img2'>
                         <li><b>".$row['user_fullname']."</li>
                         
                         <li style='font-size:10px'></b>".$hour1." &nbsp; ".$day1."/".$month1."/".$year1."</li>
@@ -235,9 +239,8 @@
                 else{
                     echo "
                     <ul>
-                        <img src=".$row['user_image']." class='img2'> 
+                        <img src='http://localhost/online-class/src/database/{$user_name1}/image/{$row['user_image']}'class='img2'>
                         <li><b>".$row['user_fullname']."</li>
-                        
                         <li style='font-size:10px'></b>".$hour1." &nbsp; ".$day1."/".$month1."/".$year1."</li>
                         <li>".$row['comment_content']."</li>
                     </ul>   

@@ -43,8 +43,9 @@
             ?>
             <div class = 'row'>
                 <div class='imageUser col-md-12'}>
-                    <img src='<?php echo $row['user_image'] ?>' alt="" class='image'>
-                    <!-- <button class ='changeUser'><i class="material-icons" style="font-size:36px">photo_camera</i></button> -->
+                    <!-- <img src='<?php echo $row['user_image'] ?>' alt="" class='image'> -->
+                    <img src='<?php echo "http://localhost/online-class/src/database/{$user}/image/{$row['user_image']}" ?>'class='image'>
+
                 </div>
             </div>
             <div class='infoAdd row'>
@@ -191,7 +192,7 @@
                                         <div class='imageFriend'>
                                             <form action='./profile.php' method='post'>
                                                 <input type='hidden' name='userOL' value=$user_name>
-                                                <img src=".$row['user_image']." class='image1'>
+                                                <img src='http://localhost/online-class/src/database/{$user_name}/image/{$row['user_image']}' class='image1'>
                                                 <button type='submit' class ='btn_name' >Bạn</button>
                                             </form>
                                         </div>
@@ -204,7 +205,7 @@
                                             <form action='./profile_user.php' method='post'>
                                                 <input type='hidden' name='userOL' value=$user_name>
                                                 <input type='hidden' name='user' value=$user_friend>
-                                                <img src=".$row['user_image']." class='image1'>
+                                                <img src='http://localhost/online-class/src/database/{$user_friend}/image/{$row['user_image']}' class='image1'>
                                                 <input class ='name'  type='submit' value='$user_fullname'>
                                             </form>
                                         </div>
@@ -229,16 +230,19 @@
                         $result = $conn->query($sql);
                         while($row = $result->fetch_assoc()) {
                             $subject_id = $row['subject_id'];
+                            
                             $sql = "SELECT * FROM user where user_name='$user'";
                             $row2 = $conn->query($sql);
                             $row2 = mysqli_fetch_array($row2);
+                            $user_name1 = $row2['user_name'];
                             echo "
                                 <div class='subjectItem'>
                                     <div class='icon'>
                                         <i class='fas fa-book-reader'></i>
                                     </div>
                                     <div class='imageSubject'>
-                                        <img src=".$row['subject_image']." class='image2'>
+                                        <img src='http://localhost/online-class/src/database/{$user_name1}/image/{$row['subject_image']}' class='image2'>
+                                        
                                     </div>
                                     <div class='infoSuject'>
                                         <div>
@@ -271,13 +275,14 @@
                             $get = "SELECT * FROM user u join subject sj on u.user_name=sj.user_name where subject_id='$subject_id'";
                             $data = $conn->query($get);
                             while($row1 = $data->fetch_assoc()) {
+                                $user_name1 = $row1['user_name'];
                             echo "
                                 <div class='subjectItem'>
                                     <div class='icon'>
                                         <i class='fas fa-book-reader'></i>
                                     </div>
                                     <div class='imageSubject'>
-                                        <img src=".$row1['user_image']." class='image2'>
+                                        <img src='http://localhost/online-class/src/database/{$user_name1}/image/{$row1['user_image']}' class='image2'>
                                     </div>
                                     <div class='infoSuject'>
                                         <div>
@@ -304,16 +309,17 @@
             </div>
         </div>
         <div class='discription col-md-3'>
-            <h5>Mô tả bản thân</h5>
+            <h5>Thông tin cá nhân</h5>
             <p>
                 <?php
                     $sql="SELECT * FROM user where user_name='$user'";
                     $result = $conn->query($sql);
                     $row = $result->fetch_assoc();
                     echo "
+                        <b>Họ tên : </b>".$row['user_fullname']."<br>
                         <b>Địa chỉ : </b>".$row['user_address']."<br>
-                        <b>Email : </b>".$row['user_email']." 
-                         
+                        <b>Email : </b>".$row['user_email']." <br>
+                        <b>Ngành học: </b>".$row['user_major']."<br>    
                     ";
                 ?>
             </p>

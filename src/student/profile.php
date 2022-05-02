@@ -1,5 +1,6 @@
 <?php
     include './demo/connect.php';
+    include './logSystem.php';
     $user_name=$_POST['userOL'];
     $_POST['userOL'];
 
@@ -44,7 +45,7 @@
             ?>
             <div class = 'row'>
                 <div class='imageUser col-md-12'}>
-                    <img src='<?php echo $row['user_image'] ?>'class='image'>
+                    <img src='<?php echo "http://localhost/online-class/src/database/{$user_name}/image/{$row['user_image']}" ?>'class='image'>
                 </div>
             </div>
             <div class='infoAdd row'>
@@ -122,7 +123,9 @@
                                                 
                                                     }else{
                                                         $sql = "UPDATE user SET user_fullname='$fullname', user_email='$email', user_phone='$phone', user_address='$address', user_major='$major', user_image='$duongdan' WHERE user_name='$user_name'";
-                                                        mysqli_query($conn,$sql);    
+                                                        mysqli_query($conn,$sql);
+
+                                                        logSystem('Chỉnh sửa thông tin', $user_name, $conn);    
                                                     }
                                                 }
                                             ?>
@@ -156,7 +159,7 @@
                                 <div class='friendItem'>
                                     <div class='imageFriend'>
                                         <form action='./profile_user.php' method='post'>
-                                            <img src=".$row['user_image']." class='image1'>
+                                            <img src='http://localhost/online-class/src/database/{$user_friend}/image/{$row['user_image']}' class='image1'>
                                             <input type='hidden' name='userOL' value=$user_name>
                                             <input type='hidden' name='user' value=$user_friend>
                                             <input class='name'  type='submit' value='$user_fullname'>    
@@ -179,13 +182,14 @@
                             $get = "SELECT * FROM user u join subject sj on u.user_name=sj.user_name where subject_id='$subject_id'";
                             $data = $conn->query($get);
                             while($row1 = $data->fetch_assoc()) {
+                                $user_name1 = $row1['user_name'];
                             echo "
                                 <div class='subjectItem'>
                                     <div class='icon'>
                                         <i class='fas fa-book-reader'></i>
                                     </div>
                                     <div class='imageSubject'>
-                                        <img src=".$row1['user_image']." class='image2'>
+                                        <img src='http://localhost/online-class/src/database/{$user_name1}/image/{$row1['user_image']}' class='image2'>
                                     </div>
                                     <div class='infoSuject'>
                                         <div>
@@ -209,16 +213,17 @@
             </div>
         </div>
         <div class='discription col-md-3'>
-            <h5>Mô tả bản thân</h5>
+            <h5>Thông tin cá nhân:</h5>
             <p>
                 <?php
                     $sql="SELECT * FROM user where user_name='$user_name'";
                     $result = $conn->query($sql);
                     $row = $result->fetch_assoc();
                     echo "
+                        <b>Họ tên : </b>".$row['user_fullname']."<br>
                         <b>Địa chỉ : </b>".$row['user_address']."<br>
-                        <b>Email : </b>".$row['user_email']." 
-                         
+                        <b>Email : </b>".$row['user_email']." <br>
+                        <b>Ngành học : </b>".$row['user_major']."<br>
                     ";
                 ?>
             </p>
