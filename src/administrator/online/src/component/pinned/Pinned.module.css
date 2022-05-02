@@ -1,0 +1,18 @@
+.pinned {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+.pinned button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 20px;
+    width: 240px;
+    height: 120px;
+    background-color: rgba(255, 255, 255, 0.615);
+    backdrop-filter: blur(12px);
+    border-radius: 20px;
+}

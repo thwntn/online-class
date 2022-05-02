@@ -1,12 +1,10 @@
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import style from './header.module.css'
-import Noti from './notification.js'
-import HomePage from '../homepage/homepage'
-import Log from '../log/log'
+import { PageContext } from '../../context/MainContext'
+import Noti from './notification'
+import Message from './message'
 import Confirm from '../confirm/confirm'
-import Message from './message.js'
-import AccountActive from '../confirm/infouser/accountactive'
-import Statistical from '../statistical/statistical'
+import Log from '../log/log'
 
 const items = ['Trang chủ', 'Tài khoản', 'Thông báo', 'Tin nhắn', 'Nhật kí']
 
@@ -15,6 +13,22 @@ function Header ({setMain}) {
     const [activeNoti, setActiveNoti] = useState(false)
     const [activeMessage, setActiveMess] = useState(false)
     const [notRead, setNotRead] = useState(null)
+    
+    const page = useContext(PageContext)
+    console.log(page);
+
+    useEffect(() => {
+      fetchNotification()
+    }, [])
+
+    useEffect(() => {
+      const id = setInterval(() => {
+        fetchNotification()
+      }, 5000);
+      return () => {
+        clearInterval(id)
+      }
+    }, [])
 
     //đặt thông báo về trạng thái đã đọc hết
     const resetNotification = () => {
@@ -31,18 +45,6 @@ function Header ({setMain}) {
       })
     }
   
-    useEffect(() => {
-      fetchNotification()
-    }, [])
-
-    useEffect(() => {
-      const id = setInterval(() => {
-        fetchNotification()
-      }, 5000);
-      return () => {
-        clearInterval(id)
-      }
-    }, [])
 
     let expandMenu = '48px';
     const setExpandMenu = () => {
@@ -63,28 +65,37 @@ function Header ({setMain}) {
                 <li
                     className = {style.item}
                     onClick = {() => {
-                        setMain(<HomePage></HomePage>)
+                        page.setMain(page.HomePage)
                         setScroll (style.noActive)
                     }}
                     ><a href = '#home'><i className="fal fa-home"></i></a></li>
                 <li
                     className = {style.item}
                     onClick = {() => {
-                        setMain(<Confirm></Confirm>)
                         setScroll (style.active)
+                        page.setMain(<Confirm></Confirm>)
+                    }}
+                    onDoubleClick={() => {
+                        page.pinItem('account')
                     }}
                 ><a href = '#account'><i className="fal fa-user-alt"></i></a></li>
                 <li
                     className = {style.item}
                     onClick = {() => {
-                        setMain(<Statistical></Statistical>)
+                        page.setMain(page.Statistical)
                         setScroll (style.active)
+                    }}
+                    onDoubleClick={() => {
+                        page.pinItem('manage')
                     }}
                 ><a href = '#manage'><i className="fal fa-chart-bar"></i></a></li>
                 <li
                     onClick = {() => {
                         setScroll (style.active)
-                        setMain(<Log></Log>)
+                        page.setMain(<Log></Log>)
+                    }}
+                    onDoubleClick={() => {
+                        page.pinItem('log')
                     }}
                     className = {style.item}
                 ><a href = '#log'><i className="fal fa-clipboard"></i></a></li>

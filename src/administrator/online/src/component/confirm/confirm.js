@@ -1,36 +1,16 @@
-import { useState } from 'react'
-import style from './confirm.module.css'
+import { useContext, useState } from 'react'
+import  style from './confirm.module.css'
 import AccountActive from './infouser/accountactive'
 import Wait from './infouser/wait'
+import { PageContext } from '../../context/MainContext'
 
 
-
-const Confirm = () => {
+function Confirm () {
     const [view, setView] = useState(false)
     const [wait, setWait] = useState(false)
+    const page = useContext(PageContext)
 
-
-    function find(arr, string) {
-        let result = arr.find(item => item.key == string)
-        let final
-        result == undefined ? final = false : final = (result.key == string)
-        return final
-    }
-
-    
-    function pinItem () {
-        let listFunc = JSON.parse(localStorage.getItem('listFunc'))
-        console.log(find(listFunc, 'managerUser'));
-        listFunc.push(
-            {
-                name: 'Quản trị người dùng',
-                key: 'managerUser'
-            }
-        )
-        localStorage.setItem('listFunc', JSON.stringify(listFunc))
-    }
-
-    return(
+    return (
         <div  id = 'account' className = {style.background + ' row pad'}>
             <div className = {style.boxItems}>
                 <div className = {style.items + ' col-md-5'}>
@@ -38,9 +18,7 @@ const Confirm = () => {
                         <button
                             className={style.itemNav}
                             onClick={() => {
-                                console.log('click');
-                                pinItem()
-                                
+                                page.pinItem('managerUser')
                             }}
                         >
                             <i className={style.pinAccount + ' fad fa-map-pin'}></i>
@@ -63,7 +41,11 @@ const Confirm = () => {
                 </div>
                 <div className = {style.items + ' col-md-5'}>
                     <div className={style.navConfirm}>
-                        <button className={style.itemNav}>
+                        <button className={style.itemNav}
+                            onClick={() => {
+                                page.pinItem('waitUser')
+                            }}
+                        >
                             <i className={style.pinAccept + " fad fa-map-pin"}></i>
                         </button>
                         <button className={style.itemNav}>

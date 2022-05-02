@@ -10,7 +10,7 @@ function App() {
   if(!localStorage.getItem('listFunc')){
     localStorage.setItem('listFunc', JSON.stringify([]))
   }
-  // console.log(sessionStorage.getItem('userOL') == undefined);
+
   const [main, setMain] = useState(<HomePage></HomePage>)
   if (window.innerWidth < 998) {
     return (
@@ -22,9 +22,7 @@ function App() {
   }
   else return (
       <div className='container-fluid' style = {{ padding: '0px', margin: '0px'}}>
-        {/* <Profile></Profile> */}
-        <Header setMain = {setMain}></Header>
-        {main}
+        <Header></Header>
       </div>
   )
 }
