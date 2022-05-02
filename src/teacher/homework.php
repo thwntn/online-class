@@ -1,5 +1,6 @@
 <?php
     include './connect.php';
+    include './logSystem.php';
     $homework_id = $_POST['homework_id'];
     $user = $_POST['userOL'];
 ?>
@@ -122,7 +123,7 @@
                                        }else{
                                         $sql2 = "UPDATE homework SET homework_id='$homework',  homework_content='$content', homework_time=now(), homework_finish='$hw_finish' WHERE homework_id='$homework_id'";
                                          mysqli_query($con,$sql2);
-                                            
+                                         logSystem('chỉnh sửa tài liệu', $user, $con);
                                             }
                                         }
                                 ?>
@@ -133,7 +134,7 @@
                         </form> 
             
         <ul>
-        <img src="<?php echo $user_img; ?>" class='img2'>
+        <img src="<?php echo "http://localhost/online-class/src/database/{$user}/image/{$row['user_image']}" ?>" class='img2'>
             <li><b>&nbsp;<?php echo $row['user_fullname']; ?> <br>
                 &nbsp; 
                 <i>
@@ -162,7 +163,7 @@
         </ul> <br> <hr> <br>
         <div class="comment">
         
-             <img src="<?php echo $user_img?>">
+             <img src="<?php echo "http://localhost/online-class/src/database/{$user}/image/{$row['user_image']}" ?>">
              <form action="" method="post" class="comment-1">
                 <input class="comment-2" type="text" name="comment" require>
                 <input type='hidden' name='userOL' value=<?php echo $user ?>>
@@ -180,6 +181,7 @@
                     $sql1 = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
                         VALUES ('$content', now(),'$user','$homework_id')";
                     $kq1=$con->query($sql1);
+                    logSystem('thêm bình luận', $user, $con);
                 }
             }
             ?>
@@ -225,11 +227,11 @@
                
                         
                        
-                        <form action="" method="post">
+                                    <form action="" method="post">
                                         
                                         <div class="fomrgroup">
                                             <input type="hidden" name="comment_id" value = "<?php echo $row['comment_id'] ?>" >
-                                            <input type="text" name="comment_content" value="<?php echo $row["comment_content"] ?>">
+                                            <input type="text" class='cmt-content' name="comment_content" value="<?php echo $row["comment_content"] ?>">
                                         </div>
                                         
                                     </form>
@@ -242,7 +244,7 @@
                                         }else{
                                         $sql2 = "UPDATE comment SET comment_content='$cmt_content', comment_time=now() WHERE comment_id=' $comment_id'";
                                         mysqli_query($con,$sql2);    
-                                        
+                                        logSystem('Sửa bình luận', $user, $con);
                                         }
                                     }
                                     ?>     
@@ -261,7 +263,7 @@
                     }
                     ?>
                      <ul>
-                    <img src="<?php echo $row['user_image'] ?>" class='img2'>
+                    <img src="<?php echo "http://localhost/online-class/src/database/{$user1}/image/{$row['user_image']}" ?>" class='img2'>
                     <li><b><?php echo $row['user_fullname'] ?></li>
                     <li style='font-size:12px'><?php echo $row['comment_time'] ?></b></li>
                     <li><?php echo $row['comment_content'] ?></li>
@@ -274,26 +276,92 @@
     <div class="right">
         
         <div class="right-2">
-            <p><b>Danh sách sinh viên đã nộp bài
+        <p><b>Danh sách sinh viên đã nộp bài
                 </b></p>
                 
-              
             <?php 
-            $sql="SELECT * FROM homework hw join score on hw.homework_id=score.homework_id
-                                            join user on score.user_name=user.user_name
+            $sql="SELECT * FROM homework hw join document dc on hw.homework_id=dc.homework_id
+                                            join user on dc.user_name=user.user_name
                                             where hw.homework_id= '$homework_id' ";
+
              $kq = $con->query($sql);
              while($row = mysqli_fetch_assoc($kq)){
-                 echo "
+               
+                
+                    echo "
                  <div class='list-score'>                                                  
-                    <p><img src=".$row['user_image']." class='user-img'> ".$row['user_fullname']."</p>                                                       
-                 </div>   
-                 ";
+                    <p><img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['user_image']}' class='user-img'> ".$row['user_fullname']."</p>
+                </div>                                                        
+                   ";
              }
-            ?>
+            
+               ?><br>
             <div id="xemthem">
-            <button class='button'>Xem thêm...</button>
+            <form action="./homework_score.php" method="post">
+                <button class='button' type="submit">Xem thêm...</button>
+                <input type="hidden" name="homework_id" value = "<?php echo $homework_id ?>" >
+                <input type="hidden" name="userOL" value="<?php echo $user?>">
+            </form>
             </div>
+                <br>
+                <form action="" method="post" >
+                    <input type="hidden" name="userOL" value = "<?php echo $user ?>">
+                    <button type='button' class='point' data-bs-toggle='modal' data-bs-target='#exampleModal1'>Chấm điểm</button>  
+                    <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content" style="height:250px;width:500px">
+                               <div class="fomrgroup" >
+                                    <form action="" method="post">
+                                    <?php 
+                                    $sql1="SELECT * FROM document dc join user on dc.user_name=user.user_name 
+                                                    where homework_id='$homework_id'";
+                                    $kq1=$con->query($sql1);
+                                    $code = array();
+                                    while($row1=$kq1->fetch_array()){
+                                        $code[] = $row1; 
+                                        $subject_score=$row1['subject_id'];
+                                    }
+                                    ?>
+                                             
+                                    <input type="hidden" name="subject_id" value = "<?php echo $subject_score ?>" >
+                                    <input type="hidden" name="homework_id" value = "<?php echo $homework_id ?>" >
+                                    <select class="create" name="user_name" style="width:100px">
+                                        <option >Tên</option> 
+                                        <?php foreach($code as $key => $value){ ?>
+                                            <option value="<?php echo $value["user_name"]; ?>"><?php echo $value["user_fullname"]; ?></option> 
+                                        <?php } ?> 
+                                        
+                                    </select>
+                                    <input type="text" name="score_level" >
+                                            
+                                    </form>
+                                </div>                
+                                <div class="fomrgroup-1" style="text-align:center;">   
+                                    <input style="width:70px;" type="submit" class="btn btn-primary" name="submit-score" value="Save">
+                                    <input style="width:70px"  type="button" class="btn btn-danger" data-bs-dismiss="modal" value="Cancel">
+                                </div>
+                                <?php 
+                                if(isset($_POST["submit-score"])){
+                                    
+                                    $user_score=$_POST["user_name"];
+                                    $score_level=$_POST["score_level"];
+                                    if($score_level == ""  ){
+                                        
+                                    }else{
+                                    $sql2 = "INSERT INTO score( user_name, subject_id, homework_id, score_level) VALUES ('$user_score', '$subject_score','$homework_id','$score_level')";
+                                    mysqli_query($con,$sql2); 
+                                    logSystem('Chấm điểm', $user, $con);
+                                        }
+                                    }
+                                
+                                ?>
+                            </div>
+                        </div>
+                    </div>
+                </form  >       
+    
+            
+            
             <!-- Bảng điểm -->
             <form action="" method="post">
             <button type="button" class="score" data-bs-toggle="modal" data-bs-target="#staticBackdrop">Bảng điểm</button> 
@@ -329,7 +397,7 @@
                                     {  
                                     echo "
                                     <ul>
-                                    <li><img src=".$row['user_image']." style='width:40px;border-radius:20px;margin-left:-10px'></li>
+                                    <li><img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['user_image']}' style='width:40px;border-radius:20px;margin-left:-10px'></li>
                                     <li style='margin-top:8px'>".$row['user_fullname']."</li>
                                     <li style='margin-top:8px'><button><img src='image/free-file-icon-1453-thumb.png' style='width:15px'></button></li>
                                     <li style='color:red; margin-top:10px'><b>".$row['score_level']."</b></li> 

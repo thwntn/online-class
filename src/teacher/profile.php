@@ -1,6 +1,8 @@
 <?php
 include 'connect.php';
-$user=$_POST['userOL'];$_POST['userOL'];
+include './logSystem.php';
+$user=$_POST['userOL'];
+
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +45,7 @@ $user=$_POST['userOL'];$_POST['userOL'];
         <div class='leftBar col-md-3'>
             <div class = 'row'>
                 
-                <div class='imageUser col-md-12' style='background:url(<?php echo $row['user_image'] ?>); background-size: cover '}>
+                <div class='imageUser col-md-12' style='background:url(<?php echo "http://localhost/online-class/src/database/{$user}/image/{$row['user_image']}" ?>); background-size: cover '}>
                    
                   
                 </div>
@@ -69,10 +71,10 @@ $user=$_POST['userOL'];$_POST['userOL'];
             
             <div class='change row'>
 
-                <div class="container">
+            <div class="container">
                 
                 
-                <form action="" method = "post" >   
+                <form action="" method = "post" enctype="multipart/form-data">   
                     <button type="button" id="myBtn" data-target=".modal1" >Chỉnh sửa thông tin</button>
                     <input type="hidden" name="userOL" value=<?php echo $user?>>
                     <!-- The Modal -->
@@ -88,8 +90,11 @@ $user=$_POST['userOL'];$_POST['userOL'];
                                         <input type="text" name="user_phone" value="<?php echo $row['user_phone'] ?>">    
                                         <input type="text" name="user_address" value="<?php echo $row['user_address'] ?>">  
                                         <input type="text" name="user_major" value="<?php echo $row['user_major'] ?>">                                            
-                                        <input style="display:none" class="upload" type="file" name="fileUpload">
-                                        <p class="user-image">Hình ảnh</p>              
+                                        <input class='upload' type="file" name = "avatar">
+                                        <!-- <p  class="user-image">Hình ảnh</p> -->
+                            
+                                            <input type='hidden' name='userOL' value=<?php echo $user ?>>
+                                        
                                     </div>
                                     <div class="fomrgroup-1" style="text-align:center;margin-top:30px">                   
                                         <button class="btn btn-primary" type='submit' name="update-user">Save</button>
@@ -103,20 +108,21 @@ $user=$_POST['userOL'];$_POST['userOL'];
                                     $phone = $_POST["user_phone"];
                                     $address = $_POST["user_address"];
                                     $major = $_POST["user_major"];       
-                                    $duongdan = $_FILES['fileUpload']['name'];
+                                    $duongdan = $_FILES['avatar']['name'];
+                                                    
                                     if(is_dir('../database/'.$user.'/image/')) {
                                     }
                                     else {
                                         mkdir("../database/".$user."/image/", 7777, true);
                                     }
-            
-                                    move_uploaded_file($_FILES['fileUpload']['tmp_name'],'../database/'.$user.'/image/' . $duongdan);
+
+                                    move_uploaded_file($_FILES['avatar']['tmp_name'],'../database/'.$user.'/image/' . $duongdan);
                                     if ($fullname == "" || $email == "" || $phone == "" || $address == "" || $major == "" || $duongdan == "") {
                                      
                                    }else{
                                     $sql = "UPDATE user SET user_fullname='$fullname', user_email='$email', user_phone='$phone', user_address='$address', user_major='$major', user_image='$duongdan' WHERE user_name='$user'";
                                      mysqli_query($con,$sql);
-                                        
+                                     logSystem('chỉnh sửa thông tin', $user, $con);
                                         }
                                     }
                             ?>
@@ -207,6 +213,10 @@ $user=$_POST['userOL'];$_POST['userOL'];
                  
         </div>
         <div class='discription col-md-3'>
+        <form action="./index.php" method='post'>
+                <input type="hidden" name="userOL" value=<?php echo $user?>>
+                <button type="submit" class="home">Trang chủ</button>
+        </form>
             <h5>Description</h5>
             <p>
             Experts predict that annual eCommerce sales will exceed $6 trillion dollars by 2023. 
@@ -240,13 +250,13 @@ $user=$_POST['userOL'];$_POST['userOL'];
 
         handle.start()
 
-         //Thêm hình ảnh
-         document.querySelector('.user-image').addEventListener('click', function () {
-         document.querySelector('.upload').click()
-     })
-     document.querySelector('.upload').addEventListener('change', function () {
-         document.querySelector('.user-image').innerHTML = document.querySelector('.upload').value
-     })
+          //Thêm hình ảnh
+    //       document.querySelector('.user-image').addEventListener('click', function () {
+    //       document.querySelector('.upload').click()
+    //   })
+    //   document.querySelector('.upload').addEventListener('change', function () {
+    //       document.querySelector('.user-image').innerHTML = document.querySelector('.upload').value
+    //   })
 
 // Modal
     var modal = document.getElementById('myModal');

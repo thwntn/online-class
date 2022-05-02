@@ -1,6 +1,7 @@
 <?php
 include 'connect.php';
 include 'header.php';
+include 'logSystem.php';
 $user=$_POST['userOL'];
 ?>
 <br> <br> <br>
@@ -8,21 +9,21 @@ $user=$_POST['userOL'];
 <br>
  <form action="" method="POST" class="addclass" enctype="multipart/form-data">
     <ul class="addclass-1">
-        <li><h1>Tạo môn học</h1> <br> </li>
+        <li><h3>Tạo môn học</h3> <br> </li>
         <li><input type='hidden' name='userOL' value=<?php echo $user ?>></li>
         <li><input class="create-1" type="text" name="subject_name" placeholder="Tên môn học"></li>
-        <li><input class="create-1" type="text" name="id"></li>
+        <li><input class="create-1" type="text" name="id" placeholder="Mã môn-Học kỳ-Năm học"></li>
         <li><input class="upload-1" type="file" name="fileUpload">
             <p class="create-3">Hình ảnh</p>
         </li>
         <li><input class="create-1" type="text" name="subject_week" placeholder="Tuần học"></li>
-        <li><h5>Thời gian bắt đầu học kỳ </h5></li>
+        <li><h6>Thời gian bắt đầu học kỳ </h6></li>
         <li><input class="create-1" type="date" name="subject_time"></li>
         <li><button name="submit-sj" class="btn btn-secondary" style="margin-left:100px">Thêm môn học </button></li>
 
     </ul>
     <ul class="addclass-2">
-        <li><h1>Lịch giảng dạy</h1> <br></li>
+        <li><h3>Lịch giảng dạy</h3> <br></li>
         <li><input type='hidden' name='userOL' value=<?php echo $user ?>></li>
         <li>
             <?php 
@@ -56,7 +57,6 @@ if (isset($_POST["submit-sj"])) {
     $name = $_POST["subject_name"];
     $week = $_POST["subject_week"];
     $time = $_POST["subject_time"];
-    // $image = $_POST["subject_image"];
     $duongdan = $_FILES["fileUpload"]["name"];
     $path = "image/";
     $slug = $path . $duongdan;
@@ -73,8 +73,10 @@ if (isset($_POST["submit-sj"])) {
             Thêm môn học thành công, hãy thêm lịch giảng dạy!
             </div>
         ";
+        logSystem('tạo 1 môn học', $user, $con);
     }
 }
+    
 ?>
  <?php 
      if (isset($_POST["submit-calendar"])) {
@@ -92,8 +94,10 @@ if (isset($_POST["submit-sj"])) {
             Thêm lịch giảng dạy thành công.
             </div>
         ";
+        logSystem('tạo 1 lịch giảng dạy', $user, $con);
     }
  }
+    
 ?> 
 <script>
     //Thêm hình ảnh

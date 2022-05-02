@@ -53,18 +53,73 @@ $friend_user=$_POST['user'];
                 $kq2 = $con->query($sql2);
                 $row2 = $kq2->fetch_assoc();
                  if(isset($row2)){
-                if($row2['friend_status'] == 1){
-                    echo "                                 
-                    <button>Bạn bè</button>
-                 ";
-                }else{
-                    echo "
-                     
-                    <button>Kết bạn</button>
-                    
-                    ";
-                }
-                 }
+                    if($row2['friend_user']==$friend_user && $row2['user_name']==$user && $row2['friend_status']==2){
+                        
+                        echo "
+                        <form action='' method='post'>
+                            <input type='hidden' name='userOL' value=$user>
+                            <input type='hidden' name='user' value=$friend_user>
+                            <button type='submit' name='edit_friend' style='width:170px'>Đã gửi lời mời kết bạn</button>
+                        </form>
+                        ";
+                        }else if($row2['friend_status'] == 1){
+                        echo "                                 
+                         
+                    <div class='dropdown'>
+                        <button onclick='hamDropdown()' class='nut_dropdown' type='submit'>Bạn bè</button>
+                            <div class='noidung_dropdown'>
+                                <form action='' method='post'>
+                                    <input type='hidden' name='userOL' value=$user>
+                                    <input type='hidden' name='user' value=$friend_user>
+                                    <input type='submit' name='unfriend' value='Hủy kết bạn'>
+                                </form>
+                            </div>
+                      </div>                         
+                             
+                        ";
+                        }
+                        
+                    }else{
+                        echo "
+                        <form action='' method='post'>
+                        <input type='hidden' name='userOL' value=$user>
+                        <input type='hidden' name='user' value=$friend_user>
+                        <button type='submit' name='submit_friend'>Kết bạn</button>
+                    </form>
+                            
+                        ";
+                        }        
+                ?>
+            
+            <!-- Kết bạn -->
+                <h4>
+                <?php
+                        if(isset($_POST['submit_friend'])){
+                            // $user_name=$_POST['userOL'];
+                            // $user=$_POST["user"];
+                            $sql3 = "INSERT INTO friend(friend_user, user_name, friend_status) 
+                                VALUES ('$friend_user','$user', 2)";
+                            $kq3=$con->query($sql3);
+                            echo "
+                                <p style='font-size:20px'>
+                                    Đã gửi lời mời kết bạn!
+                                <p>
+                            ";
+                        }
+                    ?>
+                </h4>   
+                <!--Hủy kết bạn -->
+                <?php
+                    if (isset( $_POST['unfriend'])) {
+                        $sql="DELETE FROM friend where friend_user='$friend_user' and user_name='$user' and friend_status=1";
+                        mysqli_query($con,$sql);
+                    }
+                ?>
+                <?php
+                    if (isset( $_POST['unfriend'])) {
+                        $sql4="DELETE FROM friend where friend_user='$user' and user_name='$friend_user' and friend_status=1";
+                        mysqli_query($con,$sql4);
+                    }
                 ?>
             </div>
             <div class='count row'>
@@ -77,11 +132,6 @@ $friend_user=$_POST['user'];
                     <l>Lớp học</l>
                 </div> -->
             </div>
-            <!-- <div class='change row'>
-           
-            <button type = "button"  id="myBtn" >Chỉnh sửa thông tin </button>
-        
-            </div> -->
         </div>
         <div class='rightBar col-md-6'}>
             <div class='banner row'>
@@ -219,6 +269,10 @@ $friend_user=$_POST['user'];
             </div>
         </div>
         <div class='discription col-md-3'>
+        <form action="./index.php" method='post'>
+                <input type="hidden" name="userOL" value=<?php echo $user?>>
+                <button type="submit" class="home">Trang chủ</button>
+            </form>
             <h5>Description</h5>
             <p>
             Experts predict that annual eCommerce sales will exceed $6 trillion dollars by 2023. 
@@ -283,7 +337,10 @@ $friend_user=$_POST['user'];
             modal.style.display = "none";
         }
     }
-
+    function hamDropdown() {
+                    document.querySelector(".noidung_dropdown").classList.toggle("hienThi");
+                   } 
     </script>
+    
 </body>
 </html>

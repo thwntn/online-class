@@ -27,13 +27,13 @@
 
 
     <div class = "mainSession row pad">
-        <h2 class = "title row-md-10">Quản lí môn học</h2>
+        <h4 class = "title row-md-10">Quản lí môn học</h4>
         <div class = "navigation col-md-6">
             <ul class = "listNav">
                 <!-- <li><a href="./addclass.php">Thêm lớp học</a></li> -->
                 <form action='./addclass.php' method='POST'>
                     <input type='hidden' name='userOL' value=<?php echo $user ?>>
-                    <li><input type='submit' value='Thêm lớp học' style="border:none;background:none"></li>
+                    <li><input type='submit' value='Tạo môn học' style="border:none;background:none"></li>
                 </form>
                 
                 <li>
@@ -52,22 +52,36 @@
                 $sql="SELECT * FROM subject where user_name='$user'";
                 $kq=$con->query($sql);
                 while($row=$kq->fetch_assoc()){
-                    $subject = $row['subject_id'];
+                    $subject = $row['subject_id'];  
                     $id = substr($subject,0,5);
+                   
                     ?>
                     <div class = 'itemBox col-md-4'>
                         <!--Xóa môn học -->
                       
                                 <form action = "" method = "POST"  class = "formDelete" >
                                     <button type="submit" class = "delete"><i class="fa-solid fa-xmark"></i></button>
-                                    <input type="hidden" name="subject_id" value = " <?php echo $row['subject_id']; ?>" >
+                                    <input type="hidden" name="subject_id" value =  <?php echo $subject ?> >
+                                    
                                     <input type="hidden" name="userOL" value=<?php echo $user?>>
                                 </form>  
                                 <?php 
-                                    if(isset($_POST['subject_id'])){                              
-                                    $sql="DELETE FROM subject where subject_id='$subject'";
+                                if(isset($_POST['subject_id'])){      
+                                    $sj_id=$_POST['subject_id'] ;                                                   
+                                    $sql="DELETE FROM calendar where subject_id='$sj_id'";
                                     mysqli_query($con,$sql);
                                 }
+                                if(isset($_POST['subject_id'])){      
+                                    $sj_id=$_POST['subject_id'] ;                                                   
+                                    $sql="DELETE FROM subject where subject_id='$sj_id'";
+                                    mysqli_query($con,$sql);
+                                }
+
+                                if(isset($_POST['subject_id'])){ 
+                                     $sj_id=$_POST['subject_id'] ;                             
+                                     $sql="DELETE FROM homework where subject_id='$subject'";
+                                     mysqli_query($con,$sql);
+                                     }                                     
                                 ?>
                         
                         <div class = 'item'>
@@ -75,9 +89,9 @@
                             </div>
                             <div class= 'titleItem'>                           
                                  <form action='./subject.php' method='post'>                                  
-                                 <input type='hidden' value="<?php echo $row['subject_id']; ?>" name='subject_id'>
+                                 <input type='hidden' value="<?php echo  $subject ?>" name='subject_id'>
                                     <input type='hidden' name='userOL' value=<?php echo $user ?>>                                                                    
-                                    <h3 class = 'keySubject'><input type='submit' value="<?php echo $id ;?>"></h3>
+                                    <h4 class = 'keySubject'><input type='submit' value="<?php echo $id ;?>"></h4>
                                     <h5 class = 'nameSubject'><input type='submit' value="<?php echo $row['subject_name'] ;?>"><h5>
                                 </form>
                                     
@@ -95,13 +109,14 @@
                     </div>
 
                     <?php
-                        }
+                        
+                    }
                     ?>                  
         </div> 
 
 
 
-        <button class = "more">Xem thêm...</button>
+
     </div>
 
   

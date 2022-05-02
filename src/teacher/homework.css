@@ -227,25 +227,34 @@
 .list-score {
     background-color: rgb(235, 235, 235); 
     border-radius:20px;
-    
-
+    display: flex;
+    height:40px;
     margin:0;
     padding:0px 10px ;
     margin-top:6px;
-    margin-right:10px;
+  
 }
 .list-score li{
     list-style-type: none;
   
 } 
+ .list-score button{
+  margin-top:5px;
+   margin-left:20px;
+ 
+    
+} 
+.score-level{
+    margin-left:-100px;
+}
 
 .score{
     border:none;
     font-weight: bold;
     background-color: white;
     margin-top:10px;
-    text-align:center;
 }
+
 /* .popup {
     display: none;
     position: fixed;
@@ -342,10 +351,13 @@
     background-color: rgb(218, 214, 214);
     border:none;
     border-radius: 10px;
-    margin-top:10px;
-    
+    margin-top:10px;  
 }
 
+.fomrgroup .cmt-content{
+    width:400px;
+    margin-left:-100px !important;;
+}
  .fomrgroup b{
     font-size: 20px;
 }

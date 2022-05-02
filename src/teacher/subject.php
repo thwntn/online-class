@@ -1,7 +1,9 @@
 <?php
     include './connect.php';
+    include './logSystem.php';
     $subject_id = $_POST['subject_id'];
     $user = $_POST['userOL'];
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -71,7 +73,7 @@
                                                             }else{
                                                             $sql = "UPDATE subject SET subject_id = '$sjid', subject_name='$name' WHERE subject_id='$subject'";
                                                             mysqli_query($con,$sql);    
-                                                        
+                                                            logSystem('chỉnh sửa môn học', $user, $con);
                                                             }
                                                         } 
                                                         ?>
@@ -114,12 +116,20 @@
                                         $finish = $_POST["finish"];
                                         $content = $_POST["content"];
                                         $duongdan = $_FILES["fileUpload"]["name"];
-                                        move_uploaded_file($_FILES["fileUpload"]["tmp_name"],'./filetailieu/' . $duongdan);
+                                        if(is_dir('../database/'.$subject_id.'/homework/')) {
+                                        }
+                                        else {
+                                            mkdir("../database/".$subject_id."/homework/", 7777, true);
+                                        }
+                
+                                        move_uploaded_file($_FILES['fileUpload']['tmp_name'],'../database/'.$subject_id.'/homework/' . $duongdan);
+                                        
                                         if ($id == "") {     
                                             echo  "<script>alert('Vui lòng nhập đầy đủ thông tin')</script>";
                                         }else{
                                             $sql = "INSERT INTO homework( homework_id, subject_id, homework_content, homework_time, homework_finish) VALUES ('$id', '$subject_id', '$content' '$duongdan', now(), '$finish')";
                                             mysqli_query($con,$sql); 
+                                            logSystem('thêm 1 tài liệu', $user, $con);
                                             
                                             }
                                         }
@@ -168,7 +178,7 @@
                                         }else{
                                             $sql = "INSERT INTO notification( noti_content, noti_time, noti_status, user_name) VALUES ('$content_noti', now(),0,'$user_rg')";
                                             mysqli_query($con,$sql); 
-                                            
+                                            logSystem('thêm 1 thông báo', $user, $con);
                                             }
                                         }
                                     }
@@ -179,7 +189,7 @@
                     </div>   
            
                             
-
+<!-- Danh sách thành viên -->
     <div class="link">
         <form action="" method="post">
             <button type="button" class="repair" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class='fa-solid fa-pencil'></i></button>            
@@ -190,49 +200,74 @@
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl" style="width:70%">
                     <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="staticBackdropLabel">Danh sách thành viên</h5>
-                        <button type="button" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none">Đóng</button>
-                    </div>
-                    <div class="modal-body">
-             
-                    <?php
-                        $sql="SELECT * FROM user join registry rg on user.user_name=rg.user_name where subject_id= '$subject_id'";
-                        $kq = $con->query($sql);
-                        echo"<table>";
-                        while($row = mysqli_fetch_assoc($kq)){
-                            echo "<tr>";
-                            for($i=1;$i<4;$i++)
-                            {
-                                echo "<td style='width:300px'>";
-                                if($row!=false){  
-                                  
-                                    
-                                    echo "
-                                   
-                                    <ul>
-                                    <li><img src=".$row['user_image']." ></li>
-                                    <li style='margin-top:10px'>".$row['user_fullname']."</li> 
-                                    ";
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Danh sách thành viên</h5>
+                            <button type="button" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none">Đóng</button>
+                        </div>
+                        <div class="modal-body">
+                            <div class = "items row">
+                            <?php
+                                $sql="SELECT * FROM registry where subject_id= '$subject_id'";
+                                $kq = $con->query($sql);
                             
-                                    
+                                    while($row = mysqli_fetch_assoc($kq)){
+                                    $user_registry=$row['user_name'];
+                                    $subject_id=$row['subject_id'];
+                                    $sql1="SELECT * FROM user where user_name= '$user_registry'";
+                                    $kq1 = $con->query($sql1);
+                                    $row1 = mysqli_fetch_assoc($kq1);
+                                    $sql2="SELECT * FROM document where user_name= '$user_registry' and subject_id='$subject_id'";
+                                    $kq2 = $con->query($sql2);
+                                    $row2 = mysqli_fetch_assoc($kq2);
+                                  
+                                  
+                                            echo "
+                                            <div class = 'itemBox col-md-4'>
+                                            <form action = '' method = 'POST'  >
+                                                
+                                                <input type='hidden' name='homework_id' value = ".$row2['homework_id']." >
+                                                <button type='submit' class='delete-rg' name='delete-rg' ><i class='fa-solid fa-xmark'></i></button>
+                                                <input type='hidden' name='subject_id' value = $subject_id >
+                                                <input type='hidden' name='user_name' value=$user_registry>
+                                                <input type='hidden' name='userOL' value=$user>
+                                            </form>                                                                                                             
+                                            <ul>
+                                            <li><img src='http://localhost/online-class/src/database/{$row1['user_name']}/image/{$row1['user_image']}' ></li>
+                                            <li style='margin-top:10px'>".$row1['user_fullname']."</li> 
+                                            </ul>         
+                                            </div>                           
+                                            ";
+                                            
+                                      
+                                        
                                      
-                                }else{
-                                    echo "&nbsp;";
-                                    }
-                                    echo"</td>";
-                                        if($i!=3)
-                                        {
-                                            $row= $kq->fetch_assoc();
-                                        }
-                                    } 
-                                    echo"</tr>";
                                 
+                            ?> 
+                             <?php 
+                             if(isset($_POST['user_name'])){     
+                                $sj_id=$_POST['subject_id'] ;
+                                $user_rg=$_POST['user_name'] ;                     
+                            $sql3="DELETE FROM score where subject_id='$sj_id' and user_name='$user_rg'";
+                            mysqli_query($con,$sql3);
                             }
-                            echo"</table>";
-                ?> 
-                
-                    </div>
+                                    if(isset($_POST['user_name'])){     
+                                        $sj_id=$_POST['subject_id'] ;
+                                        $user_rg=$_POST['user_name'] ;               
+                                    $sql2="DELETE FROM registry where subject_id='$sj_id' and user_name='$user_rg'";
+                                    mysqli_query($con,$sql2);
+                                    }
+                                    if(isset($_POST['user_name'])){     
+                                        $sj_id=$_POST['subject_id'] ;
+                                        $user_rg=$_POST['user_name'] ;
+                                        $hw_id=$_POST['homework_id'] ;
+                                    $sql2="DELETE FROM document where subject_id='$sj_id' and user_name='$user_rg' and homework_id='$hw_id'";
+                                    mysqli_query($con,$sql2);
+                                    }
+                                    
+                                }
+                                ?>
+                            </div>
+                        </div>
                     
                     </div>
                 </div>
@@ -280,7 +315,7 @@
                                 ?>
                 
                      <div class='media'>                        
-                         <img src="<?php echo $img_user; ?>" class='mr-3' alt='...'>                      
+                         <img src="<?php echo "http://localhost/online-class/src/database/{$user}/image/{$row['user_image']}" ?>" class='mr-3' alt='...'>                      
                          <div class='media-body'>
                          <p class='mb-0'><?php echo $name ?><a href='#'></a></p>
                          <h6><?php echo $day; echo "/"; echo $month;echo "/"; echo $year;?></h6>
@@ -293,6 +328,7 @@
                             <input type='hidden' value="<?php echo $row['homework_id']; ?>" name='homework_id'>
                             <input type='hidden' name='userOL' value=<?php echo $user ?>>                                                                    
                             <input type='submit' value="<?php echo $row['homework_content'] ;?>" style="font-size:17px;color:blue!important"> <br>
+                            
                         </form> 
                      
 

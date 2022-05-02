@@ -27,24 +27,100 @@ include 'connect.php' ;
     </div>
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
-        
-                    <?php
-                    
-                    $sql="SELECT * FROM notification nt JOIN subject sj ON nt.user_name = sj.user_name  ";
-                    $kq=$con->query($sql);
-                    while($row=$kq->fetch_assoc()){
-                    echo "<div class = 'itemNoti'>";
-                    echo "<div class = 'imageNoti'>";
-                    echo "<img src=".$row['subject_image'].">";
-                    echo "</div>";
-                    echo  "<div class = 'contentNoti'>";
-                    echo "<h4>"; echo $row['subject_name']; echo "</h4>";
-                    echo $row['noti_content'];
-                    echo "</div>";
-                    echo "</div>";
-                    }
-                ?> 
+        <?php 
+         $sql = "SELECT * FROM subject where user_name='$user'";
+         $kq = $con->query($sql);
+         while($row = $kq->fetch_assoc()) {
+            $subject_id=$row['subject_id'];
+            $sql1 = "SELECT * FROM homework where subject_id='$subject_id'";
+            $kq1 = $con->query($sql1);
+            while($row1 = $kq1->fetch_assoc()) {
+                $homework_id=$row1['homework_id'];
+                $sql2 = "SELECT * FROM comment cmt join user on cmt.user_name=user.user_name where homework_id='$homework_id' and user.user_name != '$user'";
+                $kq2 = $con->query($sql2);
+                while($row2 = $kq2->fetch_assoc()) {
+                    echo "
+                    <form action='./homework.php' method='POST' >
+                    <input type='hidden' name='userOL' value=$user> 
+                    <input type='hidden' name='subject_id' value=$subject_id> 
+                    <input type='hidden' name='homework_id' value=$homework_id> 
+                    <div class = itemNoti>                           
+                        <div class = 'imageNoti'>
+                            <img src=".$row2['user_image'].">
+                        </div>
+                        <div class = 'contentNoti'>
+                            <button type='submit' class='button' >
+                                    
+                            <h4>".$row2['user_fullname']."</h4>
+                            <p>".$row2['comment_content']."</p>
+                            <button>
+                        </div>                                                     
+                    </div>
+                    </form>
+                    ";
+                }
+            }
+         }
+        ?>
+
+
+
+        <?php
+        $sql = "SELECT * FROM friend where friend_user='$user' and friend_status=2";
+                $kq = $con->query($sql);
+            while($row = $kq->fetch_assoc()) {
+                $friend_user = $row['user_name'];
+                $sql1 = "SELECT * FROM user where user_name='$friend_user'";
+                $kq1 = $con->query($sql1);
+                $row1 = mysqli_fetch_assoc($kq1);
+                $name_user = $row1['user_fullname'];
+                $img_user = $row1['user_image'];
+                echo "
+                    <div class = itemNoti>
+                        <div class = 'imageNoti'>
+                            <img src=".$img_user.">
+                        </div>
+                        <div class = 'contentNoti'>
+                            <h4>".$name_user."</h4>
+                            <form action='' method='post'>
+                                <p class='p'>Đã gửi lời mời kết bạn &nbsp;  
+                                    <input type='hidden' name='userOL' value=$user> 
+                                    <input type='hidden' name='user' value=$friend_user>
+                                    <button type='submit' class='add-friend' name='add_friend'>Nhận</button>
+                                    <button type='submit' class='cancel-friend' name='cancel_friend'>Từ chối</button>
+                                </p>
+                            </form>
+                        </div>
+                    </div>
+                ";
+            }
+        ?>
+<!-- Xử lý kết bạn -->
+    <?php
+        if(isset($_POST['add_friend'])){
+             $user=$_POST['userOL'];
+              $friend_user=$_POST["user"];
+            $sql2 = "INSERT INTO friend(friend_user, user_name, friend_status) 
+                VALUES ('$friend_user','$user', 1)";
+            $kq2=$con->query($sql2);
             
+        }                
+    ?>
+    <?php
+        if(isset($_POST['add_friend'])){
+            $friend_user = $_POST['user'];
+            $sql = "UPDATE friend SET friend_status=1 where friend_user='$user' and user_name='$friend_user'";
+            mysqli_query($con,$sql);  
+        }
+    ?>
+<!-- Xử lý Từ chối -->   
+<?php
+        if(isset($_POST['cancel_friend'])){
+            $friend_user = $_POST['user'];
+            $sql = "DELETE FROM friend where friend_user='$user' and user_name='$friend_user' and friend_status = 2 ";
+            mysqli_query($con,$sql);  
+        }
+    ?>
         
        
     </div>
@@ -70,34 +146,7 @@ include 'connect.php' ;
             }
 
         ?> -->
-            <!-- <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div> -->
+            
 
         <div class = 'frameMess'>
             <div class = 'navigationMess'>
@@ -159,7 +208,7 @@ include 'connect.php' ;
                 $row = $result->fetch_assoc();
                 echo "
                 
-                <img src=".$row['user_image']." style='width:45px;border-radius:50px'>
+                <img src='http://localhost/online-class/src/database/{$user}/image/{$row['user_image']}' style='width:45px;border-radius:50px'>
                 ".$row['user_fullname']."
 
                 <div class='dropdown'>
@@ -258,9 +307,9 @@ include 'connect.php' ;
                         echo "
                         <div class = 'calendar_header'>
                             <div class = 'nav-cal'>
-                                <button class = 'nav-cal_prev'><i class='fas fa-angle-left'></i></button>
+                               
                                 <div>Tháng ".$month."</div>
-                                <button class = 'nav-cal_next'><i class='fas fa-angle-right'></i></button>
+                                
                             </div>
                             <div class = 'header_year'>2022</div>
                         </div>
@@ -275,7 +324,7 @@ include 'connect.php' ;
                      <table>
                         <tr> 
                             <th>Buổi</th>
-                            <th>Ngày </th>
+                            <th>Ngày bắt đầu</th>
                             <th>Mã môn</th>
                             <th>Tên môn</th> 
                             </tr>

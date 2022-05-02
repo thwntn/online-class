@@ -380,3 +380,58 @@ html {
     text-decoration: none;
     cursor: pointer;
 }
+.send-friend{
+    font-size:20px;
+}
+/* Nút Dropdown*/
+.nut_dropdown {
+    background-color: #0080ff;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+  }
+  
+  /* Thiết lập vị trí cho thẻ div với class dropdown*/
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+  
+  /* Nội dung Dropdown */
+  .noidung_dropdown {
+    /*Ẩn nội dụng các đường dẫn*/
+    display: none;
+    position: absolute;
+    background-color: rgba(255, 255, 255, 0.5);
+    width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    margin-top:10px;
+    
+  }
+  
+  /* Thiết kế style cho các đường dẫn tronng Dropdown */
+  .noidung_dropdown input {
+    color: black;
+    padding: 12px;
+    text-decoration: none;
+    display: block;
+    background:none;
+    border:none;
+  }
+  .hienThi{
+    display:block;
+  }
+  .home{
+      padding:10px;
+      width:100px;
+      background-color: #4e4e4e;
+      border:none;
+      border-radius: 20px;
+      color:white;
+  }
+  
+  
+  
+  

@@ -678,3 +678,10 @@ background: #555;
     width: 100%;
     justify-content: space-between;
 }  
+.delete-rg{
+    float:right;
+    margin-left:-30px;
+}
+embed:focus { 
+    outline: none;
+}

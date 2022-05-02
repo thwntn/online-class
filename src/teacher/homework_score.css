@@ -1,0 +1,107 @@
+@font-face{font-family: abc;src:url(./font/Bandon.ttf)}
+*{
+    font-family: abc;
+    margin: 0;
+    padding: 0;
+}
+.menu{
+    width:20%;
+    height:90vh;
+    float:left;
+    margin-left:20px; 
+    margin-top:20px;  
+    box-shadow: 0px 0px 6px rgb(0,0,0,0.15); 
+    /* z-index: 1000; */
+     transition: ease-in-out 0.5s; 
+     overflow: hidden;
+}
+
+
+.menu-1 li{
+    margin-bottom:20px;
+     margin-top:20px; 
+}
+.menu-1 a{
+    text-decoration: none;
+    color:black;
+}
+.menu-2 li{
+    margin-bottom:20px;
+}
+.menu-2 p{
+   
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+   
+
+}
+.menu-2 .item {
+    width:35px;
+    height:35px;
+    border-radius: 18px;
+    float:left;
+    background-size: 100%;
+    margin-right:10px;
+    /* box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.5); */
+}
+.menu li{
+    list-style-type: none;
+}
+.main{
+    width:70%;
+     margin-left:50px; 
+    float:left;
+}
+.menu-3 {
+    font-size:25px;
+    color:black;
+    text-decoration: none;
+}
+.menu-3 img{
+    width:30px;
+}
+.menu ul li a{
+    transition: linear 0.5s;
+}
+/* .main{
+     position: absolute; 
+      left:300px;  
+} */
+.menu.hide{
+    width:0;
+}
+.sj-name{
+    border: none;
+    background: none;
+    
+}
+.main img{
+    width:40px;
+    cursor:pointer;
+    transition: linear 0,5s;
+}
+
+.list-score {
+    background-color: rgb(235, 235, 235); 
+    border-radius:20px;
+    display: flex;
+    height:40px;
+    margin:0;
+    padding:0px 10px ;
+    margin-top:6px;
+  width:250px;
+}
+.list-score button{
+    background:none;
+    border:none;
+    margin-left:100px;
+}
+.user-img{
+    border-radius: 30px;
+    width:40px;
+    height:40px;
+    background-color: white;
+    margin-left:-8px
+}
