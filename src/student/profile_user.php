@@ -124,7 +124,15 @@
             </div>
             <div class='count row'>
                 <div class='homeWork'>
-                    <h3>10</h3>
+                    <?php 
+                        $sql = "SELECT hw.subject_id FROM registry rg join homework hw on rg.subject_id=hw.subject_id where user_name='$user'";
+                        $result = $conn->query($sql);
+                        $code = array();
+                        while($row = $result->fetch_assoc()) {
+                            $code[] = $row;             
+                        }
+                    ?>
+                    <h3><?php echo count($code); ?></h3>
                     <l>Bài tập</l>
                 </div>
                 <div class='class'>

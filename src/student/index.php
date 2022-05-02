@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <div class="main">
@@ -168,37 +169,9 @@
                     
                     echo"
                         <div class = 'frameMess'>
-                            <div class = 'navigationMess'>
-                                <button class = 'backMess'>
-                                    <i class='fas fa-angle-left'></i>
-                                </button>
-                                <div class = 'imageMess'></div>
-                                <h5 class = 'nameMess'>".$result0['user_fullname']."</h5>
-                            </div>
-                            <div class = 'contentMess'>
-                            ";
-                            $listMessSend = [];
-
-                            $query = "SELECT * FROM message WHERE chat_id = '$idSend' ORDER BY mess_time DESC";
-                            foreach($conn -> query($query) as $value) {
-                                echo "
-                                <div class = 'messMess'>
-                                    <p class = 'sendMess'>".$value['mess_content']."</p>
-                                </div>
-                                ";
-                            }
-                            $listMessReceived = [];
-
-                            $query = "SELECT * FROM message WHERE chat_id = '$idReceived' ORDER BY mess_time DESC";
-                            foreach($conn -> query($query) as $value) {
-                                echo "
-                                <div class = 'messMess'>
-                                    <p class = 'receiveMess'>".$value['mess_content']."</p>
-                                </div>
-                                ";
-                            }
+                        </div>
+                    ";
                         echo"
-                            </div>
                             <div class = 'navigationMessSend'>
                                 
                                     <input class = 'inputMessChat' placeholder = 'Nhập tin nhắn'></input>
@@ -453,10 +426,11 @@
             }
         })
     }
-    document.querySelector('.backMess').addEventListener('click', () => {
-        document.querySelector('.frameMess').style.display = 'none'
-        contentMess = false
-    })
+
+    // document.querySelector('.backMess').addEventListener('click', () => {
+    //     document.querySelector('.frameMess').style.display = 'none'
+    //     contentMess = false
+    // })
 
     //Mess Mobile
     document.querySelector('.mess-mobile').addEventListener('click', function() {
@@ -533,6 +507,19 @@
         noti = false
         }
     })
+
+
+
+
+        $.post(
+            "./text.php",
+            {userName: 'thuylien'},
+            function(data)
+            {
+                console.log(data)
+                $('.contentMess').append(data)
+            }
+        )
 </script>
 </body>
 </html>

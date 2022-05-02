@@ -1,5 +1,6 @@
 <?php
     include './demo/connect.php';
+    include './logSystem.php';
     $user_name = $_POST['userOL'];
     $subject_id = $_POST['subject_id'];
     $homework_id = $_POST['homework_id'];
@@ -157,6 +158,7 @@
                     $sql1 = "INSERT INTO comment(comment_content, comment_time, user_name, homework_id) 
                         VALUES ('$content', now(),'$user_name','$homework_id')";
                     $kq1=$conn->query($sql1);
+                    logSystem('Bình luận', $user_name, $conn);
                 }
             }
             ?>
@@ -212,7 +214,8 @@
                                                 
                                                     }else{
                                                     $sql = "UPDATE comment SET comment_content='$comment_content', comment_time=now() WHERE comment_id='$comment_id'";
-                                                    mysqli_query($conn,$sql);    
+                                                    mysqli_query($conn,$sql);  
+                                                    logSystem('Chỉnh sửa bình luận', $user_name, $conn);  
                                                     }
                                                 }
                                             ?>
@@ -254,6 +257,7 @@
             if (isset( $_POST['delete'])) {
                 $sql='DELETE FROM comment where comment_id='.$_POST["id"].'';
                 mysqli_query($conn,$sql);
+                logSystem('Xóa bình luận', $user_name, $conn);
             }
         ?>
     </div>
@@ -318,6 +322,9 @@
                         $sql2 = "INSERT INTO document( doucument_directory, user_name, subject_id, homework_id) 
                             VALUES ('$duongdan','$user_name','$subject_id','$homework_id')";
                         mysqli_query($conn,$sql2); 
+
+                        logSystem('Nộp bài tập', $user_name, $conn);
+
                         echo "
                             <div class='alert alert-primary' role='alert' >
                                 Nộp bài thành công!

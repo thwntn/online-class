@@ -56,7 +56,15 @@
             </div>
             <div class='count row'>
                 <div class='homeWork'>
-                    <h3>7</h3>
+                    <?php 
+                        $sql = "SELECT hw.subject_id FROM registry rg join homework hw on rg.subject_id=hw.subject_id where user_name='$user_name'";
+                        $result = $conn->query($sql);
+                        $code = array();
+                        while($row = $result->fetch_assoc()) {
+                            $code[] = $row;             
+                        }
+                    ?>
+                    <h3><?php echo count($code); ?></h3>
                     <l>Bài tập</l>
                 </div>
                 <div class='class'>
@@ -84,19 +92,24 @@
                                     <form action="" method="post" enctype="multipart/form-data">
                                         <h6>CHỈNH SỬA THÔNG TIN</h6>
                                         <div class="fomrgroup">
+                                            <?php
+                                                $sql="SELECT * FROM user where user_name='$user_name'";
+                                                $result = $conn->query($sql);
+                                                $row1 = $result->fetch_assoc();
+                                            ?>
                                             <b>Họ và tên:</b>
-                                            <input class='a' type="text" name="user_fullname" value="<?php echo $row["user_fullname"] ?>">
+                                            <input class='a' type="text" name="user_fullname" value="<?php echo $row1['user_fullname'] ?>">
                                             <b>Tên ngành:</b>
-                                            <input class='a' type="text" name="user_major" value="<?php echo $row["user_major"] ?>">
+                                            <input class='a' type="text" name="user_major" value="<?php echo $row1["user_major"] ?>">
                                             <b>Phone:</b>
-                                            <input class='a' type="text" name="user_phone" value="<?php echo $row["user_phone"] ?>"><br>
+                                            <input class='a' type="text" name="user_phone" value="<?php echo $row1["user_phone"] ?>"><br>
                                             <b>Email:</b>
-                                            <input class='a' type="text" name="user_email" value="<?php echo $row["user_email"] ?>"><br>
+                                            <input class='a' type="text" name="user_email" value="<?php echo $row1["user_email"] ?>"><br>
                                             <b>Hình ảnh:</b>
                                             <input class='a' type="file" name="avatar">
                                             <input type='hidden' name='userOL' value=<?php echo $user_name ?>><br>
                                             <b>Địa chỉ:</b>
-                                            <input class='a' type="text" name="user_address" value="<?php echo $row["user_address"] ?>">
+                                            <input class='a' type="text" name="user_address" value="<?php echo $row1["user_address"] ?>">
                                         </div>
                                         <div class="fomrgroup1">
                                             <button class="btn btn-danger" id="close">Đóng</button> &nbsp;
