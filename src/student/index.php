@@ -1,8 +1,6 @@
 <?php
     include './demo/connect.php';
     $user_name=$_POST['userOL'];
-    $_POST['userOL'];
-
  ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,28 +25,6 @@
             <li class="item"><a class ='noti-mobile'><i class="fas fa-bell"></i></a></li>
             <li class="item"><a class ='mess-mobile'><i class="fas fa-comment"></i></a></li>
         </ul>
-    </div>
-    <div class = 'frameNoti btap1'>
-        <h5><i class="fas fa-book"></i>Bài tập được giao</h5>
-             <?php
-                $sql = "SELECT sj.user_name, sj.subject_image, sj.subject_id, hw.homework_content FROM registry rg join homework hw on rg.subject_id=hw.subject_id
-                    join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by homework_time ASC";
-                $result = $conn->query($sql);
-                while($row = $result->fetch_assoc()) {
-                    $sj_id = substr($row['subject_id'],-13,5);
-                    echo "
-                        <div class = itemNoti>
-                            <div class = 'imageNoti'>
-                                <img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['subject_image']}'>  
-                            </div>
-                            <div class = 'contentNoti'>
-                                <h4>".$sj_id."</h4>
-                                <p class='p-homework'>".$row['homework_content']."</p>
-                            </div>
-                        </div>
-                    ";
-                }
-            ?>
     </div>
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
@@ -147,7 +123,7 @@
                     $result0 = $result0->fetch_assoc();
                     //lấy chat id tin nhắn send
                     $query = "SELECT chat_id FROM chat WHERE user_name = '$user_name' AND friend_user = '$friend'";
-
+                    
                     foreach($conn -> query($query) as $value) {
                         $idSend = $value['chat_id'];
                     }
@@ -158,7 +134,7 @@
                         $idReceived = $value['chat_id'];
                     }
                     echo "
-                        <div class = 'itemNoti'>
+                        <div class = 'itemNoti' user = $result0[user_name]>
                             <div class = 'imageNoti'></div>
                             <div class = 'contentNoti'>
                                 <h4>".$result0['user_fullname']."</h4>
@@ -166,39 +142,24 @@
                             </div>
                         </div>
                         ";
-                    
-                    echo"
-                        <div class = 'frameMess'>
-                        </div>
-                    ";
-                        echo"
-                            <div class = 'navigationMessSend'>
-                                
-                                    <input class = 'inputMessChat' placeholder = 'Nhập tin nhắn'></input>
-                                    <button  class = 'buttonMessSend'><i class ='fad fa-paper-plane'></i></button>
-                                
-                            </div>
-                        </div>
-                    ";
                 }
             }
-        ?>
-        
-        <?php
-            $sql1 = "SELECT * FROM chat_group  where user_name='$user_name'";
-            $result1 = $conn->query($sql1);
-            while($row1 = $result1->fetch_assoc()) {
-                echo "
-                <div class = 'itemNoti'>
-                    <div class = 'imageNoti'></div>
-                    <div class = 'contentNoti'>
-                        <h4>".$row1['chatgroup_name']."</h4>
-                        <p>Bài tập mới được giao</p>
-                    </div>
+            ?>
+            <div class = 'frameMess'>
+                <div class = 'navigationMess'>
+                    <button class = 'backMess'>
+                        <i class='fas fa-angle-left'></i>
+                    </button>
+                    <div class = 'imageMess'></div>
+                    <h5 class = 'nameMess'>".$result0['user_fullname']."</h5>
                 </div>
-            ";
-        }
-         ?>
+                <div class = 'contentMess'>
+                </div>
+                <div class = 'navigationMessSend'>
+                        <input class = 'inputMessChat' placeholder = 'Nhập tin nhắn'></input>
+                        <button  class = 'buttonMessSend'><i class ='fad fa-paper-plane'></i></button>
+                </div>
+            </div>
         <!-- <div class = 'frameMess'>
             <div class = 'navigationMess'>
                 <button class = 'backMess'>
@@ -263,7 +224,6 @@
                         $result = $conn->query($sql);
                         $row = $result->fetch_assoc();
                         echo "
-                        
                         <img src='http://localhost/online-class/src/database/{$user_name}/image/{$row['user_image']}' style='width:40px;border-radius:50px'>
                         ".$row['user_fullname']."
 
@@ -427,10 +387,10 @@
         })
     }
 
-    // document.querySelector('.backMess').addEventListener('click', () => {
-    //     document.querySelector('.frameMess').style.display = 'none'
-    //     contentMess = false
-    // })
+    document.querySelector('.backMess').addEventListener('click', () => {
+        document.querySelector('.frameMess').style.display = 'none'
+        contentMess = false
+    })
 
     //Mess Mobile
     document.querySelector('.mess-mobile').addEventListener('click', function() {
@@ -445,9 +405,9 @@
             mess = false
         }
     })
-    document.querySelector('.frameMess').addEventListener('click', function(e) {
-        e.stopPropagation();
-    })
+    // document.querySelector('.frameMess').addEventListener('click', function(e) {
+    //     e.stopPropagation();
+    // })
 
     //Active Notification Mobile
     document.querySelector('.noti-mobile').addEventListener('click', function() {
@@ -508,18 +468,17 @@
         }
     })
 
-
-
-
+    $('.itemNoti').on('click', function() {
         $.post(
             "./text.php",
-            {userName: 'thuylien'},
+            {userName: '<?php echo $user_name ?>', userFriend: this.getAttribute('user')},
             function(data)
             {
-                console.log(data)
-                $('.contentMess').append(data)
+                $('.contentMess').html(data)
             }
         )
+        $('.nameMess').html(this.children[1].children[0].innerHTML)
+    })
 </script>
 </body>
 </html>
