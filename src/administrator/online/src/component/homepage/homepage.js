@@ -7,7 +7,6 @@ function HomePage () {
         <div id ='home' className = { style.background } style = {{ height: window.innerHeight }}>
             <h1 className = {style.title}>Chào mừng bạn đến trang quản trị!</h1>
             <p className = {style.description}>Nơi quản lí người dùng lớp học môn học, kiểm tra bảo mật, chỉnh sửa thống tin.</p>
-            <Pinned></Pinned>
         </div>
     )
 }

@@ -1,8 +1,8 @@
 <?php
-    include('./connect.php');
+    include('../demo/connect.php');
 
-    $user_name = $_POST['userName'];
-    $user_friend = $_POST['userFriend'];
+    $user_name = $_GET['userName'];
+    $user_friend = $_GET['userFriend'];
 
     
     //lấy chat id tin nhắn send

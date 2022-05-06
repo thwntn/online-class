@@ -112,6 +112,8 @@
     border: 2px solid rgba(0, 0, 0, 0.08);
     border-radius: 100%;
     margin-bottom: 12px;
+    background-size: cover;
+    background-position: center;
 }
 .nameUser {
     padding: 0px;
@@ -232,6 +234,7 @@
         right: 0;
         bottom: 0;
         align-content: flex-start;
+        min-width: auto !important;
     }
     .boxItems {
         align-content: top;

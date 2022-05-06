@@ -97,18 +97,29 @@
                     }
                     case 2: {
                         formLogin("http://localhost/online-class/src/student/index.php", username)
+                        break
                     }
+                    case 0: {
+                        document.querySelector('.errBox').classList.add('active')
+                        setTimeout(function() {
+                            document.querySelector('.errBox').classList.remove('active')
+                        }, 2000)
+                        alert('Sai tên đăng nhập hoặc mật khẩu')
+                        break
+                    }
+                    case -1: {
+                        document.querySelector('.errBox').classList.add('active')
+                        setTimeout(function() {
+                            document.querySelector('.errBox').classList.remove('active')
+                        }, 2000)
+                        alert('Tài khoản của bạn đã bị khóa vui lòng liên hệ ADMIN : \'admin@gmail.com')
+                        break
+                    }
+
                 }
             })
         }
         login()
-        document.querySelector('.errBox').classList.add('active')
-        setTimeout(function() {
-            document.querySelector('.errBox').classList.remove('active')
-        }, 2000)
-    })
-    document.querySelector('.registry').addEventListener('click', () => {
-        location.href = 'http://localhost/online-class/src/administrator/online/login/signup.html'
     })
 </script>
 </html>

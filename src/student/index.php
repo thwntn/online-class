@@ -10,7 +10,7 @@
     <title>Document</title>
     <meta name="viewport" content="width=device-width, initial-scale=0.8">
     <link rel="stylesheet" type="text/css" href="./style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
@@ -156,8 +156,8 @@
                 <div class = 'contentMess'>
                 </div>
                 <div class = 'navigationMessSend'>
-                        <input class = 'inputMessChat' placeholder = 'Nhập tin nhắn'></input>
-                        <button  class = 'buttonMessSend'><i class ='fad fa-paper-plane'></i></button>
+                        <input style="color: black;" class = 'inputMessChat' placeholder = 'Nhập tin nhắn'></input>
+                        <button  class = 'buttonMessSend'><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
         <!-- <div class = 'frameMess'>
@@ -468,17 +468,64 @@
         }
     })
 
-    $('.itemNoti').on('click', function() {
-        $.post(
-            "./text.php",
-            {userName: '<?php echo $user_name ?>', userFriend: this.getAttribute('user')},
+    // mess
+    function fetchMess(userName, userFriend) {
+        $.get(
+            "./mess/text.php",
+            {userName: userName, userFriend: userFriend},
             function(data)
             {
                 $('.contentMess').html(data)
             }
         )
+
+        sessionStorage.setItem("dataOLChat", JSON.stringify({
+            userName: userName,
+            userFriend: userFriend
+        }))
+    }
+
+    $('.itemNoti').on('click', function() {
+        fetchMess('<?php echo $user_name ?>', this.getAttribute('user'))
         $('.nameMess').html(this.children[1].children[0].innerHTML)
     })
+    
+    // send mess
+
+    function sendMess () {
+        let users = JSON.parse(sessionStorage.getItem('dataOLChat'))
+        const actionSend = new Promise(resolve => {
+            resolve(
+                    $.post(
+                    "./mess/sendmess.php",
+                    {userName: users.userName, userFriend: users.userFriend, content: $('.inputMessChat').val()},
+                    function (data) {
+                        console.log(data);
+                    }
+                )
+            )
+        })
+
+        if($('.inputMessChat').val() != '') {
+            actionSend
+            .then(() => {
+                fetchMess(users.userName, users.userFriend)
+            })
+        }
+        $('.inputMessChat').val('')
+    }
+
+    $('.buttonMessSend').on('click', sendMess)
+
+    // updatemess
+    setInterval(() => {
+        let users = JSON.parse(sessionStorage.getItem('dataOLChat'))
+        if(users != null) {
+            fetchMess(users.userName, users.userFriend)
+        }
+
+        console.log(JSON.parse(sessionStorage.getItem('dataOLChat')) != null);
+    }, 2000);
 </script>
 </body>
 </html>

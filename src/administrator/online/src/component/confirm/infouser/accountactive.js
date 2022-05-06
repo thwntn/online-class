@@ -22,6 +22,7 @@ const AccountActive = (property) => {
             .then((usersJson) => {
                 setViewUsers(usersJson)
                 console.log(usersJson);
+                console.log(usersJson);
             })
         }
         fetchData()
@@ -86,7 +87,7 @@ const AccountActive = (property) => {
 
                             return (
                                 <div key = {index} className = {style.itemsElement + ' col-md-3'}>
-                                    <div className = {style.item}>
+                                    <div className = {style.item}>  
                                         <div className = {style.actionUser}>
                                             <button
                                                 className = {style.gotoUser}
@@ -121,7 +122,7 @@ const AccountActive = (property) => {
                                                 <h5 className = {style.contentType}>{content}</h5>
                                             </button>
                                         </div>
-                                        <div className = {style.imgUser} style = {{backgroundImage: './abc.jpg'}}></div>
+                                        <div className = {style.imgUser} style = {{backgroundImage: `url(http://localhost/online-class/src/database/${user.user_name}/image/${user.user_image})`}}></div>
                                         <div className = {style.nameUser}>{user.user_fullname}</div>
                                         <p className = {style.userMajor}>{user.user_major}</p>
                                     </div>

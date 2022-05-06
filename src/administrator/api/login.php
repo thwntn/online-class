@@ -26,13 +26,13 @@
     $query = "SELECT * FROM user WHERE `user_name` = '$username' AND `user_password` = '$password_en'";
     $sql = $conn -> query($query);
     $data = $sql -> fetch_assoc();
-    if($data == null) echo -1;
-    else echo $data['user_type'];
+    if($data == null) echo 0;
+    else {
+        echo $data['user_type'];
+  
+        // log
+        logSystem('Đăng nhập', $username, $conn);
+    }
 
 
-    // log
-    logSystem('Đăng nhập', $username, $conn);
-    $query = "UPDATE statistical SET statis_amount = statis_amount+1 WHERE statis_type = 'login'";
-
-    $conn->query($query);
 ?>

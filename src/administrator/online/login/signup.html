@@ -104,13 +104,7 @@
             return string.toLowerCase() !== string.toUpperCase()
         },
 
-        check: function() {
-            console.log(this.isLeter);
-
-        },
-
         checkString: function() {
-            console.log(this.data.username);
             for (char of this.data.username) {
                 if(!this.isLetter(char)) {
                     return false
@@ -159,12 +153,11 @@
                     })
                     .then(responseAu => responseAu.json())
                     .then((responseJsonAu) => {
-                        console.log(responseJsonAu);
                         if(responseJsonAu == 1) {
                             location.href = 'http://localhost/online-class/src/administrator/online/login/authentication.html'
                         }
                         else {
-                            console.log('err');
+                            alert('Đã xảy ra lỗi!')
                         }
                     })
                 }
@@ -213,9 +206,8 @@
             } else {
                 errPass.html(null)
             }
-            if($('.email').val().slice(-10) != '@gmail.com') {
-                console.log('123');
-                $('.email_err').html('Email phải thuộc google hoặc CTU')
+            if(($('.email').val().slice(-10) != '@gmail.com') && ($('.email').val().slice(-19) != '@student.ctu.edu.vn')) {
+                $('.email_err').html('Email phải thuộc GOOGLE hoặc CTU')
                 return false
             }
             if(this.data.major == null) {
@@ -232,7 +224,6 @@
             const _this = this
             $('.submit').on('click', () => {
                 _this.status = _this.checkData()
-                console.log(_this.status)
                 if(_this.status) {
                     _this.signUp()
                 }

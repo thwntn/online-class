@@ -19,7 +19,6 @@
     padding: 8px 32px !important;
 }
 .content {
-    max-height: 70vh;
     overflow: auto;
 }
 .boxLog ul {
@@ -101,5 +100,11 @@
     }
     .boxLog {
         border-radius: 0px
+    }
+    .boxLog ul {
+        height: 100px;
+    }
+    .labelNav {
+        display: none !important;
     }
 }

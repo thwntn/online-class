@@ -18,7 +18,7 @@ function Confirm () {
                         <button
                             className={style.itemNav}
                             onClick={() => {
-                                page.pinItem('managerUser')
+                                page.pinItem('accountActive')
                             }}
                         >
                             <i className={style.pinAccount + ' fad fa-map-pin'}></i>

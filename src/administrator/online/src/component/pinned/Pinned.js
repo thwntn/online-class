@@ -1,9 +1,13 @@
 import { useContext, useEffect, useState } from 'react';
+import clsx from 'clsx'
+
 import styles from './Pinned.module.css'
 import { PageContext } from '../../context/MainContext';
 import Statistical from '../statistical/statistical';
 import Confirm from '../confirm/confirm';
 import Log from '../log/log';
+
+import { FaUserAlt, FaMicrosoft, FaPenFancy } from 'react-icons/fa'
 
 
 function Pinned() {
@@ -18,19 +22,35 @@ function Pinned() {
                 switch(item) {
                     case 'log': {
                         return (
-                            <button 
-                                style={{border: '2px solid rgba(255, 81, 0, 0.3)'}}
+                            <button
+                                className={styles.log}
                                 onClick={() => {
                                     page.setMain(<Log></Log>)
                                 }}
-                            >Nhật kí</button>
+                        ><FaPenFancy size={20}></FaPenFancy></button>
                         )
                     }
                     case 'account': {
-                        return <button style={{border: '2px solid rgb(0, 255, 255, 0.3)'}}>Người dùng</button>
+                        return <button
+                            className={styles.account}
+                        >
+                        <FaUserAlt size={20}></FaUserAlt>
+                        </button>
                     }
                     case 'manage': {
-                        return <button style={{border: '2px solid rgba(255, 0, 212, 0.3)'}}>Quản lí</button>
+                        return <button
+                            className={styles.manage}
+                        ><FaMicrosoft size={30}></FaMicrosoft></button>
+                    }
+                    case 'accountActive': {
+                        return <button
+                            className={styles.accountActive}
+                        >Tài khoản</button>
+                    }
+                    case 'waitUser': {
+                        return <button
+                            className={styles.waitUser}
+                        >Xác nhận</button>
                     }
                 }
             })}
