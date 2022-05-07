@@ -42,7 +42,7 @@ $friend_user=$_POST['user'];
         <div class='background'></div>
         <div class='leftBar col-md-3'>
             <div class = 'row'>
-                <div class='imageUser col-md-12' style='background:url(<?php echo $row['user_image'] ?>); background-size: cover '}>                
+                <div class='imageUser col-md-12' style='background:url(<?php echo "http://localhost/online-class/src/database/{$friend_user}/image/{$row['user_image']}" ?>); background-size: cover '}>                
                 </div>
             </div>
             <div class='infoAdd row'>
@@ -161,7 +161,7 @@ $friend_user=$_POST['user'];
                                       
                                         <button type='submit' style='border:none;background:none'>
                                         <li> 
-                                            <div class='friendItem' style='background:url($user_img); background-size: cover '>                                           
+                                            <div class='friendItem' style='background:url(http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['user_image']}); background-size: cover '>                                           
                                             </div> 
                                         </li>
                                         </button>
@@ -179,7 +179,7 @@ $friend_user=$_POST['user'];
                                     <input type='hidden' name='user' value=$user_friend>
                                     <button type='submit' style='border:none;background:none'>
                                     <li> 
-                                        <div class='friendItem' style='background:url($user_img); background-size: cover '>                                           
+                                        <div class='friendItem' style='background:url(http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['user_image']}); background-size: cover '>                                           
                                         </div> 
                                     </li>
                                     </button>
@@ -212,7 +212,7 @@ $friend_user=$_POST['user'];
                              <div class='icon'>
                                  <i class='fas fa-book-reader'></i>
                              </div>
-                             <div class='imageSubject' style='background:url(<?php echo $row['subject_image']; ?>); background-size: cover '></div>
+                             <div class='imageSubject' style='background:url(<?php echo "http://localhost/online-class/src/database/{$row['subject_id']}/image/{$row['subject_image']}" ?>); background-size: cover '></div>
                              <div class='infoSuject'>
                                  <div>
                                      <h5><?php echo $row['subject_name']; ?></h5>    
@@ -275,13 +275,18 @@ $friend_user=$_POST['user'];
             </form>
             <h5>Description</h5>
             <p>
-            Experts predict that annual eCommerce sales will exceed $6 trillion dollars by 2023. 
-
-            Retail conglomerates and small businesses alike turn to online stores to sell products to a wider audience and increase their revenue. 
-
-            However, as more eCommerce websites pop up each day, staying competitive can be challenging. 
-
-            When it comes to your online store, you don’t have the luxury of an in-person sales team to close the deal. Conversions come down to the effectiveness of your product page and product descriptions. 
+            <?php 
+                    $sql="SELECT * FROM user where user_name='$friend_user'";
+                    $kq = $con->query($sql);
+                   
+                    $row = $kq->fetch_assoc();
+                    echo "
+                        Email: ".$row['user_email']."<br>
+                        SĐT: ".$row['user_phone']."<br>
+                        Địa chỉ: ".$row['user_address']."<br>
+                        Ngành: ".$row['user_major']."
+                    ";
+                        ?>    
             </p>
         </div>
     </div>

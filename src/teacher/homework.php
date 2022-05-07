@@ -51,7 +51,7 @@
                     <form action='./subject.php' method='post'>                                  
                         <input type='hidden' value=".$row['subject_id']." name='subject_id'>
                         <input type='hidden' name='userOL' value=$user>                                                                    
-                        <div class = 'item' style='background-image: url($img)'></div> 
+                        <div class = 'item' style='background-image: url(http://localhost/online-class/src/database/{$subject}/image/{$img})'></div> 
                         <p><input class='sj-name' type='submit' value=".$id."> 
                         ".$row['subject_name']."</p>
                     </form>
@@ -155,7 +155,12 @@
             <hr style='width:95%'>
              
             <li>
-                <?php echo $row['homework_content'];?>
+                <?php 
+                echo "
+                <a href='http://localhost/online-class/src/database/{$row['subject_id']}/homework/{$row['homework_content']}' style='color:blue;font-size:15px'>".$row['homework_content']."</i></a>
+                ";
+                
+                ?>
               
             </li>
             
@@ -399,7 +404,7 @@
                                     <ul>
                                     <li><img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['user_image']}' style='width:40px;border-radius:20px;margin-left:-10px'></li>
                                     <li style='margin-top:8px'>".$row['user_fullname']."</li>
-                                    <li style='margin-top:8px'><button><img src='image/free-file-icon-1453-thumb.png' style='width:15px'></button></li>
+                                    
                                     <li style='color:red; margin-top:10px'><b>".$row['score_level']."</b></li> 
                                     </ul> 
                                     ";

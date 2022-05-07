@@ -38,7 +38,7 @@
             $subject = $row['subject_id'];
             $id = substr($subject,0,5);
             ?>       
-                <div class='name-subject' style='background:url(<?php echo $anh ?>); background-size: cover '>
+                <div class='name-subject' style='background:url(<?php echo "http://localhost/online-class/src/database/{$subject_id}/image/{$anh}" ?>); background-size: cover '>
                         <p>
                         <?php echo $id ?>
                         <?php echo $row['subject_name'] ?>   
@@ -191,21 +191,35 @@
                             
 <!-- Danh sách thành viên -->
     <div class="link">
-        <form action="" method="post">
+        <!-- <form action="" method="post">
             <button type="button" class="repair" data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class='fa-solid fa-pencil'></i></button>            
             <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id'] ?>" >
             <input type="hidden" name="user_name" value = "<?php echo $row['user_name'] ?>" >
             <input type="hidden" name="userOL" value="<?php echo $user?>">
-            </form>      
+              
             <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                 <div class="modal-dialog modal-xl" style="width:70%">
                     <div class="modal-content">
                         <div class="modal-header">
                             <h5 class="modal-title" id="staticBackdropLabel">Danh sách thành viên</h5>
                             <button type="button" data-bs-dismiss="modal" aria-label="Close" style="background:none;border:none">Đóng</button>
+                        </div> -->
+                <form action="" method = "post" >   
+                    <button type="button"  class="repair" id = "myBtn" data-target=".modal4" data-toggle="modal"><i class='fa-solid fa-pencil'></i></button>
+                    <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id'] ?>" >
+                    <input type="hidden" name="user_name" value = "<?php echo $row['user_name'] ?>" >
+                    <input type="hidden" name="userOL" value="<?php echo $user?>">
+                    
+                     <div class="container">       
+                        <div id="myModal" class="modal modal4">
+                            <div class="modal-content" style="width:80%">
+                            <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Danh sách thành viên</h5>
+                            <button class="btn btn-danger" id="close">Đóng</button>
                         </div>
-                        <div class="modal-body">
-                            <div class = "items row">
+                            <div class="modal-body">
+                                
+                                <div class = "items row">
                             <?php
                                 $sql="SELECT * FROM registry where subject_id= '$subject_id'";
                                 $kq = $con->query($sql);
@@ -216,28 +230,29 @@
                                     $sql1="SELECT * FROM user where user_name= '$user_registry'";
                                     $kq1 = $con->query($sql1);
                                     $row1 = mysqli_fetch_assoc($kq1);
-                                    $sql2="SELECT * FROM document where user_name= '$user_registry' and subject_id='$subject_id'";
+                                    $sql2="SELECT * FROM homework where subject_id='$subject_id'";
                                     $kq2 = $con->query($sql2);
                                     $row2 = mysqli_fetch_assoc($kq2);
+                                        $id_hw=$row2['homework_id'];
+                                        // $document=$row2['document_directory'];
                                   
+                                    echo "
+                                    <div class = 'itemBox col-md-4'>
+                                    <form action = '' method = 'POST'  >
+                                        
+                                    <input type='hidden' name='homework_id' value = $id_hw >
+                                        <button type='submit' class='delete-rg' name='delete-rg' ><i class='fa-solid fa-xmark'></i></button>
+                                        <input type='hidden' name='subject_id' value = $subject_id >
+                                        <input type='hidden' name='user_name' value=$user_registry>
+                                        <input type='hidden' name='userOL' value=$user>
+                                    </form>                                                                                                             
+                                    <ul>
+                                    <li><img src='http://localhost/online-class/src/database/{$row1['user_name']}/image/{$row1['user_image']}' ></li>
+                                    <li style='margin-top:10px'>".$row1['user_fullname']."</li> 
+                                    </ul>         
+                                    </div>                           
+                                    ";
                                   
-                                            echo "
-                                            <div class = 'itemBox col-md-4'>
-                                            <form action = '' method = 'POST'  >
-                                                
-                                                <input type='hidden' name='homework_id' value = ".$row2['homework_id']." >
-                                                <button type='submit' class='delete-rg' name='delete-rg' ><i class='fa-solid fa-xmark'></i></button>
-                                                <input type='hidden' name='subject_id' value = $subject_id >
-                                                <input type='hidden' name='user_name' value=$user_registry>
-                                                <input type='hidden' name='userOL' value=$user>
-                                            </form>                                                                                                             
-                                            <ul>
-                                            <li><img src='http://localhost/online-class/src/database/{$row1['user_name']}/image/{$row1['user_image']}' ></li>
-                                            <li style='margin-top:10px'>".$row1['user_fullname']."</li> 
-                                            </ul>         
-                                            </div>                           
-                                            ";
-                                            
                                       
                                         
                                      
@@ -268,10 +283,11 @@
                                 ?>
                             </div>
                         </div>
-                    
+                        </div>
                     </div>
                 </div>
-            </div> 
+            
+        </form> 
         <div class="shadow p-4 mb-5 bg-white rounded">
             <p>Danh sách thành viên</p>           
         </div>
@@ -291,7 +307,7 @@
              $month = substr($k,-14,2);
              $year = substr($k,-20,4);
              $user=$row['user_name'];
-             $homework_id=$row['homework_id'];
+             $homework=$row['homework_id'];
              $img_user = $row['user_image'];
              $name = $row['user_fullname'];
              ?>
@@ -303,13 +319,13 @@
                             <input type="hidden" name="subject_id" value = "<?php echo $row['subject_id'] ?>" >
                             <button type="submit" class = "img1" name="delete-hw" ><i class='fa-solid fa-xmark'></i></button>
                             
-                            <input type="hidden" name="id" value = "<?php echo $row['homework_id'] ?>" >
+                            <input type="hidden" name="id" value = "<?php echo $homework?>" >
                             <input type="hidden" name='userOL' value=<?php echo $user ?>>
                 </form>  
                 <?php 
                                     if(isset($_POST["id"])){    
-                                                        
-                                    $sql1="DELETE FROM homework where homework_id='$homework_id'";
+                                    $hw_id=$_POST["id"];                  
+                                    $sql1="DELETE FROM homework where homework_id='$hw_id'";
                                     mysqli_query($con,$sql1);
                                 }
                                 ?>

@@ -11,7 +11,7 @@ include 'connect.php' ;
 <meta name="viewport" content="width=device-width, initial-scale=0.8">
 <link rel="stylesheet" type="text/css" href="./style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 </head>
 <body>
@@ -46,7 +46,7 @@ include 'connect.php' ;
                     <input type='hidden' name='homework_id' value=$homework_id> 
                     <div class = itemNoti>                           
                         <div class = 'imageNoti'>
-                            <img src=".$row2['user_image'].">
+                            <img src='http://localhost/online-class/src/database/{$row2['user_name']}/image/{$row2['user_image']}'>
                         </div>
                         <div class = 'contentNoti'>
                             <button type='submit' class='button' >
@@ -78,7 +78,7 @@ include 'connect.php' ;
                 echo "
                     <div class = itemNoti>
                         <div class = 'imageNoti'>
-                            <img src=".$img_user.">
+                            <img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$img_user}'>
                         </div>
                         <div class = 'contentNoti'>
                             <h4>".$name_user."</h4>
@@ -127,50 +127,49 @@ include 'connect.php' ;
 
     <div class = 'frameNoti mess'>
         <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
-        <!-- <php 
-            $sql="SELECT * FROM chat c JOIN message ms ON c.chat_id = ms.chat_id JOIN user ON c.user_name=user.user_name  ";
-            $kq=$con->query($sql);
-            while($row=$kq->fetch_assoc()){
-                echo "
-                    <div class = 'itemNoti'>
-                    <div class = 'imageNoti'>
-                    <img src=".$row['user_image'].">
-                    </div>
-                    <div class = 'contentNoti'>
-                    <h4>  ".$row['friend_user']." </h4>
-                    <p>".$row['mess_content']."</p>
-                    </div>
-                    </div>
-                 ";
-                 
+        
+        <?php
+            $sql1 = "SELECT * FROM chat  where user_name='$user'";
+            $result1 = $con->query($sql1);
+            while($row1 = $result1->fetch_assoc()) {
+                $friend = $row1['friend_user'];
+                if(isset($friend)){
+                    $get_user = "SELECT * FROM user where user_name='$friend'"; 
+                    $result0 = $con->query($get_user);
+                    $result0 = $result0->fetch_assoc();
+                    
+                    echo "
+                        <div class = 'itemNoti' user = $result0[user_name]>
+                            <div class = 'imageNoti' >
+                            <img src='http://localhost/online-class/src/database/{$friend}/image/{$result0['user_image']}'>
+                            </div>
+                            
+                            <div class = 'contentNoti'>
+                                
+                                <h4>".$result0['user_fullname']."</h4>
+                                <p>Tin nhắn</p>
+                            </div>
+                        </div>
+                        ";
+                }
             }
+            ?>
 
-        ?> -->
-            
-
-        <div class = 'frameMess'>
-            <div class = 'navigationMess'>
-                <button
-                    class = 'backMess'
-                >
-                    <i class="fas fa-angle-left"></i>
-                </button>
-                <div class = 'imageMess'></div>
-                <h5 class = 'nameMess'>Nguyễn Trần Thiên Tân</h5>
-            </div>
-            <div class = 'contentMess'>
-                <div class = 'messMess'>
-                    <p class = 'sendMess'>Làm người yêu mình nhé!</p>
+            <div class = 'frameMess'>
+                <div class = 'navigationMess'>
+                    <button class = 'backMess'>
+                        <i class='fas fa-angle-left'></i>
+                    </button>
+                    <div class = 'imageMess' style='background:url(<?php echo "http://localhost/online-class/src/database/{$friend}/image/{$result0['user_image']}" ?>); background-size: cover '></div>
+                    <h5 class = 'nameMess'><?php echo $result0['user_fullname'] ?></h5>
                 </div>
-                <div class = 'messMess'>
-                    <p class = 'receiveMess'>Tớ chỉ xem cậu là bạn thôi :)</p>
+                <div class = 'contentMess'>
+                </div>
+                <div class = 'navigationMessSend'>
+                        <input class = 'inputMessChat' placeholder = 'Nhập tin nhắn'></input>
+                        <button  class = 'buttonMessSend'><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
-            <div class = 'navigationMessSend'>
-                <input class = 'inputMessChat' placeholder = "Nhập tin nhắn"></input>
-                <button class = 'buttonMessSend'><i class ="fad fa-paper-plane"></i></button>
-            </div>
-        </div>
     </div>
     <div id='homepage'>
         <div class = 'backgroundNav'>
@@ -473,6 +472,63 @@ include 'connect.php' ;
     document.querySelector('.frameMess').addEventListener('click', function(e) {
         e.stopPropagation();
     })
+     // mess
+     function fetchMess(userName, userFriend) {
+        $.get(
+            "./mess/text.php",
+            {userName: userName, userFriend: userFriend},
+            function(data)
+            {
+                $('.contentMess').html(data)
+            }
+        )
+
+        sessionStorage.setItem("dataOLChat", JSON.stringify({
+            userName: userName,
+            userFriend: userFriend
+        }))
+    }
+
+    $('.itemNoti').on('click', function() {
+        fetchMess('<?php echo $user ?>', this.getAttribute('user'))
+        $('.nameMess').html(this.children[1].children[0].innerHTML)
+    })
+      // send mess
+
+      function sendMess () {
+        let users = JSON.parse(sessionStorage.getItem('dataOLChat'))
+        const actionSend = new Promise(resolve => {
+            resolve(
+                    $.post(
+                    "./mess/sendmess.php",
+                    {userName: users.userName, userFriend: users.userFriend, content: $('.inputMessChat').val()},
+                    function (data) {
+                        console.log(data);
+                    }
+                )
+            )
+        })
+
+        if($('.inputMessChat').val() != '') {
+            actionSend
+            .then(() => {
+                fetchMess(users.userName, users.userFriend)
+            })
+        }
+        $('.inputMessChat').val('')
+    }
+
+    $('.buttonMessSend').on('click', sendMess)
+
+    // updatemess
+    setInterval(() => {
+        let users = JSON.parse(sessionStorage.getItem('dataOLChat'))
+        if(users != null) {
+            fetchMess(users.userName, users.userFriend)
+        }
+
+        console.log(JSON.parse(sessionStorage.getItem('dataOLChat')) != null);
+    }, 2000);
 </script>
 </body>
 </html>

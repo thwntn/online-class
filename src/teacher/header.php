@@ -12,6 +12,7 @@ $user=$_POST['userOL'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <title>Document</title>
 </head>
 <body>
@@ -47,7 +48,7 @@ $user=$_POST['userOL'];
                     <input type='hidden' name='homework_id' value=$homeworkid> 
                     <div class = itemNoti>                           
                         <div class = 'imageNoti'>
-                            <img src=".$row2['user_image'].">
+                            <img src='http://localhost/online-class/src/database/{$row2['user_name']}/image/{$row2['user_image']}'>
                         </div>
                         <div class = 'contentNoti'>
                             <button type='submit'>
@@ -126,57 +127,45 @@ $user=$_POST['userOL'];
     </div>
     <div class = 'frameNoti mess'>
         <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
+        <?php
+            $sql1 = "SELECT * FROM chat  where user_name='$user'";
+            $result1 = $con->query($sql1);
+            while($row1 = $result1->fetch_assoc()) {
+                $friend = $row1['friend_user'];
+                if(isset($friend)){
+                    $get_user = "SELECT * FROM user where user_name='$friend'"; 
+                    $result0 = $con->query($get_user);
+                    $row = $result0->fetch_assoc();
+                    $user_fullname=$row['user_fullname'];
+                    
+                    echo "
+                        <div class = 'itemNoti'>
+                            <div class = 'imageNoti' style='background:url(http://localhost/online-class/src/database/{$friend}/image/{$row['user_image']}); background-size: cover '></div>
+                            <div class = 'contentNoti'>
+                                <h4>".$row['user_fullname']."</h4>
+                                <p>Tin nhắn</p>
+                            </div>
+                        </div>
+                        ";
+                }
+            }
+            ?>
+
+            <div class = 'frameMess'>
+                <div class = 'navigationMess'>
+                    <button class = 'backMess'>
+                        <i class='fas fa-angle-left'></i>
+                    </button>
+                    <div class = 'imageMess' style='background:url(<?php echo "http://localhost/online-class/src/database/{$friend}/image/{$row['user_image']}" ?>); background-size: cover '></div>
+                    <h5 class = 'nameMess' style="color:gray!important"><?php echo  $user_fullname ?></h5>
+                </div>
+                <div class = 'contentMess'>
+                </div>
+                <div class = 'navigationMessSend'>
+                        <input class = 'inputMessChat' placeholder = 'Nhập tin nhắn'></input>
+                        <button  class = 'buttonMessSend'><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-        <div class = 'frameMess'>
-            <div class = 'navigationMess'>
-                <button
-                    class = 'backMess'
-                >
-                    <i class="fas fa-angle-left"></i>
-                </button>
-                <div class = 'imageMess'></div>
-                <h5 class = 'nameMess'>Nguyễn Trần Thiên Tân</h5>
-            </div>
-            <div class = 'contentMess'>
-                <div class = 'messMess'>
-                    <p class = 'sendMess'>Làm người yêu mình nhé!</p>
-                </div>
-                <div class = 'messMess'>
-                    <p class = 'receiveMess'>Tớ chỉ xem cậu là bạn thôi :)</p>
-                </div>
-            </div>
-            <div class = 'navigationMessSend'>
-                <input class = 'inputMessChat' placeholder = "Nhập tin nhắn"></input>
-                <button class = 'buttonMessSend'><i class ="fad fa-paper-plane"></i></button>
-            </div>
-        </div>
 
 
     </div>
@@ -235,8 +224,10 @@ $user=$_POST['userOL'];
     </div> 
     
 </body>
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.min.js" integrity="sha384-VHvPCCyXqtD5DqJeNxl2dtTyhF78xXNXdkwX1CZeRusQfRKp+tA7hAShOK/B/fQ2" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
 <script>
     
     document.querySelector('.frameNoti').addEventListener('click', function(event){
@@ -336,5 +327,62 @@ $user=$_POST['userOL'];
             mess = false
         }
     })
+      // mess
+      function fetchMess(userName, userFriend) {
+        $.get(
+            "./mess/text.php",
+            {userName: userName, userFriend: userFriend},
+            function(data)
+            {
+                $('.contentMess').html(data)
+            }
+        )
+
+        sessionStorage.setItem("dataOLChat", JSON.stringify({
+            userName: userName,
+            userFriend: userFriend
+        }))
+    }
+
+    $('.itemNoti').on('click', function() {
+        fetchMess('<?php echo $user ?>', this.getAttribute('user'))
+        $('.nameMess').html(this.children[1].children[0].innerHTML)
+    })
+      // send mess
+
+      function sendMess () {
+        let users = JSON.parse(sessionStorage.getItem('dataOLChat'))
+        const actionSend = new Promise(resolve => {
+            resolve(
+                    $.post(
+                    "./mess/sendmess.php",
+                    {userName: users.userName, userFriend: users.userFriend, content: $('.inputMessChat').val()},
+                    function (data) {
+                        console.log(data);
+                    }
+                )
+            )
+        })
+
+        if($('.inputMessChat').val() != '') {
+            actionSend
+            .then(() => {
+                fetchMess(users.userName, users.userFriend)
+            })
+        }
+        $('.inputMessChat').val('')
+    }
+
+    $('.buttonMessSend').on('click', sendMess)
+
+    // updatemess
+    setInterval(() => {
+        let users = JSON.parse(sessionStorage.getItem('dataOLChat'))
+        if(users != null) {
+            fetchMess(users.userName, users.userFriend)
+        }
+
+        console.log(JSON.parse(sessionStorage.getItem('dataOLChat')) != null);
+    }, 2000);
 </script>
 </html>

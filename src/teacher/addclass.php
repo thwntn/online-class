@@ -58,16 +58,20 @@ if (isset($_POST["submit-sj"])) {
     $week = $_POST["subject_week"];
     $time = $_POST["subject_time"];
     $duongdan = $_FILES["fileUpload"]["name"];
-    $path = "image/";
-    $slug = $path . $duongdan;
-    move_uploaded_file($_FILES["fileUpload"]["tmp_name"],'./image/' . $duongdan);
+    if(is_dir('../database/'.$id.'/image/')) {
+    }
+    else {
+        mkdir("../database/".$id."/image/", 7777, true);
+    }
+
+    move_uploaded_file($_FILES['fileUpload']['tmp_name'],'../database/'.$id.'/image/' . $duongdan);
     if($id == "" || $name == "" || $duongdan == "" ){
         echo "<div class='alert alert-danger' role='alert'> 
             Vui lòng nhập đầy đủ thông tin!
             </div>
         ";
     }else{
-    $sql = "INSERT INTO subject(subject_id, subject_name, subject_week, subject_time, subject_image, user_name) VALUES ( '$id', '$name', '$week', '$time','$slug', '$user')";
+    $sql = "INSERT INTO subject(subject_id, subject_name, subject_week, subject_time, subject_image, user_name) VALUES ( '$id', '$name', '$week', '$time','$duongdan', '$user')";
     mysqli_query($con,$sql);
     echo "<div class='alert alert-primary' role='alert'>
             Thêm môn học thành công, hãy thêm lịch giảng dạy!
