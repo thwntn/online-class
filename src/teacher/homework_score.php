@@ -50,7 +50,7 @@
                     <form action='./subject.php' method='post'>                                  
                         <input type='hidden' value=".$row['subject_id']." name='subject_id'>
                         <input type='hidden' name='userOL' value=$user>                                                                    
-                        <div class = 'item' style='background-image: url($img)'></div> 
+                        <div class = 'item' style='background-image: url(http://localhost/online-class/src/database/{$subject}/image/{$img})'></div> 
                         <p><input class='sj-name' type='submit' value=".$id."> 
                         ".$row['subject_name']."</p>
                     </form>
@@ -91,16 +91,19 @@
              $kq = $con->query($sql);
              while($row = mysqli_fetch_assoc($kq)){                     
                     echo "                  
-                        <div class = 'itemBox col-md-4'>
+                        <div class = 'itemBox col-md-6'>
                             <div class='list-score'>                                                  
                                 <p><img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['user_image']}' class='user-img'> ".$row['user_fullname']."</p>
-                                <button><i class='fa-solid fa-file'></i></button>
+                                <a href='http://localhost/online-class/src/database/{$row['user_name']}/homework/{$row['doucument_directory']}' style='color:blue'>".$row['doucument_directory']."</i></a>
                                 
                             </div>             
-                        </div>                                                            
+                        </div>  
+                                                                   
                    ";                   
              }
+             
                ?>
+              
         </div>  
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script> 

@@ -33,6 +33,7 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <link rel="stylesheet" type="text/css" href="./modal_user.css">
+
 </head>
 <body>
     <div class='frame row'>
@@ -151,6 +152,7 @@
                 </div>
             </div>
         </div>
+        
         <div class='rightBar col-md-6'}>
             <div class='banner row'>
                 <div class='bannerImg'></div>
@@ -171,8 +173,15 @@
                             echo "
                                 <div class='friendItem'>
                                     <div class='imageFriend'>
+                                        <form action='./createChat.php' method='post'>
+                                            <input type='hidden' name='userOL' value=$user_name>
+                                            <input type='hidden' name='user' value=$user_friend>
+                                            <button type='submit' class='btn-im'>
+                                                <img src='http://localhost/online-class/src/database/{$user_friend}/image/{$row['user_image']}' class='image1'>
+                                            </button>
+                                        </form>
+
                                         <form action='./profile_user.php' method='post'>
-                                            <img src='http://localhost/online-class/src/database/{$user_friend}/image/{$row['user_image']}' class='image1'>
                                             <input type='hidden' name='userOL' value=$user_name>
                                             <input type='hidden' name='user' value=$user_friend>
                                             <input class='name'  type='submit' value='$user_fullname'>    

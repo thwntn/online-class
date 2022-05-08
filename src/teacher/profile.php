@@ -90,8 +90,8 @@ $user=$_POST['userOL'];
                                         <input type="text" name="user_phone" value="<?php echo $row['user_phone'] ?>">    
                                         <input type="text" name="user_address" value="<?php echo $row['user_address'] ?>">  
                                         <input type="text" name="user_major" value="<?php echo $row['user_major'] ?>">                                            
-                                        <input class='upload' type="file" name = "avatar">
-                                        <!-- <p  class="user-image">Hình ảnh</p> -->
+                                        <input style="display:none" class='upload' type="file" name = "avatar">
+                                         <p  class="user-image">Hình ảnh</p>
                             
                                             <input type='hidden' name='userOL' value=<?php echo $user ?>>
                                         
@@ -166,7 +166,7 @@ $user=$_POST['userOL'];
                                     <input type='hidden' name='user' value=".$row['user_name'].">
                                     <button type='submit' style='border:none;background:none'>
                                     <li> 
-                                        <div class='friendItem' style='background:url($user_img); background-size: cover '>                                           
+                                        <div class='friendItem' style='background:url(http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['user_image']}); background-size: cover '>                                           
                                         </div> 
                                     </li>
                                     </button>
@@ -193,7 +193,7 @@ $user=$_POST['userOL'];
                              <div class='icon'>
                                  <i class='fas fa-book-reader'></i>
                              </div>
-                             <div class='imageSubject' style='background:url(<?php echo $row['subject_image']; ?>); background-size: cover '></div>
+                             <div class='imageSubject' style='background:url(<?php echo "http://localhost/online-class/src/database/{$row['subject_id']}/image/{$row['subject_image']}" ?>); background-size: cover '></div>
                              <div class='infoSuject'>
                                  <div>
                                      <h5><?php echo $row['subject_name']; ?></h5>    
@@ -217,15 +217,20 @@ $user=$_POST['userOL'];
                 <input type="hidden" name="userOL" value=<?php echo $user?>>
                 <button type="submit" class="home">Trang chủ</button>
         </form>
-            <h5>Description</h5>
+            <h5>Thông tin cá nhân</h5>
             <p>
-            Experts predict that annual eCommerce sales will exceed $6 trillion dollars by 2023. 
-
-            Retail conglomerates and small businesses alike turn to online stores to sell products to a wider audience and increase their revenue. 
-
-            However, as more eCommerce websites pop up each day, staying competitive can be challenging. 
-
-            When it comes to your online store, you don’t have the luxury of an in-person sales team to close the deal. Conversions come down to the effectiveness of your product page and product descriptions. 
+            <?php 
+                    $sql="SELECT * FROM user where user_name='$user'";
+                    $kq = $con->query($sql);
+                   
+                    $row = $kq->fetch_assoc();
+                    echo "
+                        Email: ".$row['user_email']."<br>
+                        SĐT: ".$row['user_phone']."<br>
+                        Địa chỉ: ".$row['user_address']."<br>
+                        Ngành: ".$row['user_major']."
+                    ";
+                        ?>   
             </p>
         </div>
         
@@ -251,12 +256,12 @@ $user=$_POST['userOL'];
         handle.start()
 
           //Thêm hình ảnh
-    //       document.querySelector('.user-image').addEventListener('click', function () {
-    //       document.querySelector('.upload').click()
-    //   })
-    //   document.querySelector('.upload').addEventListener('change', function () {
-    //       document.querySelector('.user-image').innerHTML = document.querySelector('.upload').value
-    //   })
+           document.querySelector('.user-image').addEventListener('click', function () {
+           document.querySelector('.upload').click()
+       })
+       document.querySelector('.upload').addEventListener('change', function () {
+           document.querySelector('.user-image').innerHTML = document.querySelector('.upload').value
+       })
 
 // Modal
     var modal = document.getElementById('myModal');

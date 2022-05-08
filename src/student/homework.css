@@ -230,6 +230,10 @@ header .input-icon:checked ~ .menu-item{
     padding:10px;
     box-shadow: 0px 0px 6px rgb(0,0,0,0.15);
 }
+.right-1 .a{
+    float: right;
+    /* font-size: 17px; */
+}
 .right-1 .link{
     background-color: rgb(235, 235, 235);
     padding: 10px;

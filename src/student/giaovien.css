@@ -298,6 +298,7 @@
     align-content: space-between;
     color: #666;
     animation: show 0.35s ease;
+    height: 426px;
 }
 
 @keyframes show {
@@ -735,4 +736,10 @@ a{
     width: 70px;
     /* margin-top: 3px;
     margin-bottom: 3px; */
+}
+
+.button{
+    background: none;
+    border: none;
+    float: left;
 }
