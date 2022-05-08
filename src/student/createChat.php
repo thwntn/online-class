@@ -1,7 +1,7 @@
 <?php
     include('./connect.php');
-    $userName = $res['userName'];
-    $friendUser = $res['friendUser'];
+    $userName = $_POST['userOL'];
+    $friendUser = $_POST['user'];
 
     $queryCheck = "SELECT chat_id FROM chat WHERE user_name = '$userName' AND friend_user = '$friendUser'";
     $result = $conn -> query($queryCheck);
@@ -12,7 +12,12 @@
         $query = "INSERT INTO chat(user_name, friend_user) VALUE ('$userName', '$friendUser');";
         $query .= "INSERT INTO chat(user_name, friend_user) VALUE ('$friendUser', '$userName')";
     
-        echo $conn -> multi_query($query);
+        $conn -> multi_query($query);
+        echo 
+        "<script>
+            alert('Thong bao');
+        </script>";
+    
     } else {
         echo 0;
         

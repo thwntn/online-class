@@ -298,6 +298,7 @@
     align-content: space-between;
     color: #666;
     animation: show 0.35s ease;
+    height: 426px;
 }
 
 @keyframes show {

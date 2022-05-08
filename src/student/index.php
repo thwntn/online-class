@@ -140,6 +140,7 @@
                     $get_user = "SELECT * FROM user where user_name='$friend'"; 
                     $result0 = $conn->query($get_user);
                     $result0 = $result0->fetch_assoc();
+
                     //lấy chat id tin nhắn send
                     $query = "SELECT chat_id FROM chat WHERE user_name = '$user_name' AND friend_user = '$friend'";
                     
@@ -152,12 +153,15 @@
                     foreach($conn -> query($query) as $value) {
                         $idReceived = $value['chat_id'];
                     }
+
                     echo "
                         <div class = 'itemNoti' user = $result0[user_name]>
-                            <div class = 'imageNoti'></div>
+                            <div class = 'imageNoti'>
+                                <img src='http://localhost/online-class/src/database/{$result0['user_name']}/image/{$result0['user_image']}'>  
+                            </div>
                             <div class = 'contentNoti'>
                                 <h4>".$result0['user_fullname']."</h4>
-                                <p>Bài tập mới được giao</p>
+                                <p>Tin nhắn</p>
                             </div>
                         </div>
                         ";
@@ -169,7 +173,9 @@
                     <button class = 'backMess'>
                         <i class='fas fa-angle-left'></i>
                     </button>
-                    <div class = 'imageMess'></div>
+                    <!-- <div class = 'imageMess'>
+                        <img src="http://localhost/online-class/src/database/{$result0['user_name']}/image/{$result0['user_image']}">
+                    </div> -->
                     <h5 class = 'nameMess'>".$result0['user_fullname']."</h5>
                 </div>
                 <div class = 'contentMess'>
@@ -179,27 +185,6 @@
                         <button  class = 'buttonMessSend'><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
-        <!-- <div class = 'frameMess'>
-            <div class = 'navigationMess'>
-                <button class = 'backMess'>
-                    <i class="fas fa-angle-left"></i>
-                </button>
-                <div class = 'imageMess'></div>
-                <h5 class = 'nameMess'>Nguyễn Trần Thiên Tân</h5>
-            </div>
-            <div class = 'contentMess'>
-                <div class = 'messMess'>
-                    <p class = 'sendMess'>Làm người yêu mình nhé!</p>
-                </div>
-                <div class = 'messMess'>
-                    <p class = 'receiveMess'>Tớ chỉ xem cậu là bạn thôi :)</p>
-                </div>
-            </div>
-            <div class = 'navigationMessSend'>
-                <input class = 'inputMessChat' placeholder = "Nhập tin nhắn"></input>
-                <button class = 'buttonMessSend'><i class ="fad fa-paper-plane"></i></button>
-            </div>
-        </div> -->
     </div>
     <div id='homepage'>
         <div class = 'backgroundNav'>

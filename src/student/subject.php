@@ -13,6 +13,7 @@
     <link rel="stylesheet" type="text/css" href="./modal_sj.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 </head>
 <body>
 <div class="main">
@@ -33,14 +34,13 @@
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
                     $homework_id = $row['homework_id'];
-                    $subject_id = $row['subject_id'];
-                    $sj_id = substr($row['subject_id'],-13,5);
+                    $subject_id1 = $row['subject_id'];
+                    $sj = substr($row['subject_id'],-13,5);
                     echo "
                     <form action='./homework.php' method='post'>
                         <input type='hidden' name='userOL' value=$user_name> 
-                        <input type='hidden' name='subject_id' value=$subject_id> 
+                        <input type='hidden' name='subject_id' value=$subject_id1> 
                         <input type='hidden' name='homework_id' value=$homework_id>
-
                         <div class = itemNoti>
                             <div class = 'imageNoti'>
                             <button type='submit' class='button' >
@@ -48,7 +48,7 @@
                                 <button>
                             </div>
                             <div class = 'contentNoti'>
-                                <h4>".$sj_id."</h4> 
+                                <h4>".$sj."</h4> 
                                 <p class='p-homework'>".$row['homework_content']."</p>
                             </div>
                         </div>
@@ -143,58 +143,60 @@
 
     <div class = 'frameNoti mess'>
         <h5 class = 'titleNoti'><i class="fab fa-facebook-Notienger"></i> Tin nhắn</h5>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
-            <div class = 'itemNoti'>
-                <div class = 'imageNoti'></div>
-                <div class = 'contentNoti'>
-                    <h4>Nguyen Van A</h4>
-                    <p>Bài tập mới được giao</p>
-                </div>
-            </div>
+        <?php
+            $sql1 = "SELECT * FROM chat  where user_name='$user_name'";
+            $result1 = $conn->query($sql1);
+            while($row1 = $result1->fetch_assoc()) {
+                $friend = $row1['friend_user'];
+                if(isset($friend)){
+                    $get_user = "SELECT * FROM user where user_name='$friend'"; 
+                    $result0 = $conn->query($get_user);
+                    $result0 = $result0->fetch_assoc();
 
-        <div class = 'frameMess'>
-            <div class = 'navigationMess'>
-                <button
-                    class = 'backMess'
-                >
-                    <i class="fas fa-angle-left"></i>
-                </button>
-                <div class = 'imageMess'></div>
-                <h5 class = 'nameMess'>Nguyễn Trần Thiên Tân</h5>
-            </div>
-            <div class = 'contentMess'>
-                <div class = 'messMess'>
-                    <p class = 'sendMess'>Làm người yêu mình nhé!</p>
+                    //lấy chat id tin nhắn send
+                    $query = "SELECT chat_id FROM chat WHERE user_name = '$user_name' AND friend_user = '$friend'";
+                    
+                    foreach($conn -> query($query) as $value) {
+                        $idSend = $value['chat_id'];
+                    }
+                    //lấy chat id tin nhắn received
+                    $query = "SELECT chat_id FROM chat WHERE user_name = '$friend' AND friend_user = '$user_name'";
+                    
+                    foreach($conn -> query($query) as $value) {
+                        $idReceived = $value['chat_id'];
+                    }
+
+                    echo "
+                        <div class = 'itemNoti' user = $result0[user_name]>
+                            <div class = 'imageNoti'>
+                                <img src='http://localhost/online-class/src/database/{$result0['user_name']}/image/{$result0['user_image']}'>  
+                            </div>
+                            <div class = 'contentNoti'>
+                                <h4>".$result0['user_fullname']."</h4>
+                                <p>Tin nhắn</p>
+                            </div>
+                        </div>
+                        ";
+                }
+            }
+            ?>
+            <div class = 'frameMess'>
+                <div class = 'navigationMess'>
+                    <button class = 'backMess'>
+                        <i class='fas fa-angle-left'></i>
+                    </button>
+                    <!-- <div class = 'imageMess'>
+                        <img src="http://localhost/online-class/src/database/{$result0['user_name']}/image/{$result0['user_image']}">
+                    </div> -->
+                    <h5 class = 'nameMess'>".$result0['user_fullname']."</h5>
                 </div>
-                <div class = 'messMess'>
-                    <p class = 'receiveMess'>Tớ chỉ xem cậu là bạn thôi :)</p>
+                <div class = 'contentMess'>
+                </div>
+                <div class = 'navigationMessSend'>
+                        <input style="color: black;" class = 'inputMessChat' placeholder = 'Nhập tin nhắn'></input>
+                        <button  class = 'buttonMessSend'><i class="fas fa-paper-plane"></i></button>
                 </div>
             </div>
-            <div class = 'navigationMessSend'>
-                <input class = 'inputMessChat' placeholder = "Nhập tin nhắn"></input>
-                <button class = 'buttonMessSend'><i class ="fad fa-paper-plane"></i></button>
-            </div>
-        </div>
     </div>
     <div id='homepage'>
         <div class = 'backgroundNav'>
@@ -230,7 +232,6 @@
                     
                     <img src='http://localhost/online-class/src/database/{$user_name}/image/{$row['user_image']}' style='width:40px;border-radius:50px'>
                         ".$row['user_fullname']."
-
                     <div class='dropdown'>
                         <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
                         <div class='noidung_dropdown'>
@@ -263,11 +264,11 @@
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
             $anh = $result['subject_image'];
-            $sj_id = substr($result['subject_id'],-13,5);
+            $sj = substr($result['subject_id'],-13,5);
             echo "
                 <div class='name-subject' style='background:url(http://localhost/online-class/src/database/{$result['user_name']}/image/{$anh});background-repeat: no-repeat;background-size: cover;'>
                     <p>
-                        <b>".$sj_id."</b>
+                        <b>".$sj."</b>
                         ".$result['subject_name']."
                     </p>
                 </div>
@@ -497,6 +498,65 @@
             modal.style.display = "none";
         }
     }
+
+     // mess
+     function fetchMess(userName, userFriend) {
+        $.get(
+            "./mess/text.php",
+            {userName: userName, userFriend: userFriend},
+            function(data)
+            {
+                $('.contentMess').html(data)
+            }
+        )
+
+        sessionStorage.setItem("dataOLChat", JSON.stringify({
+            userName: userName,
+            userFriend: userFriend
+        }))
+    }
+
+    $('.itemNoti').on('click', function() {
+        fetchMess('<?php echo $user_name ?>', this.getAttribute('user'))
+        $('.nameMess').html(this.children[1].children[0].innerHTML)
+    })
+    
+    // send mess
+
+    function sendMess () {
+        let users = JSON.parse(sessionStorage.getItem('dataOLChat'))
+        const actionSend = new Promise(resolve => {
+            resolve(
+                    $.post(
+                    "./mess/sendmess.php",
+                    {userName: users.userName, userFriend: users.userFriend, content: $('.inputMessChat').val()},
+                    function (data) {
+                        console.log(data);
+                    }
+                )
+            )
+        })
+
+        if($('.inputMessChat').val() != '') {
+            actionSend
+            .then(() => {
+                fetchMess(users.userName, users.userFriend)
+            })
+        }
+        $('.inputMessChat').val('')
+    }
+
+    $('.buttonMessSend').on('click', sendMess)
+
+    // updatemess
+    setInterval(() => {
+        let users = JSON.parse(sessionStorage.getItem('dataOLChat'))
+        if(users != null) {
+            fetchMess(users.userName, users.userFriend)
+        }
+
+        console.log(JSON.parse(sessionStorage.getItem('dataOLChat')) != null);
+    }, 2000);
 </script>
 </body>
 </html>

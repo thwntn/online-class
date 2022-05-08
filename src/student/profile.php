@@ -152,6 +152,7 @@
                 </div>
             </div>
         </div>
+        
         <div class='rightBar col-md-6'}>
             <div class='banner row'>
                 <div class='bannerImg'></div>
