@@ -259,26 +259,25 @@
                                 
                             ?> 
                              <?php 
-                             if(isset($_POST['user_name'])){     
+                             if(isset($_POST['delete-rg'])){     
                                 $sj_id=$_POST['subject_id'] ;
                                 $user_rg=$_POST['user_name'] ;                     
-                            $sql3="DELETE FROM score where subject_id='$sj_id' and user_name='$user_rg'";
-                            mysqli_query($con,$sql3);
+                            $sql5="DELETE FROM score where subject_id='$sj_id' and user_name='$user_rg'";
+                            mysqli_query($con,$sql5);
                             }
-                                    if(isset($_POST['user_name'])){     
+                                    if(isset($_POST['delete-rg'])){     
                                         $sj_id=$_POST['subject_id'] ;
                                         $user_rg=$_POST['user_name'] ;               
-                                    $sql2="DELETE FROM registry where subject_id='$sj_id' and user_name='$user_rg'";
-                                    mysqli_query($con,$sql2);
+                                    $sql6="DELETE FROM registry where subject_id='$sj_id' and user_name='$user_rg'";
+                                    mysqli_query($con,$sql6);
                                     }
-                                    if(isset($_POST['user_name'])){     
-                                        $sj_id=$_POST['subject_id'] ;
-                                        $user_rg=$_POST['user_name'] ;
-                                        $hw_id=$_POST['homework_id'] ;
-                                    $sql2="DELETE FROM document where subject_id='$sj_id' and user_name='$user_rg' and homework_id='$hw_id'";
-                                    mysqli_query($con,$sql2);
-                                    }
-                                    
+                                     if(isset($_POST['delete-rg'])){     
+                                         $sj_id=$_POST['subject_id'] ;
+                                         $user_rg=$_POST['user_name'] ;
+                                         $hw_id=$_POST['homework_id'] ;
+                                     $sql7="DELETE FROM document where subject_id='$sj_id' and user_name='$user_rg' and homework_id='$hw_id'";
+                                     mysqli_query($con,$sql7);
+                                     }                                 
                                 }
                                 ?>
                             </div>
@@ -374,7 +373,7 @@
      })
     
    
-
+     
   //Xóa tài liệu
   document.addEventListener('DOMContentLoaded', function() {
     var el = document.getElementsByClassName("formDelete"); 

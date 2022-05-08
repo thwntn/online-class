@@ -217,7 +217,7 @@ $user=$_POST['userOL'];
                 <input type="hidden" name="userOL" value=<?php echo $user?>>
                 <button type="submit" class="home">Trang chủ</button>
         </form>
-            <h5>Description</h5>
+            <h5>Thông tin cá nhân</h5>
             <p>
             <?php 
                     $sql="SELECT * FROM user where user_name='$user'";

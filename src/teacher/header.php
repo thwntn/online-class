@@ -135,14 +135,18 @@ $user=$_POST['userOL'];
                 if(isset($friend)){
                     $get_user = "SELECT * FROM user where user_name='$friend'"; 
                     $result0 = $con->query($get_user);
-                    $row = $result0->fetch_assoc();
-                    $user_fullname=$row['user_fullname'];
+                    $result0 = $result0->fetch_assoc();
+                    $user_fullname=$result0['user_fullname'];
                     
                     echo "
-                        <div class = 'itemNoti'>
-                            <div class = 'imageNoti' style='background:url(http://localhost/online-class/src/database/{$friend}/image/{$row['user_image']}); background-size: cover '></div>
+                        <div class = 'itemNoti' user = $result0[user_name]>
+                            <div class = 'imageNoti' >
+                            <img src='http://localhost/online-class/src/database/{$friend}/image/{$result0['user_image']}'>
+                            </div>
+                            
                             <div class = 'contentNoti'>
-                                <h4>".$row['user_fullname']."</h4>
+                                
+                                <h4>".$result0['user_fullname']."</h4>
                                 <p>Tin nhắn</p>
                             </div>
                         </div>
@@ -156,7 +160,7 @@ $user=$_POST['userOL'];
                     <button class = 'backMess'>
                         <i class='fas fa-angle-left'></i>
                     </button>
-                    <div class = 'imageMess' style='background:url(<?php echo "http://localhost/online-class/src/database/{$friend}/image/{$row['user_image']}" ?>); background-size: cover '></div>
+                    
                     <h5 class = 'nameMess' style="color:gray!important"><?php echo  $user_fullname ?></h5>
                 </div>
                 <div class = 'contentMess'>

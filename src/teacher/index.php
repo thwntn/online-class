@@ -152,7 +152,7 @@ include 'connect.php' ;
                         </div>
                         ";
                 }
-            }
+            
             ?>
 
             <div class = 'frameMess'>
@@ -160,7 +160,7 @@ include 'connect.php' ;
                     <button class = 'backMess'>
                         <i class='fas fa-angle-left'></i>
                     </button>
-                    <div class = 'imageMess' style='background:url(<?php echo "http://localhost/online-class/src/database/{$friend}/image/{$result0['user_image']}" ?>); background-size: cover '></div>
+                   
                     <h5 class = 'nameMess'><?php echo $result0['user_fullname'] ?></h5>
                 </div>
                 <div class = 'contentMess'>
@@ -170,6 +170,7 @@ include 'connect.php' ;
                         <button  class = 'buttonMessSend'><i class="fa-solid fa-paper-plane"></i></button>
                 </div>
             </div>
+            <?php } ?>
     </div>
     <div id='homepage'>
         <div class = 'backgroundNav'>

@@ -73,6 +73,11 @@ $friend_user=$_POST['user'];
                                     <input type='hidden' name='user' value=$friend_user>
                                     <input type='submit' name='unfriend' value='Hủy kết bạn'>
                                 </form>
+                                <form action='createChat.php' method='post'>
+                                    <input type='hidden' name='userOL' value=$user>
+                                    <input type='hidden' name='user' value=$friend_user>
+                                    <input type='submit' name='unfriend' value='Nhắn tin'>
+                                </form>
                             </div>
                       </div>                         
                              
@@ -273,7 +278,7 @@ $friend_user=$_POST['user'];
                 <input type="hidden" name="userOL" value=<?php echo $user?>>
                 <button type="submit" class="home">Trang chủ</button>
             </form>
-            <h5>Description</h5>
+            <h5>Thông tin cá nhân</h5>
             <p>
             <?php 
                     $sql="SELECT * FROM user where user_name='$friend_user'";
