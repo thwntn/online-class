@@ -602,3 +602,9 @@ background: #555;
     /* margin-top: 3px;
     margin-bottom: 3px; */
 }
+
+.button{
+    background: none;
+    border: none;
+    float: left;
+}

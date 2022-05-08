@@ -266,7 +266,27 @@
 
     <div class="right">
         <div class="right-1">
-            <p class="p"><b>Bài tập của bạn</p>
+            <?php 
+             $get_csore = "SELECT s.score_level, s.homework_id FROM score s join homework hw on s.homework_id=hw.homework_id where s.homework_id='$homework_id' and user_name='$user_name'";
+             $data = $conn->query($get_csore);
+             $data = mysqli_fetch_array($data);
+             if(isset($data)){
+                echo "
+                <p class='p'>
+                    <b>Bài tập của bạn
+                    <i class='a'>Điểm: ".$data['score_level']."</i>   
+                </p>
+                ";
+             }else{
+                echo "
+                <p class='p'>
+                    <b>Bài tập của bạn   
+                    <i class='a'>Điểm: chưa có</i>
+                </p>
+                ";
+             }
+            ?>
+            
             <?php   
                 $get_homework = "SELECT * FROM document where homework_id='$homework_id' and user_name='$user_name'";
                 $result = $conn->query($get_homework);

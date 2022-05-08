@@ -26,6 +26,38 @@
             <li class="item"><a class ='mess-mobile'><i class="fas fa-comment"></i></a></li>
         </ul>
     </div>
+    <div class = 'frameNoti btap1'>
+        <h5><i class="fas fa-book"></i>Bài tập được giao</h5>
+             <?php
+                $sql = "SELECT sj.user_name, sj.subject_image, sj.subject_id, hw.homework_content, hw.homework_id FROM registry rg join homework hw on rg.subject_id=hw.subject_id
+                    join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by homework_time ASC";
+                $result = $conn->query($sql);
+                while($row = $result->fetch_assoc()) {
+                    $homework_id = $row['homework_id'];
+                    $subject_id = $row['subject_id'];
+                    $sj_id = substr($row['subject_id'],-13,5);
+                    echo "
+                    <form action='./homework.php' method='post'>
+                        <input type='hidden' name='userOL' value=$user_name> 
+                        <input type='hidden' name='subject_id' value=$subject_id> 
+                        <input type='hidden' name='homework_id' value=$homework_id>
+
+                        <div class = itemNoti>
+                            <div class = 'imageNoti'>
+                            <button type='submit' class='button' >
+                                <img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['subject_image']}'>  
+                                <button>
+                            </div>
+                            <div class = 'contentNoti'>
+                                <h4>".$sj_id."</h4> 
+                                <p class='p-homework'>".$row['homework_content']."</p>
+                            </div>
+                        </div>
+                    </form>
+                    ";
+                }
+            ?>
+    </div>
     <div class = 'frameNoti noti'>
         <h5><i class="fas fa-bell"></i>Thông báo</h5>
         <?php
@@ -61,32 +93,20 @@
                 join notification nf on sj.user_name=nf.user_name where rg.user_name='$user_name'";
             $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
-                // if($row['noti_status'] == 1){
+                    $subject_id = $row['subject_id'];
                     $sj_id = substr($row['subject_id'],-13,5);
                     echo "
-                        <div class = itemNoti>
-                            <div class = 'imageNoti'>
-                                <img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['subject_image']}'>  
-                            </div>
-                            <div class = 'contentNoti'>
-                                <h4>".$sj_id."</h4>
-                                <p>".$row['noti_content']."</p>
-                            </div>
-                        </div>
+                        
+                            <div class = itemNoti>
+                                <div class = 'imageNoti'>
+                                    <img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['subject_image']}'>  
+                                </div>
+                                <div class = 'contentNoti'>
+                                    <h4>".$sj_id."</h4>
+                                    <p>".$row['noti_content']."</p>
+                                </div>
+                            </div>                      
                     ";
-                // }else{
-                //     echo "
-                //         <div class = itemNotiStatus>
-                //             <div class = 'imageNoti'>
-                //                 <img src=".$row['subject_image'].">
-                //             </div>
-                //             <div class = 'contentNoti'>
-                //                 <h4>".$sj_id."</h4>
-                //                 <p>".$row['noti_content']."</p>
-                //             </div>
-                //         </div>
-                //     ";
-                //     }
                 }
             
         ?>
@@ -94,11 +114,10 @@
         <?php
             if(isset($_POST['add_friend'])){
                 $user_name=$_POST['userOL'];
-                $user=$_POST["user"];
+                $user=$_POST['user'];
                 $sql1 = "INSERT INTO friend(friend_user, user_name, friend_status) 
                     VALUES ('$user','$user_name', 1)";
-                $kq1=$conn->query($sql1);
-                
+                $kq1=$conn->query($sql1);    
             }                
         ?>
         <?php
@@ -218,6 +237,7 @@
                         // }
                     ?>
                 <!-- </li> -->
+                
                 <li>
                     <?php
                         $sql="SELECT * FROM user where user_name='$user_name'";
@@ -228,7 +248,7 @@
                         ".$row['user_fullname']."
 
                         <div class='dropdown'>
-                            <button onclick='hamDropdown()' class='nut_dropdown'> <i class='fa-solid fa-caret-down'></i></button>
+                            <button onclick='hamDropdown()' class='nut_dropdown'> <img src='./image/a.jpg' alt='' class='down'></button>
                             <div class='noidung_dropdown'>
                                 <form action='./profile.php' method='post'>
                                     <input type='hidden' name='userOL' value=$user_name>

@@ -29,21 +29,31 @@ include './demo/connect.php';
     <div class = 'frameNoti btap1'>
         <h5><i class="fas fa-book"></i>Bài tập được giao</h5>
              <?php
-                $sql = "SELECT sj.user_name, sj.subject_image, sj.subject_id, hw.homework_content FROM registry rg join homework hw on rg.subject_id=hw.subject_id
+                $sql = "SELECT sj.user_name, sj.subject_image, sj.subject_id, hw.homework_content, hw.homework_id FROM registry rg join homework hw on rg.subject_id=hw.subject_id
                     join subject sj on rg.subject_id=sj.subject_id where rg.user_name='$user_name' order by homework_time ASC";
                 $result = $conn->query($sql);
                 while($row = $result->fetch_assoc()) {
+                    $homework_id = $row['homework_id'];
+                    $subject_id = $row['subject_id'];
                     $sj_id = substr($row['subject_id'],-13,5);
                     echo "
+                    <form action='./homework.php' method='post'>
+                        <input type='hidden' name='userOL' value=$user_name> 
+                        <input type='hidden' name='subject_id' value=$subject_id> 
+                        <input type='hidden' name='homework_id' value=$homework_id>
+
                         <div class = itemNoti>
                             <div class = 'imageNoti'>
+                            <button type='submit' class='button' >
                                 <img src='http://localhost/online-class/src/database/{$row['user_name']}/image/{$row['subject_image']}'>  
+                                <button>
                             </div>
                             <div class = 'contentNoti'>
-                                <h4>".$sj_id."</h4>
+                                <h4>".$sj_id."</h4> 
                                 <p class='p-homework'>".$row['homework_content']."</p>
                             </div>
                         </div>
+                    </form>
                     ";
                 }
             ?>

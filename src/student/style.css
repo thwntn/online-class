@@ -477,22 +477,26 @@
 .contentNoti {
     flex: 1;
     margin-left: 16px;
+    /* float: left; */
 }
 .contentNoti p {
     margin: 0 !important;
     font-size: 14px;
     overflow: hidden;
     min-width: 194px;
+    /* float: left; */
 }
 
-.contentNoti .p {
+/* .contentNoti .p {
     margin: 0 !important;
     font-size: 14px;
     overflow: hidden;
     min-width: 194px;
     display: flex;
-}
+     float: left; 
+} */
 .contentNoti h4 {
+    float: left;
     font-size: 18px;
 }
 .itemNoti,
@@ -818,7 +822,7 @@ background: #555;
       background: none;
       border: none;
       color: white;
-      padding-left: 20px;
+      padding-left: 30px;
       font-size: 17px;
   }
   .sub-taikhoan:hover{
@@ -834,3 +838,15 @@ background: #555;
       /* margin-top: 3px;
       margin-bottom: 3px; */
   }
+
+/* .p-homework, */
+.button{
+    background: none;
+    border: none;
+    float: left;
+}
+
+.down{
+    background: none;
+    width: 20px;
+}
