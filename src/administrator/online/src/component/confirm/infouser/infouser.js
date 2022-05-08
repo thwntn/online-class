@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import style from './infouser.module.css'
+import { PageContext } from '../../../context/MainContext';
+import Toast from '../../../toast/Toast';
 
 
 const InfoUser = ({object}) => {
-    console.log(object);
-    
+    const page = useContext(PageContext)    
     const [user, setUser] = useState({})
 
     const updateInfo = () => {
@@ -14,7 +15,16 @@ const InfoUser = ({object}) => {
             body: JSON.stringify(user)
         })
         .then(response => response.json())
-        .then(responseJson => console.log(responseJson))
+        .then(res => {
+            if(res == 1) {
+                page.setToast(<Toast props={{ type: 'success', content: 'Thành công', sub: 'Đã thay đổi thông tin người dùng'}}></Toast>)
+            } else {
+                page.setToast(<Toast props={{ type: 'warning', content: 'Thất bại', sub: 'Có lỗi xảy ra'}}></Toast>)
+            }
+            setTimeout(() => {
+                page.setToast(null)
+            }, 2000);
+        })
     }
 
     // Lấy dữ liệu User từ cơ sở dữ liệu

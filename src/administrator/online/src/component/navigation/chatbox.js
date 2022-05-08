@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import style from './chatbox.module.css'
+import styles from './chatbox.module.css'
 
 const ChatBox = ({ object }) => {
 
@@ -95,10 +95,10 @@ const ChatBox = ({ object }) => {
     }
 
     return (
-        <div className = {style.frame}>
-            <div className = {style.navigation}>
+        <div className = {styles.frame}>
+            <div className = {styles.navigation}>
                 <button
-                    className = {style.back}
+                    className = {styles.back}
                     onClick={(event) => {
                         event.stopPropagation()
                         object.setGoToMess()
@@ -106,27 +106,27 @@ const ChatBox = ({ object }) => {
                 >
                     <i className="fas fa-angle-left"></i>
                 </button>
-                <div className = {style.image}></div>
-                <h5 className ={style.name}>{object.friend.user_fullname}</h5>
+                <div className = {styles.image}></div>
+                <h5 className ={styles.name}>{object.friend.user_fullname}</h5>
             </div>
-            <div className = {style.content}>
+            <div className = {styles.content}>
                 {messages.map(message => {
                     let type
                     switch (message.type) {
                         case 'send': {
-                            type = 'chatbox_send__zJkFJ'
+                            type = styles.send
                             break
                         }
                         case 'received': {
-                            type = 'chatbox_receive__ix311'
+                            type = styles.received
                             break;
                         }
                     }
                     return (
-                        <div key = {message.mess_id} className = {style.mess}>
+                        <div key = {message.mess_id} className = {styles.mess}>
                             <p className = {type}>
                                 {message.mess_content}
-                                <div className={style.time}>
+                                <div className={styles.time}>
                                     {message.mess_time.slice(-8, -3)}
                                 </div>
                             </p>
@@ -134,9 +134,9 @@ const ChatBox = ({ object }) => {
                     )
                 })}
             </div>
-            <div className = {style.navigationSend}>
+            <div className = {styles.navigationSend}>
                 <input
-                    className = {style.inputChat}
+                    className = {styles.inputChat}
                     placeholder = "Nhập tin nhắn"
                     onClick = {e => {
                         e.stopPropagation()
@@ -146,7 +146,7 @@ const ChatBox = ({ object }) => {
                     }}
                 ></input>
                 <button
-                    className = {style.buttonSend}
+                    className = {styles.buttonSend}
                     onClick = {(e) => {
                         const inPut = document.querySelector('input')
                         if(inPut.value != '') {

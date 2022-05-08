@@ -8,7 +8,7 @@ import SendNoti from './sendNotification'
 const AccountActive = (property) => {
     //fetch data
     const [viewUsers, setViewUsers] = useState([])
-
+    const [ask, setAsk] = useState(null)
     const [refesh, setReFesh] = useState()
     const [close, setClose] = useState(style.active)
     const [view, setView] = useState('none')
@@ -21,8 +21,6 @@ const AccountActive = (property) => {
             .then((response) => response.json())
             .then((usersJson) => {
                 setViewUsers(usersJson)
-                console.log(usersJson);
-                console.log(usersJson);
             })
         }
         fetchData()
@@ -48,6 +46,7 @@ const AccountActive = (property) => {
     
     return (
         <div className = {style.frame + ' ' + style.active}>
+            {ask}
             <div className = {style.accountBox}>
                 <div className = {style.backgroundImage}></div>
                 <div className = {style.titleMobile}><h5>Tài khoản hiện hành</h5></div>
@@ -58,6 +57,9 @@ const AccountActive = (property) => {
                         onTouchMove = {() => property.data(false)}
                     ></div>
                     <input
+                        onChange={() => {
+                            console.log(1);
+                        }}
                         className = {style.search} placeholder = 'Nhập tên cần tìm kiếm'
                     ></input>
                     <button onClick = {() => property.func()} className = {style.close}>Đóng</button>
@@ -97,8 +99,8 @@ const AccountActive = (property) => {
                                             >
                                                 <i className="fad fa-sign-in"></i>
                                                 <form style={{display: 'none'}} method = 'post' action = {(user.user_type == 1) || (user.user_type == 4) == true ? 'http://localhost/online-class/src/teacher/index.php' : 'http://localhost/online-class/src/student/index.php'}>
-                                                    <input name = 'userOL' value = {user.user_name} style= {{display: 'none'}}></input>
-                                                    <input type = 'submit'></input>
+                                                    <input onChange={() => {}} name = 'userOL' value = {user.user_name} style= {{display: 'none'}}></input>
+                                                    <input onChange={() => {}} type = 'submit'></input>
                                                 </form>
                                             </button>
                                             <button
@@ -107,7 +109,7 @@ const AccountActive = (property) => {
                                                 onMouseLeave={() => setConvert('')}
                                             >
                                                 <i className="fad fa-repeat-1"></i>
-                                                {convert === index && <Convert object = {{user: user.user_name, refesh: setReFesh}}></Convert>}
+                                                {convert === index && <Convert object = {{user: user.user_name, refesh: setReFesh, setAsk: setAsk}}></Convert>}
                                             </button>
                                             <button
                                                 onClick = {() => {setView(index)}}

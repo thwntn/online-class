@@ -1,0 +1,60 @@
+.frame {
+    display: flex;
+    position: fixed;
+    top: 0;bottom: 0;left: 0;right: 0;
+    z-index: 10;
+    background-color: #fff;
+    padding: 0px 200px;
+}
+.background {
+    position: absolute;
+    top: 0;bottom: 0;left: 0;right: 0;
+    background-image: url(./image/back.png);
+    background-size: cover;
+    z-index: -1;
+    opacity: 20%;
+}
+.imgDesk p {
+    width: 100%;
+}
+.imgDesk {
+    width: 90%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-content: center;
+    background-image: url(./image/icon.png);
+    background-size: 80%;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+}
+.content button,
+.content input {
+    width: 100%;
+    margin: 24px 0px;
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+}
+@media (max-width: 1100px) {
+    .frame {
+        padding: 0px 50px;
+    }
+}
+@media (max-width: 500px) {
+    .frame {
+        padding: 0px 50px;
+        flex-wrap: wrap;
+    }
+    .imgDesk {
+        width: 100%;
+        align-items: flex-end;
+    }
+}

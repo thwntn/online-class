@@ -1,8 +1,12 @@
+import { useContext } from 'react'
+import { PageContext } from '../../context/MainContext'
+import Toast from '../../toast/Toast'
 import style from './deleteUser.module.css'
 
 
 
 function AskDelete({user, setUserDelete, fullName, setRefesh}) {
+    const page = useContext(PageContext)
 
     const transUser = (userName) => {
         const url = 'http://localhost/online-class/src/administrator/api/deleteUserAdmin.php'
@@ -23,10 +27,15 @@ function AskDelete({user, setUserDelete, fullName, setRefesh}) {
             if(responseJson == 1) {
                 setRefesh(Math.random)
                 setUserDelete(null)
+                page.setToast(<Toast props={{ content: 'Xoá thành công', sub: 'Tài khoản quản trị vừa được xóa', type: 'warning' }}></Toast>)
             }
             else {
                 setUserDelete(null)
+                page.setToast(<Toast props={{ content: 'Thất bại', sub: 'Máy chủ không phản hồi', type: 'error' }}></Toast>)
             }
+            setTimeout(() => {
+                page.setToast(null)
+            }, 2000);
         })
     } 
 

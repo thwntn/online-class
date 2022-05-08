@@ -1,12 +1,14 @@
 //Gửi thông báo đến người dùng
 
-import { useState } from 'react'
+import { useContext, useState } from 'react'
 import style from './sendNotification.module.css'
+import { PageContext } from '../../../context/MainContext'
+import Toast from '../../../toast/Toast'
 
 function SendNoti( {object} ) {
 
     const [data, setData] = useState('')
-    console.log(object);
+    const page = useContext(PageContext)
 
     // Gửi dữ liệu thông báo đến người dùng
     const sendData = () => {
@@ -19,7 +21,16 @@ function SendNoti( {object} ) {
             })
         })
         .then(response => response.json())
-        .then(responseJson => console.log(responseJson))
+        .then(res => {
+            if(res == 1) {
+                page.setToast(<Toast props ={{ type: 'success', content: 'Thành công', sub: 'Đã gửi thông báo đến người dùng'}}></Toast>)
+            } else {
+                page.setToast(<Toast props ={{ type: 'erorr', content: 'Thất bại', sub: 'Máy chủ không phản hồi'}}></Toast>)
+            }
+            setTimeout(() => {
+                page.setToast(null)
+            }, 2000);
+        })
     }
 
     return ( 

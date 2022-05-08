@@ -523,8 +523,6 @@
         if(users != null) {
             fetchMess(users.userName, users.userFriend)
         }
-
-        console.log(JSON.parse(sessionStorage.getItem('dataOLChat')) != null);
     }, 2000);
 </script>
 </body>

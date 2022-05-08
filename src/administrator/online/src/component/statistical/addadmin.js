@@ -1,11 +1,14 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import style from './addadmin.module.css'
 import Error from '../status/error';
+import { PageContext } from '../../context/MainContext';
+import Toast from '../../toast/Toast';
 
 const md5 = require('md5')
 const sha1 = require('sha1')
 
 function AddAdmin({ setAddAd, setRefesh }) {
+    const page = useContext(PageContext)
 
     const userAdmin = {
         address: null,
@@ -32,12 +35,17 @@ function AddAdmin({ setAddAd, setRefesh }) {
             body: JSON.stringify(infoAdmin)
         })
         .then(response => response.json())
-        .then(responseJson => {
-            if(responseJson == 1) {
-                console.log(responseJson);
+        .then(res => {
+            if(res == 1) {
                 setRefesh(Math.random())
                 setAddAd(false)
+                page.setToast(<Toast props={{ type: 'success', content: 'Đã khởi tạo', sub: 'Tài khoản quản trị đã được cấp' }}></Toast>)
+            } else {
+                page.setToast(<Toast props={{ type: 'warning', content: 'Thất bại', sub: 'Tên đăng nhập đã tồn tại' }}></Toast>)
             }
+            setTimeout(() => {
+                page.setToast(null)
+            }, 2000);
         })
     }
 

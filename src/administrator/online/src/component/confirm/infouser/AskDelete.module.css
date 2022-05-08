@@ -1,0 +1,62 @@
+.frame {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.2);
+    z-index: 15;
+    backdrop-filter: blur(6px);
+}
+.box {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    width: 450px;
+    margin-left: auto;
+    margin-right: auto;
+    background-color: #fff;
+    padding: 20px 16px;
+    border-radius: 20px;
+    border: 2px solid rgb(200, 225, 255);
+    animation: anibox 0.3s ease;
+}
+.box h5 {
+    width: 100%;
+    text-align: center;
+}
+@keyframes anibox {
+    from {
+        transform: translateY(5%) scale(95%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0px) scale(100%);
+        opacity: 1;
+    }
+}
+.box button {
+    border: none;
+    padding: 8px 16px;
+    margin: 0px;
+    border-radius: 48px;
+    margin-top: 12px;
+}
+.no {
+    margin-left: 20px !important;
+}
+.no:hover {
+    background-color: rgb(80, 192, 123);
+    color: #fff;
+}
+.yes {
+    padding: 8px 20px !important;
+}
+.yes:hover {
+    background-color: rgb(255, 77, 77);
+    color: #fff;
+}

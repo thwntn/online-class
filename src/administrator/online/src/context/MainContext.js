@@ -27,11 +27,12 @@ function pinItem (key) {
 }
 
 function PageProvider({ children }) {
+    const [toast, setToast] = useState()
     const [main, setMain] = useState(<HomePage></HomePage>)
 
     return ( 
-        <PageContext.Provider value = {{ HomePage, Confirm, Statistical, Log, setMain, pinItem }}>
-            { children } {main}
+        <PageContext.Provider value = {{ HomePage, Confirm, Statistical, Log, setMain, pinItem, setToast }}>
+            { children } {main} {toast}
         </PageContext.Provider>
      );
 }

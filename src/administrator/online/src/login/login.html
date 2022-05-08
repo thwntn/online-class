@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./assets/style/login.css">
+    <link rel="stylesheet" href="./assets/framework/css/bootstrap.css">
+    <script src = './assets/framework/js/bootstrap.js'></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Varela+Round&display=swap" rel="stylesheet">
+
+    <!-- md5 -->
+    <script src="./assets/js/md5.js"></script>
+
+   </head>
+<body>
+    <div id="root">
+        <div class="container-fluid">
+            <div class="frame row">
+                <div class="background"></div>
+                <div class="img_desk col-md-6"  style="background-image: url(./assets/image/icon.png);">
+                    <h1>Chào mừng bạn!</h1>
+                    <p>Đến với trang đăng nhập vui lòng nhâp tài khoản và mật khẩu <br> chúng tôi sẽ đưa bạn đến deadline <br> của bạn! :)</p>
+                </div>
+                <div class="content col-md-4">
+                    <input class = 'username' type="text" placeholder="Tên tài khoản hoặc email">
+                    <input class="password" type = 'password' placeholder="Nhập mật khẩu">
+                    <button>Gặp sự cố với mật khẩu ?</button>
+                    <button class="signin">Đăng nhập</button>
+                    <h5>Đăng nhập với</h5>
+                    <div class="sign-with">
+                        <button class="facebook"><img src="./assets/image/logo-facebook.svg" alt=""></button>
+                        <button class="google"><img src="./assets/image/logo-google.svg" alt=""></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="errBox">
+        <h5>Sai tên đăng nhập hoặc mật khẩu !</h5>
+    </div>
+    <a href="./signup.html" class="signUp">
+        Đăng kí
+    </a>
+</body>
+<script type="module">
+    import cookie from './cookie.js'
+
+    //Create Form Login
+    const formLogin = (action, data) => {
+        const form = document.createElement('form')
+        form.setAttribute("action", action)
+        form.setAttribute("method", "post")
+
+        const input = document.createElement('input')
+        input.setAttribute('name', 'userOL')
+        input.setAttribute('value', data)
+        form.appendChild(input)
+
+        document.querySelector('body').appendChild(form)
+        document.querySelector('form').submit()
+    }
+
+    document.querySelector('.signin').addEventListener('click', function(){
+        let data = []
+        let username = document.querySelector('.username').value
+        data.push(username)
+        data.push(md5(document.querySelector('.password').value))
+        //fetch
+        async function login () {
+            const url = 'http://localhost/online-class/src/administrator/api/login.php'
+            const response = await fetch(url, {
+                method: 'POST',
+                mode: 'cors',
+                cache: 'no-cache',
+                credentials: 'same-origin',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                redirect: 'follow',
+                referrerPolicy: 'no-referrer',
+                body: JSON.stringify(data)
+            })
+            await response.json().then((responseJSON) => {
+                switch(responseJSON) {
+                    case 100: case 50:{
+                        window.sessionStorage.setItem('userOL', document.querySelector('.username').value)
+                        let url = 'http://localhost/online-class/src/administrator/api/cookie.php'
+                        let createCookie = new Promise((resolve) => {
+                            resolve(cookie( url, -1 ))
+                        })
+                        createCookie.then(() => {
+                            window.location.href = "http://localhost/online-class/src/administrator/online/build/index.html"
+                        })
+                        break
+                    }
+                    case 1: {
+                        formLogin("http://localhost/online-class/src/teacher/index.php", username)
+                        break;                      
+                    }
+                    case 2: {
+                        formLogin("http://localhost/online-class/src/student/index.php", username)
+                        break
+                    }
+                    case 0: {
+                        document.querySelector('.errBox').classList.add('active')
+                        setTimeout(function() {
+                            document.querySelector('.errBox').classList.remove('active')
+                        }, 2000)
+                        alert('Sai tên đăng nhập hoặc mật khẩu')
+                        break
+                    }
+                    case -1: {
+                        document.querySelector('.errBox').classList.add('active')
+                        setTimeout(function() {
+                            document.querySelector('.errBox').classList.remove('active')
+                        }, 2000)
+                        alert('Tài khoản của bạn đã bị khóa vui lòng liên hệ ADMIN : \'admin@gmail.com')
+                        break
+                    }
+
+                }
+            })
+        }
+        login()
+    })
+</script>
+</html>

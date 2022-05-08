@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useContext, useEffect, useState } from 'react'
+import Toast from '../../../toast/Toast'
 import style from './convert.module.css' 
 import SendNoti from './sendNotification'
+import { PageContext } from '../../../context/MainContext'
+import AskDelete from './AskDelete'
 
 async function updateType (user, action, refesh) {
     
@@ -25,9 +28,9 @@ async function updateType (user, action, refesh) {
     return response
 }
 
-const Convert = ({object}) => {
-    console.log(object);
-
+const Convert = ({ object }) => {
+    const page = useContext(PageContext)
+    const [convert, setConvert] = useState()
     const [sendNotification, setSendNotification] = useState(null)
 
     //gửi thông báo cho người dùng từ trang quản trị
@@ -49,12 +52,34 @@ const Convert = ({object}) => {
             })
         })
     }
-
-
-    const [convert, setConvert] = useState()
+    function createChat() {
+        let url = 'http://localhost/online-class/src/administrator/api/createChat.php'
+        fetch(url, {
+            method: 'post',
+            body: JSON.stringify({
+                userName: 'admin',
+                friendUser: object.user
+            })
+        })
+        .then(res => res.json())
+        .then(res => {
+            if(res == 0) {
+                page.setToast(<Toast props = {{ type: 'warning', content: 'Lưu ý', sub: 'Cuộc trò chuyện đã tồn tại'}}></Toast>)
+            } else {
+                page.setToast(<Toast props = {{ type: 'success', content: 'Thành công', sub: 'Kiểm tra tin nhắn'}}></Toast>)
+            }
+            setTimeout(() => {
+                page.setToast(null)
+            }, 3000);
+        })
+    }
     return (
         <div className = {style.boxConvert}>
             <ul className = {style.listConvert}>
+                <li
+                    className = {style.items}
+                    onClick={createChat}
+                >Nhắn tin</li>
                 <li
                     className = {style.items}
                     onClick = {() => {
@@ -68,6 +93,9 @@ const Convert = ({object}) => {
                     }}
                 >Mở khóa tài khoản</li>
                 <li
+                    onClick={() => {
+                        object.setAsk(<AskDelete props={{ userName: object.user, setAsk: object.setAsk }}></AskDelete>)
+                    }}
                     className = {style.items}
                 >Xóa tài khoản</li>
                 <li

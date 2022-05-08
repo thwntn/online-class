@@ -11,7 +11,6 @@ const Log = (property) => {
         .then(response => response.json())
         .then(responseJson => {
             setLog(responseJson)
-            console.log(responseJson);
         })
     }
 

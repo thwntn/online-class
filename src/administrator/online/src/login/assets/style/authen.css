@@ -1,0 +1,170 @@
+@font-face {
+    font-family: basic;
+    src: url(../font/Bandon.ttf);
+}
+
+* {
+    font-family: basic;
+    box-sizing: border-box;
+}
+html {
+    font-size: 62.5%;
+}
+#main {
+    font-size: 1.6rem;
+}
+.flex {
+    display: flex;
+    flex-wrap: wrap;
+}
+.frameReSend {
+    position: fixed;
+    display: none;
+    justify-content: center;
+    align-items: center;
+
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    backdrop-filter: blur(4px);
+    animation: ani 0.3s ease;
+}
+@keyframes ani {
+    from {
+        transform: translateY(20px) scale(95%);
+        opacity: 0.5;
+    }
+    to {
+        transform: translateY(0) scale(100%);
+        opacity: 1;
+    }
+}
+.boxReSend .icon {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: rgb(255, 0, 98);
+}
+.boxReSend h5 {
+    padding: 0;
+    margin: 0;
+
+    width: 100%;
+
+    font-size: 3rem;
+}
+.boxReSend p {
+    width: 100%;
+
+    color: #555;
+
+    line-height: 36px;
+    margin: 24px 0px;
+    margin-bottom: 48px;
+}
+.reSend {
+    color: red;
+}
+.boxReSend input {
+    background-color: rgb(246, 246, 246);
+
+    width: 256px;
+
+    padding: 8px 12px;
+    border-radius: 10px;
+
+    margin-right: 12px;
+
+    border: none;
+    outline: none;
+}
+.boxReSend button {
+    border: none;
+
+    width: 48px;
+    height: 48px;
+
+    color: #fff;
+    box-shadow: 0px 0px 20px rgba(255, 0, 136, 0.4);
+    
+    border-radius: 100px;
+    background-image: linear-gradient(100deg, rgb(255, 0, 136), rgb(255, 103, 33));
+}
+.boxReSend {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: right;
+
+    background-color: #fff;
+    box-shadow:  0px 0px 20px rgba(0, 0, 0, 0.05);
+
+    width: 512px;
+    padding: 24px;
+
+    border-radius: 20px;
+    border: 2px solid rgba(170, 210, 255, 0.4);
+}
+.frame_authen {
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    justify-content: center;
+    align-items: center;
+}
+.box_authen {
+    background-color: #fff;
+    padding: 24px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.05);
+    justify-content: center;
+    border: 3px solid rgba(255, 0, 136, 0.1);
+    width: 432px;
+}
+.logo {
+    width: 200px;
+    height: 200px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 100%;
+    background-color: rgb(255, 238, 245);
+    margin-bottom: 24px;
+}
+.logo i {
+    font-size: 40px;
+    color: rgb(214, 0, 125);
+}
+.in_data {
+    width: 100%;
+}
+.box_authen p {
+    margin: 12px 0px;
+    font-size: 1.3rem;
+}
+.box_authen h1 {
+    width: 100%;
+    text-align: center;
+}
+.in_data input {
+    border: none;
+    background: rgba(0, 0, 0, 0.04);
+    width: 100%;
+    height: 50px;
+    outline: none;
+    font-size: 20px;
+    letter-spacing: 48px;
+    text-align: center;
+    margin: 56px 0px;
+    text-align: center;
+    border-radius: 100px;
+}
+.in_data {
+    position: relative;
+    justify-content: space-between;
+}
+.in_data .fake {
+    background-color: #999;
+    width: 30px;
+    height: 50px;
+}

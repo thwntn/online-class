@@ -5,6 +5,8 @@ import Noti from './notification'
 import Message from './message'
 import Confirm from '../confirm/confirm'
 import Log from '../log/log'
+import { AiOutlinePoweroff } from 'react-icons/ai'
+import cookie from '../../login/cookie'
 
 const items = ['Trang chủ', 'Tài khoản', 'Thông báo', 'Tin nhắn', 'Nhật kí']
 
@@ -15,7 +17,6 @@ function Header ({setMain}) {
     const [notRead, setNotRead] = useState(null)
     
     const page = useContext(PageContext)
-    console.log(page);
 
     useEffect(() => {
       fetchNotification()
@@ -58,6 +59,14 @@ function Header ({setMain}) {
         }
     }
 
+    function logOut() {
+        cookie(-1)
+        .then((res) => {
+            console.log(res);
+            window.location.reload()
+        })
+    }
+
     return(
         <div className = {style.background + ` ${scroll}`}>
             <h2 className = {style.title}>Online Class</h2>
@@ -69,6 +78,20 @@ function Header ({setMain}) {
                         setScroll (style.noActive)
                     }}
                     ><a href = '#home'><i className="fal fa-home"></i></a></li>
+                <li
+                    onClick={() => {
+                        setActiveNoti(!activeNoti)
+                        resetNotification()
+                    }}
+                    className = {style.item}
+                >
+                    <i className="fal fa-bell"></i> {notRead == 0 ? null : <h5 className={style.notRead}>{notRead}</h5>}
+                    {activeNoti && <Noti setNotRead = {setNotRead}></Noti>}
+                </li>
+                <li onClick={() => setActiveMess(!activeMessage)} className = {style.item}>
+                    <i className="fal fa-comment"></i>
+                    {activeMessage && <Message></Message>}
+                </li>
                 <li
                     className = {style.item}
                     onClick = {() => {
@@ -100,21 +123,15 @@ function Header ({setMain}) {
                     className = {style.item}
                 ><a href = '#log'><i className="fal fa-clipboard"></i></a></li>
                 <li
-                    onClick={() => {
-                        setActiveNoti(!activeNoti)
-                        resetNotification()
-                    }}
                     className = {style.item}
-                >
-                    <i className="fal fa-bell"></i> {notRead == 0 ? null : <h5 className={style.notRead}>{notRead}</h5>}
-                    {activeNoti && <Noti setNotRead = {setNotRead}></Noti>}
-                </li>
-                <li onClick={() => setActiveMess(!activeMessage)} className = {style.item}>
-                    <i className="fal fa-comment"></i>
-                    {activeMessage && <Message></Message>}
+                    onClick={logOut}
+                    >
+                    <AiOutlinePoweroff></AiOutlinePoweroff>
                 </li>
             </ul>
-            <button className = {style.expandMenu}><i className="fas fa-bars"></i></button>
+            <button
+                className = {style.expandMenu}
+            ><i className="fas fa-bars"></i></button>
         </div>
     )
 }
