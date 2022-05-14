@@ -416,10 +416,18 @@
     display: block;
      color: #fff; 
 }
+.itemNav button{
+    background:none;
+    border:none;
+    color:white;
+}
 .activeNav a{
     color: #333;
 }
 .activeNav input{
+    color: #333;
+}
+.activeNav button{
     color: #333;
 }
 .activeNav {

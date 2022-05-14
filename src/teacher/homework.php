@@ -330,14 +330,20 @@
                                              
                                     <input type="hidden" name="subject_id" value = "<?php echo $subject_score ?>" >
                                     <input type="hidden" name="homework_id" value = "<?php echo $homework_id ?>" >
-                                    <select class="create" name="user_name" style="width:100px">
+                                    <select class="create" name="user_name" style="width:150px">
                                         <option >Tên</option> 
                                         <?php foreach($code as $key => $value){ ?>
                                             <option value="<?php echo $value["user_name"]; ?>"><?php echo $value["user_fullname"]; ?></option> 
                                         <?php } ?> 
                                         
                                     </select>
-                                    <input type="text" name="score_level" >
+                                    <select name="score_level" class="create" style="width:150px">
+                                        <option value="A">A</option>
+                                        <option value="B">B</option>
+                                        <option value="C">C</option>
+                                        <option value="D">D</option>
+                                        <option value="F">F</option>
+                                    </select>
                                             
                                     </form>
                                 </div>                
@@ -358,7 +364,19 @@
                                     logSystem('Chấm điểm', $user, $con);
                                         }
                                     }
-                                
+                                ?>
+                                <?php 
+                                if(isset($_POST["submit-score"])){
+                                    
+                                    $user_score=$_POST["user_name"];
+                                    $score_level=$_POST["score_level"];
+                                    if($score_level == ""  ){
+                                        
+                                    }else{
+                                    $sql2 = "UPDATE score SET score_level='$score_level' where user_name='$user_score' and subject_id='$subject_score'";
+                                    mysqli_query($con,$sql2); 
+                                        }
+                                    }
                                 ?>
                             </div>
                         </div>

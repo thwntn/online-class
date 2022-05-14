@@ -90,12 +90,11 @@ $friend_user=$_POST['user'];
                         <input type='hidden' name='userOL' value=$user>
                         <input type='hidden' name='user' value=$friend_user>
                         <button type='submit' name='submit_friend'>Kết bạn</button>
-                    </form>
+                        </form>
                             
                         ";
                         }        
                 ?>
-            
             <!-- Kết bạn -->
                 <h4>
                 <?php

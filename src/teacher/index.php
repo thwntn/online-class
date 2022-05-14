@@ -176,7 +176,7 @@ include 'connect.php' ;
         <div class = 'backgroundNav'>
             <h2 class = 'titleNav'>Online Class</h2>
             <ul class = 'listItemsNav'>
-                <li class = 'itemNav'><a href = '#homepage'>Trang chủ</a></li>
+                <li class = 'itemNav'><a href = '#homepage'><i class="fas fa-home"></i></a></li>
         
                 <?php
                     $sql = "SELECT * FROM subject sj join user on sj.user_name=user.user_name where sj.user_name='$user'";
@@ -186,19 +186,19 @@ include 'connect.php' ;
 
                          <form action='./manage.php' method='POST'>
                              <input type='hidden' name='userOL' value=$user>
-                             <li class = 'itemNav'><input type='submit' value='Môn học'></li>
+                             <li class = 'itemNav'><button type='submit'><i class='fas fa-suitcase'></i></button></li>
                          </form>
 
                             ";
                     
                         ?>
-                <li class = 'itemNav'><a href = '#lich'>Lịch dạy</a></li>
+                <li class = 'itemNav'><a href = '#lich'><i class="fas fa-calendar"></i></a></li>
                 <li class = 'itemNav actNoti'>
-                    Thông báo
+                <i class="fas fa-bell"></i>
                     
                     </li>
                 <li class="itemNav actMess">
-                    Tin nhắn
+                <i class="fas fa-comment"></i>
                     
                 </li>
                 <li>

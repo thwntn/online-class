@@ -235,12 +235,12 @@
                                     $row2 = mysqli_fetch_assoc($kq2);
                                         $id_hw=$row2['homework_id'];
                                         // $document=$row2['document_directory'];
-                                  
+                                        
                                     echo "
                                     <div class = 'itemBox col-md-4'>
                                     <form action = '' method = 'POST'  >
                                         
-                                    <input type='hidden' name='homework_id' value = $id_hw >
+                                        <input type='hidden' name='homework_id' value = $id_hw >
                                         <button type='submit' class='delete-rg' name='delete-rg' ><i class='fa-solid fa-xmark'></i></button>
                                         <input type='hidden' name='subject_id' value = $subject_id >
                                         <input type='hidden' name='user_name' value=$user_registry>
@@ -265,19 +265,20 @@
                             $sql5="DELETE FROM score where subject_id='$sj_id' and user_name='$user_rg'";
                             mysqli_query($con,$sql5);
                             }
+                            // if(isset($_POST['delete-rg'])){     
+                            //     $sj_id=$_POST['subject_id'] ;
+                            //     $user_rg=$_POST['user_name'] ;
+                            //     $hw_id=$_POST['homework_id'] ;
+                            // $sql7="DELETE FROM document where homework_id='$hw_id'";
+                            // mysqli_query($con,$sql7);
+                            // }           
                                     if(isset($_POST['delete-rg'])){     
                                         $sj_id=$_POST['subject_id'] ;
                                         $user_rg=$_POST['user_name'] ;               
                                     $sql6="DELETE FROM registry where subject_id='$sj_id' and user_name='$user_rg'";
                                     mysqli_query($con,$sql6);
                                     }
-                                     if(isset($_POST['delete-rg'])){     
-                                         $sj_id=$_POST['subject_id'] ;
-                                         $user_rg=$_POST['user_name'] ;
-                                         $hw_id=$_POST['homework_id'] ;
-                                     $sql7="DELETE FROM document where subject_id='$sj_id' and user_name='$user_rg' and homework_id='$hw_id'";
-                                     mysqli_query($con,$sql7);
-                                     }                                 
+                                                           
                                 }
                                 ?>
                             </div>

@@ -179,7 +179,7 @@ $user=$_POST['userOL'];
         <li class='itemNav'>
             <form action="./index.php" method='post'>
                 <input type="hidden" name="userOL" value=<?php echo $user?>>
-                <input class='itemNav' type="submit" value="Trang chủ">
+                <button type="submit"><i class="fas fa-home"></i></button>
             </form>
         </li>
         <?php
@@ -190,7 +190,7 @@ $user=$_POST['userOL'];
                     
                          <form action='./manage.php' method='post'>
                              <input type='hidden' name='userOL' value=$user>
-                             <li class = 'itemNav'><input type='submit' value='Môn học'></li>
+                             <li class = 'itemNav'><button type='submit'><i class='fas fa-suitcase'></i></button></li>
                          </form>
 
                             ";
@@ -200,16 +200,16 @@ $user=$_POST['userOL'];
         <li class='itemNav'>
             <form action='./index.php#lich' method='post'>
                 <input type="hidden" name="userOL" value=<?php echo $user?>>
-                <input class='itemNav' type="submit" value="Lịch dạy">
+                <button type="submit" ><i class="fas fa-calendar"></i></button>
             </form>
         </li>
 
             <li class = 'itemNav actNoti'>
-                Thông báo
+            <i class="fas fa-bell"></i>
                 
                 </li>
             <li class="itemNav actMess">
-                Tin nhắn
+            <i class="fas fa-comment"></i>
                 
             </li>
             <li>

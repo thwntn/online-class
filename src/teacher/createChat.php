@@ -14,10 +14,17 @@
         $query .= "INSERT INTO chat(user_name, friend_user) VALUE ('$friendUser', '$userName')";
     
          $con -> multi_query($query);
-         echo 1;
+         echo "
+         <form action='index.php' method='post'>
+            <button type='submit'>Điều hướng sang trang khác</button>
+            <input type='hidden' name='userOL' value=$userName>
+         </form>
+         ";
     } else {
-        echo 0;
+        
+        echo "Đã có cuộc trò chuyện";
         
     }
     
 ?>
+ 

@@ -62,7 +62,7 @@
                         
                         
                         <div class = 'item'>
-                            <div class = 'backgroundItem' style="background:url(<?php echo $row['subject_image']; ?> ); background-size: cover" >
+                            <div class = 'backgroundItem' style="background:url(<?php echo "http://localhost/online-class/src/database/{$subject}/image/{$row['subject_image']}" ?> ); background-size: cover" >
                             </div>
                             <div class= 'titleItem'>                           
                                  <form action='./subject.php' method='post'>                                  
