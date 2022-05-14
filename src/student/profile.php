@@ -235,7 +235,7 @@
             </div>
         </div>
         <div class='discription col-md-3'>
-            <h5>Thông tin cá nhân:</h5>
+            <h5>THÔNG TIN CÁ NHÂN:</h5>
             <p>
                 <?php
                     $sql="SELECT * FROM user where user_name='$user_name'";
@@ -245,14 +245,18 @@
                         <b>Họ tên : </b>".$row['user_fullname']."<br>
                         <b>Địa chỉ : </b>".$row['user_address']."<br>
                         <b>Email : </b>".$row['user_email']." <br>
-                        <b>Ngành học : </b>".$row['user_major']."<br>
+                        <b>Ngành : </b>".$row['user_major']."<br>
                     ";
                 ?>
             </p>
+            <h4>
+                <form action="./index.php" method="post">
+                    <input type='hidden' name='userOL' value=<?php echo $user_name ?>>
+                    <button type="submit" class='home'>Trang chủ &nbsp; <img src="./image/ten.jpg" alt="" class='ag'></button>
+                </form>
+            </h4>
         </div>
     </div>
-
-
     <script>
         const handle = {
             randomColor: function() {

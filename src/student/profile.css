@@ -363,3 +363,17 @@ html {
     border: none;
     margin-right: 10px;
 }
+
+.home{
+    border: none;
+    font-size: 16px;
+    color: rgb(110, 75, 248);
+    
+}
+h4{
+    float: right;
+}
+
+.ag{
+    width: 14px;
+}

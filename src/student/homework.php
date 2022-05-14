@@ -227,17 +227,16 @@
             <!-- Form xóa comment  -->
                         <?php
                         echo "
-                            <form action = '' method = 'post' >
+                        <form action = '' method = 'post' class='formDelete'>
                             <button type='submit' class ='button' name='delete'>Xóa</button>
                             <input type='hidden' name='id' value =".$row['comment_id']." >
                             <input type='hidden' name='userOL' value =$user_name >
                             <input type='hidden' name='subject_id' value =$subject_id >
                             <input type='hidden' name='homework_id' value = ".$row['homework_id']." >
                         </form>
-                        
-                        </li>
-                    </ul> 
-                    "; 
+                    </li>
+                </ul> 
+                "; 
                 }
                 else{
                     echo "
@@ -254,7 +253,7 @@
                    
         <!-- Xóa bình luận -->
         <?php
-            if (isset( $_POST['delete'])) {
+            if (isset( $_POST['id'])) {
                 $sql='DELETE FROM comment where comment_id='.$_POST["id"].'';
                 mysqli_query($conn,$sql);
                 logSystem('Xóa bình luận', $user_name, $conn);
@@ -294,7 +293,8 @@
                 if(isset($result)){
             ?>
                 <form action="" method = "POST" enctype="multipart/form-data">
-                    <input class='upload' name="id"><p class='create'> <?php echo $result['doucument_directory'] ?></p>
+                    <!-- <input class='upload' name="id"><p class='create'> <?php echo $result['doucument_directory'] ?></p> -->
+                    <input class='upload' name="id"><p class='create'> <?php echo "<a href='http://localhost/online-class/src/database/{$user_name}/homework/{$result['doucument_directory']}'>".$result['doucument_directory']."</a> "?></p>
                     <input type='hidden' name='homework_id' value = <?php echo $homework_id ?>>
                     <input type='hidden' name='userOL' value=<?php echo $user_name ?>>
                     <input type='hidden' name='subject_id' value=<?php echo $subject_id ?>>
@@ -374,10 +374,10 @@ document.querySelector('.create').addEventListener('click', function () {
     })
 
 //Xóa comment
-    document.addEventListener('DOMContentLoaded', function() {
-        var el = document.getElementsByClassName('formXoa'); 
+document.addEventListener('DOMContentLoaded', function() {
+        var el = document.getElementsByClassName("formDelete"); 
         for(var i=0;i < el.length;i++) {
-        el[i].addEventListener('submit', function(e) { 
+        el[i].addEventListener("submit", function(e) { 
                 e.preventDefault();
                 Swal.fire({ 
                     title: 'Bạn chắc chắn muốn xóa?',
@@ -394,27 +394,19 @@ document.querySelector('.create').addEventListener('click', function () {
     }  
         }, false);
 
-
 // Sửa comment
     var modal = document.getElementById('myModal');
-    
-    // Lấy phần button mở Modal
     var btn = document.getElementById("myBtn");
-
-    // Lấy phần span đóng Modal
     var span = document.getElementsByClassName("close")[0];
 
-    // Khi button được click thi mở Modal
     btn.onclick = function() {
         modal.style.display = "block";
     }
 
-    // Khi span được click thì đóng Modal
     span.onclick = function() {
         modal.style.display = "none";
     }
 
-    // Khi click ngoài Modal thì đóng Modal
     window.onclick = function(event) {
         if (event.target == modal) {
             modal.style.display = "none";

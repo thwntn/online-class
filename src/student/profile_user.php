@@ -29,7 +29,9 @@
     <!-- font awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta2/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <link rel="stylesheet" type="text/css" href="./modal_user.css">
 </head>
 <body>
@@ -66,11 +68,16 @@
                         ";
                         }else if($data['friend_status']==1){
                             echo "
-                            <form action='' method='post'>
-                                <input type='hidden' name='userOL' value=$user_name>
-                                <input type='hidden' name='user' value=$user>
-                                <button type='submit' name='delete_submit' class='btn'>Bạn bè</button>
-                            </form>
+                            <div class='dropdown'>
+                                <button onclick='hamDropdown()' class='nut_dropdown' type='submit'>Bạn bè</button>
+                                    <div class='noidung_dropdown'>
+                                        <form action='' method='post'>
+                                            <input type='hidden' name='userOL' value=$user_name>
+                                            <input type='hidden' name='user' value=$user>
+                                            <input type='submit' name='delete_submit' class='btn-a' value='Hủy kết bạn'>
+                                        </form>
+                                    </div>
+                            </div>  
                             ";
                         } 
                     }else{
@@ -83,6 +90,11 @@
                         ";
                     }
                 ?>
+                            <!-- <form action='' method='post'>
+                                <input type='hidden' name='userOL' value=$user_name>
+                                <input type='hidden' name='user' value=$user>
+                                <button type='submit' name='delete_submit' class='btn'>Bạn bè</button>
+                            </form> -->
                 <h4 class='h4'>
 <!-- Xử lý kết bạn -->
                     <?php
@@ -377,6 +389,11 @@
     // document.querySelector('.upload-1').addEventListener('change', function () {
     //     document.querySelector('.create-3').innerHTML = document.querySelector('.upload-1').value
     // })
+
+    function hamDropdown() {
+        document.querySelector(".noidung_dropdown").classList.toggle("hienThi");
+    } 
+
     </script>
 </body>
 </html>

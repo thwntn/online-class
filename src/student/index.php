@@ -41,7 +41,6 @@
                         <input type='hidden' name='userOL' value=$user_name> 
                         <input type='hidden' name='subject_id' value=$subject_id> 
                         <input type='hidden' name='homework_id' value=$homework_id>
-
                         <div class = itemNoti>
                             <div class = 'imageNoti'>
                             <button type='submit' class='button' >
@@ -231,7 +230,6 @@
                         echo "
                         <img src='http://localhost/online-class/src/database/{$user_name}/image/{$row['user_image']}' style='width:40px;border-radius:50px'>
                         ".$row['user_fullname']."
-
                         <div class='dropdown'>
                             <button onclick='hamDropdown()' class='nut_dropdown'> <img src='./image/a.jpg' alt='' class='down'></button>
                             <div class='noidung_dropdown'>

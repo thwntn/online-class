@@ -377,3 +377,7 @@ header .input-icon:checked ~ .menu-item{
 .homework_content b{
     font-size: 17px;
 }
+
+.akk{
+    float: right;
+}

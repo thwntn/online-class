@@ -260,7 +260,7 @@
 <div class="main-subject">
         <?php
             $sql = "SELECT * FROM subject sj join user  u on sj.user_name=u.user_name  
-                join homework hw on sj.subject_id=hw.subject_id where sj.subject_id='$subject_id'";
+                 where sj.subject_id='$subject_id'";
             $result = $conn->query($sql);
             $result = mysqli_fetch_array($result);
             $anh = $result['subject_image'];
@@ -276,10 +276,6 @@
         ?>       
     </div>
     <div class="link">
-        <!-- <div class="shadow p-4 mb-5 bg-white rounded">
-            <p>Đường dẫn cuộc họp <a href=""></a></p>
-            <a href="https://meet.google.com/hfz-duwk-hzq">https://meet.google.com/hfz-duwk-hzq</a>
-        </div> -->
         <div class="shadow p-4 mb-5 bg-white rounded">
             <form action="" method="post">
                 <p>Danh sách lớp:</p>
@@ -322,7 +318,7 @@
         $name = $result['user_fullname'];
         $img_user = $result['user_image'];
         $sql = "SELECT sj.user_name, hw.homework_content, hw.homework_time ,hw.homework_id FROM  subject sj join homework hw on hw.subject_id=sj.subject_id
-            where sj.subject_id='$subject_id'";
+             where sj.subject_id='$subject_id'";
         $result = $conn->query($sql);
         while($row = $result->fetch_assoc()) {
             $k = $row['homework_time'];
@@ -330,6 +326,7 @@
             $month = substr($k,-14,2);
             $year = substr($k,-20,4);
             $homework_content = $row['homework_content'];
+            
             echo "
             <div id='content'>
                 <div class='content-1'>
