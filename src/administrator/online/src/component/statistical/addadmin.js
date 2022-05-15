@@ -59,7 +59,7 @@ function AddAdmin({ setAddAd, setRefesh }) {
                 ></input>
                 <input
                     className={style.Pass} placeholder = "Mật khẩu"
-                    onChange={(e) => userAdmin.password = sha1(md5(e.target.value))}
+                    onChange={(e) => userAdmin.password = md5(e.target.value)}
                 ></input>
                 <input
                     className={style.fullName} placeholder = "Tên đầy đủ"

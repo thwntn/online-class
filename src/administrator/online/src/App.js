@@ -8,12 +8,13 @@ import Toast from './toast/Toast';
 import { PageContext } from './context/MainContext';
 import cookie from './login/cookie';
 import Login from './component/Login/Login';
+import All from './component/all/All';
 
 
 
 function App() {
   const page = useContext(PageContext)
-  const [ser, setSer] = useState(<Login></Login>)
+  const [ser, setSer] = useState(<Header></Header>)
   useEffect (()  => {
     function securityWebsite () {
       cookie(1)

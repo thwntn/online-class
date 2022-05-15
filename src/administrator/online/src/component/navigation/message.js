@@ -8,6 +8,7 @@ const Mess = () => {
     const [gotoMess, setGoToMess] = useState(false)
     const [friend, setFriend] = useState({})
 
+    console.log(messages);
     useEffect(() => {
         fetch("http://localhost/online-class/src/administrator/api/chat.php")
         .then(response => response.json())
@@ -26,7 +27,7 @@ const Mess = () => {
                         setFriend(message)
                     }}
                 >
-                    <div className = {style.image}></div>
+                    <div className = {style.image} style={{ backgroundImage: `url(http://localhost/online-class/src/database/${message.user_name}/image/${message.user_image})`}}></div>
                     <div className = {style.content}>
                         <h4>{message.user_fullname}</h4>
                         <p>{message.user_email}</p>

@@ -106,7 +106,7 @@ const ChatBox = ({ object }) => {
                 >
                     <i className="fas fa-angle-left"></i>
                 </button>
-                <div className = {styles.image}></div>
+                <div className = {styles.image} style={{ backgroundImage: `url(http://localhost/online-class/src/database/${object.friend.user_name}/image/${object.friend.user_image})`}}></div>
                 <h5 className ={styles.name}>{object.friend.user_fullname}</h5>
             </div>
             <div className = {styles.content}>

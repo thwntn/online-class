@@ -1,0 +1,87 @@
+.frameAll {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 24px;
+    margin-top: 68px;
+}
+.comment {
+    margin-top: 12px;
+}
+.comment,
+.document {
+    height: 45vh;
+    width: 100%;
+}
+.subject h5 {
+    width: 100%;
+}
+.subject {
+    align-content: flex-start;
+    display: flex;
+    justify-content: center;
+    flex: 0.3;
+    padding: 12px;
+    flex-wrap: wrap;
+    height: 96vh;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.03);
+}
+.comment ul,
+.document ul,
+.subject ul {
+    list-style: none;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
+    height: 98vh;
+}
+.comment ul,
+.document ul {
+    height: 40vh;
+}
+.comment ul li,
+.document ul li,
+.subject ul li {
+    line-height: 48px;
+    display: flex;
+    flex-wrap: wrap;
+    margin: 24px 0px;
+    padding: 2px 8px;
+    background-color: rgb(250, 250, 250);
+    width: 100%;
+    border-radius: 8px;
+    align-items: center;
+}
+.comment .p1 {
+    flex: 0.6;
+}
+.comment .p2,
+.comment .p3 {
+    flex: 0.2;
+}
+.frameCommentAndDocument {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    flex: 0.68;
+    padding: 12px;
+    height: 96vh;
+    box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.03);   
+}
+.frameCommentAndDocument .comment {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: space-around;
+}
+.imageSubject {
+    width: 32px;
+    height: 32px;
+    background-size: cover;
+    background-position: center;
+    border-radius: 100%;
+    margin-right: 12px;
+}

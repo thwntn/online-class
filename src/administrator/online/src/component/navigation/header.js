@@ -6,7 +6,9 @@ import Message from './message'
 import Confirm from '../confirm/confirm'
 import Log from '../log/log'
 import { AiOutlinePoweroff } from 'react-icons/ai'
+import { FaListUl } from 'react-icons/fa'
 import cookie from '../../login/cookie'
+import All from '../all/All'
 
 const items = ['Trang chủ', 'Tài khoản', 'Thông báo', 'Tin nhắn', 'Nhật kí']
 
@@ -122,6 +124,16 @@ function Header ({setMain}) {
                     }}
                     className = {style.item}
                 ><a href = '#log'><i className="fal fa-clipboard"></i></a></li>
+                <li
+                    onClick = {() => {
+                        setScroll (style.active)
+                        page.setMain(<All></All>)
+                    }}
+                    onDoubleClick={() => {
+                        page.pinItem('all')
+                    }}
+                    className = {style.item}
+                ><a href = '#log'><FaListUl></FaListUl></a></li>
                 <li
                     className = {style.item}
                     onClick={logOut}
